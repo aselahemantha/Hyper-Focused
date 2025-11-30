@@ -17,32 +17,32 @@ class AuthController extends _$AuthController {
   Future<void> login(String email, String password) async {
     state = const AsyncValue.loading();
     state = await AsyncValue.guard(() async {
-      final repository = ref.read(authRepositoryProvider);
-      return LoginUseCase(repository).call(email, password);
+      final useCase = ref.read(loginUseCaseProvider);
+      return useCase(email, password);
     });
   }
 
   Future<void> signup(String email, String password, String name) async {
     state = const AsyncValue.loading();
     state = await AsyncValue.guard(() async {
-      final repository = ref.read(authRepositoryProvider);
-      return SignupUseCase(repository).call(email, password, name);
+      final useCase = ref.read(signupUseCaseProvider);
+      return useCase(email, password, name);
     });
   }
 
   Future<void> loginWithGoogle() async {
     state = const AsyncValue.loading();
     state = await AsyncValue.guard(() async {
-      final repository = ref.read(authRepositoryProvider);
-      return GoogleLoginUseCase(repository).call();
+      final useCase = ref.read(googleLoginUseCaseProvider);
+      return useCase();
     });
   }
 
   Future<void> loginWithApple() async {
     state = const AsyncValue.loading();
     state = await AsyncValue.guard(() async {
-      final repository = ref.read(authRepositoryProvider);
-      return AppleLoginUseCase(repository).call();
+      final useCase = ref.read(appleLoginUseCaseProvider);
+      return useCase();
     });
   }
 
