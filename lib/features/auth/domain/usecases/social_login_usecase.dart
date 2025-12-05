@@ -1,3 +1,4 @@
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:hyper_focused/features/auth/domain/entities/auth_entity.dart';
 import 'package:hyper_focused/features/auth/domain/repositories/auth_repository.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
@@ -6,12 +7,12 @@ import 'package:hyper_focused/features/auth/data/repositories/auth_repository_im
 part 'social_login_usecase.g.dart';
 
 @riverpod
-GoogleLoginUseCase googleLoginUseCase(GoogleLoginUseCaseRef ref) {
+GoogleLoginUseCase googleLoginUseCase(Ref ref) {
   return GoogleLoginUseCase(ref.read(authRepositoryProvider));
 }
 
 @riverpod
-AppleLoginUseCase appleLoginUseCase(AppleLoginUseCaseRef ref) {
+AppleLoginUseCase appleLoginUseCase(Ref ref) {
   return AppleLoginUseCase(ref.read(authRepositoryProvider));
 }
 

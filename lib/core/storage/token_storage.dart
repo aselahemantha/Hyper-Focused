@@ -1,10 +1,11 @@
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part 'token_storage.g.dart';
 
 @Riverpod(keepAlive: true)
-TokenStorage tokenStorage(TokenStorageRef ref) {
+TokenStorage tokenStorage(Ref ref) {
   return TokenStorage(const FlutterSecureStorage());
 }
 

@@ -1,3 +1,4 @@
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:hyper_focused/features/auth/domain/entities/auth_entity.dart';
 import 'package:hyper_focused/features/auth/domain/repositories/auth_repository.dart';
 import 'package:hyper_focused/features/auth/data/repositories/auth_repository_impl.dart';
@@ -17,6 +18,6 @@ class LoginUseCase {
 }
 
 @riverpod
-LoginUseCase loginUseCase(LoginUseCaseRef ref) {
+LoginUseCase loginUseCase(Ref ref) {
   return LoginUseCase(ref.read(authRepositoryProvider));
 }
