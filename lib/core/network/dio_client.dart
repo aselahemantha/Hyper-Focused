@@ -1,11 +1,12 @@
 import 'package:dio/dio.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:hyper_focused/core/storage/token_storage.dart';
 
 part 'dio_client.g.dart';
 
 @Riverpod(keepAlive: true)
-Dio dio(DioRef ref) {
+Dio dio(Ref ref) {
   final dio = Dio(
     BaseOptions(
       baseUrl: 'https://api.escuelajs.co/api/v1',

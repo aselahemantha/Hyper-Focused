@@ -1,11 +1,12 @@
 import 'package:dio/dio.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:hyper_focused/core/network/dio_client.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part 'auth_remote_datasource.g.dart';
 
 @Riverpod(keepAlive: true)
-AuthRemoteDataSource authRemoteDataSource(AuthRemoteDataSourceRef ref) {
+AuthRemoteDataSource authRemoteDataSource(Ref ref) {
   return AuthRemoteDataSource(ref.read(dioProvider));
 }
 

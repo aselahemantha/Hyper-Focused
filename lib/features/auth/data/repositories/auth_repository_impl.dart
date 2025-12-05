@@ -1,3 +1,4 @@
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:hyper_focused/features/auth/data/datasources/auth_remote_datasource.dart';
 import 'package:hyper_focused/features/auth/domain/entities/auth_entity.dart';
 import 'package:hyper_focused/features/auth/domain/repositories/auth_repository.dart';
@@ -9,7 +10,7 @@ import 'package:sign_in_with_apple/sign_in_with_apple.dart';
 part 'auth_repository_impl.g.dart';
 
 @Riverpod(keepAlive: true)
-AuthRepository authRepository(AuthRepositoryRef ref) {
+AuthRepository authRepository(Ref ref) {
   return AuthRepositoryImpl(
     ref.read(authRemoteDataSourceProvider),
     ref.read(tokenStorageProvider),
