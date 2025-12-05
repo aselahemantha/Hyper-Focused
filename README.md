@@ -1,16 +1,5 @@
-# hyper_focused
+# HyperFocused Home Inspection
 
-Hyper Focused Application
+The HyperFocused Home Inspection App is a modern, inspector-focused mobile application designed to deliver a cleaner, faster, and more intuitive experience than existing home inspection tools such as Spectora.
 
-## Getting Started
-
-This project is a starting point for a Flutter application.
-
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+This mobile app is part of the HyperFocused ecosystem, which includes a Web App, Super Admin Console, and Backend API. The Flutter app enables inspectors to conduct fully offline inspections, capture photos/videos, enter notes, and sync reports seamlessly.
