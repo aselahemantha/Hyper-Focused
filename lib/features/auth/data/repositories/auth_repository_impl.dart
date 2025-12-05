@@ -71,6 +71,18 @@ class AuthRepositoryImpl implements AuthRepository {
   }
 
   @override
+  Future<AuthEntity> refreshToken() async {
+    final refreshToken = await _tokenStorage.getRefreshToken();
+    if (refreshToken == null) {
+      throw Exception('No refresh token found');
+    }
+    final data = await _remoteDataSource.refreshToken(refreshToken);
+    final authEntity = AuthEntity.fromJson(data);
+    await _saveTokens(authEntity);
+    return authEntity;
+  }
+
+  @override
   Future<void> logout() async {
     await _tokenStorage.clearTokens();
     await _googleSignIn.signOut();

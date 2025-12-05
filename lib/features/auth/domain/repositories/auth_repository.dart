@@ -5,5 +5,6 @@ abstract class AuthRepository {
   Future<AuthEntity> signup(String email, String password, String name);
   Future<AuthEntity> loginWithGoogle();
   Future<AuthEntity> loginWithApple();
+  Future<AuthEntity> refreshToken();
   Future<void> logout();
 }

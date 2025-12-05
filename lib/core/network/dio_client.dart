@@ -8,7 +8,7 @@ part 'dio_client.g.dart';
 Dio dio(DioRef ref) {
   final dio = Dio(
     BaseOptions(
-      baseUrl: 'https://api.hyperfocused.com', // TODO: Replace with actual API URL
+      baseUrl: 'https://api.escuelajs.co/api/v1',
       connectTimeout: const Duration(seconds: 10),
       receiveTimeout: const Duration(seconds: 10),
       headers: {
