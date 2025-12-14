@@ -11,10 +11,10 @@ import 'package:hyper_focused/features/check/presentation/pages/check_page.dart'
 import 'package:hyper_focused/features/approved/presentation/pages/approved_page.dart';
 import 'package:hyper_focused/features/settings/presentation/pages/settings_page.dart';
 import 'package:hyper_focused/core/presentation/widgets/bottom_nav_bar.dart';
+import 'package:hyper_focused/features/auth/presentation/pages/auth_landing_page.dart';
 
 part 'app_router.g.dart';
 
-@Riverpod(keepAlive: true)
 @Riverpod(keepAlive: true)
 GoRouter goRouter(Ref ref) {
   final authState = ref.watch(authControllerProvider);
@@ -23,8 +23,12 @@ GoRouter goRouter(Ref ref) {
 
   return GoRouter(
     navigatorKey: rootNavigatorKey,
-    initialLocation: '/login',
+    initialLocation: '/landing',
     routes: [
+      GoRoute(
+        path: '/landing',
+        builder: (context, state) => const AuthLandingPage(),
+      ),
       GoRoute(
         path: '/login',
         builder: (context, state) => const LoginPage(),
@@ -88,12 +92,13 @@ GoRouter goRouter(Ref ref) {
       final isLoggedIn = authState.value != null;
       final isLoggingIn = state.uri.path == '/login';
       final isSigningUp = state.uri.path == '/signup';
+      final isLanding = state.uri.path == '/landing';
 
-      if (!isLoggedIn && !isLoggingIn && !isSigningUp) {
-        return '/login';
+      if (!isLoggedIn && !isLoggingIn && !isSigningUp && !isLanding) {
+        return '/landing';
       }
 
-      if (isLoggedIn && (isLoggingIn || isSigningUp)) {
+      if (isLoggedIn && (isLoggingIn || isSigningUp || isLanding)) {
         return '/';
       }
 
