@@ -12,6 +12,8 @@ import 'package:hyper_focused/features/approved/presentation/pages/approved_page
 import 'package:hyper_focused/features/settings/presentation/pages/settings_page.dart';
 import 'package:hyper_focused/core/presentation/widgets/bottom_nav_bar.dart';
 import 'package:hyper_focused/features/auth/presentation/pages/auth_landing_page.dart';
+import 'package:hyper_focused/features/auth/presentation/pages/signup_verify_page.dart';
+import 'package:hyper_focused/features/auth/presentation/pages/signup_details_page.dart';
 
 part 'app_router.g.dart';
 
@@ -36,6 +38,16 @@ GoRouter goRouter(Ref ref) {
       GoRoute(
         path: '/signup',
         builder: (context, state) => const SignupPage(),
+        routes: [
+          GoRoute(
+            path: 'verify',
+            builder: (context, state) => const SignupVerifyPage(),
+          ),
+          GoRoute(
+            path: 'details',
+            builder: (context, state) => const SignupDetailsPage(),
+          ),
+        ],
       ),
       StatefulShellRoute.indexedStack(
         builder: (context, state, navigationShell) {
@@ -91,7 +103,7 @@ GoRouter goRouter(Ref ref) {
     redirect: (context, state) {
       final isLoggedIn = authState.value != null;
       final isLoggingIn = state.uri.path == '/login';
-      final isSigningUp = state.uri.path == '/signup';
+      final isSigningUp = state.uri.path.startsWith('/signup');
       final isLanding = state.uri.path == '/landing';
 
       if (!isLoggedIn && !isLoggingIn && !isSigningUp && !isLanding) {
