@@ -2,6 +2,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:go_router/go_router.dart';
+import 'package:hyper_focused/core/theme/app_colors.dart';
+import 'package:hyper_focused/core/constants/app_strings.dart';
 
 class SignupVerifyPage extends StatefulWidget {
   const SignupVerifyPage({super.key});
@@ -70,7 +72,7 @@ class _SignupVerifyPageState extends State<SignupVerifyPage> {
             children: [
               const SizedBox(height: 16),
               const Text(
-                'Enter 6-digit code',
+                AppStrings.enter6DigitCode,
                 style: TextStyle(
                   fontSize: 28,
                   fontWeight: FontWeight.bold,
@@ -80,7 +82,7 @@ class _SignupVerifyPageState extends State<SignupVerifyPage> {
               const SizedBox(height: 8),
               RichText(
                 text: const TextSpan(
-                  text: 'We sent a verification code to your email\n',
+                  text: AppStrings.verifySubtitle,
                   style: TextStyle(
                     fontSize: 16,
                     color: Colors.grey,
@@ -90,7 +92,7 @@ class _SignupVerifyPageState extends State<SignupVerifyPage> {
                     TextSpan(
                       text: 'jessydoe@email.com', // Placeholder or passed from prev screen
                       style: TextStyle(
-                        color: Color(0xFF00AA88),
+                               color: AppColors.primary,
                         decoration: TextDecoration.underline,
                       ),
                     ),
@@ -121,14 +123,14 @@ class _SignupVerifyPageState extends State<SignupVerifyPage> {
                       decoration: InputDecoration(
                         counterText: '',
                         filled: true,
-                        fillColor: const Color(0xFFF9FAFB),
+                        fillColor: AppColors.inputBackground,
                         border: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(8),
                           borderSide: BorderSide.none,
                         ),
                         focusedBorder: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(8),
-                          borderSide: const BorderSide(color: Color(0xFF00AA88), width: 1.5),
+                          borderSide: const BorderSide(color: AppColors.primary, width: 1.5),
                         ),
                       ),
                       inputFormatters: [
@@ -155,12 +157,12 @@ class _SignupVerifyPageState extends State<SignupVerifyPage> {
                   TextButton(
                     onPressed: () {},
                     style: TextButton.styleFrom(
-                      foregroundColor: const Color(0xFF00AA88),
+                      foregroundColor: AppColors.primary,
                       padding: EdgeInsets.zero,
                       minimumSize: Size.zero,
                       tapTargetSize: MaterialTapTargetSize.shrinkWrap,
                     ),
-                    child: const Text('Need Help?'),
+                    child: const Text(AppStrings.needHelp),
                   ),
                 ],
               ),
@@ -177,7 +179,7 @@ class _SignupVerifyPageState extends State<SignupVerifyPage> {
                     context.go('/signup/details');
                   },
                   style: ElevatedButton.styleFrom(
-                    backgroundColor: const Color(0xFF00AA88),
+                    backgroundColor: AppColors.primary,
                     foregroundColor: Colors.white,
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(28),
@@ -185,7 +187,7 @@ class _SignupVerifyPageState extends State<SignupVerifyPage> {
                     elevation: 0,
                   ),
                   child: const Text(
-                    'Continue',
+                    AppStrings.continueText,
                     style: TextStyle(
                       fontSize: 16,
                       fontWeight: FontWeight.w600,
@@ -200,7 +202,7 @@ class _SignupVerifyPageState extends State<SignupVerifyPage> {
               Center(
                 child: RichText(
                   text: TextSpan(
-                    text: 'Didn\'t receive the code ',
+                    text: AppStrings.didntReceiveCode,
                     style: TextStyle(
                       color: Colors.grey.shade600,
                       fontSize: 14,
@@ -212,9 +214,9 @@ class _SignupVerifyPageState extends State<SignupVerifyPage> {
                              // TODO: Resend action
                            },
                            child: const Text(
-                             'Resend it',
+                             AppStrings.resendIt,
                              style: TextStyle(
-                               color: Color(0xFF00AA88),
+                                      color: AppColors.primary,
                                fontWeight: FontWeight.w600,
                                fontSize: 14,
                              ),

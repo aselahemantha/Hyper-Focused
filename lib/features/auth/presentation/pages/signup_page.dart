@@ -4,6 +4,8 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hyper_focused/features/auth/presentation/widgets/auth_text_field.dart';
 import 'package:hyper_focused/features/auth/presentation/widgets/social_sign_in_button.dart';
+import 'package:hyper_focused/core/theme/app_colors.dart';
+import 'package:hyper_focused/core/constants/app_strings.dart';
 
 class SignupPage extends ConsumerStatefulWidget {
   const SignupPage({super.key});
@@ -60,7 +62,7 @@ class _SignupPageState extends ConsumerState<SignupPage> {
               children: [
                 const SizedBox(height: 16),
                 const Text(
-                  'Join Hyper Focused',
+                  AppStrings.joinHyperFocused,
                   style: TextStyle(
                     fontSize: 28,
                     fontWeight: FontWeight.bold,
@@ -69,7 +71,7 @@ class _SignupPageState extends ConsumerState<SignupPage> {
                 ),
                 const SizedBox(height: 8),
                 Text(
-                  'Create your account to start professional home inspections.',
+                  AppStrings.signupSubtitle,
                   style: TextStyle(
                     fontSize: 16,
                     color: Colors.grey.shade600,
@@ -81,12 +83,12 @@ class _SignupPageState extends ConsumerState<SignupPage> {
                 
                 // Full Name
                 AuthTextField(
-                  label: 'Full Name',
-                  hintText: 'Enter your full name',
+                  label: AppStrings.fullName,
+                  hintText: AppStrings.fullNameHint,
                   controller: _nameController,
                   prefixIcon: Icons.person_outline,
                   validator: (value) {
-                    if (value == null || value.isEmpty) return 'Please enter your name';
+                    if (value == null || value.isEmpty) return AppStrings.enterName;
                     return null;
                   },
                 ),
@@ -95,13 +97,13 @@ class _SignupPageState extends ConsumerState<SignupPage> {
                 
                 // Email Address
                 AuthTextField(
-                  label: 'Email Address',
-                  hintText: 'Enter your email',
+                  label: AppStrings.emailAddress,
+                  hintText: AppStrings.emailHint,
                   controller: _emailController,
                   prefixIcon: Icons.email_outlined,
                   validator: (value) {
-                    if (value == null || value.isEmpty) return 'Please enter your email';
-                    if (!value.contains('@')) return 'Please enter a valid email';
+                    if (value == null || value.isEmpty) return AppStrings.enterEmail;
+                    if (!value.contains('@')) return AppStrings.validEmail;
                     return null;
                   },
                 ),
@@ -110,14 +112,14 @@ class _SignupPageState extends ConsumerState<SignupPage> {
                 
                 // Password
                 AuthTextField(
-                  label: 'Password',
-                  hintText: 'Create a password',
+                  label: AppStrings.password,
+                  hintText: AppStrings.createPasswordHint,
                   controller: _passwordController,
                   isPassword: true,
                   prefixIcon: Icons.lock_outline,
                   validator: (value) {
-                    if (value == null || value.isEmpty) return 'Please enter a password';
-                    if (value.length < 6) return 'Password must be at least 6 characters';
+                    if (value == null || value.isEmpty) return AppStrings.enterPassword;
+                    if (value.length < 6) return AppStrings.passwordLength;
                     return null;
                   },
                 ),
@@ -126,14 +128,14 @@ class _SignupPageState extends ConsumerState<SignupPage> {
                 
                 // Confirm Password
                 AuthTextField(
-                  label: 'Confirm Password',
-                  hintText: 'Confirm password',
+                  label: AppStrings.confirmPassword,
+                  hintText: AppStrings.confirmPasswordHint,
                   controller: _confirmPasswordController,
                   isPassword: true,
                   prefixIcon: Icons.lock_outline,
                   validator: (value) {
-                    if (value == null || value.isEmpty) return 'Please confirm your password';
-                    if (value != _passwordController.text) return 'Passwords do not match';
+                    if (value == null || value.isEmpty) return AppStrings.confirmYourPassword;
+                    if (value != _passwordController.text) return AppStrings.passwordsDoNotMatch;
                     return null;
                   },
                 ),
@@ -153,7 +155,7 @@ class _SignupPageState extends ConsumerState<SignupPage> {
                       }
                     },
                     style: ElevatedButton.styleFrom(
-                      backgroundColor: const Color(0xFF00AA88), // Teal
+                      backgroundColor: AppColors.primary, // Teal
                       foregroundColor: Colors.white,
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(28),
@@ -161,7 +163,7 @@ class _SignupPageState extends ConsumerState<SignupPage> {
                       elevation: 0,
                     ),
                     child: const Text(
-                      'Continue',
+                      AppStrings.continueText,
                       style: TextStyle(
                         fontSize: 16,
                         fontWeight: FontWeight.w600,
@@ -179,7 +181,7 @@ class _SignupPageState extends ConsumerState<SignupPage> {
                     Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 16),
                       child: Text(
-                        'Or continue with',
+                        AppStrings.orContinueWith,
                         style: TextStyle(
                           color: Colors.grey.shade500,
                           fontSize: 14,
@@ -196,7 +198,7 @@ class _SignupPageState extends ConsumerState<SignupPage> {
                 Row(
                   children: [
                     SocialSignInButton(
-                      text: 'Google',
+                      text: AppStrings.google,
                       assetName: 'assets/images/google_logo.png',
                       onPressed: () {
                          // TODO
@@ -204,7 +206,7 @@ class _SignupPageState extends ConsumerState<SignupPage> {
                     ),
                     const SizedBox(width: 16),
                     SocialSignInButton(
-                      text: 'Apple',
+                      text: AppStrings.apple,
                       assetName: 'assets/images/apple_logo.png',
                       onPressed: () {
                          // TODO
@@ -220,7 +222,7 @@ class _SignupPageState extends ConsumerState<SignupPage> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     const Text(
-                      'Already have an account? ',
+                      AppStrings.alreadyHaveAccount,
                       style: TextStyle(
                         color: Colors.black87,
                         fontSize: 14,
@@ -229,9 +231,9 @@ class _SignupPageState extends ConsumerState<SignupPage> {
                     GestureDetector(
                       onTap: () => context.go('/login'),
                       child: const Text(
-                        'Sign In',
+                        AppStrings.signIn,
                         style: TextStyle(
-                          color: Color(0xFF00AA88),
+                          color: AppColors.primary,
                           fontWeight: FontWeight.w600,
                           fontSize: 14,
                         ),

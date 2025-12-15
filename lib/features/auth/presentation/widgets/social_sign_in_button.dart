@@ -1,5 +1,6 @@
 
 import 'package:flutter/material.dart';
+import 'package:hyper_focused/core/theme/app_colors.dart';
 
 class SocialSignInButton extends StatelessWidget {
   final String text;
@@ -20,7 +21,7 @@ class SocialSignInButton extends StatelessWidget {
         onPressed: onPressed,
         style: OutlinedButton.styleFrom(
           padding: const EdgeInsets.symmetric(vertical: 16),
-          side: BorderSide(color: Colors.grey.shade300),
+          side: BorderSide(color: AppColors.neutral200),
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(30),
           ),
@@ -29,7 +30,6 @@ class SocialSignInButton extends StatelessWidget {
         child: Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            // Using a container to handle potential missing assets gracefully in dev
             SizedBox(
               width: 24,
               height: 24,
@@ -42,8 +42,8 @@ class SocialSignInButton extends StatelessWidget {
             Text(
               text,
               style: const TextStyle(
-                color: Colors.black87,
-                fontWeight: FontWeight.w600,
+                color: AppColors.neutralDark,
+                fontWeight: FontWeight.w500,
                 fontSize: 14,
               ),
             ),

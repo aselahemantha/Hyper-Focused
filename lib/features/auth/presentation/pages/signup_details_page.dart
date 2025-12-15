@@ -4,6 +4,8 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hyper_focused/features/auth/presentation/widgets/auth_text_field.dart';
 import 'package:hyper_focused/features/auth/presentation/controllers/auth_controller.dart';
+import 'package:hyper_focused/core/theme/app_colors.dart';
+import 'package:hyper_focused/core/constants/app_strings.dart';
 
 class SignupDetailsPage extends ConsumerStatefulWidget {
   const SignupDetailsPage({super.key});
@@ -63,7 +65,7 @@ class _SignupDetailsPageState extends ConsumerState<SignupDetailsPage> {
               children: [
                 const SizedBox(height: 16),
                 const Text(
-                  'Employment Details',
+                  AppStrings.employmentDetails,
                   style: TextStyle(
                     fontSize: 28,
                     fontWeight: FontWeight.bold,
@@ -72,7 +74,7 @@ class _SignupDetailsPageState extends ConsumerState<SignupDetailsPage> {
                 ),
                 const SizedBox(height: 8),
                 Text(
-                  'Enter details of your current employment details.',
+                  AppStrings.employmentDetailsSubtitle,
                   style: TextStyle(
                     fontSize: 16,
                     color: Colors.grey.shade600,
@@ -84,12 +86,12 @@ class _SignupDetailsPageState extends ConsumerState<SignupDetailsPage> {
                 
                 // Phone Number
                 AuthTextField(
-                  label: 'Phone Number',
-                  hintText: 'Phone Number',
+                  label: AppStrings.phoneNumber,
+                  hintText: AppStrings.phoneNumberHint,
                   controller: _phoneController,
                   prefixIcon: Icons.phone_outlined,
                   validator: (value) {
-                    if (value == null || value.isEmpty) return 'Please enter your phone number';
+                    if (value == null || value.isEmpty) return AppStrings.enterPhone;
                     return null;
                   },
                 ),
@@ -98,8 +100,8 @@ class _SignupDetailsPageState extends ConsumerState<SignupDetailsPage> {
                 
                 // Company
                 AuthTextField(
-                  label: 'Company (Optional)',
-                  hintText: 'Enter Company Name',
+                  label: AppStrings.company,
+                  hintText: AppStrings.companyHint,
                   controller: _companyController,
                   prefixIcon: Icons.business_outlined,
                 ),
@@ -108,8 +110,8 @@ class _SignupDetailsPageState extends ConsumerState<SignupDetailsPage> {
                 
                 // Years
                 AuthTextField(
-                  label: 'Years as an Inspector (Optional)',
-                  hintText: 'Years as an Inspector',
+                  label: AppStrings.yearsAsInspector,
+                  hintText: AppStrings.yearsAsInspectorHint,
                   controller: _yearsController,
                 ),
                 
@@ -117,8 +119,8 @@ class _SignupDetailsPageState extends ConsumerState<SignupDetailsPage> {
                 
                 // Number of Inspectors
                 AuthTextField(
-                  label: 'Number of Inspectors (Optional)',
-                  hintText: 'Number of Inspectors',
+                  label: AppStrings.numberOfInspectors,
+                  hintText: AppStrings.numberOfInspectorsHint,
                   controller: _inspectorsCountController,
                 ),
                 
@@ -152,7 +154,7 @@ class _SignupDetailsPageState extends ConsumerState<SignupDetailsPage> {
                       }
                     },
                     style: ElevatedButton.styleFrom(
-                      backgroundColor: const Color(0xFF00AA88),
+                      backgroundColor: AppColors.primary,
                       foregroundColor: Colors.white,
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(28),
@@ -160,7 +162,7 @@ class _SignupDetailsPageState extends ConsumerState<SignupDetailsPage> {
                       elevation: 0,
                     ),
                     child: const Text(
-                      'Complete',
+                      AppStrings.complete,
                       style: TextStyle(
                         fontSize: 16,
                         fontWeight: FontWeight.w600,

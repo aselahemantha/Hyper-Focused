@@ -14,6 +14,7 @@ import 'package:hyper_focused/core/presentation/widgets/bottom_nav_bar.dart';
 import 'package:hyper_focused/features/auth/presentation/pages/auth_landing_page.dart';
 import 'package:hyper_focused/features/auth/presentation/pages/signup_verify_page.dart';
 import 'package:hyper_focused/features/auth/presentation/pages/signup_details_page.dart';
+import 'package:hyper_focused/features/splash/presentation/pages/splash_page.dart';
 
 part 'app_router.g.dart';
 
@@ -25,8 +26,12 @@ GoRouter goRouter(Ref ref) {
 
   return GoRouter(
     navigatorKey: rootNavigatorKey,
-    initialLocation: '/landing',
+    initialLocation: '/splash',
     routes: [
+      GoRoute(
+        path: '/splash',
+        builder: (context, state) => const SplashPage(),
+      ),
       GoRoute(
         path: '/landing',
         builder: (context, state) => const AuthLandingPage(),
@@ -105,9 +110,10 @@ GoRouter goRouter(Ref ref) {
       final isLoggingIn = state.uri.path == '/login';
       final isSigningUp = state.uri.path.startsWith('/signup');
       final isLanding = state.uri.path == '/landing';
+      final isSplash = state.uri.path == '/splash';
 
-      if (!isLoggedIn && !isLoggingIn && !isSigningUp && !isLanding) {
-        return '/landing';
+      if (!isLoggedIn && !isLoggingIn && !isSigningUp && !isLanding && !isSplash) {
+        return '/splash';
       }
 
       if (isLoggedIn && (isLoggingIn || isSigningUp || isLanding)) {

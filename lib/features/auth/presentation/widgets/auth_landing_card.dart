@@ -1,6 +1,8 @@
 
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:hyper_focused/core/theme/app_colors.dart';
+import 'package:hyper_focused/core/constants/app_strings.dart';
 
 class AuthLandingCard extends StatelessWidget {
   const AuthLandingCard({super.key});
@@ -34,21 +36,40 @@ class AuthLandingCard extends StatelessWidget {
             // Logo area
             // Assuming logo is an image for now as described in plan
             Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 Image.asset(
                   'assets/images/logo_white.png',
                    height: 48, // approximate size
                    // width: 48,
                 ),
-                // If the logo image doesn't include text, we'd add Text widget here.
-                // Assuming the asset "logo_white.png" is the icon+text combo from the design
+                Container(
+                  height: 36,
+                  width: 36,
+                  decoration: BoxDecoration(
+                    color: AppColors.primary,
+                    shape: BoxShape.circle,
+                  ),
+                  child: IconButton(
+                    padding: EdgeInsets.zero,
+                    icon: const Icon(
+                      Icons.question_mark,
+                      color: AppColors.neutralWhite,
+                      size: 20,
+                    ),
+                    onPressed: () {
+                      // TODO: handle help action
+                    },
+                  ),
+                ),
               ],
             ),
             const SizedBox(height: 24),
             
             // Description Text
             const Text(
-              'The modern home inspection platform designed for professionals who value precision, efficiency, and exceptional client experiences.',
+              AppStrings.landingDescription,
               style: TextStyle(
                 color: Colors.white,
                 fontSize: 14,
@@ -64,17 +85,17 @@ class AuthLandingCard extends StatelessWidget {
               height: 56,
               child: ElevatedButton(
                 onPressed: () {
-                   context.push('/login'); // Assuming /login route
+                   context.push('/login');
                 },
                 style: ElevatedButton.styleFrom(
-                  backgroundColor: const Color(0xFF00AA88), // Teal color from design
+                  backgroundColor: AppColors.primary,
                   foregroundColor: Colors.white,
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(28),
                   ),
                 ),
                 child: const Text(
-                  'Sign In',
+                  AppStrings.signIn,
                   style: TextStyle(
                     fontSize: 16,
                     fontWeight: FontWeight.w600,
@@ -91,7 +112,7 @@ class AuthLandingCard extends StatelessWidget {
               height: 56,
               child: ElevatedButton(
                 onPressed: () {
-                  context.push('/signup'); // Assuming /signup route
+                  context.push('/signup');
                 },
                 style: ElevatedButton.styleFrom(
                   backgroundColor: Colors.white,
@@ -101,7 +122,7 @@ class AuthLandingCard extends StatelessWidget {
                   ),
                 ),
                 child: const Text(
-                  'Register Now',
+                  AppStrings.registerNow,
                   style: TextStyle(
                     fontSize: 16,
                     fontWeight: FontWeight.w600,
@@ -109,7 +130,7 @@ class AuthLandingCard extends StatelessWidget {
                 ),
               ),
             ),
-             const SizedBox(height: 20), // Bottom safe area padding approximation
+             const SizedBox(height: 20),
           ],
         ),
       ),

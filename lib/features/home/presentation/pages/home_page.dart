@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:hyper_focused/core/theme/app_colors.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
@@ -6,11 +7,11 @@ class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return const Scaffold(
-      backgroundColor: Colors.black,
+      backgroundColor: AppColors.neutralDark,
       body: Center(
         child: Text(
           'Home Page',
-          style: TextStyle(color: Colors.white),
+          style: TextStyle(color: AppColors.neutralWhite),
         ),
       ),
     );

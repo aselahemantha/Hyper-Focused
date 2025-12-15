@@ -5,6 +5,8 @@ import 'package:go_router/go_router.dart';
 import 'package:hyper_focused/features/auth/presentation/controllers/auth_controller.dart';
 import 'package:hyper_focused/features/auth/presentation/widgets/auth_text_field.dart';
 import 'package:hyper_focused/features/auth/presentation/widgets/social_sign_in_button.dart';
+import 'package:hyper_focused/core/theme/app_colors.dart';
+import 'package:hyper_focused/core/constants/app_strings.dart';
 
 class LoginPage extends ConsumerStatefulWidget {
   const LoginPage({super.key});
@@ -51,10 +53,11 @@ class _LoginPageState extends ConsumerState<LoginPage> {
           child: Container(
             decoration: BoxDecoration(
               shape: BoxShape.circle,
-              border: Border.all(color: Colors.grey.shade200),
+              color: AppColors.neutral100,
+              border: Border.all(color: AppColors.neutral200),
             ),
             child: IconButton(
-              icon: const Icon(Icons.arrow_back, color: Colors.black, size: 20),
+              icon: const Icon(Icons.arrow_back, color: AppColors.neutralDark, size: 20),
               onPressed: () => context.pop(),
               padding: EdgeInsets.zero,
             ),
@@ -72,29 +75,30 @@ class _LoginPageState extends ConsumerState<LoginPage> {
                 const SizedBox(height: 16),
                 // Logo
                 Image.asset(
-                  'assets/images/logo.png',
+                  'assets/images/hyperfocused_icon.png',
                   height: 60,
                   // width: 60,
                   errorBuilder: (context, error, stackTrace) =>
-                      const Icon(Icons.apps, size: 60, color: Color(0xFF00AA88)),
+                      const Icon(Icons.apps, size: 60, color: AppColors.primary),
                 ),
                 const SizedBox(height: 24),
                 
                 // Title
                 const Text(
-                  'Welcome Back',
+                  AppStrings.welcomeBack,
                   style: TextStyle(
-                    fontSize: 28,
+                    fontSize: 24,
                     fontWeight: FontWeight.bold,
-                    color: Colors.black,
+                    color: AppColors.neutralDark,
                   ),
                 ),
                 const SizedBox(height: 8),
                 Text(
-                  'Sign in to continue your inspection works.',
+                  AppStrings.loginSubtitle,
                   style: TextStyle(
-                    fontSize: 16,
-                    color: Colors.grey.shade600,
+                    fontSize: 14,
+                    fontWeight: FontWeight.normal,
+                    color: AppColors.textBody,
                   ),
                 ),
                 
@@ -102,16 +106,16 @@ class _LoginPageState extends ConsumerState<LoginPage> {
                 
                 // Email Field
                 AuthTextField(
-                  label: 'Email Address',
-                  hintText: 'Email Address',
+                  label: AppStrings.emailAddress,
+                  hintText: AppStrings.emailHint,
                   controller: _emailController,
                   prefixIcon: Icons.email_outlined,
                   validator: (value) {
                     if (value == null || value.isEmpty) {
-                      return 'Please enter your email';
+                      return AppStrings.enterEmail;
                     }
                     if (!value.contains('@')) {
-                      return 'Please enter a valid email';
+                      return AppStrings.validEmail;
                     }
                     return null;
                   },
@@ -121,14 +125,14 @@ class _LoginPageState extends ConsumerState<LoginPage> {
                 
                 // Password Field
                 AuthTextField(
-                  label: 'Password',
-                  hintText: 'Your Password',
+                  label: AppStrings.password,
+                  hintText: AppStrings.passwordHint,
                   controller: _passwordController,
                   isPassword: true,
                   prefixIcon: Icons.lock_outline,
                   validator: (value) {
                     if (value == null || value.isEmpty) {
-                      return 'Please enter your password';
+                      return AppStrings.enterPassword;
                     }
                     return null;
                   },
@@ -149,7 +153,7 @@ class _LoginPageState extends ConsumerState<LoginPage> {
                             _rememberMe = value ?? false;
                           });
                         },
-                        activeColor: const Color(0xFF00AA88),
+                        activeColor: AppColors.primary,
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(4),
                         ),
@@ -157,9 +161,10 @@ class _LoginPageState extends ConsumerState<LoginPage> {
                     ),
                     const SizedBox(width: 8),
                     const Text(
-                      'Remember Me',
+                      AppStrings.rememberMe,
                       style: TextStyle(
                         fontSize: 14,
+                        color: AppColors.neutralDark,
                         fontWeight: FontWeight.w500,
                       ),
                     ),
@@ -172,9 +177,9 @@ class _LoginPageState extends ConsumerState<LoginPage> {
                         padding: EdgeInsets.zero,
                         minimumSize: Size.zero,
                         tapTargetSize: MaterialTapTargetSize.shrinkWrap,
-                        foregroundColor: const Color(0xFF00AA88),
+                        foregroundColor: AppColors.primary,
                       ),
-                      child: const Text('Forgot Password'),
+                      child: const Text(AppStrings.forgotPassword),
                     ),
                   ],
                 ),
@@ -197,9 +202,9 @@ class _LoginPageState extends ConsumerState<LoginPage> {
                             }
                           },
                     style: ElevatedButton.styleFrom(
-                      backgroundColor: const Color(0xFF00AA88),
+                      backgroundColor: AppColors.primary,
                       foregroundColor: Colors.white,
-                      disabledBackgroundColor: const Color(0xFF00AA88).withOpacity(0.6),
+                      disabledBackgroundColor: AppColors.primary.withOpacity(0.6),
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(28),
                       ),
@@ -208,7 +213,7 @@ class _LoginPageState extends ConsumerState<LoginPage> {
                     child: isLoading
                         ? const CircularProgressIndicator(color: Colors.white)
                         : const Text(
-                            'Sign In',
+                            AppStrings.signIn,
                             style: TextStyle(
                               fontSize: 16,
                               fontWeight: FontWeight.w600,
@@ -222,18 +227,18 @@ class _LoginPageState extends ConsumerState<LoginPage> {
                 // Or continue with
                 Row(
                   children: [
-                    Expanded(child: Divider(color: Colors.grey.shade300)),
+                    Expanded(child: Divider(color: AppColors.neutral500)),
                     Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 16),
                       child: Text(
-                        'Or continue with',
+                        AppStrings.orContinueWith,
                         style: TextStyle(
-                          color: Colors.grey.shade500,
+                          color: AppColors.neutral500,
                           fontSize: 14,
                         ),
                       ),
                     ),
-                    Expanded(child: Divider(color: Colors.grey.shade300)),
+                    Expanded(child: Divider(color: AppColors.neutral500)),
                   ],
                 ),
                 
@@ -243,7 +248,7 @@ class _LoginPageState extends ConsumerState<LoginPage> {
                 Row(
                   children: [
                     SocialSignInButton(
-                      text: 'Google',
+                      text: AppStrings.google,
                       assetName: 'assets/images/google_logo.png',
                       onPressed: () {
                         ref.read(authControllerProvider.notifier).loginWithGoogle();
@@ -251,7 +256,7 @@ class _LoginPageState extends ConsumerState<LoginPage> {
                     ),
                     const SizedBox(width: 16),
                     SocialSignInButton(
-                      text: 'Apple',
+                      text: AppStrings.apple,
                       assetName: 'assets/images/apple_logo.png',
                       onPressed: () {
                         ref.read(authControllerProvider.notifier).loginWithApple();
@@ -267,26 +272,27 @@ class _LoginPageState extends ConsumerState<LoginPage> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     const Text(
-                      'Don\'t have an account? ',
+                      AppStrings.dontHaveAccount,
                       style: TextStyle(
-                        color: Colors.black87,
+                        color: AppColors.neutralDark,
+                        fontWeight: FontWeight.w500,
                         fontSize: 14,
                       ),
                     ),
                     GestureDetector(
                       onTap: () => context.push('/signup'),
                       child: const Text(
-                        'Sign up',
+                        AppStrings.signUp,
                         style: TextStyle(
-                          color: Color(0xFF00AA88),
-                          fontWeight: FontWeight.w600,
+                          color: AppColors.primary,
+                          fontWeight: FontWeight.w500,
                           fontSize: 14,
                         ),
                       ),
                     ),
                   ],
                 ),
-                const SizedBox(height: 16), // Bottom padding
+                const SizedBox(height: 16),
               ],
             ),
           ),

@@ -1,5 +1,6 @@
 
 import 'package:flutter/material.dart';
+import 'package:hyper_focused/core/theme/app_colors.dart';
 
 class AuthTextField extends StatefulWidget {
   final String label;
@@ -35,8 +36,8 @@ class _AuthTextFieldState extends State<AuthTextField> {
           widget.label,
           style: const TextStyle(
             fontSize: 14,
-            fontWeight: FontWeight.w600,
-            color: Colors.black87,
+            fontWeight: FontWeight.w500,
+            color: AppColors.neutralDark,
           ),
         ),
         const SizedBox(height: 8),
@@ -46,17 +47,17 @@ class _AuthTextFieldState extends State<AuthTextField> {
           validator: widget.validator,
           decoration: InputDecoration(
             hintText: widget.hintText,
-            hintStyle: const TextStyle(color: Colors.grey, fontSize: 14),
+            hintStyle: const TextStyle(color: AppColors.textBody, fontSize: 14),
             filled: true,
-            fillColor: const Color(0xFFF9FAFB), // Light grey from design
+            fillColor: AppColors.neutral100,
             prefixIcon: widget.prefixIcon != null
-                ? Icon(widget.prefixIcon, color: Colors.grey, size: 20)
+                ? Icon(widget.prefixIcon, color: AppColors.textBody, size: 20)
                 : null,
             suffixIcon: widget.isPassword
                 ? IconButton(
                     icon: Icon(
                       _obscureText ? Icons.visibility_outlined : Icons.visibility_off_outlined,
-                      color: Colors.grey,
+                      color: AppColors.textBody,
                       size: 20,
                     ),
                     onPressed: () {
@@ -77,7 +78,7 @@ class _AuthTextFieldState extends State<AuthTextField> {
             ),
             focusedBorder: OutlineInputBorder(
               borderRadius: BorderRadius.circular(12),
-              borderSide: const BorderSide(color: Color(0xFF00AA88), width: 1.5),
+              borderSide: const BorderSide(color: AppColors.primary, width: 1.5),
             ),
             errorBorder: OutlineInputBorder(
               borderRadius: BorderRadius.circular(12),
