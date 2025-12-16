@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
@@ -34,9 +33,9 @@ class _LoginPageState extends ConsumerState<LoginPage> {
       if (next is AsyncData && next.value != null) {
         context.go('/');
       } else if (next is AsyncError) {
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text(next.error.toString())),
-        );
+        ScaffoldMessenger.of(
+          context,
+        ).showSnackBar(SnackBar(content: Text(next.error.toString())));
       }
     });
 
@@ -57,7 +56,11 @@ class _LoginPageState extends ConsumerState<LoginPage> {
               border: Border.all(color: AppColors.neutral200),
             ),
             child: IconButton(
-              icon: const Icon(Icons.arrow_back, color: AppColors.neutralDark, size: 20),
+              icon: const Icon(
+                Icons.arrow_back,
+                color: AppColors.neutralDark,
+                size: 20,
+              ),
               onPressed: () => context.pop(),
               padding: EdgeInsets.zero,
             ),
@@ -78,11 +81,14 @@ class _LoginPageState extends ConsumerState<LoginPage> {
                   'assets/images/hyperfocused_icon.png',
                   height: 60,
                   // width: 60,
-                  errorBuilder: (context, error, stackTrace) =>
-                      const Icon(Icons.apps, size: 60, color: AppColors.primary),
+                  errorBuilder: (context, error, stackTrace) => const Icon(
+                    Icons.apps,
+                    size: 60,
+                    color: AppColors.primary,
+                  ),
                 ),
                 const SizedBox(height: 24),
-                
+
                 // Title
                 const Text(
                   AppStrings.welcomeBack,
@@ -101,9 +107,9 @@ class _LoginPageState extends ConsumerState<LoginPage> {
                     color: AppColors.textBody,
                   ),
                 ),
-                
+
                 const SizedBox(height: 32),
-                
+
                 // Email Field
                 AuthTextField(
                   label: AppStrings.emailAddress,
@@ -120,9 +126,9 @@ class _LoginPageState extends ConsumerState<LoginPage> {
                     return null;
                   },
                 ),
-                
+
                 const SizedBox(height: 20),
-                
+
                 // Password Field
                 AuthTextField(
                   label: AppStrings.password,
@@ -137,9 +143,9 @@ class _LoginPageState extends ConsumerState<LoginPage> {
                     return null;
                   },
                 ),
-                
+
                 const SizedBox(height: 16),
-                
+
                 // Remember Me & Forgot Password
                 Row(
                   children: [
@@ -171,7 +177,7 @@ class _LoginPageState extends ConsumerState<LoginPage> {
                     const Spacer(),
                     TextButton(
                       onPressed: () {
-                         // TODO: Implement Forgot Password
+                        // TODO: Implement Forgot Password
                       },
                       style: TextButton.styleFrom(
                         padding: EdgeInsets.zero,
@@ -183,9 +189,9 @@ class _LoginPageState extends ConsumerState<LoginPage> {
                     ),
                   ],
                 ),
-                
+
                 const SizedBox(height: 32),
-                
+
                 // Sign In Button
                 SizedBox(
                   width: double.infinity,
@@ -195,7 +201,9 @@ class _LoginPageState extends ConsumerState<LoginPage> {
                         ? null
                         : () {
                             if (_formKey.currentState!.validate()) {
-                              ref.read(authControllerProvider.notifier).login(
+                              ref
+                                  .read(authControllerProvider.notifier)
+                                  .login(
                                     _emailController.text,
                                     _passwordController.text,
                                   );
@@ -204,7 +212,9 @@ class _LoginPageState extends ConsumerState<LoginPage> {
                     style: ElevatedButton.styleFrom(
                       backgroundColor: AppColors.primary,
                       foregroundColor: Colors.white,
-                      disabledBackgroundColor: AppColors.primary.withOpacity(0.6),
+                      disabledBackgroundColor: AppColors.primary.withOpacity(
+                        0.6,
+                      ),
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(28),
                       ),
@@ -215,15 +225,15 @@ class _LoginPageState extends ConsumerState<LoginPage> {
                         : const Text(
                             AppStrings.signIn,
                             style: TextStyle(
-                              fontSize: 16,
-                              fontWeight: FontWeight.w600,
+                              fontSize: 14,
+                              fontWeight: FontWeight.w500,
                             ),
                           ),
                   ),
                 ),
-                
+
                 const SizedBox(height: 32),
-                
+
                 // Or continue with
                 Row(
                   children: [
@@ -241,9 +251,9 @@ class _LoginPageState extends ConsumerState<LoginPage> {
                     Expanded(child: Divider(color: AppColors.neutral500)),
                   ],
                 ),
-                
+
                 const SizedBox(height: 32),
-                
+
                 // Social Buttons
                 Row(
                   children: [
@@ -251,7 +261,9 @@ class _LoginPageState extends ConsumerState<LoginPage> {
                       text: AppStrings.google,
                       assetName: 'assets/images/google_logo.png',
                       onPressed: () {
-                        ref.read(authControllerProvider.notifier).loginWithGoogle();
+                        ref
+                            .read(authControllerProvider.notifier)
+                            .loginWithGoogle();
                       },
                     ),
                     const SizedBox(width: 16),
@@ -259,14 +271,16 @@ class _LoginPageState extends ConsumerState<LoginPage> {
                       text: AppStrings.apple,
                       assetName: 'assets/images/apple_logo.png',
                       onPressed: () {
-                        ref.read(authControllerProvider.notifier).loginWithApple();
+                        ref
+                            .read(authControllerProvider.notifier)
+                            .loginWithApple();
                       },
                     ),
                   ],
                 ),
-                
+
                 const SizedBox(height: 32),
-                
+
                 // Sign Up Footer
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,

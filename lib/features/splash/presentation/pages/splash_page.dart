@@ -19,7 +19,7 @@ class _SplashPageState extends State<SplashPage> {
     Timer(const Duration(seconds: 3), () {
       if (mounted) {
         // Router redirect logic will handle where to go (Landing or Home)
-        // We just need to trigger a check or go to a route that redirects.
+        // We just need to trigger a report or go to a route that redirects.
         // Since initialLocation in router might be splash, we need to explicitly go.
         // However, usually Splash screens are handled by checking auth state.
         // For simplicity with go_router redirects, we can just context.go('/landing');

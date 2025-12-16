@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:go_router/go_router.dart';
@@ -14,7 +13,10 @@ class SignupVerifyPage extends StatefulWidget {
 
 class _SignupVerifyPageState extends State<SignupVerifyPage> {
   // Using a list of controllers for the OTP fields
-  final List<TextEditingController> _controllers = List.generate(6, (index) => TextEditingController());
+  final List<TextEditingController> _controllers = List.generate(
+    6,
+    (index) => TextEditingController(),
+  );
   final List<FocusNode> _focusNodes = List.generate(6, (index) => FocusNode());
 
   @override
@@ -54,10 +56,15 @@ class _SignupVerifyPageState extends State<SignupVerifyPage> {
           child: Container(
             decoration: BoxDecoration(
               shape: BoxShape.circle,
-              border: Border.all(color: Colors.grey.shade200),
+              color: AppColors.neutral100,
+              border: Border.all(color: AppColors.neutral200),
             ),
             child: IconButton(
-              icon: const Icon(Icons.arrow_back, color: Colors.black, size: 20),
+              icon: const Icon(
+                Icons.arrow_back,
+                color: AppColors.neutralDark,
+                size: 20,
+              ),
               onPressed: () => context.pop(),
               padding: EdgeInsets.zero,
             ),
@@ -74,9 +81,9 @@ class _SignupVerifyPageState extends State<SignupVerifyPage> {
               const Text(
                 AppStrings.enter6DigitCode,
                 style: TextStyle(
-                  fontSize: 28,
-                  fontWeight: FontWeight.bold,
-                  color: Colors.black,
+                  fontSize: 24,
+                  fontWeight: FontWeight.w700,
+                  color: AppColors.neutralDark,
                 ),
               ),
               const SizedBox(height: 8),
@@ -84,30 +91,30 @@ class _SignupVerifyPageState extends State<SignupVerifyPage> {
                 text: const TextSpan(
                   text: AppStrings.verifySubtitle,
                   style: TextStyle(
-                    fontSize: 16,
-                    color: Colors.grey,
+                    fontSize: 14,
+                    color: AppColors.textBody,
                     height: 1.5,
                   ),
                   children: [
                     TextSpan(
-                      text: 'jessydoe@email.com', // Placeholder or passed from prev screen
+                      text: 'jessydoe@email.com', // Passed from prev screen
                       style: TextStyle(
-                               color: AppColors.primary,
+                        color: AppColors.primary,
                         decoration: TextDecoration.underline,
                       ),
                     ),
                   ],
                 ),
               ),
-              
+
               const SizedBox(height: 48),
-              
+
               // OTP Input Fields
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: List.generate(6, (index) {
                   return SizedBox(
-                    width: 48, // Adjust based on screen width if needed
+                    width: 48,
                     height: 56,
                     child: TextField(
                       controller: _controllers[index],
@@ -118,41 +125,39 @@ class _SignupVerifyPageState extends State<SignupVerifyPage> {
                       onChanged: (value) => _onChanged(value, index),
                       style: const TextStyle(
                         fontSize: 20,
-                        fontWeight: FontWeight.bold,
+                        fontWeight: FontWeight.w700,
                       ),
                       decoration: InputDecoration(
                         counterText: '',
                         filled: true,
-                        fillColor: AppColors.inputBackground,
+                        fillColor: AppColors.neutral100,
                         border: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(8),
                           borderSide: BorderSide.none,
                         ),
                         focusedBorder: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(8),
-                          borderSide: const BorderSide(color: AppColors.primary, width: 1.5),
+                          borderSide: const BorderSide(
+                            color: AppColors.primary,
+                            width: 1.5,
+                          ),
                         ),
                       ),
-                      inputFormatters: [
-                        FilteringTextInputFormatter.digitsOnly,
-                      ],
+                      inputFormatters: [FilteringTextInputFormatter.digitsOnly],
                     ),
                   );
                 }),
               ),
-              
+
               const SizedBox(height: 24),
-              
+
               // Timer and Help
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Text(
-                    'Remaining 60s', // Mock timer
-                    style: TextStyle(
-                      color: Colors.grey.shade600,
-                      fontSize: 14,
-                    ),
+                    'Remaining 60s',
+                    style: TextStyle(color: AppColors.textBody, fontSize: 14),
                   ),
                   TextButton(
                     onPressed: () {},
@@ -166,9 +171,9 @@ class _SignupVerifyPageState extends State<SignupVerifyPage> {
                   ),
                 ],
               ),
-              
+
               const SizedBox(height: 32),
-              
+
               // Continue Button
               SizedBox(
                 width: double.infinity,
@@ -180,7 +185,7 @@ class _SignupVerifyPageState extends State<SignupVerifyPage> {
                   },
                   style: ElevatedButton.styleFrom(
                     backgroundColor: AppColors.primary,
-                    foregroundColor: Colors.white,
+                    foregroundColor: AppColors.neutralWhite,
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(28),
                     ),
@@ -188,39 +193,33 @@ class _SignupVerifyPageState extends State<SignupVerifyPage> {
                   ),
                   child: const Text(
                     AppStrings.continueText,
-                    style: TextStyle(
-                      fontSize: 16,
-                      fontWeight: FontWeight.w600,
-                    ),
+                    style: TextStyle(fontSize: 14, fontWeight: FontWeight.w500),
                   ),
                 ),
               ),
-               
+
               const SizedBox(height: 24),
-               
+
               // Resend Code
               Center(
                 child: RichText(
                   text: TextSpan(
                     text: AppStrings.didntReceiveCode,
-                    style: TextStyle(
-                      color: Colors.grey.shade600,
-                      fontSize: 14,
-                    ),
+                    style: TextStyle(color: AppColors.textBody, fontSize: 14),
                     children: [
                       WidgetSpan(
                         child: GestureDetector(
-                           onTap: () {
-                             // TODO: Resend action
-                           },
-                           child: const Text(
-                             AppStrings.resendIt,
-                             style: TextStyle(
-                                      color: AppColors.primary,
-                               fontWeight: FontWeight.w600,
-                               fontSize: 14,
-                             ),
-                           ),
+                          onTap: () {
+                            // TODO: Resend action
+                          },
+                          child: const Text(
+                            AppStrings.resendIt,
+                            style: TextStyle(
+                              color: AppColors.primary,
+                              fontWeight: FontWeight.w500,
+                              fontSize: 14,
+                            ),
+                          ),
                         ),
                       ),
                     ],
