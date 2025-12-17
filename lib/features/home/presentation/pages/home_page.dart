@@ -21,11 +21,12 @@ class HomePage extends StatelessWidget {
             colors: [
               Color(0xFFE0F7FA), // Very light teal at top
               Color(0xFFF5F5F5), // Light grey middle
-              Colors.white,      // White bottom
+              Colors.white, // White bottom
             ],
           ),
         ),
         child: SafeArea(
+          bottom: false,
           child: SingleChildScrollView(
             padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
             child: Column(
@@ -38,7 +39,6 @@ class HomePage extends StatelessWidget {
                 UpcomingSchedules(),
                 SizedBox(height: 24),
                 RecentReports(),
-                // Add extra padding at bottom for the floating navbar
                 SizedBox(height: 100),
               ],
             ),

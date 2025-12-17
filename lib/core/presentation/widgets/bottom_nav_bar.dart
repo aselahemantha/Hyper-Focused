@@ -45,11 +45,11 @@ class BottomNavBar extends StatelessWidget {
                   child: Container(
                     height: 70,
                     decoration: BoxDecoration(
-                      color: const Color(0xFF9E9E9E).withOpacity(0.4), // Semi-transparent grey
+                      color: AppColors.neutralWhite.withOpacity(0.3),
                       borderRadius: BorderRadius.circular(35),
                       boxShadow: [
                         BoxShadow(
-                          color: Colors.black.withOpacity(0.1),
+                          color: AppColors.neutralDark.withOpacity(0.1),
                           blurRadius: 10,
                           offset: const Offset(0, 5),
                         ),
@@ -83,11 +83,11 @@ class BottomNavBar extends StatelessWidget {
                     height: 70,
                     width: 70,
                     decoration: BoxDecoration(
-                      color: const Color(0xFF9E9E9E).withOpacity(0.4), // Semi-transparent grey
+                      color: AppColors.neutralWhite.withOpacity(0.3),
                       shape: BoxShape.circle,
                       boxShadow: [
                         BoxShadow(
-                          color: Colors.black.withOpacity(0.1),
+                          color: AppColors.neutralDark.withOpacity(0.1),
                           blurRadius: 10,
                           offset: const Offset(0, 5),
                         ),

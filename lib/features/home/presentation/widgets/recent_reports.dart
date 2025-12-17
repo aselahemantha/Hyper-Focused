@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:hyper_focused/core/constants/app_strings.dart';
 import 'package:hyper_focused/core/theme/app_colors.dart';
 
 class RecentReports extends StatelessWidget {
@@ -14,19 +15,19 @@ class RecentReports extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             const Text(
-              'Recent Reports',
+              AppStrings.recentReports,
               style: TextStyle(
-                fontSize: 18,
-                fontWeight: FontWeight.bold,
+                fontSize: 16,
+                fontWeight: FontWeight.w500,
                 color: AppColors.neutralDark,
               ),
             ),
             TextButton(
               onPressed: () {},
               child: const Text(
-                'View All',
+                AppStrings.viewAll,
                 style: TextStyle(
-                  color: Colors.teal,
+                  color: AppColors.primary,
                   fontSize: 14,
                   fontWeight: FontWeight.w500,
                 ),
@@ -34,9 +35,9 @@ class RecentReports extends StatelessWidget {
             ),
           ],
         ),
-        
+
         const SizedBox(height: 8),
-        
+
         _buildReportCard(),
         // Add more cards here if needed
       ],
@@ -71,11 +72,18 @@ class RecentReports extends StatelessWidget {
                 ),
                 child: Row(
                   children: const [
-                    Icon(Icons.apartment, size: 16, color: AppColors.neutralDark),
+                    Icon(
+                      Icons.apartment,
+                      size: 16,
+                      color: AppColors.neutralDark,
+                    ),
                     SizedBox(width: 6),
                     Text(
                       'Service Name',
-                      style: TextStyle(fontWeight: FontWeight.bold, fontSize: 13),
+                      style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        fontSize: 13,
+                      ),
                     ),
                   ],
                 ),
@@ -89,24 +97,35 @@ class RecentReports extends StatelessWidget {
                 ),
                 child: Row(
                   children: const [
-                    Icon(Icons.access_time, size: 16, color: AppColors.neutralDark),
+                    Icon(
+                      Icons.access_time,
+                      size: 16,
+                      color: AppColors.neutralDark,
+                    ),
                     SizedBox(width: 6),
                     Text(
                       '12-12-2025 | 12.00PM',
-                      style: TextStyle(fontWeight: FontWeight.w600, fontSize: 13),
+                      style: TextStyle(
+                        fontWeight: FontWeight.w600,
+                        fontSize: 13,
+                      ),
                     ),
                   ],
                 ),
               ),
             ],
           ),
-          
+
           const SizedBox(height: 16),
-          
+
           // User Info
           Row(
             children: [
-              const Icon(Icons.person_outline, size: 20, color: AppColors.neutralDark),
+              const Icon(
+                Icons.person_outline,
+                size: 20,
+                color: AppColors.neutralDark,
+              ),
               const SizedBox(width: 8),
               const Text(
                 'Jason Johnson',
@@ -114,14 +133,18 @@ class RecentReports extends StatelessWidget {
               ),
             ],
           ),
-          
+
           const SizedBox(height: 8),
-          
+
           // Location
           Row(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const Icon(Icons.location_on_outlined, size: 20, color: AppColors.neutralDark),
+              const Icon(
+                Icons.location_on_outlined,
+                size: 20,
+                color: AppColors.neutralDark,
+              ),
               const SizedBox(width: 8),
               Expanded(
                 child: Text(
@@ -131,13 +154,18 @@ class RecentReports extends StatelessWidget {
               ),
             ],
           ),
-          
+
           const SizedBox(height: 8),
-          
+
           // Phone
           Row(
             children: [
-              const Icon(Icons.phone_outlined, size: 20, color: AppColors.neutralDark), // In design generic icon usually
+              const Icon(
+                Icons.phone_outlined,
+                size: 20,
+                color: AppColors.neutralDark,
+              ),
+              // In design generic icon usually
               const SizedBox(width: 8),
               Text(
                 '880 762 233 2234', // Assuming phone number
@@ -145,9 +173,9 @@ class RecentReports extends StatelessWidget {
               ),
             ],
           ),
-          
+
           const SizedBox(height: 16),
-          
+
           // Status Checks
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -158,17 +186,20 @@ class RecentReports extends StatelessWidget {
               _buildStatusCheck('Published', false),
             ],
           ),
-          
+
           const SizedBox(height: 16),
           Divider(color: AppColors.neutral200),
           const SizedBox(height: 8),
-          
+
           // Footer Row
           Row(
             children: [
               // Price Tag
               Container(
-                padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 6),
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 10,
+                  vertical: 6,
+                ),
                 decoration: BoxDecoration(
                   color: AppColors.neutral100,
                   borderRadius: BorderRadius.circular(20),
@@ -179,29 +210,39 @@ class RecentReports extends StatelessWidget {
                     SizedBox(width: 4),
                     Text(
                       '\$550.48',
-                      style: TextStyle(fontWeight: FontWeight.bold, fontSize: 13),
+                      style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        fontSize: 13,
+                      ),
                     ),
                   ],
                 ),
               ),
-              
+
               const SizedBox(width: 8),
-              
+
               // Status Status Pill
               Container(
-                padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 6),
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 10,
+                  vertical: 6,
+                ),
                 decoration: BoxDecoration(
                   border: Border.all(color: Colors.red),
                   borderRadius: BorderRadius.circular(20),
                 ),
                 child: const Text(
                   'Under Review',
-                  style: TextStyle(color: Colors.red, fontSize: 12, fontWeight: FontWeight.w600),
+                  style: TextStyle(
+                    color: Colors.red,
+                    fontSize: 12,
+                    fontWeight: FontWeight.w600,
+                  ),
                 ),
               ),
-              
+
               const Spacer(),
-              
+
               // Cloud Icon
               Container(
                 width: 36,
@@ -213,7 +254,11 @@ class RecentReports extends StatelessWidget {
                 child: Stack(
                   alignment: Alignment.center,
                   children: [
-                    const Icon(Icons.cloud_upload_outlined, color: Colors.black, size: 20),
+                    const Icon(
+                      Icons.cloud_upload_outlined,
+                      color: Colors.black,
+                      size: 20,
+                    ),
                     Positioned(
                       top: 8,
                       right: 8,
@@ -225,13 +270,13 @@ class RecentReports extends StatelessWidget {
                           shape: BoxShape.circle,
                         ),
                       ),
-                    )
+                    ),
                   ],
                 ),
               ),
-              
+
               const SizedBox(width: 8),
-              
+
               // Arrow Button
               Container(
                 width: 36,
@@ -240,7 +285,11 @@ class RecentReports extends StatelessWidget {
                   color: AppColors.neutral200,
                   shape: BoxShape.circle,
                 ),
-                child: const Icon(Icons.arrow_forward, color: AppColors.neutralDark, size: 20),
+                child: const Icon(
+                  Icons.arrow_forward,
+                  color: AppColors.neutralDark,
+                  size: 20,
+                ),
               ),
             ],
           ),

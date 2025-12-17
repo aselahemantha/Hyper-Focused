@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:hyper_focused/core/constants/app_strings.dart';
 import 'package:hyper_focused/core/theme/app_colors.dart';
 
 class UpcomingSchedules extends StatelessWidget {
@@ -14,19 +15,19 @@ class UpcomingSchedules extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             const Text(
-              'Upcoming Schedules',
+              AppStrings.upcomingSchedules,
               style: TextStyle(
-                fontSize: 18,
-                fontWeight: FontWeight.bold,
+                fontSize: 16,
+                fontWeight: FontWeight.w500,
                 color: AppColors.neutralDark,
               ),
             ),
             TextButton(
               onPressed: () {},
               child: const Text(
-                'View All',
+                AppStrings.viewAll,
                 style: TextStyle(
-                  color: Colors.teal, // Matching the image's "View All" color
+                  color: AppColors.primary,
                   fontSize: 14,
                   fontWeight: FontWeight.w500,
                 ),
@@ -34,9 +35,9 @@ class UpcomingSchedules extends StatelessWidget {
             ),
           ],
         ),
-        
+
         const SizedBox(height: 12),
-        
+
         // Horizontal List
         SingleChildScrollView(
           scrollDirection: Axis.horizontal,
@@ -77,11 +78,11 @@ class UpcomingSchedules extends StatelessWidget {
     return Container(
       width: 280,
       decoration: BoxDecoration(
-        color: Colors.white,
+        color: AppColors.neutralWhite,
         borderRadius: BorderRadius.circular(20),
         boxShadow: [
           BoxShadow(
-            color: Colors.black.withOpacity(0.05),
+            color: AppColors.neutralDark.withOpacity(0.05),
             blurRadius: 10,
             offset: const Offset(0, 4),
           ),
@@ -93,12 +94,14 @@ class UpcomingSchedules extends StatelessWidget {
           Container(
             height: 160,
             decoration: BoxDecoration(
-              borderRadius: const BorderRadius.vertical(top: Radius.circular(20)),
+              borderRadius: const BorderRadius.vertical(
+                top: Radius.circular(20),
+              ),
               image: DecorationImage(
-                image: AssetImage(imageUrl), // Placeholder
+                image: AssetImage(imageUrl),
                 fit: BoxFit.cover,
               ),
-              color: Colors.grey[300], // Fallback color
+              color: AppColors.neutral200,
             ),
             child: Stack(
               children: [
@@ -106,7 +109,9 @@ class UpcomingSchedules extends StatelessWidget {
                 Positioned.fill(
                   child: Container(
                     decoration: BoxDecoration(
-                      borderRadius: const BorderRadius.vertical(top: Radius.circular(20)),
+                      borderRadius: const BorderRadius.vertical(
+                        top: Radius.circular(20),
+                      ),
                       gradient: LinearGradient(
                         begin: Alignment.topCenter,
                         end: Alignment.bottomCenter,
@@ -129,15 +134,16 @@ class UpcomingSchedules extends StatelessWidget {
                       Text(
                         name,
                         style: const TextStyle(
-                          color: Colors.white,
-                          fontWeight: FontWeight.bold,
-                          fontSize: 16,
+                          color: AppColors.neutralWhite,
+                          fontWeight: FontWeight.w500,
+                          fontSize: 14,
                         ),
                       ),
                       Text(
                         service,
                         style: const TextStyle(
-                          color: Colors.white,
+                          color: AppColors.neutralWhite,
+                          fontWeight: FontWeight.w400,
                           fontSize: 14,
                         ),
                       ),
@@ -147,7 +153,7 @@ class UpcomingSchedules extends StatelessWidget {
               ],
             ),
           ),
-          
+
           // Details Area
           Padding(
             padding: const EdgeInsets.all(12),
@@ -157,17 +163,17 @@ class UpcomingSchedules extends StatelessWidget {
                 Container(
                   padding: const EdgeInsets.all(8),
                   decoration: const BoxDecoration(
-                    color: Color(0xFFEFE93D), // Yellowish
+                    color: AppColors.secondary,
                     shape: BoxShape.circle,
                   ),
                   child: const Icon(
                     Icons.calendar_month,
-                    color: Colors.black,
+                    color: AppColors.neutralDark,
                     size: 20,
                   ),
                 ),
                 const SizedBox(width: 12),
-                
+
                 // Date & Time
                 Expanded(
                   child: Column(
@@ -176,7 +182,7 @@ class UpcomingSchedules extends StatelessWidget {
                       Text(
                         date,
                         style: const TextStyle(
-                          fontWeight: FontWeight.bold,
+                          fontWeight: FontWeight.w500,
                           fontSize: 14,
                           color: AppColors.neutralDark,
                         ),
@@ -191,7 +197,7 @@ class UpcomingSchedules extends StatelessWidget {
                     ],
                   ),
                 ),
-                
+
                 // Arrow Button
                 Container(
                   width: 32,

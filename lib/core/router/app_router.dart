@@ -73,6 +73,7 @@ GoRouter goRouter(Ref ref) {
       StatefulShellRoute.indexedStack(
         builder: (context, state, navigationShell) {
           return Scaffold(
+            extendBody: true,
             body: navigationShell,
             bottomNavigationBar: BottomNavBar(navigationShell: navigationShell),
           );

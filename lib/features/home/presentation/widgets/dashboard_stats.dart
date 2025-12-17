@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:hyper_focused/core/constants/app_strings.dart';
 import 'package:hyper_focused/core/theme/app_colors.dart';
 
 class DashboardStats extends StatelessWidget {
@@ -13,28 +14,28 @@ class DashboardStats extends StatelessWidget {
           icon: Icons.pending_actions_outlined,
           iconColor: Colors.orange,
           count: '5',
-          label: 'Pending\nPayments',
+          label: AppStrings.pendingPayment,
         ),
         const SizedBox(width: 12),
         _buildStatCard(
           icon: Icons.calendar_today_outlined,
           iconColor: Colors.teal,
           count: '4',
-          label: 'Today',
+          label: AppStrings.today,
         ),
         const SizedBox(width: 12),
         _buildStatCard(
           icon: Icons.assignment_outlined,
           iconColor: Colors.green,
           count: '16',
-          label: 'Unsigned\nContracts',
+          label: AppStrings.unsignedContracts,
         ),
         const SizedBox(width: 12),
         _buildStatCard(
           icon: Icons.mail_outline,
           iconColor: Colors.blue,
           count: '25',
-          label: 'Submissions',
+          label: AppStrings.submissions,
         ),
       ],
     );
@@ -48,14 +49,14 @@ class DashboardStats extends StatelessWidget {
   }) {
     return Expanded(
       child: Container(
-        height: 110, // Fixed height to keep them uniform
+        height: 110,
         padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 8),
         decoration: BoxDecoration(
-          color: Colors.white,
+          color: AppColors.neutralWhite,
           borderRadius: BorderRadius.circular(16),
           boxShadow: [
             BoxShadow(
-              color: Colors.black.withOpacity(0.05),
+              color: AppColors.neutralDark.withOpacity(0.05),
               blurRadius: 10,
               offset: const Offset(0, 4),
             ),
@@ -70,7 +71,7 @@ class DashboardStats extends StatelessWidget {
               count,
               style: const TextStyle(
                 fontSize: 18,
-                fontWeight: FontWeight.bold,
+                fontWeight: FontWeight.w500,
                 color: AppColors.neutralDark,
               ),
             ),

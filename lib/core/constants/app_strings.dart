@@ -72,4 +72,21 @@ class AppStrings {
   // Splash
   static const String appTitle = 'HYPER\nFOCUSED';
   static const String copyright = '©2025 Hyper Focused Inc.';
+
+  // Home
+
+  // Dashboard Stats
+  static const String pendingPayment = 'Pending\nPayments';
+  static const String today = 'Today';
+  static const String unsignedContracts = 'Unsigned\nContracts';
+  static const String submissions = 'Submissions';
+
+  // Upcoming Schedules
+  static const String upcomingSchedules = 'Upcoming Schedules';
+  static const String viewAll = 'View All';
+
+  // Recent Reports
+  static const String recentReports = 'Recent Reports';
+
+
 }

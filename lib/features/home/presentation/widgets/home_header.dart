@@ -17,7 +17,7 @@ class HomeHeader extends StatelessWidget {
               borderRadius: BorderRadius.circular(30),
               boxShadow: [
                 BoxShadow(
-                  color: Colors.black.withOpacity(0.05),
+                  color: AppColors.neutralDark.withOpacity(0.05),
                   blurRadius: 10,
                   offset: const Offset(0, 4),
                 ),
@@ -32,7 +32,9 @@ class HomeHeader extends StatelessWidget {
                   decoration: const BoxDecoration(
                     shape: BoxShape.circle,
                     image: DecorationImage(
-                      image: AssetImage('assets/images/user_avatar_placeholder.png'), // Placeholder
+                      image: AssetImage(
+                        'assets/images/user_avatar_placeholder.jpg',
+                      ),
                       fit: BoxFit.cover,
                     ),
                   ),
@@ -50,7 +52,7 @@ class HomeHeader extends StatelessWidget {
                     Text(
                       'Welcome Back!',
                       style: TextStyle(
-                        fontSize: 12,
+                        fontSize: 14,
                         color: AppColors.textBody,
                         fontWeight: FontWeight.w400,
                       ),
@@ -58,9 +60,9 @@ class HomeHeader extends StatelessWidget {
                     Text(
                       'Jesse Doe',
                       style: TextStyle(
-                        fontSize: 16,
+                        fontSize: 14,
                         color: AppColors.neutralDark,
-                        fontWeight: FontWeight.bold,
+                        fontWeight: FontWeight.w400,
                       ),
                     ),
                   ],
@@ -69,9 +71,9 @@ class HomeHeader extends StatelessWidget {
             ),
           ),
         ),
-        
+
         const SizedBox(width: 16),
-        
+
         // Notification Bell
         Container(
           width: 50,
@@ -81,7 +83,7 @@ class HomeHeader extends StatelessWidget {
             shape: BoxShape.circle,
             boxShadow: [
               BoxShadow(
-                color: Colors.black.withOpacity(0.05),
+                color: AppColors.neutralDark.withOpacity(0.05),
                 blurRadius: 10,
                 offset: const Offset(0, 4),
               ),
@@ -92,19 +94,21 @@ class HomeHeader extends StatelessWidget {
             children: [
               const Icon(
                 Icons.notifications,
-                color: Color(0xFFFFB300), // Yellow/Orange bell
+                color: AppColors.statusNotifyBell,
                 size: 28,
               ),
               Positioned(
                 top: 12,
                 right: 14,
                 child: Container(
-                  width: 8,
-                  height: 8,
+                  width: 10,
+                  height: 10,
                   decoration: const BoxDecoration(
-                    color: Colors.red,
+                    color: AppColors.statusNotify,
                     shape: BoxShape.circle,
-                    border: Border.fromBorderSide(BorderSide(color: Colors.white, width: 1.5)),
+                    border: Border.fromBorderSide(
+                      BorderSide(color: AppColors.neutralWhite, width: 1.5),
+                    ),
                   ),
                 ),
               ),
