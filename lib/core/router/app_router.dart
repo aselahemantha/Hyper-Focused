@@ -17,6 +17,7 @@ import '../../features/auth/presentation/pages/login_page.dart';
 import '../../features/map/presentation/pages/map_page.dart';
 import '../../features/report/presentation/pages/report_page.dart';
 import '../../features/schedule/presentation/pages/schedule_page.dart';
+import '../../features/schedule/presentation/pages/create_schedule_page.dart';
 
 part 'app_router.g.dart';
 
@@ -92,6 +93,12 @@ GoRouter goRouter(Ref ref) {
               GoRoute(
                 path: '/schedule',
                 builder: (context, state) => const SchedulePage(),
+                routes: [
+                  GoRoute(
+                    path: 'create',
+                    builder: (context, state) => const CreateSchedulePage(),
+                  ),
+                ],
               ),
             ],
           ),

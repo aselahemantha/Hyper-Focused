@@ -55,7 +55,7 @@ class BottomNavBar extends StatelessWidget {
                         ),
                       ],
                     ),
-                    padding: const EdgeInsets.symmetric(horizontal: 8),
+                    padding: const EdgeInsets.symmetric(horizontal: 4),
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: [
@@ -124,7 +124,7 @@ class BottomNavBar extends StatelessWidget {
         duration: const Duration(milliseconds: 200),
         curve: Curves.easeInOut,
         padding: isSelected
-            ? const EdgeInsets.symmetric(horizontal: 20, vertical: 12)
+            ? const EdgeInsets.symmetric(horizontal: 16, vertical: 12)
             : const EdgeInsets.all(12),
         decoration: isSelected
             ? BoxDecoration(
