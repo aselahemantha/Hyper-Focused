@@ -12,6 +12,7 @@ import 'package:hyper_focused/features/auth/presentation/pages/auth_landing_page
 import 'package:hyper_focused/features/auth/presentation/pages/signup_verify_page.dart';
 import 'package:hyper_focused/features/auth/presentation/pages/signup_details_page.dart';
 import 'package:hyper_focused/features/splash/presentation/pages/splash_page.dart';
+import 'package:hyper_focused/features/services/presentation/pages/my_services_page.dart';
 
 import '../../features/auth/presentation/pages/login_page.dart';
 import '../../features/map/presentation/pages/map_page.dart';
@@ -127,6 +128,10 @@ GoRouter goRouter(Ref ref) {
             ],
           ),
         ],
+      ),
+      GoRoute(
+        path: '/my-services',
+        builder: (context, state) => const MyServicesPage(),
       ),
     ],
     redirect: (context, state) {

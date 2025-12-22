@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:hyper_focused/core/theme/app_colors.dart';
-import 'package:hyper_focused/features/settings/presentation/widgets/section_divider.dart';
-import 'package:hyper_focused/features/settings/presentation/widgets/settings_tile.dart';
-import 'package:hyper_focused/features/settings/presentation/widgets/address_card.dart';
+import 'package:hyper_focused/features/settings/presentation/pages/edit_profile_page.dart';
+import 'package:hyper_focused/features/contacts/presentation/pages/contacts_page.dart';
+import 'package:hyper_focused/features/settings/presentation/widgets/settings_section_tile.dart';
 
 class SettingsPage extends StatelessWidget {
   const SettingsPage({super.key});
@@ -10,207 +10,348 @@ class SettingsPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color(0xFFEAF5EF), // Light green background matching image
+      backgroundColor: AppColors.neutral100, // Light background
       body: SafeArea(
-        bottom: false,
-        child: Column(
-          children: [
-            _buildAppBar(context),
-            Expanded(
-              child: SingleChildScrollView(
-                child: Column(
+        child: SingleChildScrollView(
+          child: Padding(
+            padding: const EdgeInsets.all(16.0),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                // Header
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    const SizedBox(height: 20),
-                    // Profile Image
-                    Stack(
+                    Row(
                       children: [
-                        Container(
-                          width: 100,
-                          height: 100,
-                          decoration: BoxDecoration(
-                            shape: BoxShape.circle,
-                            border: Border.all(color: Colors.white, width: 4),
-                            image: const DecorationImage(
-                              image: AssetImage('assets/images/user_avatar_placeholder.jpg'),
-                              fit: BoxFit.cover,
-                            ),
-                            boxShadow: [
-                              BoxShadow(
-                                color: Colors.black.withOpacity(0.1),
-                                blurRadius: 10,
-                                offset: const Offset(0, 5),
-                              ),
-                            ],
-                          ),
+                        Image.asset(
+                          'assets/images/app_logo_small.png', // Assuming you have a small logo
+                          height: 24,
+                          errorBuilder: (context, error, stackTrace) {
+                             return const Icon(Icons.change_history, size: 24, color: Colors.black);
+                          },
                         ),
-                        Positioned(
-                          bottom: 0,
-                          right: 0,
-                          left: 0,
-                          child: Center(
-                            child: Container(
-                              padding: const EdgeInsets.all(8),
-                              decoration: const BoxDecoration(
-                                color: AppColors.primary,
-                                shape: BoxShape.circle,
-                              ),
-                              child: const Icon(Icons.edit, color: Colors.white, size: 16),
-                            ),
-                          ),
+                        const SizedBox(width: 8),
+                        Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: const [
+                                Text(
+                                    "HYPER",
+                                    style: TextStyle(
+                                        fontSize: 14,
+                                        fontWeight: FontWeight.w900,
+                                        height: 1.0,
+                                    ),
+                                ),
+                                Text(
+                                    "FOCUSED",
+                                    style: TextStyle(
+                                        fontSize: 14,
+                                        fontWeight: FontWeight.w300,
+                                        height: 1.0,
+                                    ),
+                                ),
+                            ],
                         ),
                       ],
                     ),
-                    const SizedBox(height: 10),
-                    
-                    // Personal Information Divider
-                    const SectionDivider(text: 'Personal Information'),
+                    IconButton(
+                      icon: const Icon(Icons.close, color: Colors.red),
+                      onPressed: () {
+                          Navigator.maybePop(context);
+                      },
+                      style: IconButton.styleFrom(
+                        backgroundColor: Colors.white,
+                        padding: const EdgeInsets.all(8),
+                      ),
+                    ),
+                  ],
+                ),
+                
+                const SizedBox(height: 24),
 
-                    // Personal Details Header
-                    Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-                      child: Align(
-                        alignment: Alignment.centerLeft,
-                        child: const Text(
-                          'Personal Details',
-                          style: TextStyle(
-                            fontSize: 14,
-                            fontWeight: FontWeight.bold,
-                            color: AppColors.neutralDark,
+                // Profile Section
+                Container(
+                  padding: const EdgeInsets.all(16),
+                  decoration: BoxDecoration(
+                    color: AppColors.neutralWhite, // Not really defined, using white
+                    borderRadius: BorderRadius.circular(16),
+                  ),
+                  child: Row(
+                    children: [
+                      Container(
+                        width: 50,
+                        height: 50,
+                        decoration: BoxDecoration(
+                          shape: BoxShape.circle,
+                          image: const DecorationImage(
+                            image: AssetImage('assets/images/user_avatar_placeholder.jpg'),
+                            fit: BoxFit.cover,
                           ),
                         ),
                       ),
-                    ),
-
-                    // Personal Details Card
-                    Container(
-                      margin: const EdgeInsets.symmetric(horizontal: 16),
-                      decoration: BoxDecoration(
-                        color: AppColors.neutralWhite,
-                        borderRadius: BorderRadius.circular(12),
-                      ),
-                      child: Column(
-                        children: [
-                          const SettingsTile(
-                            icon: Icons.person_outline,
-                            title: 'Full Name',
-                            value: 'Jesse Doe',
-                            isRequired: true,
-                          ),
-                          _buildDivider(),
-                          const SettingsTile(
-                            icon: Icons.email_outlined,
-                            title: 'Email Address',
-                            value: 'jessedoe@email.com',
-                            isRequired: true,
-                          ),
-                          _buildDivider(),
-                          const SettingsTile(
-                            icon: Icons.phone_outlined,
-                            title: 'Phone Number',
-                            value: '+1 888 897 778 1239',
-                          ),
-                          _buildDivider(),
-                          const SettingsTile(
-                            icon: Icons.language,
-                            title: 'Website',
-                            value: 'www.jessedoes.com',
-                          ),
-                        ],
-                      ),
-                    ),
-
-                    const SizedBox(height: 24),
-
-                    // Address Header
-                    Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          const Text(
-                            'Address',
-                            style: TextStyle(
-                              fontSize: 14,
-                              fontWeight: FontWeight.bold,
-                              color: AppColors.neutralDark,
+                      const SizedBox(width: 12),
+                      Expanded(
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: const [
+                            Text(
+                              'Jesse Doe',
+                              style: TextStyle(
+                                fontSize: 16,
+                                fontWeight: FontWeight.bold,
+                                color: AppColors.neutralDark,
+                              ),
                             ),
+                            Text(
+                              'jessejoe@email.com',
+                              style: TextStyle(
+                                fontSize: 12,
+                                color: AppColors.neutral500,
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                      ElevatedButton(
+                        onPressed: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(builder: (context) => const EditProfilePage()),
+                          );
+                        },
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor: Color(0xFFD6EFE6), // Light green
+                          elevation: 0,
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(20),
                           ),
-                          TextButton(
+                          padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+                        ),
+                        child: const Text(
+                          'Edit Profile',
+                          style: TextStyle(
+                            color: AppColors.primary,
+                            fontSize: 12,
+                            fontWeight: FontWeight.w600,
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+
+                const SizedBox(height: 24),
+
+                // Management Section
+                const Text(
+                  'Management',
+                  style: TextStyle(
+                    fontSize: 14,
+                    color: AppColors.neutral500,
+                    fontWeight: FontWeight.w500,
+                  ),
+                ),
+                const SizedBox(height: 8),
+                Container(
+                  decoration: BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: BorderRadius.circular(12),
+                  ),
+                  child: Column(
+                    children: [
+                      SettingsSectionTile(
+                        icon: Icons.people_outline,
+                        title: 'Contacts',
+                        onTap: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(builder: (context) => const ContactsPage()),
+                          );
+                        },
+                      ),
+                      const Divider(height: 1, indent: 16, endIndent: 16),
+                      SettingsSectionTile(
+                        icon: Icons.calendar_today_outlined,
+                        title: 'Calendar',
+                        onTap: () {},
+                      ),
+                      const Divider(height: 1, indent: 16, endIndent: 16),
+                      SettingsSectionTile(
+                        icon: Icons.grid_view_outlined,
+                        title: 'Template Centre',
+                        onTap: () {},
+                      ),
+                       const Divider(height: 1, indent: 16, endIndent: 16),
+                      SettingsSectionTile(
+                        icon: Icons.format_list_bulleted,
+                        title: 'My Services',
+                        onTap: () {},
+                      ),
+                    ],
+                  ),
+                ),
+
+                const SizedBox(height: 24),
+
+                // Analytics Section
+                const Text(
+                  'Analytics',
+                  style: TextStyle(
+                    fontSize: 14,
+                    color: AppColors.neutral500,
+                    fontWeight: FontWeight.w500,
+                  ),
+                ),
+                const SizedBox(height: 8),
+                Container(
+                  decoration: BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: BorderRadius.circular(12),
+                  ),
+                  child: Column(
+                    children: [
+                      SettingsSectionTile(
+                        icon: Icons.show_chart, // Or similar icon
+                        title: 'My Subscription',
+                        onTap: () {},
+                      ),
+                       const Divider(height: 1, indent: 16, endIndent: 16),
+                      SettingsSectionTile(
+                        icon: Icons.person_outline,
+                        title: 'Finance',
+                        onTap: () {},
+                      ),
+                    ],
+                  ),
+                ),
+
+                const SizedBox(height: 24),
+
+                // Device Settings Section
+                const Text(
+                  'Device Settings',
+                  style: TextStyle(
+                    fontSize: 14,
+                    color: AppColors.neutral500,
+                    fontWeight: FontWeight.w500,
+                  ),
+                ),
+                const SizedBox(height: 8),
+                Container(
+                  decoration: BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: BorderRadius.circular(12),
+                  ),
+                  child: Column(
+                    children: [
+                       SettingsSectionTile(
+                        icon: Icons.smartphone_outlined,
+                        title: 'Application Settings',
+                        onTap: () {},
+                      ),
+                    ],
+                  ),
+                ),
+
+                const SizedBox(height: 24),
+
+                // Support Centre Section
+                Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                        const Text(
+                          'Support Centre',
+                          style: TextStyle(
+                            fontSize: 14,
+                            color: AppColors.neutral500,
+                            fontWeight: FontWeight.w500,
+                          ),
+                        ),
+                        TextButton(
                             onPressed: () {},
-                            style: TextButton.styleFrom(
+                             style: TextButton.styleFrom(
                               minimumSize: Size.zero,
                               padding: EdgeInsets.zero,
                               tapTargetSize: MaterialTapTargetSize.shrinkWrap,
                             ),
                             child: const Text(
-                              'Edit',
-                              style: TextStyle(
-                                color: AppColors.primary,
-                                fontWeight: FontWeight.w600,
-                              ),
+                                "Report a Problem",
+                                style: TextStyle(
+                                    color: AppColors.primary,
+                                    fontSize: 12,
+                                    fontWeight: FontWeight.w600,
+                                ),
                             ),
-                          ),
-                        ],
+                        ),
+                    ],
+                ),
+                const SizedBox(height: 8),
+                Container(
+                  decoration: BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: BorderRadius.circular(12),
+                  ),
+                  child: Column(
+                    children: [
+                      SettingsSectionTile(
+                        icon: Icons.help_outline,
+                        title: 'Knowledge Centre',
+                        onTap: () {},
+                      ),
+                       const Divider(height: 1, indent: 16, endIndent: 16),
+                      SettingsSectionTile(
+                        icon: Icons.help_outline, // Question mark icon
+                        title: 'Hire a Tutor',
+                        onTap: () {},
+                      ),
+                    ],
+                  ),
+                ),
+
+                const SizedBox(height: 32),
+
+                // Bottom Footer
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    TextButton(
+                      onPressed: () {},
+                      child: const Text(
+                        'Sign Out',
+                        style: TextStyle(
+                          color: Color(0xFFFF6B6B), // Light red
+                          fontSize: 14,
+                        ),
                       ),
                     ),
-
-                    // Address Card
-                    const AddressCard(),
-
-                    // Company Details Divider
-                    const SectionDivider(text: 'Company Details'),
-                    
-                    // Extra spacing for bottom nav
-                    const SizedBox(height: 100),
+                    Row(
+                      children: [
+                        _buildSocialIcon(Icons.language),
+                        const SizedBox(width: 8),
+                        _buildSocialIcon(Icons.camera_alt_outlined), // Instagram-ish
+                        const SizedBox(width: 8),
+                        _buildSocialIcon(Icons.play_circle_outline), // Youtube-ish
+                        const SizedBox(width: 8),
+                        _buildSocialIcon(Icons.book_outlined),
+                      ],
+                    ),
                   ],
                 ),
-              ),
+                 const SizedBox(height: 32),
+              ],
             ),
-          ],
+          ),
         ),
       ),
     );
   }
 
-  Widget _buildAppBar(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          CircleAvatar(
-            backgroundColor: Colors.white,
-            radius: 20,
-            child: IconButton(
-              icon: const Icon(Icons.arrow_back_ios_new, size: 18, color: AppColors.neutralDark),
-              onPressed: () {
-                // Determine behavior, maybe nothing since it's a tab
-              },
-            ),
-          ),
-          const Text(
-            'Edit Profile',
-            style: TextStyle(
-              fontSize: 16,
-              fontWeight: FontWeight.bold,
-              color: AppColors.neutralDark,
-            ),
-          ),
-          CircleAvatar(
-            backgroundColor: Colors.black,
-            radius: 12,
-            child: const Icon(Icons.info_outline, color: Colors.white, size: 16),
-          ),
-        ],
-      ),
-    );
-  }
-
-  Widget _buildDivider() {
-    return const Divider(
-      height: 1,
-      thickness: 1,
-      color: AppColors.neutral100,
+  Widget _buildSocialIcon(IconData icon) {
+    return Icon(
+        icon,
+        size: 20,
+        color: AppColors.neutral500,
     );
   }
 }
