@@ -99,7 +99,9 @@ class BottomNavBar extends StatelessWidget {
                     height: 70,
                     width: 70,
                     decoration: BoxDecoration(
-                      color: AppColors.neutralWhite.withOpacity(0.3),
+                      color: navigationShell.currentIndex == 4
+                          ? AppColors.neutralDark
+                          : AppColors.neutralWhite.withOpacity(0.3),
                       shape: BoxShape.circle,
                       boxShadow: [
                         BoxShadow(
@@ -113,8 +115,8 @@ class BottomNavBar extends StatelessWidget {
                       child: Icon(
                         Icons.menu,
                         color: navigationShell.currentIndex == 4
-                            ? AppColors.neutralDark
-                            : AppColors.neutralWhite,
+                            ? AppColors.neutralWhite
+                            : AppColors.neutralDark.withOpacity(0.3),
                         size: 30,
                       ),
                     ),
