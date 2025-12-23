@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
+import 'package:hyper_focused/core/constants/app_strings.dart';
 import 'package:hyper_focused/core/theme/app_colors.dart';
-import 'package:hyper_focused/features/settings/presentation/pages/edit_profile_page.dart';
-import 'package:hyper_focused/features/contacts/presentation/pages/contacts_page.dart';
 import 'package:hyper_focused/features/settings/presentation/widgets/settings_section_tile.dart';
 
 class SettingsPage extends StatelessWidget {
@@ -10,7 +10,7 @@ class SettingsPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: AppColors.neutral100, // Light background
+      backgroundColor: AppColors.neutral100,
       body: SafeArea(
         child: SingleChildScrollView(
           child: Padding(
@@ -25,56 +25,41 @@ class SettingsPage extends StatelessWidget {
                     Row(
                       children: [
                         Image.asset(
-                          'assets/images/app_logo_small.png', // Assuming you have a small logo
-                          height: 24,
+                          'assets/images/app_logo_small.png',
+                          height: 45,
                           errorBuilder: (context, error, stackTrace) {
-                             return const Icon(Icons.change_history, size: 24, color: Colors.black);
+                            return const Icon(
+                              Icons.change_history,
+                              size: 45,
+                              color: AppColors.neutralDark,
+                            );
                           },
-                        ),
-                        const SizedBox(width: 8),
-                        Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: const [
-                                Text(
-                                    "HYPER",
-                                    style: TextStyle(
-                                        fontSize: 14,
-                                        fontWeight: FontWeight.w900,
-                                        height: 1.0,
-                                    ),
-                                ),
-                                Text(
-                                    "FOCUSED",
-                                    style: TextStyle(
-                                        fontSize: 14,
-                                        fontWeight: FontWeight.w300,
-                                        height: 1.0,
-                                    ),
-                                ),
-                            ],
                         ),
                       ],
                     ),
                     IconButton(
                       icon: const Icon(Icons.close, color: Colors.red),
                       onPressed: () {
-                          Navigator.maybePop(context);
+                        // Context.pop() if it's pushed, but settings is a tab.
+                        if (context.canPop()) {
+                          context.pop();
+                        }
                       },
                       style: IconButton.styleFrom(
-                        backgroundColor: Colors.white,
+                        backgroundColor: AppColors.neutralWhite,
                         padding: const EdgeInsets.all(8),
                       ),
                     ),
                   ],
                 ),
-                
+
                 const SizedBox(height: 24),
 
                 // Profile Section
                 Container(
                   padding: const EdgeInsets.all(16),
                   decoration: BoxDecoration(
-                    color: AppColors.neutralWhite, // Not really defined, using white
+                    color: AppColors.neutralWhite,
                     borderRadius: BorderRadius.circular(16),
                   ),
                   child: Row(
@@ -85,7 +70,9 @@ class SettingsPage extends StatelessWidget {
                         decoration: BoxDecoration(
                           shape: BoxShape.circle,
                           image: const DecorationImage(
-                            image: AssetImage('assets/images/user_avatar_placeholder.jpg'),
+                            image: AssetImage(
+                              'assets/images/user_avatar_placeholder.jpg',
+                            ),
                             fit: BoxFit.cover,
                           ),
                         ),
@@ -115,25 +102,25 @@ class SettingsPage extends StatelessWidget {
                       ),
                       ElevatedButton(
                         onPressed: () {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(builder: (context) => const EditProfilePage()),
-                          );
+                          context.push('/edit-profile');
                         },
                         style: ElevatedButton.styleFrom(
-                          backgroundColor: Color(0xFFD6EFE6), // Light green
+                          backgroundColor: AppColors.primary100,
                           elevation: 0,
                           shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(20),
                           ),
-                          padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+                          padding: const EdgeInsets.symmetric(
+                            horizontal: 16,
+                            vertical: 8,
+                          ),
                         ),
                         child: const Text(
-                          'Edit Profile',
+                          AppStrings.editProfile,
                           style: TextStyle(
                             color: AppColors.primary,
                             fontSize: 12,
-                            fontWeight: FontWeight.w600,
+                            fontWeight: FontWeight.w400,
                           ),
                         ),
                       ),
@@ -145,11 +132,11 @@ class SettingsPage extends StatelessWidget {
 
                 // Management Section
                 const Text(
-                  'Management',
+                  AppStrings.management,
                   style: TextStyle(
-                    fontSize: 14,
-                    color: AppColors.neutral500,
-                    fontWeight: FontWeight.w500,
+                    fontSize: 12,
+                    color: AppColors.textBody,
+                    fontWeight: FontWeight.w400,
                   ),
                 ),
                 const SizedBox(height: 8),
@@ -162,31 +149,30 @@ class SettingsPage extends StatelessWidget {
                     children: [
                       SettingsSectionTile(
                         icon: Icons.people_outline,
-                        title: 'Contacts',
+                        title: AppStrings.contacts,
                         onTap: () {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(builder: (context) => const ContactsPage()),
-                          );
+                          context.push('/contacts');
                         },
                       ),
                       const Divider(height: 1, indent: 16, endIndent: 16),
                       SettingsSectionTile(
                         icon: Icons.calendar_today_outlined,
-                        title: 'Calendar',
+                        title: AppStrings.calender,
                         onTap: () {},
                       ),
                       const Divider(height: 1, indent: 16, endIndent: 16),
                       SettingsSectionTile(
                         icon: Icons.grid_view_outlined,
-                        title: 'Template Centre',
+                        title: AppStrings.templateCentre,
                         onTap: () {},
                       ),
-                       const Divider(height: 1, indent: 16, endIndent: 16),
+                      const Divider(height: 1, indent: 16, endIndent: 16),
                       SettingsSectionTile(
                         icon: Icons.format_list_bulleted,
-                        title: 'My Services',
-                        onTap: () {},
+                        title: AppStrings.myServices,
+                        onTap: () {
+                          context.push('/my-services');
+                        },
                       ),
                     ],
                   ),
@@ -196,30 +182,30 @@ class SettingsPage extends StatelessWidget {
 
                 // Analytics Section
                 const Text(
-                  'Analytics',
+                  AppStrings.analytics,
                   style: TextStyle(
-                    fontSize: 14,
-                    color: AppColors.neutral500,
-                    fontWeight: FontWeight.w500,
+                    fontSize: 12,
+                    color: AppColors.textBody,
+                    fontWeight: FontWeight.w400,
                   ),
                 ),
                 const SizedBox(height: 8),
                 Container(
                   decoration: BoxDecoration(
-                    color: Colors.white,
+                    color: AppColors.neutralWhite,
                     borderRadius: BorderRadius.circular(12),
                   ),
                   child: Column(
                     children: [
                       SettingsSectionTile(
-                        icon: Icons.show_chart, // Or similar icon
-                        title: 'My Subscription',
+                        icon: Icons.show_chart,
+                        title: AppStrings.mySubscription,
                         onTap: () {},
                       ),
-                       const Divider(height: 1, indent: 16, endIndent: 16),
+                      const Divider(height: 1, indent: 16, endIndent: 16),
                       SettingsSectionTile(
                         icon: Icons.person_outline,
-                        title: 'Finance',
+                        title: AppStrings.finance,
                         onTap: () {},
                       ),
                     ],
@@ -230,24 +216,24 @@ class SettingsPage extends StatelessWidget {
 
                 // Device Settings Section
                 const Text(
-                  'Device Settings',
+                  AppStrings.deviceSettings,
                   style: TextStyle(
-                    fontSize: 14,
-                    color: AppColors.neutral500,
-                    fontWeight: FontWeight.w500,
+                    fontSize: 12,
+                    color: AppColors.textBody,
+                    fontWeight: FontWeight.w400,
                   ),
                 ),
                 const SizedBox(height: 8),
                 Container(
                   decoration: BoxDecoration(
-                    color: Colors.white,
+                    color: AppColors.neutralWhite,
                     borderRadius: BorderRadius.circular(12),
                   ),
                   child: Column(
                     children: [
-                       SettingsSectionTile(
+                      SettingsSectionTile(
                         icon: Icons.smartphone_outlined,
-                        title: 'Application Settings',
+                        title: AppStrings.applicationSettings,
                         onTap: () {},
                       ),
                     ],
@@ -258,51 +244,51 @@ class SettingsPage extends StatelessWidget {
 
                 // Support Centre Section
                 Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                        const Text(
-                          'Support Centre',
-                          style: TextStyle(
-                            fontSize: 14,
-                            color: AppColors.neutral500,
-                            fontWeight: FontWeight.w500,
-                          ),
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    const Text(
+                      AppStrings.supportCentre,
+                      style: TextStyle(
+                        fontSize: 12,
+                        color: AppColors.textBody,
+                        fontWeight: FontWeight.w400,
+                      ),
+                    ),
+                    TextButton(
+                      onPressed: () {},
+                      style: TextButton.styleFrom(
+                        minimumSize: Size.zero,
+                        padding: EdgeInsets.zero,
+                        tapTargetSize: MaterialTapTargetSize.shrinkWrap,
+                      ),
+                      child: const Text(
+                        AppStrings.reportAProblem,
+                        style: TextStyle(
+                          color: AppColors.primary,
+                          fontSize: 12,
+                          fontWeight: FontWeight.w400,
                         ),
-                        TextButton(
-                            onPressed: () {},
-                             style: TextButton.styleFrom(
-                              minimumSize: Size.zero,
-                              padding: EdgeInsets.zero,
-                              tapTargetSize: MaterialTapTargetSize.shrinkWrap,
-                            ),
-                            child: const Text(
-                                "Report a Problem",
-                                style: TextStyle(
-                                    color: AppColors.primary,
-                                    fontSize: 12,
-                                    fontWeight: FontWeight.w600,
-                                ),
-                            ),
-                        ),
-                    ],
+                      ),
+                    ),
+                  ],
                 ),
                 const SizedBox(height: 8),
                 Container(
                   decoration: BoxDecoration(
-                    color: Colors.white,
+                    color: AppColors.neutralWhite,
                     borderRadius: BorderRadius.circular(12),
                   ),
                   child: Column(
                     children: [
                       SettingsSectionTile(
                         icon: Icons.help_outline,
-                        title: 'Knowledge Centre',
+                        title: AppStrings.knowledgeCentre,
                         onTap: () {},
                       ),
-                       const Divider(height: 1, indent: 16, endIndent: 16),
+                      const Divider(height: 1, indent: 16, endIndent: 16),
                       SettingsSectionTile(
-                        icon: Icons.help_outline, // Question mark icon
-                        title: 'Hire a Tutor',
+                        icon: Icons.help_outline,
+                        title: AppStrings.hireATutor,
                         onTap: () {},
                       ),
                     ],
@@ -312,33 +298,43 @@ class SettingsPage extends StatelessWidget {
                 const SizedBox(height: 32),
 
                 // Bottom Footer
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    TextButton(
-                      onPressed: () {},
-                      child: const Text(
-                        'Sign Out',
-                        style: TextStyle(
-                          color: Color(0xFFFF6B6B), // Light red
-                          fontSize: 14,
+                Container(
+                  decoration: BoxDecoration(
+                    color: AppColors.neutralWhite,
+                    borderRadius: BorderRadius.circular(12),
+                  ),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      TextButton(
+                        onPressed: () {},
+                        child: const Text(
+                          AppStrings.signOut,
+                          style: TextStyle(
+                            color: AppColors.statusNotify,
+                            fontSize: 12,
+                            fontWeight: FontWeight.w400,
+                          ),
                         ),
                       ),
-                    ),
-                    Row(
-                      children: [
-                        _buildSocialIcon(Icons.language),
-                        const SizedBox(width: 8),
-                        _buildSocialIcon(Icons.camera_alt_outlined), // Instagram-ish
-                        const SizedBox(width: 8),
-                        _buildSocialIcon(Icons.play_circle_outline), // Youtube-ish
-                        const SizedBox(width: 8),
-                        _buildSocialIcon(Icons.book_outlined),
-                      ],
-                    ),
-                  ],
+                      Row(
+                        children: [
+                          _buildSocialIcon(Icons.language),
+                          const SizedBox(width: 8),
+                          _buildSocialIcon(Icons.camera_alt_outlined),
+                          // Instagram-ish
+                          const SizedBox(width: 8),
+                          _buildSocialIcon(Icons.play_circle_outline),
+                          // Youtube-ish
+                          const SizedBox(width: 8),
+                          _buildSocialIcon(Icons.book_outlined),
+                        ],
+                      ),
+                    ],
+                  ),
                 ),
-                 const SizedBox(height: 32),
+
+                const SizedBox(height: 32),
               ],
             ),
           ),
@@ -348,10 +344,6 @@ class SettingsPage extends StatelessWidget {
   }
 
   Widget _buildSocialIcon(IconData icon) {
-    return Icon(
-        icon,
-        size: 20,
-        color: AppColors.neutral500,
-    );
+    return Icon(icon, size: 20, color: AppColors.textBody);
   }
 }

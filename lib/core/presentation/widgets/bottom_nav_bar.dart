@@ -7,10 +7,7 @@ import 'package:hyper_focused/core/constants/app_strings.dart';
 class BottomNavBar extends StatelessWidget {
   final StatefulNavigationShell navigationShell;
 
-  const BottomNavBar({
-    super.key,
-    required this.navigationShell,
-  });
+  const BottomNavBar({super.key, required this.navigationShell});
 
   void _onTap(int index) {
     if (index == 4) {
@@ -18,7 +15,7 @@ class BottomNavBar extends StatelessWidget {
       // But standard goBranch works fine if routes are set up.
       // Index 4 is Settings.
     }
-    
+
     navigationShell.goBranch(
       index,
       initialLocation: index == navigationShell.currentIndex,
@@ -27,7 +24,6 @@ class BottomNavBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    
     return SafeArea(
       child: Container(
         color: Colors.transparent,
@@ -59,19 +55,39 @@ class BottomNavBar extends StatelessWidget {
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: [
-                        _buildNavItem(0, Icons.home_outlined, Icons.home, AppStrings.navHome),
-                        _buildNavItem(1, Icons.calendar_today_outlined, Icons.calendar_month, 'Schedule'), 
-                        _buildNavItem(2, Icons.assignment_outlined, Icons.assignment, 'Reports'),
-                        _buildNavItem(3, Icons.location_on_outlined, Icons.location_on, 'Map'),
+                        _buildNavItem(
+                          0,
+                          Icons.home_outlined,
+                          Icons.home,
+                          AppStrings.navHome,
+                        ),
+                        _buildNavItem(
+                          1,
+                          Icons.calendar_today_outlined,
+                          Icons.calendar_month,
+                          'Schedule',
+                        ),
+                        _buildNavItem(
+                          2,
+                          Icons.assignment_outlined,
+                          Icons.assignment,
+                          'Reports',
+                        ),
+                        _buildNavItem(
+                          3,
+                          Icons.location_on_outlined,
+                          Icons.location_on,
+                          'Map',
+                        ),
                       ],
                     ),
                   ),
                 ),
               ),
             ),
-            
+
             const SizedBox(width: 16),
-            
+
             // Menu Button (Settings)
             GestureDetector(
               onTap: () => _onTap(4),
@@ -96,7 +112,9 @@ class BottomNavBar extends StatelessWidget {
                     child: Center(
                       child: Icon(
                         Icons.menu,
-                        color: navigationShell.currentIndex == 4 ? Colors.white : Colors.black,
+                        color: navigationShell.currentIndex == 4
+                            ? AppColors.neutralDark
+                            : AppColors.neutralWhite,
                         size: 30,
                       ),
                     ),
@@ -110,14 +128,19 @@ class BottomNavBar extends StatelessWidget {
     );
   }
 
-  Widget _buildNavItem(int index, IconData icon, IconData activeIcon, String label) {
+  Widget _buildNavItem(
+    int index,
+    IconData icon,
+    IconData activeIcon,
+    String label,
+  ) {
     // Current route index
     final isSelected = navigationShell.currentIndex == index;
-    
+
     // Based on the image:
     // Selected item is a black pill with text + icon
     // Unselected items are just icons
-    
+
     return GestureDetector(
       onTap: () => _onTap(index),
       child: AnimatedContainer(
@@ -128,7 +151,7 @@ class BottomNavBar extends StatelessWidget {
             : const EdgeInsets.all(12),
         decoration: isSelected
             ? BoxDecoration(
-                color: Colors.black, // Dark/Black active background
+                color: AppColors.neutralDark,
                 borderRadius: BorderRadius.circular(30),
               )
             : null,

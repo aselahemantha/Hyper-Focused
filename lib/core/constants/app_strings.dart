@@ -88,5 +88,25 @@ class AppStrings {
   // Recent Reports
   static const String recentReports = 'Recent Reports';
 
+  // Settings
+
+  static const String editProfile = 'Edit Profile';
+  static const String management = 'Management';
+  static const String contacts = 'Contacts';
+  static const String calender = 'Calender';
+  static const String templateCentre = 'Template Centre';
+  static const String myServices = 'My Services';
+  static const String analytics = 'Analytics';
+  static const String mySubscription = 'My Subscription';
+  static const String finance = 'Finance';
+  static const String deviceSettings = 'Device Settings';
+  static const String applicationSettings = 'Application Settings';
+  static const String supportCentre = 'Support Centre';
+  static const String reportAProblem = 'Report a Problem';
+  static const String knowledgeCentre = 'Knowledge Centre';
+  static const String hireATutor = 'Hire a Tutor';
+  static const String signOut = 'Sign Out';
+
+
 
 }

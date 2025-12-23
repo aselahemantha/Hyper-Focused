@@ -49,7 +49,7 @@ class _ContactsPageState extends State<ContactsPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color(0xFFEAF5EF), // Light green background matching image
+      backgroundColor: const Color(0xFFEAF5EF),
       body: SafeArea(
         bottom: false,
         child: Column(

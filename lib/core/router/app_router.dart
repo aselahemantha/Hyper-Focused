@@ -13,6 +13,8 @@ import 'package:hyper_focused/features/auth/presentation/pages/signup_verify_pag
 import 'package:hyper_focused/features/auth/presentation/pages/signup_details_page.dart';
 import 'package:hyper_focused/features/splash/presentation/pages/splash_page.dart';
 import 'package:hyper_focused/features/services/presentation/pages/my_services_page.dart';
+import 'package:hyper_focused/features/contacts/presentation/pages/contacts_page.dart';
+import 'package:hyper_focused/features/settings/presentation/pages/edit_profile_page.dart';
 
 import '../../features/auth/presentation/pages/login_page.dart';
 import '../../features/map/presentation/pages/map_page.dart';
@@ -132,6 +134,14 @@ GoRouter goRouter(Ref ref) {
       GoRoute(
         path: '/my-services',
         builder: (context, state) => const MyServicesPage(),
+      ),
+      GoRoute(
+        path: '/contacts',
+        builder: (context, state) => const ContactsPage(),
+      ),
+      GoRoute(
+        path: '/edit-profile',
+        builder: (context, state) => const EditProfilePage(),
       ),
     ],
     redirect: (context, state) {
