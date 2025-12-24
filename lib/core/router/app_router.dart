@@ -15,6 +15,8 @@ import 'package:hyper_focused/features/splash/presentation/pages/splash_page.dar
 import 'package:hyper_focused/features/services/presentation/pages/my_services_page.dart';
 import 'package:hyper_focused/features/contacts/presentation/pages/contacts_page.dart';
 import 'package:hyper_focused/features/settings/presentation/pages/edit_profile_page.dart';
+import 'package:hyper_focused/features/templates/presentation/pages/template_center_page.dart';
+import 'package:hyper_focused/features/templates/presentation/pages/edit_template_page.dart';
 
 import '../../features/auth/presentation/pages/login_page.dart';
 import '../../features/map/presentation/pages/map_page.dart';
@@ -142,6 +144,14 @@ GoRouter goRouter(Ref ref) {
       GoRoute(
         path: '/edit-profile',
         builder: (context, state) => const EditProfilePage(),
+      ),
+      GoRoute(
+        path: '/template-center',
+        builder: (context, state) => const TemplateCenterPage(),
+      ),
+      GoRoute(
+        path: '/edit-template',
+        builder: (context, state) => const EditTemplatePage(),
       ),
     ],
     redirect: (context, state) {

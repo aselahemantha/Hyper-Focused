@@ -164,7 +164,9 @@ class SettingsPage extends StatelessWidget {
                       SettingsSectionTile(
                         icon: Icons.grid_view_outlined,
                         title: AppStrings.templateCentre,
-                        onTap: () {},
+                        onTap: () {
+                          context.push('/template-center');
+                        },
                       ),
                       const Divider(height: 1, indent: 16, endIndent: 16),
                       SettingsSectionTile(
