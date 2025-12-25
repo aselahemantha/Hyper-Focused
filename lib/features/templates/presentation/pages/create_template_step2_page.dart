@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hyper_focused/core/theme/app_colors.dart';
 import 'package:hyper_focused/features/templates/presentation/widgets/add_section_dialog.dart';
+import 'package:hyper_focused/features/templates/presentation/widgets/icon_picker_dialog.dart';
 import 'dart:ui';
 
 class CreateTemplateStep2Page extends StatefulWidget {
@@ -13,11 +14,49 @@ class CreateTemplateStep2Page extends StatefulWidget {
 
 class _CreateTemplateStep2PageState extends State<CreateTemplateStep2Page> {
   final List<Map<String, dynamic>> _sections = [];
+  bool _isEditing = false;
 
   void _addSection(Map<String, dynamic> sectionData) {
     setState(() {
       _sections.add(sectionData);
     });
+  }
+
+  void _updateSectionName(int index, String newName) {
+    setState(() {
+      _sections[index]['name'] = newName;
+    });
+  }
+
+  void _updateSectionIcon(int index, IconData newIcon) {
+    setState(() {
+      _sections[index]['icon'] = newIcon;
+    });
+  }
+
+  void _removeSection(int index) {
+    setState(() {
+      _sections.removeAt(index);
+      if (_sections.isEmpty) {
+        _isEditing = false; // Add this line to exit edit mode if list becomes empty
+      }
+    });
+  }
+
+  void _toggleEditMode() {
+    setState(() {
+      _isEditing = !_isEditing;
+    });
+  }
+
+  Future<void> _pickIcon(int index) async {
+    final IconData? pickedIcon = await showDialog<IconData>(
+      context: context,
+      builder: (context) => IconPickerDialog(currentIcon: _sections[index]['icon']),
+    );
+    if (pickedIcon != null) {
+      _updateSectionIcon(index, pickedIcon);
+    }
   }
 
   @override
@@ -131,49 +170,81 @@ class _CreateTemplateStep2PageState extends State<CreateTemplateStep2Page> {
                   const SizedBox(height: 16),
                   
                   // User Added Sections
-                  ..._sections.map((section) => Padding(
-                    padding: const EdgeInsets.only(bottom: 16),
-                    child: Container(
-                      padding: const EdgeInsets.all(16),
-                      decoration: BoxDecoration(
-                        color: AppColors.neutralWhite,
-                        borderRadius: BorderRadius.circular(12),
-                      ),
-                      child: Row(
-                        children: [
-                          Icon(
-                            section['icon'] ?? Icons.folder_outlined,
-                            color: AppColors.neutral500,
-                          ),
-                          const SizedBox(width: 12),
-                          Expanded(
-                            child: Text(
-                              section['name'] ?? '',
-                              style: const TextStyle(
-                                fontSize: 16,
-                                fontWeight: FontWeight.w500,
-                                color: AppColors.neutralDark,
+                  ..._sections.asMap().entries.map((entry) {
+                    final index = entry.key;
+                    final section = entry.value;
+                    return Padding(
+                      padding: const EdgeInsets.only(bottom: 16),
+                      child: Container(
+                        padding: const EdgeInsets.all(16),
+                        decoration: BoxDecoration(
+                          color: AppColors.neutralWhite,
+                          borderRadius: BorderRadius.circular(12),
+                        ),
+                        child: Row(
+                          children: [
+                            GestureDetector(
+                                onTap: _isEditing ? () => _pickIcon(index) : null,
+                                child: Icon(
+                                  section['icon'] ?? Icons.folder_outlined,
+                                  color: AppColors.neutral500,
+                                ),
                               ),
+                            const SizedBox(width: 12),
+                            Expanded(
+                              child: _isEditing 
+                                ? TextField(
+                                      controller: TextEditingController(text: section['name'])
+                                      ..selection = TextSelection.collapsed(offset: (section['name'] as String).length),
+                                      onChanged: (val) => _updateSectionName(index, val),
+                                      decoration: const InputDecoration(
+                                        isDense: true,
+                                        border: InputBorder.none,
+                                        contentPadding: EdgeInsets.zero,
+                                      ),
+                                      style: const TextStyle(
+                                        fontSize: 16,
+                                        fontWeight: FontWeight.w500,
+                                        color: AppColors.neutralDark,
+                                      ),
+                                    )
+                                : Text(
+                                  section['name'] ?? '',
+                                  style: const TextStyle(
+                                    fontSize: 16,
+                                    fontWeight: FontWeight.w500,
+                                    color: AppColors.neutralDark,
+                                  ),
+                                ),
                             ),
-                          ),
-                          TextButton(
-                            onPressed: () {
-                              // Action for adding sub sections
-                            },
-                            child: const Text(
-                              'Add Sub Sections',
-                              style: TextStyle(
-                                color: AppColors.primary, // Using primary color (teal-ish)
-                                fontWeight: FontWeight.bold,
+                            if (_isEditing)
+                                IconButton(
+                                  icon: const Icon(Icons.remove, color: Colors.red),
+                                  onPressed: () => _removeSection(index),
+                                  padding: EdgeInsets.zero,
+                                  constraints: const BoxConstraints(),
+                                )
+                            else
+                              TextButton(
+                                onPressed: () {
+                                  // Action for adding sub sections
+                                },
+                                child: const Text(
+                                  'Add Sub Sections',
+                                  style: TextStyle(
+                                    color: AppColors.primary, // Using primary color (teal-ish)
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                ),
                               ),
-                            ),
-                          ),
-                        ],
+                          ],
+                        ),
                       ),
-                    ),
-                  )),
+                    );
+                  }),
 
                   // Add New Section Button
+                  if (!_isEditing)
                   GestureDetector(
                     onTap: () => _showAddSectionDialog(context),
                     child: Container(
@@ -234,19 +305,34 @@ class _CreateTemplateStep2PageState extends State<CreateTemplateStep2Page> {
                                   icon: const Icon(Icons.arrow_back, color: AppColors.neutralDark, size: 28),
                                   onPressed: () => context.pop(),
                                 ),
-                                IconButton(
+                                if (_isEditing)
+                                   IconButton(
+                                    // Tick for finishing edit
+                                    icon: const Icon(Icons.check, color: AppColors.neutralDark, size: 28),
+                                    onPressed: () => _toggleEditMode(),
+                                  )
+                                else 
+                                  IconButton(
                                   icon: const Icon(Icons.save_outlined, color: AppColors.neutralDark, size: 28),
                                   onPressed: () {
                                     // Save
                                   },
                                 ),
-                                if (_sections.isNotEmpty)
+                                if (_isEditing)
+                                   IconButton(
+                                    icon: const Icon(Icons.save_outlined, color: AppColors.neutralDark, size: 28),
+                                    onPressed: () {
+                                      // Save action during edit
+                                      _toggleEditMode();
+                                    },
+                                  )
+                                else if (_sections.isNotEmpty)
                                   IconButton(
                                     icon: const Icon(Icons.edit_outlined, color: AppColors.neutralDark, size: 28),
-                                    onPressed: () {
-                                      // Edit
-                                    },
+                                    onPressed: () => _toggleEditMode(),
                                   ),
+
+                                if (!_isEditing)
                                 IconButton(
                                   icon: const Icon(Icons.add, color: AppColors.neutralDark, size: 28),
                                   onPressed: () => _showAddSectionDialog(context),
@@ -305,7 +391,8 @@ class _CreateTemplateStep2PageState extends State<CreateTemplateStep2Page> {
               leading: const Icon(Icons.edit_outlined, color: AppColors.neutral500),
               title: const Text('Edit Sections'),
               onTap: () {
-                context.pop();
+                context.pop(); // Close sheet
+                 if (_sections.isNotEmpty) _toggleEditMode();
               },
             ),
             const Divider(height: 1),
