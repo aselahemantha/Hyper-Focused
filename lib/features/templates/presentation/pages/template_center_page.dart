@@ -90,10 +90,84 @@ class TemplateCenterPage extends StatelessWidget {
                 'Commercial Building',
                 'You can manage your services here. These services will be shown on your website.',
               ),
+              const SizedBox(height: 80), // Extra space for FAB
             ],
           ),
         ),
       ),
+      floatingActionButton: Padding(
+        padding: const EdgeInsets.only(bottom: 20, right: 10),
+        child: FloatingActionButton(
+          onPressed: () => _showOptionsModal(context),
+          backgroundColor: Colors.white,
+          shape: const CircleBorder(),
+          elevation: 4,
+          child: const Icon(Icons.menu, color: Colors.black),
+        ),
+      ),
+    );
+  }
+
+  void _showOptionsModal(BuildContext context) {
+    showModalBottomSheet(
+      context: context,
+      backgroundColor: Colors.transparent,
+      builder: (context) => Container(
+        padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 16),
+        decoration: const BoxDecoration(
+          color: Colors.white,
+          borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
+        ),
+        child: SafeArea(
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              _buildOption(
+                context,
+                icon: Icons.add,
+                label: 'Create a New Template',
+                onTap: () {
+                  context.pop(); // Close modal
+                  context.push('/create-template');
+                },
+              ),
+              const Divider(),
+              _buildOption(
+                context,
+                icon: Icons.file_download_outlined,
+                label: 'Import Template',
+                onTap: () {
+                  context.pop(); // Close modal
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    const SnackBar(content: Text('Import functionality not implemented yet')),
+                  );
+                },
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+
+  Widget _buildOption(
+    BuildContext context, {
+    required IconData icon,
+    required String label,
+    required VoidCallback onTap,
+  }) {
+    return ListTile(
+      leading: Icon(icon, color: AppColors.neutral500),
+      title: Text(
+        label,
+        style: const TextStyle(
+          color: AppColors.neutralDark,
+          fontSize: 16,
+          fontWeight: FontWeight.w500,
+        ),
+      ),
+      onTap: onTap,
+      contentPadding: const EdgeInsets.symmetric(horizontal: 16),
     );
   }
 

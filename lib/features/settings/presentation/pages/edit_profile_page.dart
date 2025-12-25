@@ -121,6 +121,82 @@ class EditProfilePage extends StatelessWidget {
 
                     const SizedBox(height: 24),
 
+                    // Company Details Divider
+                    const SectionDivider(text: 'Company Details'),
+                    
+                    const SizedBox(height: 8),
+
+                    // Company Details Card
+                    Container(
+                      margin: const EdgeInsets.symmetric(horizontal: 16),
+                      decoration: BoxDecoration(
+                        color: AppColors.neutralWhite,
+                        borderRadius: BorderRadius.circular(12),
+                      ),
+                      child: Column(
+                        children: [
+                          // Company Logo Row
+                          Padding(
+                            padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+                            child: Row(
+                              children: [
+                                const Icon(Icons.business_outlined, size: 20, color: AppColors.neutral500),
+                                const SizedBox(width: 12),
+                                const Text(
+                                  'Company Logo',
+                                  style: TextStyle(
+                                    color: AppColors.neutralDark,
+                                    fontSize: 14,
+                                  ),
+                                ),
+                                const Spacer(),
+                                Container(
+                                  width: 32,
+                                  height: 32,
+                                  decoration: const BoxDecoration(
+                                    color: Color(0xFF003366), // Dark blue like in image
+                                    shape: BoxShape.circle,
+                                  ),
+                                  child: const Center(
+                                    child: Icon(Icons.water_drop, color: Colors.blue, size: 20),
+                                  ),
+                                ),
+                                const SizedBox(width: 8),
+                                const Icon(Icons.arrow_forward_ios, size: 14, color: AppColors.neutralDark),
+                              ],
+                            ),
+                          ),
+                          _buildDivider(),
+                          const SettingsTile(
+                            icon: Icons.business,
+                            title: 'Company Name',
+                            value: 'Jesse Doe',
+                            isRequired: true,
+                          ),
+                          _buildDivider(),
+                          const SettingsTile(
+                            icon: Icons.email_outlined,
+                            title: 'Contact Email',
+                            value: 'jessedoe@email.com',
+                          ),
+                          _buildDivider(),
+                          const SettingsTile(
+                            icon: Icons.phone_outlined,
+                            title: 'Company Phone',
+                            value: '+1 888 897 778 1239',
+                          ),
+                          _buildDivider(),
+                          const SettingsTile(
+                            icon: Icons.language,
+                            title: 'Website',
+                            value: 'www.jessedoes.com',
+                          ),
+                        ],
+                      ),
+                    ),
+
+                    const SizedBox(height: 24),
+
                     // Address Header
                     Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
@@ -156,9 +232,6 @@ class EditProfilePage extends StatelessWidget {
 
                     // Address Card
                     const AddressCard(),
-
-                    // Company Details Divider
-                    const SectionDivider(text: 'Company Details'),
                     
                     // Extra spacing for bottom nav
                     const SizedBox(height: 100),
