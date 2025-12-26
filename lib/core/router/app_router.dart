@@ -19,6 +19,7 @@ import 'package:hyper_focused/features/templates/presentation/pages/template_cen
 import 'package:hyper_focused/features/templates/presentation/pages/edit_template_page.dart';
 import 'package:hyper_focused/features/templates/presentation/pages/create_template_page.dart';
 import 'package:hyper_focused/features/templates/presentation/pages/create_template_step2_page.dart';
+import 'package:hyper_focused/features/templates/presentation/pages/create_template_sub_section_page.dart';
 
 import '../../features/auth/presentation/pages/login_page.dart';
 import '../../features/map/presentation/pages/map_page.dart';
@@ -104,7 +105,10 @@ GoRouter goRouter(Ref ref) {
                   GoRoute(
                     path: 'create',
                     builder: (context, state) => const CreateSchedulePage(),
-                  ),
+                    routes: [
+
+                  ],
+                ),
                 ],
               ),
             ],
@@ -162,6 +166,16 @@ GoRouter goRouter(Ref ref) {
           GoRoute(
             path: 'step-2',
             builder: (context, state) => const CreateTemplateStep2Page(),
+            routes: [
+              GoRoute(
+                path: 'sub-sections',
+                builder: (context, state) {
+                  final extra = state.extra as Map<String, dynamic>?;
+                  final categoryName = extra?['categoryName'] as String? ?? 'Category';
+                  return CreateTemplateSubSectionPage(categoryName: categoryName);
+                },
+              ),
+            ],
           ),
         ],
       ),

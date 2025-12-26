@@ -5,40 +5,42 @@ import 'package:hyper_focused/features/templates/presentation/widgets/add_sectio
 import 'package:hyper_focused/features/templates/presentation/widgets/icon_picker_dialog.dart';
 import 'dart:ui';
 
-class CreateTemplateStep2Page extends StatefulWidget {
-  const CreateTemplateStep2Page({super.key});
+class CreateTemplateSubSectionPage extends StatefulWidget {
+  final String categoryName;
+
+  const CreateTemplateSubSectionPage({super.key, required this.categoryName});
 
   @override
-  State<CreateTemplateStep2Page> createState() => _CreateTemplateStep2PageState();
+  State<CreateTemplateSubSectionPage> createState() => _CreateTemplateSubSectionPageState();
 }
 
-class _CreateTemplateStep2PageState extends State<CreateTemplateStep2Page> {
-  final List<Map<String, dynamic>> _sections = [];
+class _CreateTemplateSubSectionPageState extends State<CreateTemplateSubSectionPage> {
+  final List<Map<String, dynamic>> _subSections = [];
   bool _isEditing = false;
 
-  void _addSection(Map<String, dynamic> sectionData) {
+  void _addSubSection(Map<String, dynamic> sectionData) {
     setState(() {
-      _sections.add(sectionData);
+      _subSections.add(sectionData);
     });
   }
 
   void _updateSectionName(int index, String newName) {
     setState(() {
-      _sections[index]['name'] = newName;
+      _subSections[index]['name'] = newName;
     });
   }
 
   void _updateSectionIcon(int index, IconData newIcon) {
     setState(() {
-      _sections[index]['icon'] = newIcon;
+      _subSections[index]['icon'] = newIcon;
     });
   }
 
   void _removeSection(int index) {
     setState(() {
-      _sections.removeAt(index);
-      if (_sections.isEmpty) {
-        _isEditing = false; // Add this line to exit edit mode if list becomes empty
+      _subSections.removeAt(index);
+      if (_subSections.isEmpty) {
+        _isEditing = false;
       }
     });
   }
@@ -52,7 +54,7 @@ class _CreateTemplateStep2PageState extends State<CreateTemplateStep2Page> {
   Future<void> _pickIcon(int index) async {
     final IconData? pickedIcon = await showDialog<IconData>(
       context: context,
-      builder: (context) => IconPickerDialog(currentIcon: _sections[index]['icon']),
+      builder: (context) => IconPickerDialog(currentIcon: _subSections[index]['icon']),
     );
     if (pickedIcon != null) {
       _updateSectionIcon(index, pickedIcon);
@@ -93,12 +95,21 @@ class _CreateTemplateStep2PageState extends State<CreateTemplateStep2Page> {
               ),
             ),
             const SizedBox(height: 4),
-            const Text(
-              'Main Categories',
-              style: TextStyle(
-                color: AppColors.neutralDark,
-                fontSize: 16,
-                fontWeight: FontWeight.bold,
+            RichText(
+              text: TextSpan(
+                style: const TextStyle(
+                  color: AppColors.neutralDark,
+                  fontSize: 16,
+                  fontWeight: FontWeight.bold,
+                ),
+                children: [
+                  const TextSpan(text: 'Main Categories '),
+                  const WidgetSpan(
+                    child: Icon(Icons.keyboard_arrow_right, size: 20, color: AppColors.neutralDark),
+                    alignment: PlaceholderAlignment.middle,
+                  ),
+                  TextSpan(text: ' ${widget.categoryName}'),
+                ],
               ),
             ),
           ],
@@ -169,8 +180,8 @@ class _CreateTemplateStep2PageState extends State<CreateTemplateStep2Page> {
                   ),
                   const SizedBox(height: 16),
                   
-                  // User Added Sections
-                  ..._sections.asMap().entries.map((entry) {
+                  // User Added Sub-Sections
+                  ..._subSections.asMap().entries.map((entry) {
                     final index = entry.key;
                     final section = entry.value;
                     return Padding(
@@ -184,12 +195,12 @@ class _CreateTemplateStep2PageState extends State<CreateTemplateStep2Page> {
                         child: Row(
                           children: [
                             GestureDetector(
-                                onTap: _isEditing ? () => _pickIcon(index) : null,
-                                child: Icon(
-                                  section['icon'] ?? Icons.folder_outlined,
-                                  color: AppColors.neutral500,
-                                ),
+                              onTap: _isEditing ? () => _pickIcon(index) : null,
+                              child: Icon(
+                                section['icon'] ?? Icons.folder_outlined,
+                                color: AppColors.neutral500,
                               ),
+                            ),
                             const SizedBox(width: 12),
                             Expanded(
                               child: _isEditing 
@@ -226,20 +237,17 @@ class _CreateTemplateStep2PageState extends State<CreateTemplateStep2Page> {
                                 )
                             else
                               TextButton(
-                            onPressed: () {
-                              context.push(
-                                '/create-template/step-2/sub-sections',
-                                extra: {'categoryName': section['name']},
-                              );
-                            },
-                            child: const Text(
-                              'Add Sub Sections',
-                              style: TextStyle(
-                                color: AppColors.primary, // Using primary color (teal-ish)
-                                fontWeight: FontWeight.bold,
+                                onPressed: () {
+                                  // Action for adding items
+                                },
+                                child: const Text(
+                                  'Add Items',
+                                  style: TextStyle(
+                                    color: AppColors.primary,
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                ),
                               ),
-                            ),
-                          ),
                           ],
                         ),
                       ),
@@ -325,16 +333,14 @@ class _CreateTemplateStep2PageState extends State<CreateTemplateStep2Page> {
                                    IconButton(
                                     icon: const Icon(Icons.save_outlined, color: AppColors.neutralDark, size: 28),
                                     onPressed: () {
-                                      // Save action during edit
                                       _toggleEditMode();
                                     },
                                   )
-                                else if (_sections.isNotEmpty)
+                                else if (_subSections.isNotEmpty)
                                   IconButton(
                                     icon: const Icon(Icons.edit_outlined, color: AppColors.neutralDark, size: 28),
                                     onPressed: () => _toggleEditMode(),
                                   ),
-
                                 if (!_isEditing)
                                 IconButton(
                                   icon: const Icon(Icons.add, color: AppColors.neutralDark, size: 28),
@@ -394,8 +400,8 @@ class _CreateTemplateStep2PageState extends State<CreateTemplateStep2Page> {
               leading: const Icon(Icons.edit_outlined, color: AppColors.neutral500),
               title: const Text('Edit Sections'),
               onTap: () {
-                context.pop(); // Close sheet
-                 if (_sections.isNotEmpty) _toggleEditMode();
+                context.pop();
+                 if (_subSections.isNotEmpty) _toggleEditMode();
               },
             ),
             const Divider(height: 1),
@@ -403,8 +409,8 @@ class _CreateTemplateStep2PageState extends State<CreateTemplateStep2Page> {
               leading: const Icon(Icons.grid_view, color: AppColors.neutral500),
               title: const Text('New Section'),
               onTap: () {
-                context.pop(); // Close sheet
-                _showAddSectionDialog(context); // Open dialog
+                context.pop();
+                _showAddSectionDialog(context);
               },
             ),
           ],
@@ -420,7 +426,7 @@ class _CreateTemplateStep2PageState extends State<CreateTemplateStep2Page> {
     );
 
     if (result != null) {
-      _addSection(result);
+      _addSubSection(result);
     }
   }
 }
