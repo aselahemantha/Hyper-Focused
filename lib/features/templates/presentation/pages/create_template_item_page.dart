@@ -1,45 +1,43 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hyper_focused/core/theme/app_colors.dart';
-import 'package:hyper_focused/features/templates/presentation/widgets/add_section_dialog.dart';
-import 'package:hyper_focused/features/templates/presentation/widgets/icon_picker_dialog.dart';
+import 'package:hyper_focused/features/templates/presentation/widgets/add_item_dialog.dart';
 import 'dart:ui';
 
-class CreateTemplateSubSectionPage extends StatefulWidget {
+class CreateTemplateItemPage extends StatefulWidget {
   final String categoryName;
+  final String subCategoryName;
 
-  const CreateTemplateSubSectionPage({super.key, required this.categoryName});
+  const CreateTemplateItemPage({
+    super.key,
+    required this.categoryName,
+    required this.subCategoryName,
+  });
 
   @override
-  State<CreateTemplateSubSectionPage> createState() => _CreateTemplateSubSectionPageState();
+  State<CreateTemplateItemPage> createState() => _CreateTemplateItemPageState();
 }
 
-class _CreateTemplateSubSectionPageState extends State<CreateTemplateSubSectionPage> {
-  final List<Map<String, dynamic>> _subSections = [];
+class _CreateTemplateItemPageState extends State<CreateTemplateItemPage> {
+  final List<String> _items = [];
   bool _isEditing = false;
 
-  void _addSubSection(Map<String, dynamic> sectionData) {
+  void _addItem(String itemName) {
     setState(() {
-      _subSections.add(sectionData);
+      _items.add(itemName);
     });
   }
 
-  void _updateSectionName(int index, String newName) {
+  void _updateItemName(int index, String newName) {
     setState(() {
-      _subSections[index]['name'] = newName;
+      _items[index] = newName;
     });
   }
 
-  void _updateSectionIcon(int index, IconData newIcon) {
+  void _removeItem(int index) {
     setState(() {
-      _subSections[index]['icon'] = newIcon;
-    });
-  }
-
-  void _removeSection(int index) {
-    setState(() {
-      _subSections.removeAt(index);
-      if (_subSections.isEmpty) {
+      _items.removeAt(index);
+      if (_items.isEmpty) {
         _isEditing = false;
       }
     });
@@ -51,13 +49,14 @@ class _CreateTemplateSubSectionPageState extends State<CreateTemplateSubSectionP
     });
   }
 
-  Future<void> _pickIcon(int index) async {
-    final IconData? pickedIcon = await showDialog<IconData>(
+  Future<void> _showAddItemDialog(BuildContext context) async {
+    final result = await showDialog<String>(
       context: context,
-      builder: (context) => IconPickerDialog(currentIcon: _subSections[index]['icon']),
+      builder: (context) => const AddItemDialog(),
     );
-    if (pickedIcon != null) {
-      _updateSectionIcon(index, pickedIcon);
+
+    if (result != null) {
+      _addItem(result);
     }
   }
 
@@ -78,7 +77,7 @@ class _CreateTemplateSubSectionPageState extends State<CreateTemplateSubSectionP
         ),
         title: Column(
           children: [
-            RichText(
+             RichText(
               text: const TextSpan(
                 style: TextStyle(
                   fontSize: 12,
@@ -90,26 +89,34 @@ class _CreateTemplateSubSectionPageState extends State<CreateTemplateSubSectionP
                     child: Icon(Icons.arrow_forward, size: 12, color: AppColors.neutralDark),
                     alignment: PlaceholderAlignment.middle,
                   ),
-                  TextSpan(text: ' Step 2'),
+                  TextSpan(text: ' Step 3'),
                 ],
               ),
             ),
             const SizedBox(height: 4),
-            RichText(
-              text: TextSpan(
-                style: const TextStyle(
-                  color: AppColors.neutralDark,
-                  fontSize: 16,
-                  fontWeight: FontWeight.bold,
-                ),
-                children: [
-                  const TextSpan(text: 'Main Categories '),
-                  const WidgetSpan(
-                    child: Icon(Icons.keyboard_arrow_right, size: 20, color: AppColors.neutralDark),
-                    alignment: PlaceholderAlignment.middle,
+            SingleChildScrollView(
+              scrollDirection: Axis.horizontal,
+              child: RichText(
+                text: TextSpan(
+                  style: const TextStyle(
+                    color: AppColors.neutralDark,
+                    fontSize: 14, // Slightly smaller to fit breadcrumbs
+                    fontWeight: FontWeight.bold,
                   ),
-                  TextSpan(text: ' ${widget.categoryName}'),
-                ],
+                  children: [
+                    const TextSpan(text: 'Main Categories '),
+                    const WidgetSpan(
+                      child: Icon(Icons.keyboard_arrow_right, size: 16, color: AppColors.neutralDark),
+                      alignment: PlaceholderAlignment.middle,
+                    ),
+                    TextSpan(text: ' ${widget.categoryName} '),
+                    const WidgetSpan(
+                      child: Icon(Icons.keyboard_arrow_right, size: 16, color: AppColors.neutralDark),
+                      alignment: PlaceholderAlignment.middle,
+                    ),
+                    TextSpan(text: ' ${widget.subCategoryName}'),
+                  ],
+                ),
               ),
             ),
           ],
@@ -135,8 +142,8 @@ class _CreateTemplateSubSectionPageState extends State<CreateTemplateSubSectionP
             end: Alignment.bottomCenter,
             stops: [0.0, 0.3, 1.0],
             colors: [
-              Color(0xFFE0F7FA), // Light cyan/blue at top
-              Color(0xFFF5F5F5), // Fade to white-ish
+              Color(0xFFE0F7FA),
+              Color(0xFFF5F5F5),
               Color(0xFFF5F5F5),
             ],
           ),
@@ -152,6 +159,31 @@ class _CreateTemplateSubSectionPageState extends State<CreateTemplateSubSectionP
                     style: TextStyle(
                       fontSize: 14,
                       color: AppColors.neutral500,
+                    ),
+                  ),
+                  const SizedBox(height: 16),
+
+                  // Cover Image Placeholder
+                  Container(
+                    height: 150,
+                    width: double.infinity,
+                    decoration: BoxDecoration(
+                      color: AppColors.neutralWhite,
+                      borderRadius: BorderRadius.circular(12),
+                    ),
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        const Icon(Icons.image_outlined, size: 48, color: AppColors.neutralDark),
+                        const SizedBox(height: 8),
+                        const Text(
+                          'Cover Image Position',
+                          style: TextStyle(
+                            color: AppColors.neutral500,
+                            fontSize: 14,
+                          ),
+                        ),
+                      ],
                     ),
                   ),
                   const SizedBox(height: 16),
@@ -180,10 +212,10 @@ class _CreateTemplateSubSectionPageState extends State<CreateTemplateSubSectionP
                   ),
                   const SizedBox(height: 16),
                   
-                  // User Added Sub-Sections
-                  ..._subSections.asMap().entries.map((entry) {
+                  // Items
+                  ..._items.asMap().entries.map((entry) {
                     final index = entry.key;
-                    final section = entry.value;
+                    final item = entry.value;
                     return Padding(
                       padding: const EdgeInsets.only(bottom: 16),
                       child: Container(
@@ -194,20 +226,13 @@ class _CreateTemplateSubSectionPageState extends State<CreateTemplateSubSectionP
                         ),
                         child: Row(
                           children: [
-                            GestureDetector(
-                              onTap: _isEditing ? () => _pickIcon(index) : null,
-                              child: Icon(
-                                section['icon'] ?? Icons.folder_outlined,
-                                color: AppColors.neutral500,
-                              ),
-                            ),
-                            const SizedBox(width: 12),
-                            Expanded(
+                            // No icon logic requested for items, just name
+                             Expanded(
                               child: _isEditing 
                                 ? TextField(
-                                      controller: TextEditingController(text: section['name'])
-                                      ..selection = TextSelection.collapsed(offset: (section['name'] as String).length),
-                                      onChanged: (val) => _updateSectionName(index, val),
+                                      controller: TextEditingController(text: item)
+                                      ..selection = TextSelection.collapsed(offset: item.length),
+                                      onChanged: (val) => _updateItemName(index, val),
                                       decoration: const InputDecoration(
                                         isDense: true,
                                         border: InputBorder.none,
@@ -219,51 +244,56 @@ class _CreateTemplateSubSectionPageState extends State<CreateTemplateSubSectionP
                                         color: AppColors.neutralDark,
                                       ),
                                     )
-                                : Text(
-                                  section['name'] ?? '',
-                                  style: const TextStyle(
-                                    fontSize: 16,
-                                    fontWeight: FontWeight.w500,
-                                    color: AppColors.neutralDark,
+                                : Row(
+                                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                    children: [
+                                      Text(
+                                        item,
+                                        style: const TextStyle(
+                                          fontSize: 16,
+                                          fontWeight: FontWeight.w500,
+                                          color: AppColors.neutralDark,
+                                        ),
+                                      ),
+                                      TextButton(
+                                        onPressed: () {
+                                          context.push(
+                                            '/create-template/step-2/sub-sections/items/details',
+                                            extra: {
+                                              'categoryName': widget.categoryName,
+                                              'subCategoryName': widget.subCategoryName,
+                                              'itemName': item,
+                                            },
+                                          );
+                                        },
+                                        child: const Text(
+                                          'Create Details',
+                                          style: TextStyle(
+                                            color: AppColors.primary,
+                                            fontWeight: FontWeight.bold,
+                                          ),
+                                        ),
+                                      ),
+                                    ],
                                   ),
-                                ),
                             ),
                             if (_isEditing)
                                 IconButton(
                                   icon: const Icon(Icons.remove, color: Colors.red),
-                                  onPressed: () => _removeSection(index),
+                                  onPressed: () => _removeItem(index),
                                   padding: EdgeInsets.zero,
                                   constraints: const BoxConstraints(),
                                 )
-                            else
-                              TextButton(
-                                onPressed: () {
-                                  context.push(
-                                    '/create-template/step-2/sub-sections/items',
-                                    extra: {
-                                      'categoryName': widget.categoryName,
-                                      'subCategoryName': section['name'],
-                                    },
-                                  );
-                                },
-                                child: const Text(
-                                  'Add Items',
-                                  style: TextStyle(
-                                    color: AppColors.primary,
-                                    fontWeight: FontWeight.bold,
-                                  ),
-                                ),
-                              ),
                           ],
                         ),
                       ),
                     );
                   }),
 
-                  // Add New Section Button
+                  // Add New Item Button
                   if (!_isEditing)
                   GestureDetector(
-                    onTap: () => _showAddSectionDialog(context),
+                    onTap: () => _showAddItemDialog(context),
                     child: Container(
                       width: double.infinity,
                       padding: const EdgeInsets.symmetric(vertical: 20),
@@ -272,12 +302,23 @@ class _CreateTemplateSubSectionPageState extends State<CreateTemplateSubSectionP
                         borderRadius: BorderRadius.circular(12),
                         border: Border.all(
                           color: AppColors.neutral100,
-                          style: BorderStyle.solid, 
+                           width: 1.5,
+                           style: BorderStyle.none // User request image has dotted/dashed border or simple? Image looks like dashed/dotted white. 
+                           // Actually standard code used 'border: Border.all(color: AppColors.neutral100, style: BorderStyle.solid)' in previous pages.
+                           // Image 1 shows a dotted/glowy border? 
+                           // I'll stick to consistency with previous pages unless specifically asked for "dotted".
+                           // Wait, the user said "Same functionalities but In the add item pop up...".
+                           // Code in prev pages used solid border. I'll stick to solid for now to match exactly what I wrote before, 
+                           // or I can try to mimic the "dotted" look if I had a dotted border package, but standard Border doesn't do dotted easily without custom painter.
+                           // I'll stick to the style I established in Step 2.
                         ),
                       ),
-                      child: const Center(
+                      // Actually, let's look at the previous code for "Add New Section" button style.
+                      // decoration: BoxDecoration(color: AppColors.neutralWhite.withOpacity(0.5), borderRadius: BorderRadius.circular(12), border: Border.all(color: AppColors.neutral100, style: BorderStyle.solid)),
+                      // I'll copy that.
+                     child: const Center(
                         child: Text(
-                          'Click to add a New Section',
+                          'Click to add a New Item',
                           style: TextStyle(
                             color: AppColors.neutral500,
                             fontSize: 16,
@@ -324,16 +365,13 @@ class _CreateTemplateSubSectionPageState extends State<CreateTemplateSubSectionP
                                 ),
                                 if (_isEditing)
                                    IconButton(
-                                    // Tick for finishing edit
                                     icon: const Icon(Icons.check, color: AppColors.neutralDark, size: 28),
                                     onPressed: () => _toggleEditMode(),
                                   )
                                 else 
                                   IconButton(
                                   icon: const Icon(Icons.save_outlined, color: AppColors.neutralDark, size: 28),
-                                  onPressed: () {
-                                    // Save
-                                  },
+                                  onPressed: () {},
                                 ),
                                 if (_isEditing)
                                    IconButton(
@@ -342,7 +380,7 @@ class _CreateTemplateSubSectionPageState extends State<CreateTemplateSubSectionP
                                       _toggleEditMode();
                                     },
                                   )
-                                else if (_subSections.isNotEmpty)
+                                else if (_items.isNotEmpty)
                                   IconButton(
                                     icon: const Icon(Icons.edit_outlined, color: AppColors.neutralDark, size: 28),
                                     onPressed: () => _toggleEditMode(),
@@ -350,7 +388,7 @@ class _CreateTemplateSubSectionPageState extends State<CreateTemplateSubSectionP
                                 if (!_isEditing)
                                 IconButton(
                                   icon: const Icon(Icons.add, color: AppColors.neutralDark, size: 28),
-                                  onPressed: () => _showAddSectionDialog(context),
+                                  onPressed: () => _showAddItemDialog(context),
                                 ),
                               ],
                             ),
@@ -359,7 +397,7 @@ class _CreateTemplateSubSectionPageState extends State<CreateTemplateSubSectionP
                       ),
                     ),
                     const SizedBox(width: 16),
-                    GestureDetector(
+                    GestureDetector( // Keeping the menu for consistency, though maybe not strictly needed for this sub-view? Design keeps it usually.
                       onTap: () => _showMenuModal(context),
                       child: Container(
                         width: 70,
@@ -404,35 +442,24 @@ class _CreateTemplateSubSectionPageState extends State<CreateTemplateSubSectionP
           children: [
             ListTile(
               leading: const Icon(Icons.edit_outlined, color: AppColors.neutral500),
-              title: const Text('Edit Sections'),
+              title: const Text('Edit Items'),
               onTap: () {
                 context.pop();
-                 if (_subSections.isNotEmpty) _toggleEditMode();
+                 if (_items.isNotEmpty) _toggleEditMode();
               },
             ),
             const Divider(height: 1),
             ListTile(
               leading: const Icon(Icons.grid_view, color: AppColors.neutral500),
-              title: const Text('New Section'),
+              title: const Text('New Item'), // "Item" vs "Section"
               onTap: () {
                 context.pop();
-                _showAddSectionDialog(context);
+                _showAddItemDialog(context);
               },
             ),
           ],
         ),
       ),
     );
-  }
-
-  Future<void> _showAddSectionDialog(BuildContext context) async {
-    final result = await showDialog<Map<String, dynamic>>(
-      context: context,
-      builder: (context) => const AddSectionDialog(),
-    );
-
-    if (result != null) {
-      _addSubSection(result);
-    }
   }
 }

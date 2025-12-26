@@ -20,6 +20,8 @@ import 'package:hyper_focused/features/templates/presentation/pages/edit_templat
 import 'package:hyper_focused/features/templates/presentation/pages/create_template_page.dart';
 import 'package:hyper_focused/features/templates/presentation/pages/create_template_step2_page.dart';
 import 'package:hyper_focused/features/templates/presentation/pages/create_template_sub_section_page.dart';
+import 'package:hyper_focused/features/templates/presentation/pages/create_template_item_page.dart';
+import 'package:hyper_focused/features/templates/presentation/pages/create_template_item_details_page.dart';
 
 import '../../features/auth/presentation/pages/login_page.dart';
 import '../../features/map/presentation/pages/map_page.dart';
@@ -174,6 +176,36 @@ GoRouter goRouter(Ref ref) {
                   final categoryName = extra?['categoryName'] as String? ?? 'Category';
                   return CreateTemplateSubSectionPage(categoryName: categoryName);
                 },
+                routes: [
+                  GoRoute(
+                    path: 'items',
+                    builder: (context, state) {
+                      final extra = state.extra as Map<String, dynamic>?;
+                      final categoryName = extra?['categoryName'] as String? ?? 'Category';
+                      final subCategoryName = extra?['subCategoryName'] as String? ?? 'SubCategory';
+                      return CreateTemplateItemPage(
+                        categoryName: categoryName,
+                        subCategoryName: subCategoryName,
+                      );
+                    },
+                    routes: [
+                      GoRoute(
+                        path: 'details',
+                        builder: (context, state) {
+                          final extra = state.extra as Map<String, dynamic>?;
+                          final categoryName = extra?['categoryName'] as String? ?? 'Category';
+                          final subCategoryName = extra?['subCategoryName'] as String? ?? 'SubCategory';
+                          final itemName = extra?['itemName'] as String? ?? 'Item';
+                          return CreateTemplateItemDetailsPage(
+                            categoryName: categoryName,
+                            subCategoryName: subCategoryName,
+                            itemName: itemName,
+                          );
+                        },
+                      ),
+                    ],
+                  ),
+                ],
               ),
             ],
           ),
