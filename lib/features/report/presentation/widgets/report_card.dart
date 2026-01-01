@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import '../../../../core/theme/app_colors.dart';
 
 class ReportCard extends StatelessWidget {
@@ -148,7 +149,10 @@ class ReportCard extends StatelessWidget {
               // Action Icons
               _buildCircleIcon(Icons.cloud_upload_outlined, AppColors.secondary, showDot: true),
               const SizedBox(width: 8),
-              _buildCircleIcon(Icons.arrow_forward, AppColors.neutral200, showDot: false),
+              GestureDetector(
+                onTap: () => context.push('/report-detail'),
+                child: _buildCircleIcon(Icons.arrow_forward, AppColors.neutral200, showDot: false),
+              ),
             ],
           ),
         ],

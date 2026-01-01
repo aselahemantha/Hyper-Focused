@@ -26,6 +26,8 @@ import 'package:hyper_focused/features/templates/presentation/pages/create_templ
 import '../../features/auth/presentation/pages/login_page.dart';
 import '../../features/map/presentation/pages/map_page.dart';
 import '../../features/report/presentation/pages/report_page.dart';
+import '../../features/report/presentation/pages/report_detail_page.dart';
+import '../../features/report/presentation/pages/inspection_start_page.dart';
 import '../../features/schedule/presentation/pages/schedule_page.dart';
 import '../../features/schedule/presentation/pages/create_schedule_page.dart';
 
@@ -140,6 +142,14 @@ GoRouter goRouter(Ref ref) {
             ],
           ),
         ],
+      ),
+      GoRoute(
+        path: '/report-detail',
+        builder: (context, state) => const ReportDetailPage(),
+      ),
+      GoRoute(
+        path: '/inspection-start',
+        builder: (context, state) => const InspectionStartPage(),
       ),
       GoRoute(
         path: '/my-services',
