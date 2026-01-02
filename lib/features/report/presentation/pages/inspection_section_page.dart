@@ -4,28 +4,26 @@ import 'package:go_router/go_router.dart';
 import 'package:hyper_focused/core/theme/app_colors.dart';
 import 'package:hyper_focused/features/templates/presentation/widgets/add_section_dialog.dart';
 
-class InspectionStartPage extends StatefulWidget {
-  const InspectionStartPage({super.key});
+class InspectionSectionPage extends StatefulWidget {
+  final String categoryName;
+  const InspectionSectionPage({super.key, required this.categoryName});
 
   @override
-  State<InspectionStartPage> createState() => _InspectionStartPageState();
+  State<InspectionSectionPage> createState() => _InspectionSectionPageState();
 }
 
-class _InspectionStartPageState extends State<InspectionStartPage> {
+class _InspectionSectionPageState extends State<InspectionSectionPage> {
   bool _isEditing = false;
-  // Dummy data for categories - converted to a state variable
-  final List<Map<String, dynamic>> _categories = [
+  
+  // Dummy data for sections - this would ideally come from the category or backend
+  final List<Map<String, dynamic>> _sections = [
     {'icon': Icons.info_outline, 'name': 'General Info', 'pins': null},
-    {'icon': Icons.chair_outlined, 'name': 'Interior', 'pins': 3},
-    {'icon': Icons.grid_view, 'name': 'Exterior', 'pins': null},
-    {'icon': Icons.garage_outlined, 'name': 'Garage', 'pins': 3},
-    {'icon': Icons.pool_outlined, 'name': 'Pool', 'pins': null},
-    {'icon': Icons.hvac, 'name': 'Heating', 'pins': 5},
-    {'icon': Icons.nature_people_outlined, 'name': 'Roof', 'pins': 2},
-    {'icon': Icons.park_outlined, 'name': 'Garden', 'pins': null},
-    {'icon': Icons.water_drop_outlined, 'name': 'Plumbing', 'pins': null},
-    {'icon': Icons.local_fire_department_outlined, 'name': 'Fireplace', 'pins': null},
-    {'icon': Icons.fence_outlined, 'name': 'Gate', 'pins': null},
+    {'icon': Icons.chair_outlined, 'name': 'Living Room', 'pins': null},
+    {'icon': Icons.kitchen_outlined, 'name': 'Kitchen', 'pins': null},
+    {'icon': Icons.bed_outlined, 'name': 'Master Bedroom', 'pins': 1},
+    {'icon': Icons.bed_outlined, 'name': 'Bedroom 1', 'pins': 2},
+    {'icon': Icons.bed_outlined, 'name': 'Bedroom 2', 'pins': 2},
+    {'icon': Icons.bed_outlined, 'name': 'Bedroom 3', 'pins': null},
   ];
 
   Future<void> _showAddSectionDialog(BuildContext context) async {
@@ -36,7 +34,7 @@ class _InspectionStartPageState extends State<InspectionStartPage> {
 
     if (result != null) {
       setState(() {
-        _categories.add({
+        _sections.add({
           'icon': result['icon'] ?? Icons.folder_outlined,
           'name': result['name'],
           'pins': null,
@@ -51,9 +49,9 @@ class _InspectionStartPageState extends State<InspectionStartPage> {
     });
   }
 
-  void _removeCategory(int index) {
+  void _removeSection(int index) {
     setState(() {
-      _categories.removeAt(index);
+      _sections.removeAt(index);
     });
   }
 
@@ -62,8 +60,8 @@ class _InspectionStartPageState extends State<InspectionStartPage> {
       if (oldIndex < newIndex) {
         newIndex -= 1;
       }
-      final item = _categories.removeAt(oldIndex);
-      _categories.insert(newIndex, item);
+      final item = _sections.removeAt(oldIndex);
+      _sections.insert(newIndex, item);
     });
   }
 
@@ -102,40 +100,9 @@ class _InspectionStartPageState extends State<InspectionStartPage> {
                   child: _isEditing
                       ? ReorderableListView.builder(
                           padding: const EdgeInsets.fromLTRB(16, 8, 16, 120),
-                          itemCount: _categories.length,
+                          itemCount: _sections.length,
                           onReorder: _onReorder,
-                          header: Padding(
-                              padding: const EdgeInsets.symmetric(vertical: 8),
-                              child: Row(
-                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                children: [
-                                  const Text(
-                                    'Edit Sections',
-                                    style: TextStyle(
-                                      fontSize: 16,
-                                      fontWeight: FontWeight.bold,
-                                      color: AppColors.neutralDark,
-                                    ),
-                                  ),
-                                  TextButton(
-                                    onPressed: _toggleEditMode,
-                                    style: TextButton.styleFrom(
-                                      padding: EdgeInsets.zero,
-                                      minimumSize: Size.zero,
-                                      tapTargetSize: MaterialTapTargetSize.shrinkWrap,
-                                    ),
-                                    child: const Text(
-                                      'Save Changes',
-                                      style: TextStyle(
-                                        color: AppColors.primary,
-                                        fontWeight: FontWeight.w600,
-                                        fontSize: 14,
-                                      ),
-                                    ),
-                                  ),
-                                ],
-                              ),
-                            ),
+                          header: _buildListHeader(),
                           proxyDecorator: (child, index, animation) {
                             return AnimatedBuilder(
                               animation: animation,
@@ -151,50 +118,19 @@ class _InspectionStartPageState extends State<InspectionStartPage> {
                           },
                           itemBuilder: (context, index) {
                             return Container(
-                              key: ValueKey(_categories[index]),
+                              key: ValueKey(_sections[index]),
                               margin: const EdgeInsets.only(bottom: 12),
-                              child: _buildCategoryItem(_categories[index], index: index),
+                              child: _buildSectionItem(_sections[index], index: index),
                             );
                           },
                         )
                       : ListView(
                           padding: const EdgeInsets.fromLTRB(16, 8, 16, 120),
                           children: [
-                            Padding(
-                              padding: const EdgeInsets.symmetric(vertical: 8),
-                              child: Row(
-                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                children: [
-                                  const Text(
-                                    'Main Categories',
-                                    style: TextStyle(
-                                      fontSize: 16,
-                                      fontWeight: FontWeight.bold,
-                                      color: AppColors.neutralDark,
-                                    ),
-                                  ),
-                                  TextButton(
-                                    onPressed: _toggleEditMode,
-                                    style: TextButton.styleFrom(
-                                      padding: EdgeInsets.zero,
-                                      minimumSize: Size.zero,
-                                      tapTargetSize: MaterialTapTargetSize.shrinkWrap,
-                                    ),
-                                    child: const Text(
-                                      'Edit Sections',
-                                      style: TextStyle(
-                                        color: AppColors.primary,
-                                        fontWeight: FontWeight.w600,
-                                        fontSize: 14,
-                                      ),
-                                    ),
-                                  ),
-                                ],
-                              ),
-                            ),
-                            ..._categories.map((category) => Container(
+                            _buildListHeader(),
+                            ..._sections.map((section) => Container(
                               margin: const EdgeInsets.only(bottom: 12),
-                              child: _buildCategoryItem(category),
+                              child: _buildSectionItem(section),
                             )),
                             const SizedBox(height: 24),
                             _buildActionButton(
@@ -203,15 +139,6 @@ class _InspectionStartPageState extends State<InspectionStartPage> {
                               bgColor: AppColors.primary,
                               textColor: Colors.white,
                               onTap: () => _showAddSectionDialog(context),
-                            ),
-                            const SizedBox(height: 12),
-                            _buildActionButton(
-                              context: context,
-                              label: 'Save as a new template',
-                              bgColor: const Color(0xFFE0F2F1),
-                              textColor: AppColors.primary,
-                              onTap: () {},
-                              isOutline: true,
                             ),
                           ],
                         ),
@@ -277,17 +204,17 @@ class _InspectionStartPageState extends State<InspectionStartPage> {
               const SizedBox(width: 12),
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
-                children: const [
-                  Text(
-                    'Residential Inspection',
+                children: [
+                  const Text(
+                    'Inspection Details',
                     style: TextStyle(
                       color: AppColors.neutral500,
                       fontSize: 12,
                     ),
                   ),
                   Text(
-                    'John Johnson | 12.12.2025',
-                    style: TextStyle(
+                    widget.categoryName,
+                    style: const TextStyle(
                       color: AppColors.neutralDark,
                       fontWeight: FontWeight.bold,
                       fontSize: 14,
@@ -310,8 +237,50 @@ class _InspectionStartPageState extends State<InspectionStartPage> {
     );
   }
 
-  Widget _buildCategoryItem(Map<String, dynamic> category, {int? index}) {
-    final pins = category['pins'] as int?;
+  Widget _buildListHeader() {
+    return Padding(
+      padding: const EdgeInsets.symmetric(vertical: 8),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          _isEditing 
+          ? const Text(
+                'Edit Sections',
+                style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold, color: AppColors.neutralDark),
+              )
+          : Row(
+            children: [
+               Icon(Icons.grid_on_outlined, size: 20, color: AppColors.neutral500),
+               const SizedBox(width: 8),
+               const Text(
+                'Sections',
+                style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold, color: AppColors.neutralDark),
+              ),
+            ],
+          ),
+          TextButton(
+            onPressed: _toggleEditMode,
+            style: TextButton.styleFrom(
+              padding: EdgeInsets.zero,
+              minimumSize: Size.zero,
+              tapTargetSize: MaterialTapTargetSize.shrinkWrap,
+            ),
+            child: Text(
+              _isEditing ? 'Save Changes' : 'Edit Sections',
+              style: const TextStyle(
+                color: AppColors.primary,
+                fontWeight: FontWeight.w600,
+                fontSize: 14,
+              ),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildSectionItem(Map<String, dynamic> section, {int? index}) {
+    final pins = section['pins'] as int?;
     
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
@@ -329,11 +298,11 @@ class _InspectionStartPageState extends State<InspectionStartPage> {
                 child: Icon(Icons.menu, color: AppColors.neutral500),
               ),
             ),
-          Icon(category['icon'] as IconData, color: AppColors.neutral500, size: 24),
+          Icon(section['icon'] as IconData, color: AppColors.neutral500, size: 24),
           const SizedBox(width: 16),
           Expanded(
             child: Text(
-              category['name'] as String,
+              section['name'] as String,
               style: const TextStyle(
                 fontSize: 16,
                 fontWeight: FontWeight.w500,
@@ -342,37 +311,23 @@ class _InspectionStartPageState extends State<InspectionStartPage> {
             ),
           ),
           if (!_isEditing) ...[
-             GestureDetector(
-                onTap: () {
-                   context.push(
-                    '/inspection-section', 
-                    extra: {'categoryName': category['name']},
-                  );
-                },
-                behavior: HitTestBehavior.translucent,
-                child: Row(
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    if (pins != null) ...[
-                      const Icon(Icons.push_pin_outlined, size: 16, color: AppColors.primary),
-                      const SizedBox(width: 4),
-                      Text(
-                        '$pins Pins',
-                        style: const TextStyle(
-                          color: AppColors.primary,
-                          fontSize: 14,
-                          fontWeight: FontWeight.w500,
-                        ),
-                      ),
-                      const SizedBox(width: 12),
-                    ],
-                    const Icon(Icons.arrow_forward_ios, size: 16, color: AppColors.neutralDark),
-                  ],
+            if (pins != null) ...[
+              const Icon(Icons.push_pin_outlined, size: 16, color: AppColors.primary),
+              const SizedBox(width: 4),
+              Text(
+                '$pins ${pins == 1 ? 'Pin' : 'Pins'}',
+                style: const TextStyle(
+                  color: AppColors.primary,
+                  fontSize: 14,
+                  fontWeight: FontWeight.w500,
                 ),
               ),
+              const SizedBox(width: 12),
+            ],
+            const Icon(Icons.arrow_forward_ios, size: 16, color: AppColors.neutralDark),
           ] else 
             GestureDetector(
-              onTap: () => _removeCategory(index!),
+              onTap: () => _removeSection(index!),
               child: Container(
                 width: 24, 
                 height: 2, 
@@ -444,31 +399,31 @@ class _InspectionStartPageState extends State<InspectionStartPage> {
                     ],
                   ),
                   child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      _buildIcon(Icons.grid_view, isSelected: true),
-                      _buildIcon(Icons.assignment_outlined), // Clipboard icon
-                       // Cloud upload with red dot
-                        Stack(
-                          alignment: Alignment.center,
-                          children: [
-                            const Icon(Icons.cloud_upload_outlined, color: Colors.black87, size: 24),
-                             Positioned(
-                                top: 0,
-                                right: 0,
-                                child: Container(
-                                  width: 8,
-                                  height: 8,
-                                  decoration: BoxDecoration(
-                                    color: AppColors.statusNotify,
-                                    shape: BoxShape.circle,
-                                    border: Border.all(color: Colors.white, width: 1.5),
-                                  ),
+                      _buildIcon(Icons.arrow_back),
+                      // Cloud upload with red dot
+                      Stack(
+                        alignment: Alignment.center,
+                        children: [
+                          const Icon(Icons.cloud_upload_outlined, color: Colors.black87, size: 24),
+                            Positioned(
+                              top: 0,
+                              right: 0,
+                              child: Container(
+                                width: 8,
+                                height: 8,
+                                decoration: BoxDecoration(
+                                  color: AppColors.statusNotify,
+                                  shape: BoxShape.circle,
+                                  border: Border.all(color: Colors.white, width: 1.5),
                                 ),
                               ),
-                          ],
-                        ),
-                      _buildIcon(Icons.edit_outlined), // Edit icon
+                            ),
+                        ],
+                      ),
+                      _buildIcon(Icons.flashlight_on_outlined),
+                      _buildIcon(Icons.arrow_forward),
                     ],
                   ),
                 ),
@@ -507,7 +462,7 @@ class _InspectionStartPageState extends State<InspectionStartPage> {
       context: context,
       backgroundColor: Colors.transparent,
       builder: (context) => Container(
-        margin: const EdgeInsets.only(left: 16, right: 16, bottom: 40),
+        margin: const EdgeInsets.only(left: 16, right: 16, bottom: 40), // Adjust bottom margin to sit above bottom bar if needed, or just standard
         padding: const EdgeInsets.symmetric(vertical: 8),
         decoration: BoxDecoration(
           color: Colors.white,
@@ -533,7 +488,7 @@ class _InspectionStartPageState extends State<InspectionStartPage> {
             ),
             const Divider(height: 1, color: AppColors.neutral100),
             ListTile(
-              leading: const Icon(Icons.grid_view_outlined, color: AppColors.neutral500),
+              leading: const Icon(Icons.grid_view_outlined, color: AppColors.neutral500), // Using grid_view_outlined to match "New Section" idea (or create_new_folder)
               title: const Text(
                 'New Section',
                 style: TextStyle(
@@ -553,7 +508,7 @@ class _InspectionStartPageState extends State<InspectionStartPage> {
     );
   }
 
-  Widget _buildIcon(IconData icon, {bool isSelected = false}) {
+  Widget _buildIcon(IconData icon) {
     return IconButton(
       onPressed: () {},
       icon: Icon(icon, color: Colors.black87, size: 24),

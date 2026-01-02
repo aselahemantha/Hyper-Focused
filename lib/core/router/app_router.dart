@@ -28,6 +28,7 @@ import '../../features/map/presentation/pages/map_page.dart';
 import '../../features/report/presentation/pages/report_page.dart';
 import '../../features/report/presentation/pages/report_detail_page.dart';
 import '../../features/report/presentation/pages/inspection_start_page.dart';
+import '../../features/report/presentation/pages/inspection_section_page.dart';
 import '../../features/schedule/presentation/pages/schedule_page.dart';
 import '../../features/schedule/presentation/pages/create_schedule_page.dart';
 
@@ -150,6 +151,14 @@ GoRouter goRouter(Ref ref) {
       GoRoute(
         path: '/inspection-start',
         builder: (context, state) => const InspectionStartPage(),
+      ),
+      GoRoute(
+        path: '/inspection-section',
+        builder: (context, state) {
+           final extra = state.extra as Map<String, dynamic>?;
+           final categoryName = extra?['categoryName'] as String? ?? 'Section';
+           return InspectionSectionPage(categoryName: categoryName);
+        },
       ),
       GoRoute(
         path: '/my-services',
