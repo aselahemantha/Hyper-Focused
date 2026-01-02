@@ -12,6 +12,7 @@ class InspectionStartPage extends StatefulWidget {
 }
 
 class _InspectionStartPageState extends State<InspectionStartPage> {
+  bool _isEditing = false;
   // Dummy data for categories - converted to a state variable
   final List<Map<String, dynamic>> _categories = [
     {'icon': Icons.info_outline, 'name': 'General Info', 'pins': null},
@@ -35,15 +36,35 @@ class _InspectionStartPageState extends State<InspectionStartPage> {
 
     if (result != null) {
       setState(() {
-         // Add the new section to the list
-         // Assuming the dialog returns {'name': 'String', 'icon': IconData?}
         _categories.add({
-          'icon': result['icon'] ?? Icons.folder_outlined, // Default icon if none selected
+          'icon': result['icon'] ?? Icons.folder_outlined,
           'name': result['name'],
-          'pins': null, // New sections start with 0 pins/null
+          'pins': null,
         });
       });
     }
+  }
+
+  void _toggleEditMode() {
+    setState(() {
+      _isEditing = !_isEditing;
+    });
+  }
+
+  void _removeCategory(int index) {
+    setState(() {
+      _categories.removeAt(index);
+    });
+  }
+
+  void _onReorder(int oldIndex, int newIndex) {
+    setState(() {
+      if (oldIndex < newIndex) {
+        newIndex -= 1;
+      }
+      final item = _categories.removeAt(oldIndex);
+      _categories.insert(newIndex, item);
+    });
   }
 
   @override
@@ -78,79 +99,150 @@ class _InspectionStartPageState extends State<InspectionStartPage> {
               children: [
                 _buildHeader(context),
                 Expanded(
-                  child: ListView(
-                    padding: const EdgeInsets.fromLTRB(16, 8, 16, 120), // Bottom padding for floating bar
-                    children: [
-                      // List Title Row
-                      Padding(
-                        padding: const EdgeInsets.symmetric(vertical: 8),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            const Text(
-                              'Main Categories',
-                              style: TextStyle(
-                                fontSize: 16,
-                                fontWeight: FontWeight.bold,
-                                color: AppColors.neutralDark,
+                  child: _isEditing
+                      ? ReorderableListView.builder(
+                          padding: const EdgeInsets.fromLTRB(16, 8, 16, 120),
+                          itemCount: _categories.length,
+                          onReorder: _onReorder,
+                          header: Padding(
+                              padding: const EdgeInsets.symmetric(vertical: 8),
+                              child: Row(
+                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                children: [
+                                  const Text(
+                                    'Edit Sections',
+                                    style: TextStyle(
+                                      fontSize: 16,
+                                      fontWeight: FontWeight.bold,
+                                      color: AppColors.neutralDark,
+                                    ),
+                                  ),
+                                  TextButton(
+                                    onPressed: _toggleEditMode,
+                                    style: TextButton.styleFrom(
+                                      padding: EdgeInsets.zero,
+                                      minimumSize: Size.zero,
+                                      tapTargetSize: MaterialTapTargetSize.shrinkWrap,
+                                    ),
+                                    child: const Text(
+                                      'Save Changes',
+                                      style: TextStyle(
+                                        color: AppColors.primary,
+                                        fontWeight: FontWeight.w600,
+                                        fontSize: 14,
+                                      ),
+                                    ),
+                                  ),
+                                ],
                               ),
                             ),
-                            TextButton(
-                              onPressed: () {},
-                              style: TextButton.styleFrom(
-                                padding: EdgeInsets.zero,
-                                minimumSize: Size.zero,
-                                tapTargetSize: MaterialTapTargetSize.shrinkWrap,
+                          proxyDecorator: (child, index, animation) {
+                            return AnimatedBuilder(
+                              animation: animation,
+                              builder: (BuildContext context, Widget? child) {
+                                return Material(
+                                  elevation: 0,
+                                  color: Colors.transparent,
+                                  child: child,
+                                );
+                              },
+                              child: child,
+                            );
+                          },
+                          itemBuilder: (context, index) {
+                            return Container(
+                              key: ValueKey(_categories[index]),
+                              margin: const EdgeInsets.only(bottom: 12),
+                              child: _buildCategoryItem(_categories[index], index: index),
+                            );
+                          },
+                        )
+                      : ListView(
+                          padding: const EdgeInsets.fromLTRB(16, 8, 16, 120),
+                          children: [
+                            Padding(
+                              padding: const EdgeInsets.symmetric(vertical: 8),
+                              child: Row(
+                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                children: [
+                                  const Text(
+                                    'Main Categories',
+                                    style: TextStyle(
+                                      fontSize: 16,
+                                      fontWeight: FontWeight.bold,
+                                      color: AppColors.neutralDark,
+                                    ),
+                                  ),
+                                  TextButton(
+                                    onPressed: _toggleEditMode,
+                                    style: TextButton.styleFrom(
+                                      padding: EdgeInsets.zero,
+                                      minimumSize: Size.zero,
+                                      tapTargetSize: MaterialTapTargetSize.shrinkWrap,
+                                    ),
+                                    child: const Text(
+                                      'Edit Sections',
+                                      style: TextStyle(
+                                        color: AppColors.primary,
+                                        fontWeight: FontWeight.w600,
+                                        fontSize: 14,
+                                      ),
+                                    ),
+                                  ),
+                                ],
                               ),
-                              child: const Text(
-                                'Edit Sections',
-                                style: TextStyle(
-                                  color: AppColors.primary,
-                                  fontWeight: FontWeight.w600,
-                                  fontSize: 14,
-                                ),
-                              ),
+                            ),
+                            ..._categories.map((category) => Container(
+                              margin: const EdgeInsets.only(bottom: 12),
+                              child: _buildCategoryItem(category),
+                            )),
+                            const SizedBox(height: 24),
+                            _buildActionButton(
+                              context: context,
+                              label: 'Add a new section',
+                              bgColor: AppColors.primary,
+                              textColor: Colors.white,
+                              onTap: () => _showAddSectionDialog(context),
+                            ),
+                            const SizedBox(height: 12),
+                            _buildActionButton(
+                              context: context,
+                              label: 'Save as a new template',
+                              bgColor: const Color(0xFFE0F2F1),
+                              textColor: AppColors.primary,
+                              onTap: () {},
+                              isOutline: true,
                             ),
                           ],
                         ),
-                      ),
-                      
-                      // Categories List
-                      ..._categories.map((category) => _buildCategoryItem(category)),
-
-                      const SizedBox(height: 24),
-                      
-                      // Buttons
-                      _buildActionButton(
-                        context: context,
-                        label: 'Add a new section',
-                        bgColor: AppColors.primary,
-                        textColor: Colors.white,
-                        onTap: () => _showAddSectionDialog(context),
-                      ),
-                      const SizedBox(height: 12),
-                      _buildActionButton(
-                        context: context,
-                        label: 'Save as a new template',
-                        bgColor: const Color(0xFFE0F2F1), // Light teal
-                        textColor: AppColors.primary,
-                        onTap: () {},
-                        isOutline: true,
-                      ),
-                    ],
-                  ),
                 ),
               ],
             ),
           ),
           
-          // Floating Bottom Navigation
-           Positioned(
+          if (!_isEditing)
+          Positioned(
             left: 0,
             right: 0,
             bottom: 0,
             child: _buildBottomActionBar(context),
           ),
+
+          if (_isEditing)
+            Positioned(
+              left: 16,
+              right: 16,
+              bottom: 32,
+              child: SafeArea(
+                child: _buildActionButton(
+                   context: context,
+                   label: 'Save Changes',
+                   bgColor: AppColors.primary,
+                   textColor: Colors.white,
+                   onTap: _toggleEditMode,
+                 ),
+              ),
+            ),
         ],
       ),
     );
@@ -218,10 +310,10 @@ class _InspectionStartPageState extends State<InspectionStartPage> {
     );
   }
 
-  Widget _buildCategoryItem(Map<String, dynamic> category) {
+  Widget _buildCategoryItem(Map<String, dynamic> category, {int? index}) {
     final pins = category['pins'] as int?;
+    
     return Container(
-      margin: const EdgeInsets.only(bottom: 12),
       padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
       decoration: BoxDecoration(
         color: Colors.white,
@@ -229,6 +321,14 @@ class _InspectionStartPageState extends State<InspectionStartPage> {
       ),
       child: Row(
         children: [
+           if (_isEditing)
+            ReorderableDragStartListener(
+              index: index!,
+              child: const Padding(
+                padding: EdgeInsets.only(right: 16),
+                child: Icon(Icons.menu, color: AppColors.neutral500),
+              ),
+            ),
           Icon(category['icon'] as IconData, color: AppColors.neutral500, size: 24),
           const SizedBox(width: 16),
           Expanded(
@@ -241,20 +341,30 @@ class _InspectionStartPageState extends State<InspectionStartPage> {
               ),
             ),
           ),
-          if (pins != null) ...[
-            const Icon(Icons.push_pin_outlined, size: 16, color: AppColors.primary),
-            const SizedBox(width: 4),
-            Text(
-              '$pins Pins',
-              style: const TextStyle(
-                color: AppColors.primary,
-                fontSize: 14,
-                fontWeight: FontWeight.w500,
+          if (!_isEditing) ...[
+            if (pins != null) ...[
+              const Icon(Icons.push_pin_outlined, size: 16, color: AppColors.primary),
+              const SizedBox(width: 4),
+              Text(
+                '$pins Pins',
+                style: const TextStyle(
+                  color: AppColors.primary,
+                  fontSize: 14,
+                  fontWeight: FontWeight.w500,
+                ),
               ),
-            ),
-            const SizedBox(width: 12),
-          ],
-          const Icon(Icons.arrow_forward_ios, size: 16, color: AppColors.neutralDark),
+              const SizedBox(width: 12),
+            ],
+            const Icon(Icons.arrow_forward_ios, size: 16, color: AppColors.neutralDark),
+          ] else 
+            GestureDetector(
+              onTap: () => _removeCategory(index!),
+              child: Container(
+                width: 24, 
+                height: 2, 
+                color: Colors.red,
+              ),
+            )
         ],
       ),
     );
