@@ -3,6 +3,7 @@ import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hyper_focused/core/theme/app_colors.dart';
+import 'package:hyper_focused/features/report/presentation/widgets/add_deficiency_dialog.dart';
 
 class InspectionItemDetailsPage extends StatefulWidget {
   final String categoryName;
@@ -350,7 +351,33 @@ class _InspectionItemDetailsPageState extends State<InspectionItemDetailsPage> {
      return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 16),
       child: Column(
-        children: _deficiencies.map((def) => _buildDeficiencyTile(def)).toList(),
+        children: [
+          ..._deficiencies.map((def) => _buildDeficiencyTile(def)),
+          const SizedBox(height: 12),
+          SizedBox(
+            width: double.infinity,
+            child: ElevatedButton(
+              onPressed: () async {
+                 final newDeficiency = await showDialog<Map<String, dynamic>>(
+                  context: context,
+                  builder: (context) => const AddDeficiencyDialog(),
+                );
+                if (newDeficiency != null) {
+                  setState(() {
+                    _deficiencies.add(newDeficiency);
+                  });
+                }
+              },
+              style: ElevatedButton.styleFrom(
+                backgroundColor: const Color(0xFF00A98E),
+                padding: const EdgeInsets.symmetric(vertical: 16),
+                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
+                elevation: 0,
+              ),
+              child: const Text('Add New', style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 16)),
+            ),
+          ),
+        ],
       ),
      );
   }
@@ -365,10 +392,10 @@ class _InspectionItemDetailsPageState extends State<InspectionItemDetailsPage> {
       child: Theme(
         data: Theme.of(context).copyWith(dividerColor: Colors.transparent),
         child: ExpansionTile(
-          initiallyExpanded: deficiency['isExpanded'],
+          initiallyExpanded: deficiency['isExpanded'] ?? false,
           tilePadding: const EdgeInsets.symmetric(horizontal: 12, vertical: 4),
           leading: Checkbox(
-            value: deficiency['isSelected'],
+            value: deficiency['isSelected'] ?? false,
             onChanged: (val) {
                setState(() => deficiency['isSelected'] = val);
             },
@@ -386,12 +413,101 @@ class _InspectionItemDetailsPageState extends State<InspectionItemDetailsPage> {
           ),
           childrenPadding: const EdgeInsets.fromLTRB(16, 0, 16, 16),
           children: [
+            // Status Buttons
+            Row(
+              children: [
+                Expanded(child: _buildTileStatusButton(deficiency, 'Monitor', Icons.analytics_outlined, Colors.blue)),
+                const SizedBox(width: 8),
+                Expanded(child: _buildTileStatusButton(deficiency, 'Deficiency', Icons.build_outlined, Colors.orange)),
+                const SizedBox(width: 8),
+                Expanded(child: _buildTileStatusButton(deficiency, 'Priority', Icons.warning_amber_rounded, Colors.red)),
+              ],
+            ),
+            const SizedBox(height: 16),
+            
+            // Comment Section
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                const Text('Comment', style: TextStyle(fontWeight: FontWeight.w600, fontSize: 15)),
+                TextButton(
+                  onPressed: () {},
+                  style: TextButton.styleFrom(
+                    padding: EdgeInsets.zero,
+                    minimumSize: Size.zero,
+                    tapTargetSize: MaterialTapTargetSize.shrinkWrap,
+                  ),
+                  child: const Text('Edit Comment', style: TextStyle(color: Color(0xFF00A98E), fontSize: 14)),
+                )
+              ],
+            ),
+            const SizedBox(height: 8),
             Text(
-              deficiency['description'],
+              deficiency['description'] ?? 'No description',
               style: const TextStyle(
                 fontSize: 14,
                 color: AppColors.neutral500,
                 height: 1.5,
+              ),
+            ),
+            const Padding(
+              padding: EdgeInsets.symmetric(vertical: 16),
+              child: Divider(height: 1, color: AppColors.neutral100),
+            ),
+            
+             // Add Photo Button
+             GestureDetector(
+                onTap: () {},
+                child: const Row(
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  children: [
+                    Icon(Icons.camera_alt_outlined, color: Color(0xFF00A98E), size: 20),
+                    SizedBox(width: 4),
+                    Text(
+                      'Add a Photo',
+                      style: TextStyle(
+                        color: Color(0xFF00A98E),
+                        fontSize: 14,
+                        fontWeight: FontWeight.w600,
+                      ),
+                    ),
+                  ],
+                ),
+             ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  Widget _buildTileStatusButton(Map<String, dynamic> deficiency, String label, IconData icon, Color color) {
+    // For now, let's default to selecting if it matches the 'status' key or default empty
+    // If we want to store it, we need to update the map.
+    String currentStatus = deficiency['status'] ?? 'Deficiency'; // Default
+    bool isSelected = currentStatus == label;
+    
+    return GestureDetector(
+      onTap: () {
+        setState(() {
+          deficiency['status'] = label;
+        });
+      },
+      child: Container(
+        padding: const EdgeInsets.symmetric(vertical: 8),
+         decoration: BoxDecoration(
+          color: isSelected ? color.withOpacity(0.1) : const Color(0xFFF3F4F6),
+          borderRadius: BorderRadius.circular(8),
+        ),
+        child: Column(
+          children: [
+             Icon(icon, color: isSelected ? color : AppColors.neutral500, size: 20),
+            const SizedBox(height: 4),
+            Text(
+              label,
+              style: TextStyle(
+                fontSize: 13,
+                color: isSelected ? color : AppColors.neutral500,
+                 fontWeight: isSelected ? FontWeight.w600 : FontWeight.w400,
               ),
             ),
           ],
