@@ -1,6 +1,8 @@
+import 'dart:io';
 import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:hyper_focused/core/theme/app_colors.dart';
 import 'package:hyper_focused/features/templates/presentation/widgets/add_section_dialog.dart';
 
@@ -16,6 +18,7 @@ class InspectionItemPage extends StatefulWidget {
 class _InspectionItemPageState extends State<InspectionItemPage> {
   bool _isEditingItems = false;
   bool _isEditingLocation = false;
+  File? _coverImage;
   final TextEditingController _locationController = TextEditingController(text: 'Between the MB room and bathroom');
   
   final List<String> _items = [
@@ -29,6 +32,17 @@ class _InspectionItemPageState extends State<InspectionItemPage> {
   final Map<String, int?> _itemPins = {
     'Entry Door': 2,
   };
+
+  Future<void> _pickCoverPhoto() async {
+    final ImagePicker picker = ImagePicker();
+    final XFile? image = await picker.pickImage(source: ImageSource.gallery);
+
+    if (image != null) {
+      setState(() {
+        _coverImage = File(image.path);
+      });
+    }
+  }
 
   void _toggleEditItems() {
     setState(() {
@@ -133,10 +147,7 @@ class _InspectionItemPageState extends State<InspectionItemPage> {
               ),
               onTap: () {
                 context.pop();
-                // Placeholder for Edit Cover Photo
-                ScaffoldMessenger.of(context).showSnackBar(
-                  const SnackBar(content: Text('Edit Cover Photo tapped')),
-                );
+                _pickCoverPhoto();
               },
             ),
             const Divider(height: 1, color: AppColors.neutral100),
@@ -209,14 +220,17 @@ class _InspectionItemPageState extends State<InspectionItemPage> {
                             height: 200,
                             width: double.infinity,
                             color: Colors.grey[300], // Placeholder for image
-                            child:
-                            // In real app, replace with Image.file or Image.network
-                             Image.asset(
-                               'assets/images/placeholder_room.png', // Fallback or placeholder
-                               fit: BoxFit.cover,
-                               errorBuilder: (context, error, stackTrace) => 
-                                  const Center(child: Icon(Icons.image, size: 50, color: Colors.grey)),
-                             ), 
+                            child: _coverImage != null
+                              ? Image.file(
+                                  _coverImage!,
+                                  fit: BoxFit.cover,
+                                )
+                              : Image.asset(
+                                 'assets/images/placeholder_room.png', // Fallback or placeholder
+                                 fit: BoxFit.cover,
+                                 errorBuilder: (context, error, stackTrace) => 
+                                    const Center(child: Icon(Icons.image, size: 50, color: Colors.grey)),
+                               ), 
                           ),
                         ),
                         const SizedBox(height: 24),
