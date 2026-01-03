@@ -301,30 +301,59 @@ class _InspectionSectionPageState extends State<InspectionSectionPage> {
           Icon(section['icon'] as IconData, color: AppColors.neutral500, size: 24),
           const SizedBox(width: 16),
           Expanded(
-            child: Text(
-              section['name'] as String,
-              style: const TextStyle(
-                fontSize: 16,
-                fontWeight: FontWeight.w500,
-                color: AppColors.neutralDark,
+            child: GestureDetector(
+              onTap: _isEditing ? null : () {
+                 context.push(
+                  '/inspection-item', 
+                  extra: {
+                    'categoryName': widget.categoryName,
+                    'sectionName': section['name'],
+                  },
+                );
+              },
+              behavior: HitTestBehavior.translucent,
+              child: Text(
+                section['name'] as String,
+                style: const TextStyle(
+                  fontSize: 16,
+                  fontWeight: FontWeight.w500,
+                  color: AppColors.neutralDark,
+                ),
               ),
             ),
           ),
           if (!_isEditing) ...[
-            if (pins != null) ...[
-              const Icon(Icons.push_pin_outlined, size: 16, color: AppColors.primary),
-              const SizedBox(width: 4),
-              Text(
-                '$pins ${pins == 1 ? 'Pin' : 'Pins'}',
-                style: const TextStyle(
-                  color: AppColors.primary,
-                  fontSize: 14,
-                  fontWeight: FontWeight.w500,
-                ),
+            GestureDetector(
+              onTap: () {
+                 context.push(
+                  '/inspection-item', 
+                  extra: {
+                    'categoryName': widget.categoryName,
+                    'sectionName': section['name'],
+                  },
+                );
+              },
+              behavior: HitTestBehavior.translucent,
+              child: Row(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  if (pins != null) ...[
+                    const Icon(Icons.push_pin_outlined, size: 16, color: AppColors.primary),
+                    const SizedBox(width: 4),
+                    Text(
+                      '$pins ${pins == 1 ? 'Pin' : 'Pins'}',
+                      style: const TextStyle(
+                        color: AppColors.primary,
+                        fontSize: 14,
+                        fontWeight: FontWeight.w500,
+                      ),
+                    ),
+                    const SizedBox(width: 12),
+                  ],
+                  const Icon(Icons.arrow_forward_ios, size: 16, color: AppColors.neutralDark),
+                ],
               ),
-              const SizedBox(width: 12),
-            ],
-            const Icon(Icons.arrow_forward_ios, size: 16, color: AppColors.neutralDark),
+            ),
           ] else 
             GestureDetector(
               onTap: () => _removeSection(index!),

@@ -3,7 +3,8 @@ import 'package:hyper_focused/core/theme/app_colors.dart';
 import 'package:hyper_focused/features/templates/presentation/utils/icon_library.dart';
 
 class AddSectionDialog extends StatefulWidget {
-  const AddSectionDialog({super.key});
+  final bool showIconPicker;
+  const AddSectionDialog({super.key, this.showIconPicker = true});
 
   @override
   State<AddSectionDialog> createState() => _AddSectionDialogState();
@@ -65,48 +66,50 @@ class _AddSectionDialogState extends State<AddSectionDialog> {
                 const SizedBox(height: 16),
 
                 // Icon Chooser
-                Container(
-                  decoration: BoxDecoration(
-                    color: _isIconExpanded ? Colors.transparent : const Color(0xFFF5F5F5),
-                    borderRadius: BorderRadius.circular(8),
-                    border: _isIconExpanded 
-                      ? Border.all(color: AppColors.primary, width: 1.5)
-                      : null,
-                  ),
-                  child: Column(
-                    children: [
-                      InkWell(
-                        onTap: () {
-                          setState(() {
-                            _isIconExpanded = !_isIconExpanded;
-                          });
-                        },
-                        borderRadius: BorderRadius.circular(8),
-                        child: Padding(
-                          padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 14),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              Text(
-                                _selectedIcon == null ? 'Choose a Icon (Optional)' : 'Icon Selected',
-                                style: const TextStyle(
-                                  color: AppColors.neutral500,
-                                  fontSize: 16,
+                if (widget.showIconPicker) ...[
+                  Container(
+                    decoration: BoxDecoration(
+                      color: _isIconExpanded ? Colors.transparent : const Color(0xFFF5F5F5),
+                      borderRadius: BorderRadius.circular(8),
+                      border: _isIconExpanded 
+                        ? Border.all(color: AppColors.primary, width: 1.5)
+                        : null,
+                    ),
+                    child: Column(
+                      children: [
+                        InkWell(
+                          onTap: () {
+                            setState(() {
+                              _isIconExpanded = !_isIconExpanded;
+                            });
+                          },
+                          borderRadius: BorderRadius.circular(8),
+                          child: Padding(
+                            padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 14),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Text(
+                                  _selectedIcon == null ? 'Choose a Icon (Optional)' : 'Icon Selected',
+                                  style: const TextStyle(
+                                    color: AppColors.neutral500,
+                                    fontSize: 16,
+                                  ),
                                 ),
-                              ),
-                              Icon(
-                                _isIconExpanded ? Icons.keyboard_arrow_up : Icons.keyboard_arrow_down,
-                                color: AppColors.neutralDark,
-                              ),
-                            ],
+                                Icon(
+                                  _isIconExpanded ? Icons.keyboard_arrow_up : Icons.keyboard_arrow_down,
+                                  color: AppColors.neutralDark,
+                                ),
+                              ],
+                            ),
                           ),
                         ),
-                      ),
-                    ],
+                      ],
+                    ),
                   ),
-                ),
+                ],
 
-                if (_isIconExpanded) ...[
+                if (widget.showIconPicker && _isIconExpanded) ...[
                   const SizedBox(height: 8),
                   Flexible(
                     child: Container(
