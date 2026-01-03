@@ -30,6 +30,7 @@ import '../../features/report/presentation/pages/report_detail_page.dart';
 import '../../features/report/presentation/pages/inspection_start_page.dart';
 import '../../features/report/presentation/pages/inspection_section_page.dart';
 import '../../features/report/presentation/pages/inspection_item_page.dart';
+import '../../features/report/presentation/pages/inspection_item_details_page.dart';
 import '../../features/schedule/presentation/pages/schedule_page.dart';
 import '../../features/schedule/presentation/pages/create_schedule_page.dart';
 
@@ -168,6 +169,16 @@ GoRouter goRouter(Ref ref) {
            final categoryName = extra?['categoryName'] as String? ?? 'Category';
            final sectionName = extra?['sectionName'] as String? ?? 'Section';
            return InspectionItemPage(categoryName: categoryName, sectionName: sectionName);
+        },
+      ),
+      GoRoute(
+        path: '/inspection-item-details',
+        builder: (context, state) {
+           final extra = state.extra as Map<String, dynamic>?;
+           final categoryName = extra?['categoryName'] as String? ?? 'Category';
+           final sectionName = extra?['sectionName'] as String? ?? 'Section';
+           final itemName = extra?['itemName'] as String? ?? 'Item';
+           return InspectionItemDetailsPage(categoryName: categoryName, sectionName: sectionName, itemName: itemName);
         },
       ),
       GoRoute(

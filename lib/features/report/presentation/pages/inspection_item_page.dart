@@ -511,12 +511,25 @@ class _InspectionItemPageState extends State<InspectionItemPage> {
               ),
             ),
           Expanded(
-            child: Text(
-              itemName,
-              style: const TextStyle(
-                fontSize: 16,
-                fontWeight: FontWeight.w500,
-                color: AppColors.neutralDark,
+            child: GestureDetector(
+              onTap: _isEditingItems ? null : () {
+                context.push(
+                  '/inspection-item-details',
+                  extra: {
+                    'categoryName': widget.categoryName,
+                    'sectionName': widget.sectionName,
+                    'itemName': itemName,
+                  },
+                );
+              },
+              behavior: HitTestBehavior.translucent,
+              child: Text(
+                itemName,
+                style: const TextStyle(
+                  fontSize: 16,
+                  fontWeight: FontWeight.w500,
+                  color: AppColors.neutralDark,
+                ),
               ),
             ),
           ),
@@ -534,7 +547,20 @@ class _InspectionItemPageState extends State<InspectionItemPage> {
               ),
               const SizedBox(width: 12),
             ],
-            const Icon(Icons.arrow_forward_ios, size: 16, color: AppColors.neutralDark),
+            GestureDetector(
+              onTap: () {
+                 context.push(
+                  '/inspection-item-details',
+                  extra: {
+                    'categoryName': widget.categoryName,
+                    'sectionName': widget.sectionName,
+                    'itemName': itemName,
+                  },
+                );
+              },
+              behavior: HitTestBehavior.translucent,
+              child: const Icon(Icons.arrow_forward_ios, size: 16, color: AppColors.neutralDark),
+            ),
           ] else
             GestureDetector(
               onTap: () => _removeItem(index!),
