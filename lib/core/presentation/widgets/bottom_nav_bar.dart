@@ -116,7 +116,7 @@ class BottomNavBar extends StatelessWidget {
                         Icons.menu,
                         color: navigationShell.currentIndex == 4
                             ? AppColors.neutralWhite
-                            : AppColors.neutralDark.withOpacity(0.3),
+                            : AppColors.neutralDark,
                         size: 30,
                       ),
                     ),

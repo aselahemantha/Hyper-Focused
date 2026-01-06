@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hyper_focused/core/constants/app_strings.dart';
 import 'package:hyper_focused/core/theme/app_colors.dart';
@@ -24,23 +25,20 @@ class SettingsPage extends StatelessWidget {
                   children: [
                     Row(
                       children: [
-                        Image.asset(
-                          'assets/images/app_logo_small.png',
+                        SvgPicture.asset(
+                          'assets/images/svg/app_logo_small.svg',
                           height: 45,
-                          errorBuilder: (context, error, stackTrace) {
-                            return const Icon(
-                              Icons.change_history,
-                              size: 45,
-                              color: AppColors.neutralDark,
-                            );
-                          },
+                          placeholderBuilder: (context) => const Icon(
+                            Icons.change_history,
+                            size: 45,
+                            color: AppColors.neutralDark,
+                          ),
                         ),
                       ],
                     ),
                     IconButton(
                       icon: const Icon(Icons.close, color: Colors.red),
                       onPressed: () {
-                        // Context.pop() if it's pushed, but settings is a tab.
                         if (context.canPop()) {
                           context.pop();
                         }
@@ -52,16 +50,12 @@ class SettingsPage extends StatelessWidget {
                     ),
                   ],
                 ),
-
-                const SizedBox(height: 24),
-
+                const SizedBox(height: 18),
+                const Divider(height: 1, indent: 8, endIndent: 8),
+                const SizedBox(height: 6),
                 // Profile Section
-                Container(
+                Padding(
                   padding: const EdgeInsets.all(16),
-                  decoration: BoxDecoration(
-                    color: AppColors.neutralWhite,
-                    borderRadius: BorderRadius.circular(16),
-                  ),
                   child: Row(
                     children: [
                       Container(
@@ -105,7 +99,7 @@ class SettingsPage extends StatelessWidget {
                           context.push('/edit-profile');
                         },
                         style: ElevatedButton.styleFrom(
-                          backgroundColor: AppColors.primary100,
+                          backgroundColor: AppColors.primary.withOpacity(0.1),
                           elevation: 0,
                           shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(20),
@@ -142,13 +136,13 @@ class SettingsPage extends StatelessWidget {
                 const SizedBox(height: 8),
                 Container(
                   decoration: BoxDecoration(
-                    color: Colors.white,
-                    borderRadius: BorderRadius.circular(12),
+                    color: AppColors.neutralWhite,
+                    borderRadius: BorderRadius.circular(6),
                   ),
                   child: Column(
                     children: [
                       SettingsSectionTile(
-                        icon: Icons.people_outline,
+                        icon: Icons.account_circle_outlined,
                         title: AppStrings.contacts,
                         onTap: () {
                           context.push('/contacts');
@@ -156,7 +150,7 @@ class SettingsPage extends StatelessWidget {
                       ),
                       const Divider(height: 1, indent: 16, endIndent: 16),
                       SettingsSectionTile(
-                        icon: Icons.calendar_today_outlined,
+                        icon: Icons.calendar_month,
                         title: AppStrings.calender,
                         onTap: () {},
                       ),
@@ -170,7 +164,7 @@ class SettingsPage extends StatelessWidget {
                       ),
                       const Divider(height: 1, indent: 16, endIndent: 16),
                       SettingsSectionTile(
-                        icon: Icons.format_list_bulleted,
+                        icon: Icons.grading_outlined,
                         title: AppStrings.myServices,
                         onTap: () {
                           context.push('/my-services');
@@ -200,7 +194,7 @@ class SettingsPage extends StatelessWidget {
                   child: Column(
                     children: [
                       SettingsSectionTile(
-                        icon: Icons.show_chart,
+                        icon: Icons.approval_outlined,
                         title: AppStrings.mySubscription,
                         onTap: () {},
                       ),
@@ -301,6 +295,7 @@ class SettingsPage extends StatelessWidget {
 
                 // Bottom Footer
                 Container(
+                  padding: const EdgeInsets.all(8.0),
                   decoration: BoxDecoration(
                     color: AppColors.neutralWhite,
                     borderRadius: BorderRadius.circular(12),

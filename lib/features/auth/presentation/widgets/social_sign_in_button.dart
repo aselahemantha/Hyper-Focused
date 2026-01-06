@@ -1,5 +1,6 @@
 
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:hyper_focused/core/theme/app_colors.dart';
 
 class SocialSignInButton extends StatelessWidget {
@@ -33,7 +34,7 @@ class SocialSignInButton extends StatelessWidget {
             SizedBox(
               width: 24,
               height: 24,
-              child: Image.asset(
+              child: SvgPicture.asset(
                 assetName,
                 errorBuilder: (context, error, stackTrace) => const Icon(Icons.error_outline, size: 20),
               ),

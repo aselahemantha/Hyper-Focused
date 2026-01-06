@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hyper_focused/features/auth/presentation/controllers/auth_controller.dart';
 import 'package:hyper_focused/features/auth/presentation/widgets/auth_text_field.dart';
@@ -77,8 +78,8 @@ class _LoginPageState extends ConsumerState<LoginPage> {
               children: [
                 const SizedBox(height: 16),
                 // Logo
-                Image.asset(
-                  'assets/images/hyperfocused_icon.png',
+                SvgPicture.asset(
+                  'assets/images/svg/hyperfocused_icon.svg',
                   height: 60,
                   // width: 60,
                   errorBuilder: (context, error, stackTrace) => const Icon(
@@ -259,7 +260,7 @@ class _LoginPageState extends ConsumerState<LoginPage> {
                   children: [
                     SocialSignInButton(
                       text: AppStrings.google,
-                      assetName: 'assets/images/google_logo.png',
+                      assetName: 'assets/images/svg/google_logo.svg',
                       onPressed: () {
                         ref
                             .read(authControllerProvider.notifier)
@@ -269,7 +270,7 @@ class _LoginPageState extends ConsumerState<LoginPage> {
                     const SizedBox(width: 16),
                     SocialSignInButton(
                       text: AppStrings.apple,
-                      assetName: 'assets/images/apple_logo.png',
+                      assetName: 'assets/images/svg/apple_logo.svg',
                       onPressed: () {
                         ref
                             .read(authControllerProvider.notifier)

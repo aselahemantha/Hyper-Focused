@@ -17,7 +17,14 @@ class SettingsSectionTile extends StatelessWidget {
   Widget build(BuildContext context) {
     return ListTile(
       onTap: onTap,
-      leading: Icon(icon, color: AppColors.neutralDark),
+      visualDensity: const VisualDensity(
+        vertical: -3,
+      ),
+      leading: Icon(
+          icon,
+          color: AppColors.neutralDark,
+          size: 20,
+      ),
       title: Text(
         title,
         style: const TextStyle(

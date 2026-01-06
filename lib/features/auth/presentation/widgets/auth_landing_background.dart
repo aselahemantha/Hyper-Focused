@@ -9,7 +9,7 @@ class AuthLandingBackground extends StatelessWidget {
     return Container(
       decoration: const BoxDecoration(
         image: DecorationImage(
-          image: AssetImage('assets/images/auth_background.png'),
+          image: AssetImage('assets/images/auth_background.jpg'),
           fit: BoxFit.cover,
         ),
       ),

@@ -1,5 +1,6 @@
 
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hyper_focused/core/theme/app_colors.dart';
 import 'package:hyper_focused/core/constants/app_strings.dart';
@@ -13,14 +14,11 @@ class AuthLandingCard extends StatelessWidget {
       alignment: Alignment.bottomCenter,
       child: Container(
         width: double.infinity,
-        // Height controls how much of the screen it takes.
-        // Based on image, it looks like roughly 40-45% of screen height
-        // or content based.
         padding: const EdgeInsets.only(
           left: 24,
           right: 24,
           bottom: 34,
-          top: 30, // giving some space for the logo overlap if we were doing that style
+          top: 30,
         ),
         decoration: const BoxDecoration(
           color: Colors.black,
@@ -33,16 +31,13 @@ class AuthLandingCard extends StatelessWidget {
           mainAxisSize: MainAxisSize.min,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            // Logo area
-            // Assuming logo is an image for now as described in plan
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                Image.asset(
-                  'assets/images/logo_white.png',
-                   height: 48, // approximate size
-                   // width: 48,
+                SvgPicture.asset(
+                  'assets/images/svg/app_logo_white.svg',
+                   height: 48,
                 ),
                 Container(
                   height: 36,
