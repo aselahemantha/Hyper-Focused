@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:hyper_focused/core/constants/app_strings.dart';
 import 'package:hyper_focused/core/theme/app_colors.dart';
 import 'package:hyper_focused/features/settings/presentation/widgets/section_divider.dart';
 import 'package:hyper_focused/features/settings/presentation/widgets/settings_tile.dart';
@@ -10,7 +11,7 @@ class EditProfilePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color(0xFFEAF5EF), // Light green background matching image
+      backgroundColor: AppColors.primary200,
       body: SafeArea(
         bottom: false,
         child: Column(
@@ -31,12 +32,14 @@ class EditProfilePage extends StatelessWidget {
                             shape: BoxShape.circle,
                             border: Border.all(color: Colors.white, width: 4),
                             image: const DecorationImage(
-                              image: AssetImage('assets/images/user_avatar_placeholder.jpg'),
+                              image: AssetImage(
+                                'assets/images/user_avatar_placeholder.jpg',
+                              ),
                               fit: BoxFit.cover,
                             ),
                             boxShadow: [
                               BoxShadow(
-                                color: Colors.black.withOpacity(0.1),
+                                color: AppColors.neutralDark.withOpacity(0.1),
                                 blurRadius: 10,
                                 offset: const Offset(0, 5),
                               ),
@@ -54,24 +57,31 @@ class EditProfilePage extends StatelessWidget {
                                 color: AppColors.primary,
                                 shape: BoxShape.circle,
                               ),
-                              child: const Icon(Icons.edit, color: Colors.white, size: 16),
+                              child: const Icon(
+                                Icons.edit,
+                                color: AppColors.neutralWhite,
+                                size: 16,
+                              ),
                             ),
                           ),
                         ),
                       ],
                     ),
                     const SizedBox(height: 10),
-                    
+
                     // Personal Information Divider
-                    const SectionDivider(text: 'Personal Information'),
+                    SectionDivider(text: AppStrings.personalInformation),
 
                     // Personal Details Header
                     Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: 16,
+                        vertical: 8,
+                      ),
                       child: Align(
                         alignment: Alignment.centerLeft,
                         child: const Text(
-                          'Personal Details',
+                            AppStrings.personalDetails,
                           style: TextStyle(
                             fontSize: 14,
                             fontWeight: FontWeight.bold,
@@ -123,7 +133,7 @@ class EditProfilePage extends StatelessWidget {
 
                     // Company Details Divider
                     const SectionDivider(text: 'Company Details'),
-                    
+
                     const SizedBox(height: 8),
 
                     // Company Details Card
@@ -137,10 +147,17 @@ class EditProfilePage extends StatelessWidget {
                         children: [
                           // Company Logo Row
                           Padding(
-                            padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+                            padding: const EdgeInsets.symmetric(
+                              horizontal: 16,
+                              vertical: 12,
+                            ),
                             child: Row(
                               children: [
-                                const Icon(Icons.business_outlined, size: 20, color: AppColors.neutral500),
+                                const Icon(
+                                  Icons.business_outlined,
+                                  size: 20,
+                                  color: AppColors.neutral500,
+                                ),
                                 const SizedBox(width: 12),
                                 const Text(
                                   'Company Logo',
@@ -154,15 +171,24 @@ class EditProfilePage extends StatelessWidget {
                                   width: 32,
                                   height: 32,
                                   decoration: const BoxDecoration(
-                                    color: Color(0xFF003366), // Dark blue like in image
+                                    color: Color(0xFF003366),
+                                    // Dark blue like in image
                                     shape: BoxShape.circle,
                                   ),
                                   child: const Center(
-                                    child: Icon(Icons.water_drop, color: Colors.blue, size: 20),
+                                    child: Icon(
+                                      Icons.water_drop,
+                                      color: Colors.blue,
+                                      size: 20,
+                                    ),
                                   ),
                                 ),
                                 const SizedBox(width: 8),
-                                const Icon(Icons.arrow_forward_ios, size: 14, color: AppColors.neutralDark),
+                                const Icon(
+                                  Icons.arrow_forward_ios,
+                                  size: 14,
+                                  color: AppColors.neutralDark,
+                                ),
                               ],
                             ),
                           ),
@@ -199,7 +225,10 @@ class EditProfilePage extends StatelessWidget {
 
                     // Address Header
                     Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: 16,
+                        vertical: 8,
+                      ),
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
@@ -232,7 +261,7 @@ class EditProfilePage extends StatelessWidget {
 
                     // Address Card
                     const AddressCard(),
-                    
+
                     // Extra spacing for bottom nav
                     const SizedBox(height: 100),
                   ],
@@ -252,27 +281,34 @@ class EditProfilePage extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           CircleAvatar(
-            backgroundColor: Colors.white,
-            radius: 20,
+            backgroundColor: AppColors.neutralWhite,
+            radius: 18,
             child: IconButton(
-              icon: const Icon(Icons.arrow_back_ios_new, size: 18, color: AppColors.neutralDark),
+              icon: const Icon(
+                Icons.arrow_back_ios_new,
+                size: 16,
+                color: AppColors.neutralDark,
+              ),
               onPressed: () {
                 Navigator.of(context).pop();
               },
             ),
           ),
           const Text(
-            'Edit Profile',
+            AppStrings.editProfile,
             style: TextStyle(
-              fontSize: 16,
-              fontWeight: FontWeight.bold,
+              fontSize: 14,
+              fontWeight: FontWeight.w500,
               color: AppColors.neutralDark,
             ),
           ),
-          CircleAvatar(
-            backgroundColor: Colors.black,
-            radius: 12,
-            child: const Icon(Icons.info_outline, color: Colors.white, size: 16),
+          IconButton(
+            icon: const Icon(
+              Icons.info,
+              size: 26,
+              color: AppColors.neutralDark,
+            ),
+            onPressed: () {},
           ),
         ],
       ),
@@ -280,10 +316,6 @@ class EditProfilePage extends StatelessWidget {
   }
 
   Widget _buildDivider() {
-    return const Divider(
-      height: 1,
-      thickness: 1,
-      color: AppColors.neutral100,
-    );
+    return const Divider(height: 1, thickness: 1, color: AppColors.neutral100);
   }
 }

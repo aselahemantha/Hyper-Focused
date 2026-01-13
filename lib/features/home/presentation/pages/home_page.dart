@@ -11,7 +11,7 @@ class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor: AppColors.neutralWhite,
       body: Container(
         decoration: const BoxDecoration(
           gradient: LinearGradient(
@@ -19,9 +19,9 @@ class HomePage extends StatelessWidget {
             end: Alignment.bottomCenter,
             stops: [0.0, 0.3, 1.0],
             colors: [
-              Color(0xFFE0F7FA), // Very light teal at top
-              Color(0xFFF5F5F5), // Light grey middle
-              Colors.white, // White bottom
+              Color(0xFFE0F7FA),
+              Color(0xFFF5F5F5),
+              AppColors.neutralWhite,
             ],
           ),
         ),

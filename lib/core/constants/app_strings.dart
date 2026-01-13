@@ -74,6 +74,8 @@ class AppStrings {
   static const String copyright = '©2025 Hyper Focused Inc.';
 
   // Home
+  // static const String welcomeBack = 'Welcome Back!';
+
 
   // Dashboard Stats
   static const String pendingPayment = 'Pending\nPayments';
@@ -106,6 +108,10 @@ class AppStrings {
   static const String knowledgeCentre = 'Knowledge Centre';
   static const String hireATutor = 'Hire a Tutor';
   static const String signOut = 'Sign Out';
+
+  static const String personalInformation = 'Personal Information';
+  static const String personalDetails= 'Personal Details';
+
 
 
 

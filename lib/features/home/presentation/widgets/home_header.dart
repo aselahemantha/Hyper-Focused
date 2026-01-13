@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:hyper_focused/core/constants/app_strings.dart';
 import 'package:hyper_focused/core/theme/app_colors.dart';
 
 class HomeHeader extends StatelessWidget {
@@ -13,7 +14,7 @@ class HomeHeader extends StatelessWidget {
           child: Container(
             padding: const EdgeInsets.all(8),
             decoration: BoxDecoration(
-              color: Colors.white,
+              color: AppColors.neutralWhite,
               borderRadius: BorderRadius.circular(30),
               boxShadow: [
                 BoxShadow(
@@ -38,7 +39,6 @@ class HomeHeader extends StatelessWidget {
                       fit: BoxFit.cover,
                     ),
                   ),
-                  // Fallback if asset missing
                   child: const CircleAvatar(
                     backgroundColor: AppColors.neutral200,
                     child: Icon(Icons.person, color: AppColors.neutralDark),
@@ -50,7 +50,7 @@ class HomeHeader extends StatelessWidget {
                   mainAxisSize: MainAxisSize.min,
                   children: [
                     Text(
-                      'Welcome Back!',
+                      "${AppStrings.welcomeBack}!",
                       style: TextStyle(
                         fontSize: 14,
                         color: AppColors.textBody,

@@ -168,7 +168,7 @@ class RecentReports extends StatelessWidget {
               // In design generic icon usually
               const SizedBox(width: 8),
               Text(
-                '880 762 233 2234', // Assuming phone number
+                '880 762 233 2234',
                 style: TextStyle(color: AppColors.textBody, fontSize: 13),
               ),
             ],

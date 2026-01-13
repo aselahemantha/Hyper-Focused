@@ -75,144 +75,176 @@ class UpcomingSchedules extends StatelessWidget {
     required String time,
     required bool isFirst,
   }) {
+    // Dimensions
+    const double imageHeight = 170;
+    const double cardHeight = 230;
+
     return Container(
-      width: 280,
-      decoration: BoxDecoration(
-        color: AppColors.neutralWhite,
-        borderRadius: BorderRadius.circular(20),
-        boxShadow: [
-          BoxShadow(
-            color: AppColors.neutralDark.withOpacity(0.05),
-            blurRadius: 10,
-            offset: const Offset(0, 4),
-          ),
-        ],
-      ),
-      child: Column(
+      width: 320,
+      height: cardHeight,
+      margin: const EdgeInsets.only(right: 16),
+      child: Stack(
+        clipBehavior: Clip.none,
         children: [
-          // Image Area with Overlay Text
-          Container(
-            height: 160,
-            decoration: BoxDecoration(
-              borderRadius: const BorderRadius.vertical(
-                top: Radius.circular(20),
+          // Image Area
+          Positioned(
+            top: 0,
+            left: 0,
+            right: 0,
+            height: imageHeight,
+            child: Container(
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(24),
+                boxShadow: [
+                  BoxShadow(
+                    color: AppColors.neutralDark.withOpacity(0.1),
+                    blurRadius: 10,
+                    offset: const Offset(0, 4),
+                  ),
+                ],
+                image: DecorationImage(
+                  image: AssetImage(imageUrl),
+                  fit: BoxFit.cover,
+                ),
               ),
-              image: DecorationImage(
-                image: AssetImage(imageUrl),
-                fit: BoxFit.cover,
-              ),
-              color: AppColors.neutral200,
-            ),
-            child: Stack(
-              children: [
-                // Gradient overlay for text visibility
-                Positioned.fill(
-                  child: Container(
-                    decoration: BoxDecoration(
-                      borderRadius: const BorderRadius.vertical(
-                        top: Radius.circular(20),
-                      ),
-                      gradient: LinearGradient(
-                        begin: Alignment.topCenter,
-                        end: Alignment.bottomCenter,
-                        colors: [
-                          Colors.transparent,
-                          Colors.black.withOpacity(0.7),
-                        ],
+              child: Stack(
+                children: [
+                  // Gradient Overlay
+                  Positioned.fill(
+                    child: Container(
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(24),
+                        gradient: LinearGradient(
+                          begin: Alignment.topCenter,
+                          end: Alignment.bottomCenter,
+                          colors: [
+                            Colors.transparent,
+                            Colors.black.withOpacity(0.7),
+                          ],
+                          stops: const [0.5, 1.0],
+                        ),
                       ),
                     ),
                   ),
-                ),
-                // Text Overlay
-                Positioned(
-                  bottom: 12,
-                  left: 16,
-                  right: 16,
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Text(
-                        name,
-                        style: const TextStyle(
-                          color: AppColors.neutralWhite,
-                          fontWeight: FontWeight.w500,
-                          fontSize: 14,
+                  // Text Overlay (Name & Service)
+                  Positioned(
+                    left: 20,
+                    right: 20,
+                    bottom: 40, // Adjust based on overlap
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      crossAxisAlignment: CrossAxisAlignment.end,
+                      children: [
+                        Text(
+                          name,
+                          style: const TextStyle(
+                            color: AppColors.neutralWhite,
+                            fontWeight: FontWeight.w600,
+                            fontSize: 18,
+                          ),
                         ),
-                      ),
-                      Text(
-                        service,
-                        style: const TextStyle(
-                          color: AppColors.neutralWhite,
-                          fontWeight: FontWeight.w400,
-                          fontSize: 14,
+                        Text(
+                          service,
+                          style: const TextStyle(
+                            color: AppColors.neutralWhite,
+                            fontWeight: FontWeight.w500,
+                            fontSize: 16,
+                          ),
                         ),
-                      ),
-                    ],
+                      ],
+                    ),
                   ),
-                ),
-              ],
+                ],
+              ),
             ),
           ),
 
-          // Details Area
-          Padding(
-            padding: const EdgeInsets.all(12),
-            child: Row(
-              children: [
-                // Icon
-                Container(
-                  padding: const EdgeInsets.all(8),
-                  decoration: const BoxDecoration(
-                    color: AppColors.secondary,
-                    shape: BoxShape.circle,
-                  ),
-                  child: const Icon(
-                    Icons.calendar_month,
-                    color: AppColors.neutralDark,
-                    size: 20,
-                  ),
+          // Floating Details Capsule
+          Positioned(
+            bottom: 10,
+            left: 12,
+            right: 12,
+            child: Container(
+              constraints: const BoxConstraints(minHeight: 70),
+              padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+              decoration: BoxDecoration(
+                color: AppColors.neutralWhite,
+                borderRadius: BorderRadius.circular(40),
+                border: Border.all(
+                  color: const Color(0xFF29B6F6),
+                  width: 1,
+                  style: BorderStyle.none,
                 ),
-                const SizedBox(width: 12),
+                boxShadow: [
+                  BoxShadow(
+                    color: AppColors.neutralDark.withOpacity(0.08),
+                    blurRadius: 12,
+                    offset: const Offset(0, 4),
+                  ),
+                ],
+              ),
+              child: Row(
+                children: [
+                  // Icon
+                  Container(
+                    width: 44,
+                    height: 44,
+                    decoration: const BoxDecoration(
+                      color: AppColors.secondary,
+                      shape: BoxShape.circle,
+                    ),
+                    child: const Icon(
+                      Icons.calendar_month,
+                      color: AppColors.neutralDark,
+                      size: 22,
+                    ),
+                  ),
+                  const SizedBox(width: 12),
 
-                // Date & Time
-                Expanded(
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        date,
-                        style: const TextStyle(
-                          fontWeight: FontWeight.w500,
-                          fontSize: 14,
-                          color: AppColors.neutralDark,
+                  // Date & Time
+                  Expanded(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        Text(
+                          date,
+                          style: const TextStyle(
+                            fontWeight: FontWeight.w600,
+                            fontSize: 15,
+                            color: AppColors.neutralDark,
+                          ),
                         ),
-                      ),
-                      Text(
-                        time,
-                        style: TextStyle(
-                          fontSize: 12,
-                          color: AppColors.textBody,
+                        const SizedBox(height: 2),
+                        Text(
+                          time,
+                          style: TextStyle(
+                            fontSize: 13,
+                            color: AppColors.neutral500,
+                            fontWeight: FontWeight.w400,
+                          ),
                         ),
-                      ),
-                    ],
+                      ],
+                    ),
                   ),
-                ),
 
-                // Arrow Button
-                Container(
-                  width: 32,
-                  height: 32,
-                  decoration: BoxDecoration(
-                    color: AppColors.neutral200,
-                    shape: BoxShape.circle,
+                  // Arrow Button
+                  const SizedBox(width: 8),
+                  Container(
+                    width: 44,
+                    height: 44,
+                    decoration: BoxDecoration(
+                      color: AppColors.neutral200.withOpacity(0.5),
+                      shape: BoxShape.circle,
+                    ),
+                    child: const Icon(
+                      Icons.arrow_outward,
+                      size: 22,
+                      color: AppColors.neutralDark,
+                    ),
                   ),
-                  child: const Icon(
-                    Icons.arrow_outward,
-                    size: 18,
-                    color: AppColors.neutralDark,
-                  ),
-                ),
-              ],
+                ],
+              ),
             ),
           ),
         ],

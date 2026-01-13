@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:hyper_focused/core/constants/app_strings.dart';
 import 'package:hyper_focused/core/theme/app_colors.dart';
 
@@ -11,28 +12,28 @@ class DashboardStats extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
         _buildStatCard(
-          icon: Icons.pending_actions_outlined,
+          svgPath: 'assets/images/svg/pending_payment_icon.svg',
           iconColor: Colors.orange,
           count: '5',
           label: AppStrings.pendingPayment,
         ),
         const SizedBox(width: 12),
         _buildStatCard(
-          icon: Icons.calendar_today_outlined,
+          svgPath: 'assets/images/svg/today_icon.svg',
           iconColor: Colors.teal,
           count: '4',
           label: AppStrings.today,
         ),
         const SizedBox(width: 12),
         _buildStatCard(
-          icon: Icons.assignment_outlined,
+          svgPath: 'assets/images/svg/unsigned_contracts_icon.svg',
           iconColor: Colors.green,
           count: '16',
           label: AppStrings.unsignedContracts,
         ),
         const SizedBox(width: 12),
         _buildStatCard(
-          icon: Icons.mail_outline,
+          svgPath: 'assets/images/svg/submissions_icon.svg',
           iconColor: Colors.blue,
           count: '25',
           label: AppStrings.submissions,
@@ -42,7 +43,7 @@ class DashboardStats extends StatelessWidget {
   }
 
   Widget _buildStatCard({
-    required IconData icon,
+    required String svgPath,
     required Color iconColor,
     required String count,
     required String label,
@@ -65,7 +66,15 @@ class DashboardStats extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Icon(icon, color: iconColor, size: 24),
+            SvgPicture.asset(
+              svgPath,
+              width: 24,
+              height: 24,
+              colorFilter: ColorFilter.mode(
+                iconColor,
+                BlendMode.srcIn,
+              ),
+            ),
             const SizedBox(height: 8),
             Text(
               count,
@@ -76,13 +85,18 @@ class DashboardStats extends StatelessWidget {
               ),
             ),
             const SizedBox(height: 4),
-            Text(
-              label,
-              textAlign: TextAlign.center,
-              style: TextStyle(
-                fontSize: 10,
-                color: AppColors.textBody,
-                height: 1.2,
+            SizedBox(
+              height: 24,
+              child: Text(
+                label,
+                textAlign: TextAlign.center,
+                maxLines: 2,
+                overflow: TextOverflow.ellipsis,
+                style: TextStyle(
+                  fontSize: 10,
+                  color: AppColors.textBody,
+                  fontWeight: FontWeight.w500,
+                ),
               ),
             ),
           ],
