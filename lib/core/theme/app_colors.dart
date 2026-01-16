@@ -10,6 +10,7 @@ class AppColors {
   static const Color neutral200 = Color(0xFFE5E5E5);
   static const Color neutral300 = Color(0xFFE5E6E6);
   static const Color neutral500 = Color(0xFF737373);
+  static const Color neutral800 = Color(0xFF262626);
   static const Color statusNotify = Color(0xFFFF4A4A);
   static const Color statusNotifyBell = Color(0xFFFFC107);
 

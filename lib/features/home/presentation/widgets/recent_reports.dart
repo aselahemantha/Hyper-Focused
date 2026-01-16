@@ -131,7 +131,7 @@ class RecentReports extends StatelessWidget {
               SizedBox(width: 8.w),
               Text(
                 'Jason Johnson',
-                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 15.sp),
+                style: TextStyle(fontWeight: FontWeight.w600, fontSize: 14.sp),
               ),
             ],
           ),
@@ -151,7 +151,7 @@ class RecentReports extends StatelessWidget {
               Expanded(
                 child: Text(
                   '1005 S Lorem Ipsum, Dolor Dantos, Garylord\nSt Dancer, Co 80209',
-                  style: TextStyle(color: AppColors.textBody, fontSize: 13.sp),
+                  style: TextStyle(color: AppColors.neutral800, fontSize: 14.sp),
                 ),
               ),
             ],
@@ -167,11 +167,10 @@ class RecentReports extends StatelessWidget {
                 size: 20.w,
                 color: AppColors.neutralDark,
               ),
-              // In design generic icon usually
               SizedBox(width: 8.w),
               Text(
                 '880 762 233 2234',
-                style: TextStyle(color: AppColors.textBody, fontSize: 13.sp),
+                style: TextStyle(color: AppColors.textBody, fontSize: 14.sp),
               ),
             ],
           ),
@@ -198,10 +197,7 @@ class RecentReports extends StatelessWidget {
             children: [
               // Price Tag
               Container(
-                padding: EdgeInsets.symmetric(
-                  horizontal: 10.w,
-                  vertical: 6.h,
-                ),
+                padding: EdgeInsets.symmetric(horizontal: 10.w, vertical: 6.h),
                 decoration: BoxDecoration(
                   color: AppColors.neutral100,
                   borderRadius: BorderRadius.circular(20.w),
@@ -225,10 +221,7 @@ class RecentReports extends StatelessWidget {
 
               // Status Status Pill
               Container(
-                padding: EdgeInsets.symmetric(
-                  horizontal: 10.w,
-                  vertical: 6.h,
-                ),
+                padding: EdgeInsets.symmetric(horizontal: 10.w, vertical: 6.h),
                 decoration: BoxDecoration(
                   border: Border.all(color: Colors.red),
                   borderRadius: BorderRadius.circular(20.w),
