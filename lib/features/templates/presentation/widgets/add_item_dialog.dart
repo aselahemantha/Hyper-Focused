@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hyper_focused/core/theme/app_colors.dart';
+import 'package:hyper_focused/core/utils/responsive_size.dart';
 
 class AddItemDialog extends StatefulWidget {
   const AddItemDialog({super.key});
@@ -21,55 +22,55 @@ class _AddItemDialogState extends State<AddItemDialog> {
   @override
   Widget build(BuildContext context) {
     return Dialog(
-      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
-      insetPadding: const EdgeInsets.symmetric(horizontal: 16),
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16.w)),
+      insetPadding: EdgeInsets.symmetric(horizontal: 16.w),
       child: Container(
-        padding: const EdgeInsets.all(24),
+        padding: EdgeInsets.all(24.w),
         width: double.infinity,
         decoration: BoxDecoration(
           color: AppColors.neutralWhite,
-          borderRadius: BorderRadius.circular(16),
+          borderRadius: BorderRadius.circular(16.w),
         ),
         child: Column(
           mainAxisSize: MainAxisSize.min,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const Text(
+            Text(
               'Add a New Item',
               style: TextStyle(
-                fontSize: 18,
+                fontSize: 18.sp,
                 fontWeight: FontWeight.bold,
                 color: AppColors.neutralDark,
               ),
             ),
-            const SizedBox(height: 16),
+            SizedBox(height: 16.h),
             Container(
               decoration: BoxDecoration(
                 color: AppColors.neutral100, // Light grey background
-                borderRadius: BorderRadius.circular(8),
+                borderRadius: BorderRadius.circular(8.w),
               ),
               child: TextField(
                 controller: _nameController,
-                decoration: const InputDecoration(
+                decoration: InputDecoration(
                   hintText: 'Item Name',
-                  hintStyle: TextStyle(color: AppColors.neutral500),
+                  hintStyle: const TextStyle(color: AppColors.neutral500),
                   border: InputBorder.none,
-                  contentPadding: EdgeInsets.symmetric(horizontal: 16, vertical: 14),
+                  contentPadding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 14.h),
                 ),
                 style: const TextStyle(color: AppColors.neutralDark),
               ),
             ),
-            const SizedBox(height: 24),
+            SizedBox(height: 24.h),
             Row(
               children: [
                 Expanded(
                   child: OutlinedButton(
                     onPressed: () => context.pop(),
                     style: OutlinedButton.styleFrom(
-                      padding: const EdgeInsets.symmetric(vertical: 14),
+                      padding: EdgeInsets.symmetric(vertical: 14.h),
                       side: const BorderSide(color: AppColors.neutral300),
                       shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(30),
+                        borderRadius: BorderRadius.circular(30.w),
                       ),
                     ),
                     child: const Text(
@@ -81,7 +82,7 @@ class _AddItemDialogState extends State<AddItemDialog> {
                     ),
                   ),
                 ),
-                const SizedBox(width: 16),
+                SizedBox(width: 16.w),
                 Expanded(
                   child: ElevatedButton(
                     onPressed: () {
@@ -91,10 +92,10 @@ class _AddItemDialogState extends State<AddItemDialog> {
                     },
                     style: ElevatedButton.styleFrom(
                       backgroundColor: AppColors.primary, // Teal color
-                      padding: const EdgeInsets.symmetric(vertical: 14),
+                      padding: EdgeInsets.symmetric(vertical: 14.h),
                       elevation: 0,
                       shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(30),
+                        borderRadius: BorderRadius.circular(30.w),
                       ),
                     ),
                     child: const Text(

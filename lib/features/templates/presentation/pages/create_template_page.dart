@@ -3,6 +3,7 @@ import 'dart:ui'; // Add import for ImageFilter
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hyper_focused/core/theme/app_colors.dart';
+import 'package:hyper_focused/core/utils/responsive_size.dart';
 
 class CreateTemplatePage extends StatelessWidget {
   const CreateTemplatePage({super.key});
@@ -13,11 +14,11 @@ class CreateTemplatePage extends StatelessWidget {
       extendBodyBehindAppBar: true,
       appBar: AppBar(
         leading: Padding(
-          padding: const EdgeInsets.only(left: 16),
+          padding: EdgeInsets.only(left: 16.w),
           child: CircleAvatar(
             backgroundColor: AppColors.neutralWhite,
             child: IconButton(
-              icon: const Icon(Icons.arrow_back_ios_new, size: 18, color: AppColors.neutralDark),
+              icon: Icon(Icons.arrow_back_ios_new, size: 18.w, color: AppColors.neutralDark),
               onPressed: () => context.pop(),
             ),
           ),
@@ -25,27 +26,27 @@ class CreateTemplatePage extends StatelessWidget {
         title: Column(
           children: [
             RichText(
-              text: const TextSpan(
+              text: TextSpan(
                 style: TextStyle(
-                  fontSize: 12,
+                  fontSize: 12.sp,
                   color: AppColors.neutralDark,
                 ),
                 children: [
-                  TextSpan(text: 'Create a New Template '),
+                  const TextSpan(text: 'Create a New Template '),
                   WidgetSpan(
-                    child: Icon(Icons.arrow_forward, size: 12, color: AppColors.neutralDark),
+                    child: Icon(Icons.arrow_forward, size: 12.w, color: AppColors.neutralDark),
                     alignment: PlaceholderAlignment.middle,
                   ),
-                  TextSpan(text: ' Step 1'),
+                  const TextSpan(text: ' Step 1'),
                 ],
               ),
             ),
-            const SizedBox(height: 4),
-            const Text(
+            SizedBox(height: 4.h),
+            Text(
               'Template Information',
               style: TextStyle(
                 color: AppColors.neutralDark,
-                fontSize: 16,
+                fontSize: 16.sp,
                 fontWeight: FontWeight.bold,
               ),
             ),
@@ -56,11 +57,11 @@ class CreateTemplatePage extends StatelessWidget {
         elevation: 0,
         actions: [
           Padding(
-            padding: const EdgeInsets.only(right: 16),
+            padding: EdgeInsets.only(right: 16.w),
             child: CircleAvatar(
               backgroundColor: Colors.black,
-              radius: 14,
-              child: const Icon(Icons.info_outline, color: Colors.white, size: 18),
+              radius: 14.w,
+              child: Icon(Icons.info_outline, color: Colors.white, size: 18.w),
             ),
           ),
         ],
@@ -82,66 +83,66 @@ class CreateTemplatePage extends StatelessWidget {
           child: Stack(
             children: [
               ListView(
-                padding: const EdgeInsets.fromLTRB(16, 16, 16, 100),
+                padding: EdgeInsets.fromLTRB(16.w, 16.h, 16.w, 100.h),
                 children: [
                   // Primary Details Card
                   Container(
-                    padding: const EdgeInsets.all(16),
+                    padding: EdgeInsets.all(16.w),
                     decoration: BoxDecoration(
                       color: AppColors.neutralWhite,
-                      borderRadius: BorderRadius.circular(12),
+                      borderRadius: BorderRadius.circular(12.w),
                     ),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        const Text(
+                        Text(
                           'Primary Details',
                           style: TextStyle(
-                            fontSize: 16,
+                            fontSize: 16.sp,
                             fontWeight: FontWeight.bold,
                             color: AppColors.neutralDark,
                           ),
                         ),
-                        const SizedBox(height: 16),
+                        SizedBox(height: 16.h),
                         _buildTextField('Template Name'),
-                        const SizedBox(height: 12),
+                        SizedBox(height: 12.h),
                         _buildTextField('Description'),
                       ],
                     ),
                   ),
-                  const SizedBox(height: 16),
+                  SizedBox(height: 16.h),
                   
                   // Defect Categories Card
                   Container(
-                    padding: const EdgeInsets.all(16),
+                    padding: EdgeInsets.all(16.w),
                     decoration: BoxDecoration(
                       color: AppColors.neutralWhite,
-                      borderRadius: BorderRadius.circular(12),
+                      borderRadius: BorderRadius.circular(12.w),
                     ),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        const Text(
+                        Text(
                           'Defect Categories (Names)',
                           style: TextStyle(
-                            fontSize: 16,
+                            fontSize: 16.sp,
                             fontWeight: FontWeight.bold,
                             color: AppColors.neutralDark,
                           ),
                         ),
-                        const SizedBox(height: 8),
-                        const Text(
+                        SizedBox(height: 8.h),
+                        Text(
                           'You can manage your services here. These services will be shown on your website.',
                           style: TextStyle(
-                            fontSize: 12,
+                            fontSize: 12.sp,
                             color: AppColors.neutral500,
                           ),
                         ),
-                        const SizedBox(height: 16),
+                        SizedBox(height: 16.h),
                         _buildCategoryItem(Icons.style_outlined, 'Default - Monitor', Colors.blue),
-                        const SizedBox(height: 12),
+                        SizedBox(height: 12.h),
                         _buildCategoryItem(Icons.handyman_outlined, 'Default - Deficiency', Colors.orange),
-                        const SizedBox(height: 12),
+                        SizedBox(height: 12.h),
                         _buildCategoryItem(Icons.warning_amber_rounded, 'Default - Priority', Colors.red),
                       ],
                     ),
@@ -152,22 +153,22 @@ class CreateTemplatePage extends StatelessWidget {
               
               // Bottom Bar
               Positioned(
-                bottom: 24,
-                left: 16,
-                right: 16,
+                bottom: 24.h,
+                left: 16.w,
+                right: 16.w,
                 child: Row(
                   children: [
                     Expanded(
                       child: ClipRRect(
-                        borderRadius: BorderRadius.circular(35), // Rounded capsule
+                        borderRadius: BorderRadius.circular(35.w), // Rounded capsule
                         child: BackdropFilter(
                           filter: ImageFilter.blur(sigmaX: 10, sigmaY: 10),
                           child: Container(
-                            height: 70, // Match design height
-                            padding: const EdgeInsets.symmetric(horizontal: 24), // Adjust padding
+                            height: 70.h, // Match design height
+                            padding: EdgeInsets.symmetric(horizontal: 24.w), // Adjust padding
                             decoration: BoxDecoration(
                               color: AppColors.neutralWhite.withOpacity(0.3),
-                              borderRadius: BorderRadius.circular(35),
+                              borderRadius: BorderRadius.circular(35.w),
                               boxShadow: [
                                 BoxShadow(
                                   color: AppColors.neutralDark.withOpacity(0.1),
@@ -180,11 +181,11 @@ class CreateTemplatePage extends StatelessWidget {
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
                                 IconButton(
-                                  icon: const Icon(Icons.arrow_back, color: AppColors.neutralDark, size: 28),
+                                  icon: Icon(Icons.arrow_back, color: AppColors.neutralDark, size: 28.w),
                                   onPressed: () => context.pop(),
                                 ),
                                 IconButton(
-                                  icon: const Icon(Icons.save_outlined, color: AppColors.neutralDark, size: 28),
+                                  icon: Icon(Icons.save_outlined, color: AppColors.neutralDark, size: 28.w),
                                   onPressed: () {
                                     // Save placeholder
                                   },
@@ -195,14 +196,14 @@ class CreateTemplatePage extends StatelessWidget {
                         ),
                       ),
                     ),
-                    const SizedBox(width: 16),
+                    SizedBox(width: 16.w),
                     GestureDetector(
                       onTap: () {
                         context.push('/create-template/step-2');
                       },
                       child: Container(
-                        width: 70,
-                        height: 70,
+                        width: 70.w,
+                        height: 70.w,
                         decoration: const BoxDecoration(
                           color: AppColors.primary,
                           shape: BoxShape.circle,
@@ -214,7 +215,7 @@ class CreateTemplatePage extends StatelessWidget {
                             ),
                           ],
                         ),
-                        child: const Icon(Icons.arrow_forward, color: Colors.white, size: 30),
+                        child: Icon(Icons.arrow_forward, color: Colors.white, size: 30.w),
                       ),
                     ),
                   ],
@@ -231,14 +232,14 @@ class CreateTemplatePage extends StatelessWidget {
     return Container(
       decoration: BoxDecoration(
         color: const Color(0xFFF5F5F5),
-        borderRadius: BorderRadius.circular(8),
+        borderRadius: BorderRadius.circular(8.w),
       ),
       child: TextField(
         decoration: InputDecoration(
           hintText: hint,
           hintStyle: const TextStyle(color: AppColors.neutral500),
           border: InputBorder.none,
-          contentPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 14),
+          contentPadding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 14.h),
         ),
       ),
     );
@@ -246,19 +247,19 @@ class CreateTemplatePage extends StatelessWidget {
 
   Widget _buildCategoryItem(IconData icon, String title, Color iconColor) {
     return Container(
-      padding: const EdgeInsets.all(16),
+      padding: EdgeInsets.all(16.w),
       decoration: BoxDecoration(
         color: const Color(0xFFF5F5F5),
-        borderRadius: BorderRadius.circular(8),
+        borderRadius: BorderRadius.circular(8.w),
       ),
       child: Row(
         children: [
-          Icon(icon, color: iconColor, size: 24),
-          const SizedBox(width: 16),
+          Icon(icon, color: iconColor, size: 24.w),
+          SizedBox(width: 16.w),
           Text(
             title,
-            style: const TextStyle(
-              fontSize: 14,
+            style: TextStyle(
+              fontSize: 14.sp,
               color: AppColors.neutralDark,
             ),
           ),

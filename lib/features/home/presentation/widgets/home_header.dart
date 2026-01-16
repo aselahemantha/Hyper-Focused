@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:hyper_focused/core/constants/app_strings.dart';
 import 'package:hyper_focused/core/theme/app_colors.dart';
+import 'package:hyper_focused/core/utils/responsive_size.dart';
 
 class HomeHeader extends StatelessWidget {
   const HomeHeader({super.key});
@@ -12,10 +13,10 @@ class HomeHeader extends StatelessWidget {
         // Welcome Pill
         Expanded(
           child: Container(
-            padding: const EdgeInsets.all(8),
+            padding: EdgeInsets.all(8.w),
             decoration: BoxDecoration(
               color: AppColors.neutralWhite,
-              borderRadius: BorderRadius.circular(30),
+              borderRadius: BorderRadius.circular(30.h),
               boxShadow: [
                 BoxShadow(
                   color: AppColors.neutralDark.withOpacity(0.05),
@@ -28,8 +29,8 @@ class HomeHeader extends StatelessWidget {
               children: [
                 // Profile Image
                 Container(
-                  width: 40,
-                  height: 40,
+                  width: 40.w,
+                  height: 40.w,
                   decoration: const BoxDecoration(
                     shape: BoxShape.circle,
                     image: DecorationImage(
@@ -44,7 +45,7 @@ class HomeHeader extends StatelessWidget {
                     child: Icon(Icons.person, color: AppColors.neutralDark),
                   ),
                 ),
-                const SizedBox(width: 12),
+                SizedBox(width: 12.w),
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   mainAxisSize: MainAxisSize.min,
@@ -52,7 +53,7 @@ class HomeHeader extends StatelessWidget {
                     Text(
                       "${AppStrings.welcomeBack}!",
                       style: TextStyle(
-                        fontSize: 14,
+                        fontSize: 14.sp,
                         color: AppColors.textBody,
                         fontWeight: FontWeight.w400,
                       ),
@@ -60,7 +61,7 @@ class HomeHeader extends StatelessWidget {
                     Text(
                       'Jesse Doe',
                       style: TextStyle(
-                        fontSize: 14,
+                        fontSize: 14.sp,
                         color: AppColors.neutralDark,
                         fontWeight: FontWeight.w400,
                       ),
@@ -72,12 +73,12 @@ class HomeHeader extends StatelessWidget {
           ),
         ),
 
-        const SizedBox(width: 16),
+        SizedBox(width: 16.w),
 
         // Notification Bell
         Container(
-          width: 50,
-          height: 50,
+          width: 50.w,
+          height: 50.w,
           decoration: BoxDecoration(
             color: Colors.white,
             shape: BoxShape.circle,
@@ -92,17 +93,17 @@ class HomeHeader extends StatelessWidget {
           child: Stack(
             alignment: Alignment.center,
             children: [
-              const Icon(
+              Icon(
                 Icons.notifications,
                 color: AppColors.statusNotifyBell,
-                size: 28,
+                size: 28.w,
               ),
               Positioned(
-                top: 12,
-                right: 14,
+                top: 12.h,
+                right: 14.w,
                 child: Container(
-                  width: 10,
-                  height: 10,
+                  width: 10.w,
+                  height: 10.w,
                   decoration: const BoxDecoration(
                     color: AppColors.statusNotify,
                     shape: BoxShape.circle,

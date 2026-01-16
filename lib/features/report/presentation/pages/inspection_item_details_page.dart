@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hyper_focused/core/theme/app_colors.dart';
 import 'package:hyper_focused/features/report/presentation/widgets/add_deficiency_dialog.dart';
+import 'package:hyper_focused/core/utils/responsive_size.dart';
 
 class InspectionItemDetailsPage extends StatefulWidget {
   final String categoryName;
@@ -81,11 +82,11 @@ class _InspectionItemDetailsPageState extends State<InspectionItemDetailsPage> {
       context: context,
       backgroundColor: Colors.transparent,
       builder: (context) => Container(
-        margin: const EdgeInsets.only(left: 16, right: 16, bottom: 40),
-        padding: const EdgeInsets.symmetric(vertical: 8),
+        margin: EdgeInsets.only(left: 16.w, right: 16.w, bottom: 40.h),
+        padding: EdgeInsets.symmetric(vertical: 8.h),
         decoration: BoxDecoration(
           color: Colors.white,
-          borderRadius: BorderRadius.circular(12),
+          borderRadius: BorderRadius.circular(12.w),
         ),
         child: Column(
           mainAxisSize: MainAxisSize.min,
@@ -95,7 +96,7 @@ class _InspectionItemDetailsPageState extends State<InspectionItemDetailsPage> {
             _buildMenuItem(Icons.maps_ugc_outlined, 'Location', () {
                setState(() => _isEditingLocation = true);
             }),
-             _buildDivider(),
+            _buildDivider(),
             _buildMenuItem(Icons.text_fields, 'Comment', () {}),
              _buildDivider(),
             _buildMenuItem(Icons.photo_outlined, 'Photo', () {}),
@@ -115,11 +116,11 @@ class _InspectionItemDetailsPageState extends State<InspectionItemDetailsPage> {
 
   Widget _buildMenuItem(IconData icon, String title, VoidCallback onTap) {
     return ListTile(
-      leading: Icon(icon, color: AppColors.neutral500),
+      leading: Icon(icon, color: AppColors.neutral500, size: 24.w),
       title: Text(
         title,
-        style: const TextStyle(
-          fontSize: 16,
+        style: TextStyle(
+          fontSize: 16.sp,
           fontWeight: FontWeight.w500,
           color: AppColors.neutralDark,
         ),
@@ -130,7 +131,7 @@ class _InspectionItemDetailsPageState extends State<InspectionItemDetailsPage> {
       },
       visualDensity: const VisualDensity(horizontal: 0, vertical: -2),
       dense: true,
-      contentPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 0),
+      contentPadding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 0),
     );
   }
 
@@ -149,7 +150,7 @@ class _InspectionItemDetailsPageState extends State<InspectionItemDetailsPage> {
             top: 0,
             left: 0,
             right: 0,
-            height: 300,
+            height: 300.h,
             child: Container(
               decoration: BoxDecoration(
                 gradient: LinearGradient(
@@ -168,12 +169,12 @@ class _InspectionItemDetailsPageState extends State<InspectionItemDetailsPage> {
             child: Column(
               children: [
                 _buildHeader(context),
-                const SizedBox(height: 16),
+                SizedBox(height: 16.h),
                 _buildTabs(),
-                const SizedBox(height: 16),
+                SizedBox(height: 16.h),
                 Expanded(
                   child: SingleChildScrollView(
-                    padding: const EdgeInsets.only(bottom: 120),
+                    padding: EdgeInsets.only(bottom: 120.h),
                     child: _buildContent(),
                   ),
                 ),
@@ -194,13 +195,13 @@ class _InspectionItemDetailsPageState extends State<InspectionItemDetailsPage> {
 
   Widget _buildHeader(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+      padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 8.h),
       child: Row(
         children: [
           GestureDetector(
             onTap: () => context.pop(),
             child: Container(
-              padding: const EdgeInsets.all(8),
+              padding: EdgeInsets.all(8.w),
               decoration: const BoxDecoration(
                 color: Colors.white,
                 shape: BoxShape.circle,
@@ -212,46 +213,46 @@ class _InspectionItemDetailsPageState extends State<InspectionItemDetailsPage> {
                   ),
                 ],
               ),
-              child: const Icon(Icons.arrow_back, color: Colors.black87, size: 20),
+              child: Icon(Icons.arrow_back, color: Colors.black87, size: 20.w),
             ),
           ),
-          const SizedBox(width: 12),
+          SizedBox(width: 12.w),
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const Text(
+              Text(
                 'Inspection Details',
                 style: TextStyle(
                   color: AppColors.neutral500,
-                  fontSize: 12,
+                  fontSize: 12.sp,
                 ),
               ),
               Row(
                 children: [
                   Text(
                     widget.categoryName,
-                    style: const TextStyle(
+                    style: TextStyle(
                       color: AppColors.neutralDark,
                       fontWeight: FontWeight.bold,
-                      fontSize: 14,
+                      fontSize: 14.sp,
                     ),
                   ),
-                  const Icon(Icons.keyboard_arrow_right, size: 16, color: AppColors.neutralDark),
+                  Icon(Icons.keyboard_arrow_right, size: 16.w, color: AppColors.neutralDark),
                   Text(
                     widget.sectionName,
-                    style: const TextStyle(
+                    style: TextStyle(
                       color: AppColors.neutralDark,
                       fontWeight: FontWeight.bold,
-                      fontSize: 14,
+                      fontSize: 14.sp,
                     ),
                   ),
-                  const Icon(Icons.keyboard_arrow_right, size: 16, color: AppColors.neutralDark),
+                  Icon(Icons.keyboard_arrow_right, size: 16.w, color: AppColors.neutralDark),
                    Text(
                     widget.itemName,
-                    style: const TextStyle(
+                    style: TextStyle(
                       color: AppColors.neutralDark,
                       fontWeight: FontWeight.bold,
-                      fontSize: 14,
+                      fontSize: 14.sp,
                     ),
                   ),
                 ],
@@ -265,13 +266,13 @@ class _InspectionItemDetailsPageState extends State<InspectionItemDetailsPage> {
 
   Widget _buildTabs() {
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 16),
+      padding: EdgeInsets.symmetric(horizontal: 16.w),
       child: Container(
         decoration: BoxDecoration(
           color: Colors.white,
-          borderRadius: BorderRadius.circular(30),
+          borderRadius: BorderRadius.circular(30.w),
         ),
-        padding: const EdgeInsets.all(4),
+        padding: EdgeInsets.all(4.w),
         child: Row(
           children: [
             _buildTabItem('Information', 0),
@@ -289,10 +290,10 @@ class _InspectionItemDetailsPageState extends State<InspectionItemDetailsPage> {
       child: GestureDetector(
         onTap: () => setState(() => _selectedTabIndex = index),
         child: Container(
-          padding: const EdgeInsets.symmetric(vertical: 12),
+          padding: EdgeInsets.symmetric(vertical: 12.h),
           decoration: BoxDecoration(
             color: isSelected ? const Color(0xFF00A98E) : Colors.transparent,
-            borderRadius: BorderRadius.circular(24),
+            borderRadius: BorderRadius.circular(24.w),
           ),
           child: Text(
             title,
@@ -300,7 +301,7 @@ class _InspectionItemDetailsPageState extends State<InspectionItemDetailsPage> {
             style: TextStyle(
               color: isSelected ? Colors.white : AppColors.neutralDark,
               fontWeight: isSelected ? FontWeight.w600 : FontWeight.w400,
-              fontSize: 13,
+              fontSize: 13.sp,
             ),
           ),
         ),
@@ -320,23 +321,23 @@ class _InspectionItemDetailsPageState extends State<InspectionItemDetailsPage> {
 
   Widget _buildInformationTab() {
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 16),
+      padding: EdgeInsets.symmetric(horizontal: 16.w),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           _buildLocationSection(),
-          const SizedBox(height: 24),
+          SizedBox(height: 24.h),
           _buildCheckListsSection(),
-          const SizedBox(height: 24),
+          SizedBox(height: 24.h),
           _buildSectionHeader('Texts', 'Edit List'),
           _buildTextCard(),
-          const SizedBox(height: 24),
+          SizedBox(height: 24.h),
           _buildSectionHeader('Photos', 'Edit List'),
-          const SizedBox(height: 8),
+          SizedBox(height: 8.h),
           _buildPhotoGrid(),
-          const SizedBox(height: 24),
+          SizedBox(height: 24.h),
           _buildSectionHeader('Voice Notes', 'Edit List'),
-           const SizedBox(height: 8),
+           SizedBox(height: 8.h),
           _buildVoiceNoteList(),
         ],
       ),
@@ -349,11 +350,11 @@ class _InspectionItemDetailsPageState extends State<InspectionItemDetailsPage> {
 
   Widget _buildDeficienciesTab() {
      return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 16),
+      padding: EdgeInsets.symmetric(horizontal: 16.w),
       child: Column(
         children: [
           ..._deficiencies.map((def) => _buildDeficiencyTile(def)),
-          const SizedBox(height: 12),
+          SizedBox(height: 12.h),
           SizedBox(
             width: double.infinity,
             child: ElevatedButton(
@@ -370,11 +371,11 @@ class _InspectionItemDetailsPageState extends State<InspectionItemDetailsPage> {
               },
               style: ElevatedButton.styleFrom(
                 backgroundColor: const Color(0xFF00A98E),
-                padding: const EdgeInsets.symmetric(vertical: 16),
-                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
+                padding: EdgeInsets.symmetric(vertical: 16.h),
+                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8.w)),
                 elevation: 0,
               ),
-              child: const Text('Add New', style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 16)),
+              child: Text('Add New', style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 16.sp)),
             ),
           ),
         ],
@@ -384,52 +385,52 @@ class _InspectionItemDetailsPageState extends State<InspectionItemDetailsPage> {
 
   Widget _buildDeficiencyTile(Map<String, dynamic> deficiency) {
     return Container(
-      margin: const EdgeInsets.only(bottom: 12),
+      margin: EdgeInsets.only(bottom: 12.h),
       decoration: BoxDecoration(
         color: Colors.white,
-        borderRadius: BorderRadius.circular(12),
+        borderRadius: BorderRadius.circular(12.w),
       ),
       child: Theme(
         data: Theme.of(context).copyWith(dividerColor: Colors.transparent),
         child: ExpansionTile(
           initiallyExpanded: deficiency['isExpanded'] ?? false,
-          tilePadding: const EdgeInsets.symmetric(horizontal: 12, vertical: 4),
+          tilePadding: EdgeInsets.symmetric(horizontal: 12.w, vertical: 4.h),
           leading: Checkbox(
             value: deficiency['isSelected'] ?? false,
             onChanged: (val) {
                setState(() => deficiency['isSelected'] = val);
             },
-            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(4)),
+            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(4.w)),
             activeColor: const Color(0xFF00A98E),
             side: const BorderSide(color: AppColors.neutral200),
           ),
           title: Text(
             deficiency['title'],
-            style: const TextStyle(
-              fontSize: 16,
+            style: TextStyle(
+              fontSize: 16.sp,
               fontWeight: FontWeight.w600,
               color: AppColors.neutralDark,
             ),
           ),
-          childrenPadding: const EdgeInsets.fromLTRB(16, 0, 16, 16),
+          childrenPadding: EdgeInsets.fromLTRB(16.w, 0, 16.w, 16.h),
           children: [
             // Status Buttons
             Row(
               children: [
                 Expanded(child: _buildTileStatusButton(deficiency, 'Monitor', Icons.analytics_outlined, Colors.blue)),
-                const SizedBox(width: 8),
+                SizedBox(width: 8.w),
                 Expanded(child: _buildTileStatusButton(deficiency, 'Deficiency', Icons.build_outlined, Colors.orange)),
-                const SizedBox(width: 8),
+                SizedBox(width: 8.w),
                 Expanded(child: _buildTileStatusButton(deficiency, 'Priority', Icons.warning_amber_rounded, Colors.red)),
               ],
             ),
-            const SizedBox(height: 16),
+            SizedBox(height: 16.h),
             
             // Comment Section
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                const Text('Comment', style: TextStyle(fontWeight: FontWeight.w600, fontSize: 15)),
+                Text('Comment', style: TextStyle(fontWeight: FontWeight.w600, fontSize: 15.sp)),
                 TextButton(
                   onPressed: () {},
                   style: TextButton.styleFrom(
@@ -437,37 +438,37 @@ class _InspectionItemDetailsPageState extends State<InspectionItemDetailsPage> {
                     minimumSize: Size.zero,
                     tapTargetSize: MaterialTapTargetSize.shrinkWrap,
                   ),
-                  child: const Text('Edit Comment', style: TextStyle(color: Color(0xFF00A98E), fontSize: 14)),
+                  child: Text('Edit Comment', style: TextStyle(color: const Color(0xFF00A98E), fontSize: 14.sp)),
                 )
               ],
             ),
-            const SizedBox(height: 8),
+            SizedBox(height: 8.h),
             Text(
               deficiency['description'] ?? 'No description',
-              style: const TextStyle(
-                fontSize: 14,
+              style: TextStyle(
+                fontSize: 14.sp,
                 color: AppColors.neutral500,
                 height: 1.5,
               ),
             ),
-            const Padding(
-              padding: EdgeInsets.symmetric(vertical: 16),
-              child: Divider(height: 1, color: AppColors.neutral100),
+            Padding(
+              padding: EdgeInsets.symmetric(vertical: 16.h),
+              child: const Divider(height: 1, color: AppColors.neutral100),
             ),
             
              // Add Photo Button
              GestureDetector(
                 onTap: () {},
-                child: const Row(
+                child: Row(
                   mainAxisAlignment: MainAxisAlignment.end,
                   children: [
-                    Icon(Icons.camera_alt_outlined, color: Color(0xFF00A98E), size: 20),
-                    SizedBox(width: 4),
+                    Icon(Icons.camera_alt_outlined, color: const Color(0xFF00A98E), size: 20.w),
+                    SizedBox(width: 4.w),
                     Text(
                       'Add a Photo',
                       style: TextStyle(
-                        color: Color(0xFF00A98E),
-                        fontSize: 14,
+                        color: const Color(0xFF00A98E),
+                        fontSize: 14.sp,
                         fontWeight: FontWeight.w600,
                       ),
                     ),
@@ -493,19 +494,19 @@ class _InspectionItemDetailsPageState extends State<InspectionItemDetailsPage> {
         });
       },
       child: Container(
-        padding: const EdgeInsets.symmetric(vertical: 8),
+        padding: EdgeInsets.symmetric(vertical: 8.h),
          decoration: BoxDecoration(
           color: isSelected ? color.withOpacity(0.1) : const Color(0xFFF3F4F6),
-          borderRadius: BorderRadius.circular(8),
+          borderRadius: BorderRadius.circular(8.w),
         ),
         child: Column(
           children: [
-             Icon(icon, color: isSelected ? color : AppColors.neutral500, size: 20),
-            const SizedBox(height: 4),
+             Icon(icon, color: isSelected ? color : AppColors.neutral500, size: 20.w),
+            SizedBox(height: 4.h),
             Text(
               label,
               style: TextStyle(
-                fontSize: 13,
+                fontSize: 13.sp,
                 color: isSelected ? color : AppColors.neutral500,
                  fontWeight: isSelected ? FontWeight.w600 : FontWeight.w400,
               ),
@@ -522,14 +523,14 @@ class _InspectionItemDetailsPageState extends State<InspectionItemDetailsPage> {
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            const Row(
+            Row(
               children: [
-                Icon(Icons.location_on_outlined, color: AppColors.neutral500, size: 20),
-                SizedBox(width: 8),
+                Icon(Icons.location_on_outlined, color: AppColors.neutral500, size: 20.w),
+                SizedBox(width: 8.w),
                 Text(
                   'Location',
                   style: TextStyle(
-                    fontSize: 16,
+                    fontSize: 16.sp,
                     fontWeight: FontWeight.bold,
                     color: AppColors.neutralDark,
                   ),
@@ -550,21 +551,21 @@ class _InspectionItemDetailsPageState extends State<InspectionItemDetailsPage> {
         ),
          Container(
           width: double.infinity,
-          padding: const EdgeInsets.all(16),
+          padding: EdgeInsets.all(16.w),
           decoration: BoxDecoration(
             color: Colors.white,
-            borderRadius: BorderRadius.circular(12),
+            borderRadius: BorderRadius.circular(12.w),
           ),
           child: _isEditingLocation
               ? TextField(
                   controller: _locationController,
                   maxLines: null,
                   decoration: const InputDecoration.collapsed(hintText: 'Enter location'),
-                  style: const TextStyle(fontSize: 16, color: AppColors.neutralDark),
+                  style: TextStyle(fontSize: 16.sp, color: AppColors.neutralDark),
                 )
               : Text(
                   _locationController.text,
-                  style: const TextStyle(fontSize: 16, color: AppColors.neutralDark),
+                  style: TextStyle(fontSize: 16.sp, color: AppColors.neutralDark),
                 ),
         ),
       ],
@@ -575,32 +576,32 @@ class _InspectionItemDetailsPageState extends State<InspectionItemDetailsPage> {
     return Column(
       children: [
         _buildSectionHeader('Check Lists', 'Edit List'),
-        const SizedBox(height: 8),
+        SizedBox(height: 8.h),
         Container(
-          padding: const EdgeInsets.all(16),
+          padding: EdgeInsets.all(16.w),
           decoration: BoxDecoration(
             color: Colors.white,
-            borderRadius: BorderRadius.circular(12),
+            borderRadius: BorderRadius.circular(12.w),
           ),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const Text('Material', style: TextStyle(fontSize: 16, fontWeight: FontWeight.w500)),
-              const SizedBox(height: 12),
+              Text('Material', style: TextStyle(fontSize: 16.sp, fontWeight: FontWeight.w500)),
+              SizedBox(height: 12.h),
               Wrap(
-                spacing: 16,
-                runSpacing: 8,
+                spacing: 16.w,
+                runSpacing: 8.h,
                 children: _materials.entries.map((e) => _buildCheckboxItem(e.key, e.value, _materials)).toList(),
               ),
-              const Padding(
-                padding: EdgeInsets.symmetric(vertical: 16),
-                child: Divider(height: 1, color: AppColors.neutral100),
+              Padding(
+                padding: EdgeInsets.symmetric(vertical: 16.h),
+                child: const Divider(height: 1, color: AppColors.neutral100),
               ),
-              const Text('Check List sample', style: TextStyle(fontSize: 16, fontWeight: FontWeight.w500)),
-               const SizedBox(height: 12),
+              Text('Check List sample', style: TextStyle(fontSize: 16.sp, fontWeight: FontWeight.w500)),
+               SizedBox(height: 12.h),
                Wrap(
-                spacing: 16,
-                runSpacing: 8,
+                spacing: 16.w,
+                runSpacing: 8.h,
                 children: _sampleCheckList.entries.map((e) => _buildCheckboxItem(e.key, e.value, _sampleCheckList)).toList(),
               ),
             ],
@@ -615,23 +616,23 @@ class _InspectionItemDetailsPageState extends State<InspectionItemDetailsPage> {
       mainAxisSize: MainAxisSize.min,
       children: [
         SizedBox(
-          width: 24,
-          height: 24,
+          width: 24.w,
+          height: 24.w,
           child: Checkbox(
             value: value,
             onChanged: (val) {
                setState(() => sourceMap[label] = val!);
             },
-            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(4)),
+            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(4.w)),
             activeColor: const Color(0xFF00A98E),
             side: const BorderSide(color: AppColors.neutral200),
           ),
         ),
-        const SizedBox(width: 8),
+        SizedBox(width: 8.w),
         Text(
           label,
-          style: const TextStyle(
-            fontSize: 15,
+          style: TextStyle(
+            fontSize: 15.sp,
             color: AppColors.neutral500,
           ),
         ),
@@ -641,24 +642,24 @@ class _InspectionItemDetailsPageState extends State<InspectionItemDetailsPage> {
 
   Widget _buildTextCard() {
     return Container(
-      padding: const EdgeInsets.all(16),
+      padding: EdgeInsets.all(16.w),
       decoration: BoxDecoration(
         color: Colors.white,
-        borderRadius: BorderRadius.circular(12),
+        borderRadius: BorderRadius.circular(12.w),
       ),
       child: Column(
         children: [
-          const Text(
+          Text(
             'You can manage your services here. These services will be shown on your website and it will help your clients to easily book your services.',
-             style: TextStyle(fontSize: 14, color: AppColors.neutral500, height: 1.5),
+             style: TextStyle(fontSize: 14.sp, color: AppColors.neutral500, height: 1.5),
           ),
-           const Padding(
-            padding: EdgeInsets.symmetric(vertical: 16),
-            child: Divider(height: 1, color: AppColors.neutral100),
+           Padding(
+            padding: EdgeInsets.symmetric(vertical: 16.h),
+            child: const Divider(height: 1, color: AppColors.neutral100),
           ),
-           const Text(
+           Text(
             'You can manage your services here. These services will be shown on your website and it will help your clients to easily book your services.',
-             style: TextStyle(fontSize: 14, color: AppColors.neutral500, height: 1.5),
+             style: TextStyle(fontSize: 14.sp, color: AppColors.neutral500, height: 1.5),
           ),
         ],
       ),
@@ -670,8 +671,8 @@ class _InspectionItemDetailsPageState extends State<InspectionItemDetailsPage> {
       crossAxisCount: 3,
       shrinkWrap: true,
       physics: const NeverScrollableScrollPhysics(),
-      mainAxisSpacing: 8,
-      crossAxisSpacing: 8,
+      mainAxisSpacing: 8.h,
+      crossAxisSpacing: 8.w,
       children: [
         _buildPhotoItem('assets/images/photo1.png', Colors.black),
         _buildPhotoItem('assets/images/photo2.png', Colors.teal),
@@ -685,7 +686,7 @@ class _InspectionItemDetailsPageState extends State<InspectionItemDetailsPage> {
   
   Widget _buildPhotoItem(String path, Color placeholderColor) {
     return ClipRRect(
-      borderRadius: BorderRadius.circular(8),
+      borderRadius: BorderRadius.circular(8.w),
       child: Container(
         color: placeholderColor,
         // child: Image.asset(path, fit: BoxFit.cover), // Placeholder colors for now
@@ -697,17 +698,17 @@ class _InspectionItemDetailsPageState extends State<InspectionItemDetailsPage> {
     return Container(
       decoration: BoxDecoration(
         color: Colors.white,
-        borderRadius: BorderRadius.circular(8),
+        borderRadius: BorderRadius.circular(8.w),
         border: Border.all(color: AppColors.neutral200),
       ),
-      child: const Column(
+      child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Icon(Icons.add, color: AppColors.neutralDark),
-          SizedBox(height: 4),
+          const Icon(Icons.add, color: AppColors.neutralDark),
+          SizedBox(height: 4.h),
           Text(
             'Add New',
-            style: TextStyle(fontSize: 12, color: AppColors.neutralDark, fontWeight: FontWeight.w500),
+            style: TextStyle(fontSize: 12.sp, color: AppColors.neutralDark, fontWeight: FontWeight.w500),
           )
         ],
       ),
@@ -718,11 +719,11 @@ class _InspectionItemDetailsPageState extends State<InspectionItemDetailsPage> {
     return Column(
       children: List.generate(4, (index) => 
         Container(
-          margin: const EdgeInsets.only(bottom: 8),
-          padding: const EdgeInsets.all(16),
+          margin: EdgeInsets.only(bottom: 8.h),
+          padding: EdgeInsets.all(16.w),
           decoration: BoxDecoration(
             color: Colors.white,
-            borderRadius: BorderRadius.circular(12),
+            borderRadius: BorderRadius.circular(12.w),
           ),
           child: Row(
             children: [
@@ -730,18 +731,18 @@ class _InspectionItemDetailsPageState extends State<InspectionItemDetailsPage> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    const Text(
+                    Text(
                       '12 Dec 25 02.28 PM',
                       style: TextStyle(
-                        fontSize: 14,
+                        fontSize: 14.sp,
                         color: AppColors.neutral500,
                       ),
                     ),
-                    const SizedBox(height: 4),
-                    const Text(
+                    SizedBox(height: 4.h),
+                    Text(
                       '2 mins 4 secs',
                       style: TextStyle(
-                        fontSize: 15,
+                        fontSize: 15.sp,
                         fontWeight: FontWeight.w600,
                         color: AppColors.neutralDark,
                       ),
@@ -749,7 +750,7 @@ class _InspectionItemDetailsPageState extends State<InspectionItemDetailsPage> {
                   ],
                 ),
               ),
-              const Icon(Icons.play_arrow_outlined, size: 28, color: AppColors.neutralDark),
+              Icon(Icons.play_arrow_outlined, size: 28.w, color: AppColors.neutralDark),
             ],
           ),
         ),
@@ -763,8 +764,8 @@ class _InspectionItemDetailsPageState extends State<InspectionItemDetailsPage> {
       children: [
          Text(
           title,
-          style: const TextStyle(
-            fontSize: 16,
+          style: TextStyle(
+            fontSize: 16.sp,
             fontWeight: FontWeight.bold,
             color: AppColors.neutralDark,
           ),
@@ -790,14 +791,14 @@ class _InspectionItemDetailsPageState extends State<InspectionItemDetailsPage> {
 
   Widget _buildBottomActionBar(BuildContext context) {
     return Container(
-      padding: const EdgeInsets.only(left: 24, right: 24, bottom: 32),
+      padding: EdgeInsets.only(left: 24.w, right: 24.w, bottom: 32.h),
       child: Row(
         mainAxisSize: MainAxisSize.min,
         crossAxisAlignment: CrossAxisAlignment.end,
         children: [
           Expanded(
             child: ClipRRect(
-              borderRadius: BorderRadius.circular(50),
+              borderRadius: BorderRadius.circular(50.w),
               child: BackdropFilter(
                 filter: ImageFilter.blur(sigmaX: 10, sigmaY: 10),
                 child: Container(

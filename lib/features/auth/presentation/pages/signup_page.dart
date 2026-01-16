@@ -5,6 +5,7 @@ import 'package:hyper_focused/features/auth/presentation/widgets/auth_text_field
 import 'package:hyper_focused/features/auth/presentation/widgets/social_sign_in_button.dart';
 import 'package:hyper_focused/core/theme/app_colors.dart';
 import 'package:hyper_focused/core/constants/app_strings.dart';
+import 'package:hyper_focused/core/utils/responsive_size.dart';
 
 class SignupPage extends ConsumerStatefulWidget {
   const SignupPage({super.key});
@@ -37,7 +38,7 @@ class _SignupPageState extends ConsumerState<SignupPage> {
         backgroundColor: Colors.white,
         elevation: 0,
         leading: Padding(
-          padding: const EdgeInsets.only(left: 16),
+          padding: EdgeInsets.only(left: 16.w),
           child: Container(
             decoration: BoxDecoration(
               shape: BoxShape.circle,
@@ -45,10 +46,10 @@ class _SignupPageState extends ConsumerState<SignupPage> {
               border: Border.all(color: AppColors.neutral200),
             ),
             child: IconButton(
-              icon: const Icon(
+              icon: Icon(
                 Icons.arrow_back,
                 color: AppColors.neutralDark,
-                size: 20,
+                size: 20.w,
               ),
               onPressed: () => context.pop(),
               padding: EdgeInsets.zero,
@@ -58,32 +59,32 @@ class _SignupPageState extends ConsumerState<SignupPage> {
       ),
       body: SafeArea(
         child: SingleChildScrollView(
-          padding: const EdgeInsets.symmetric(horizontal: 24.0, vertical: 16.0),
+          padding: EdgeInsets.symmetric(horizontal: 24.w, vertical: 16.h),
           child: Form(
             key: _formKey,
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                const SizedBox(height: 16),
-                const Text(
+                SizedBox(height: 16.h),
+                Text(
                   AppStrings.joinHyperFocused,
                   style: TextStyle(
-                    fontSize: 24,
+                    fontSize: 24.sp,
                     fontWeight: FontWeight.bold,
                     color: AppColors.neutralDark,
                   ),
                 ),
-                const SizedBox(height: 8),
+                SizedBox(height: 8.h),
                 Text(
                   AppStrings.signupSubtitle,
                   style: TextStyle(
-                    fontSize: 14,
+                    fontSize: 14.sp,
                     color: AppColors.textBody,
                     height: 1.5,
                   ),
                 ),
 
-                const SizedBox(height: 32),
+                SizedBox(height: 32.h),
 
                 // Full Name
                 AuthTextField(
@@ -98,7 +99,7 @@ class _SignupPageState extends ConsumerState<SignupPage> {
                   },
                 ),
 
-                const SizedBox(height: 20),
+                SizedBox(height: 20.h),
 
                 // Email Address
                 AuthTextField(
@@ -114,7 +115,7 @@ class _SignupPageState extends ConsumerState<SignupPage> {
                   },
                 ),
 
-                const SizedBox(height: 20),
+                SizedBox(height: 20.h),
 
                 // Password
                 AuthTextField(
@@ -131,7 +132,7 @@ class _SignupPageState extends ConsumerState<SignupPage> {
                   },
                 ),
 
-                const SizedBox(height: 20),
+                SizedBox(height: 20.h),
 
                 // Confirm Password
                 AuthTextField(
@@ -149,12 +150,12 @@ class _SignupPageState extends ConsumerState<SignupPage> {
                   },
                 ),
 
-                const SizedBox(height: 32),
+                SizedBox(height: 32.h),
 
                 // Continue Button
                 SizedBox(
                   width: double.infinity,
-                  height: 56,
+                  height: 56.h,
                   child: ElevatedButton(
                     onPressed: () {
                       if (_formKey.currentState!.validate()) {
@@ -167,33 +168,33 @@ class _SignupPageState extends ConsumerState<SignupPage> {
                       backgroundColor: AppColors.primary,
                       foregroundColor: AppColors.neutralWhite,
                       shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(28),
+                        borderRadius: BorderRadius.circular(28.h),
                       ),
                       elevation: 0,
                     ),
-                    child: const Text(
+                    child: Text(
                       AppStrings.continueText,
                       style: TextStyle(
-                        fontSize: 14,
+                        fontSize: 14.sp,
                         fontWeight: FontWeight.w500,
                       ),
                     ),
                   ),
                 ),
 
-                const SizedBox(height: 32),
+                SizedBox(height: 32.h),
 
                 // Or continue with
                 Row(
                   children: [
                     Expanded(child: Divider(color: AppColors.neutral500)),
                     Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 16),
+                      padding: EdgeInsets.symmetric(horizontal: 16.w),
                       child: Text(
                         AppStrings.orContinueWith,
                         style: TextStyle(
                           color: AppColors.neutral500,
-                          fontSize: 14,
+                          fontSize: 14.sp,
                         ),
                       ),
                     ),
@@ -201,7 +202,7 @@ class _SignupPageState extends ConsumerState<SignupPage> {
                   ],
                 ),
 
-                const SizedBox(height: 32),
+                SizedBox(height: 32.h),
 
                 // Social Buttons
                 Row(
@@ -213,7 +214,7 @@ class _SignupPageState extends ConsumerState<SignupPage> {
                         // TODO
                       },
                     ),
-                    const SizedBox(width: 16),
+                    SizedBox(width: 16.w),
                     SocialSignInButton(
                       text: AppStrings.apple,
                       assetName: 'assets/images/apple_logo.png',
@@ -224,34 +225,34 @@ class _SignupPageState extends ConsumerState<SignupPage> {
                   ],
                 ),
 
-                const SizedBox(height: 32),
+                SizedBox(height: 32.h),
 
                 // Sign In Link
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    const Text(
+                    Text(
                       AppStrings.alreadyHaveAccount,
                       style: TextStyle(
                         color: AppColors.neutralDark,
                         fontWeight: FontWeight.w500,
-                        fontSize: 14,
+                        fontSize: 14.sp,
                       ),
                     ),
                     GestureDetector(
                       onTap: () => context.go('/login'),
-                      child: const Text(
+                      child: Text(
                         AppStrings.signIn,
                         style: TextStyle(
                           color: AppColors.primary,
                           fontWeight: FontWeight.w500,
-                          fontSize: 14,
+                          fontSize: 14.sp,
                         ),
                       ),
                     ),
                   ],
                 ),
-                const SizedBox(height: 16),
+                SizedBox(height: 16.h),
               ],
             ),
           ),

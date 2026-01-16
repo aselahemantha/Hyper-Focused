@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hyper_focused/core/theme/app_colors.dart';
+import 'package:hyper_focused/core/utils/responsive_size.dart';
 
 class MyServicesPage extends StatelessWidget {
   const MyServicesPage({super.key});
@@ -13,7 +14,7 @@ class MyServicesPage extends StatelessWidget {
         backgroundColor: Colors.transparent,
         elevation: 0,
         leading: Padding(
-          padding: const EdgeInsets.only(left: 16.0),
+          padding: EdgeInsets.only(left: 16.0.w),
           child: CircleAvatar(
             backgroundColor: Colors.white,
             child: IconButton(
@@ -23,11 +24,11 @@ class MyServicesPage extends StatelessWidget {
           ),
         ),
         centerTitle: true,
-        title: const Text(
+        title: Text(
           'My Services',
           style: TextStyle(
             color: Colors.black,
-            fontSize: 18,
+            fontSize: 18.sp,
             fontWeight: FontWeight.w600,
           ),
         ),
@@ -54,20 +55,20 @@ class MyServicesPage extends StatelessWidget {
         ),
         child: SafeArea(
           child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 16.0),
+            padding: EdgeInsets.symmetric(horizontal: 16.0.w),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                const SizedBox(height: 20),
+                SizedBox(height: 20.h),
                 Text(
                   'You can manage your services here. These services will be shown on your website and it will help your clients to easily book your services.',
                   style: TextStyle(
                     color: Colors.grey[600],
-                    fontSize: 14,
+                    fontSize: 14.sp,
                     height: 1.5,
                   ),
                 ),
-                const SizedBox(height: 24),
+                SizedBox(height: 24.h),
                 Expanded(
                   child: ListView(
                     children: [
@@ -125,11 +126,11 @@ class MyServicesPage extends StatelessWidget {
     required int price,
   }) {
     return Container(
-      margin: const EdgeInsets.only(bottom: 16),
-      padding: const EdgeInsets.all(16),
+      margin: EdgeInsets.only(bottom: 16.h),
+      padding: EdgeInsets.all(16.w),
       decoration: BoxDecoration(
         color: Colors.white,
-        borderRadius: BorderRadius.circular(12),
+        borderRadius: BorderRadius.circular(12.w),
         boxShadow: [
           BoxShadow(
             color: const Color.fromRGBO(0, 0, 0, 0.05),
@@ -142,49 +143,49 @@ class MyServicesPage extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Container(
-            padding: const EdgeInsets.all(12),
+            padding: EdgeInsets.all(12.w),
             decoration: BoxDecoration(
               color: Colors.black,
-              borderRadius: BorderRadius.circular(8),
+              borderRadius: BorderRadius.circular(8.w),
             ),
-            child: Icon(icon, color: Colors.white, size: 24),
+            child: Icon(icon, color: Colors.white, size: 24.w),
           ),
-          const SizedBox(width: 12),
+          SizedBox(width: 12.w),
           Expanded(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
                   title,
-                  style: const TextStyle(
+                  style: TextStyle(
                     fontWeight: FontWeight.bold,
-                    fontSize: 14,
+                    fontSize: 14.sp,
                   ),
                 ),
-                const SizedBox(height: 4),
+                SizedBox(height: 4.h),
                 Row(
                   children: [
-                    const Icon(Icons.money, size: 16, color: AppColors.primary),
-                    const SizedBox(width: 4),
+                    Icon(Icons.money, size: 16.w, color: AppColors.primary),
+                    SizedBox(width: 4.w),
                     Text(
                       '\$${totalEarned.toStringAsFixed(2)} Total Earned',
                       style: TextStyle(
                         color: Colors.grey[600],
-                        fontSize: 12,
+                        fontSize: 12.sp,
                       ),
                     ),
                   ],
                 ),
-                const SizedBox(height: 2),
+                SizedBox(height: 2.h),
                 Row(
                   children: [
-                    const Icon(Icons.calendar_today, size: 16, color: AppColors.primary),
-                    const SizedBox(width: 4),
+                    Icon(Icons.calendar_today, size: 16.w, color: AppColors.primary),
+                    SizedBox(width: 4.w),
                     Text(
                       '$upcomingSchedules Upcoming Schedule${upcomingSchedules != 1 ? 's' : ''}',
                       style: TextStyle(
                         color: Colors.grey[600],
-                        fontSize: 12,
+                        fontSize: 12.sp,
                       ),
                     ),
                   ],
@@ -192,35 +193,35 @@ class MyServicesPage extends StatelessWidget {
               ],
             ),
           ),
-          const SizedBox(width: 12),
+          SizedBox(width: 12.w),
           Column(
             crossAxisAlignment: CrossAxisAlignment.end,
             children: [
               Container(
-                padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+                padding: EdgeInsets.symmetric(horizontal: 8.w, vertical: 4.h),
                 decoration: BoxDecoration(
                   border: Border.all(color: Colors.grey[300]!),
-                  borderRadius: BorderRadius.circular(4),
+                  borderRadius: BorderRadius.circular(4.w),
                 ),
                 child: Text(
                   '\$ $price USD',
-                  style: const TextStyle(
+                  style: TextStyle(
                     fontWeight: FontWeight.bold,
-                    fontSize: 12,
+                    fontSize: 12.sp,
                   ),
                 ),
               ),
-              const SizedBox(height: 8),
+              SizedBox(height: 8.h),
               GestureDetector(
                 onTap: () {
                   // TODO: Implement edit service
                 },
-                child: const Text(
+                child: Text(
                   'Edit Service',
                   style: TextStyle(
                     color: AppColors.primary,
                     fontWeight: FontWeight.w500,
-                    fontSize: 12,
+                    fontSize: 12.sp,
                   ),
                 ),
               ),

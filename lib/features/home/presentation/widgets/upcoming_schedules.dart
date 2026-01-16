@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:hyper_focused/core/constants/app_strings.dart';
 import 'package:hyper_focused/core/theme/app_colors.dart';
+import 'package:hyper_focused/core/utils/responsive_size.dart';
 
 class UpcomingSchedules extends StatelessWidget {
   const UpcomingSchedules({super.key});
@@ -14,21 +15,21 @@ class UpcomingSchedules extends StatelessWidget {
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            const Text(
+            Text(
               AppStrings.upcomingSchedules,
               style: TextStyle(
-                fontSize: 16,
+                fontSize: 16.sp,
                 fontWeight: FontWeight.w500,
                 color: AppColors.neutralDark,
               ),
             ),
             TextButton(
               onPressed: () {},
-              child: const Text(
+              child: Text(
                 AppStrings.viewAll,
                 style: TextStyle(
                   color: AppColors.primary,
-                  fontSize: 14,
+                  fontSize: 14.sp,
                   fontWeight: FontWeight.w500,
                 ),
               ),
@@ -36,7 +37,7 @@ class UpcomingSchedules extends StatelessWidget {
           ],
         ),
 
-        const SizedBox(height: 12),
+        SizedBox(height: 12.h),
 
         // Horizontal List
         SingleChildScrollView(
@@ -51,7 +52,7 @@ class UpcomingSchedules extends StatelessWidget {
                 time: '8.00AM - 12.00PM',
                 isFirst: true,
               ),
-              const SizedBox(width: 16),
+              SizedBox(width: 16.w),
               _buildScheduleCard(
                 imageUrl: 'assets/images/property_placeholder_2.jpg',
                 name: 'Olivia R.',
@@ -76,13 +77,13 @@ class UpcomingSchedules extends StatelessWidget {
     required bool isFirst,
   }) {
     // Dimensions
-    const double imageHeight = 170;
-    const double cardHeight = 230;
+    double imageHeight = 170.h;
+    double cardHeight = 230.h;
 
     return Container(
-      width: 320,
+      width: 320.w,
       height: cardHeight,
-      margin: const EdgeInsets.only(right: 16),
+      margin: EdgeInsets.only(right: 16.w),
       child: Stack(
         clipBehavior: Clip.none,
         children: [
@@ -94,7 +95,7 @@ class UpcomingSchedules extends StatelessWidget {
             height: imageHeight,
             child: Container(
               decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(24),
+                borderRadius: BorderRadius.circular(24.w),
                 boxShadow: [
                   BoxShadow(
                     color: AppColors.neutralDark.withOpacity(0.1),
@@ -113,7 +114,7 @@ class UpcomingSchedules extends StatelessWidget {
                   Positioned.fill(
                     child: Container(
                       decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(24),
+                        borderRadius: BorderRadius.circular(24.w),
                         gradient: LinearGradient(
                           begin: Alignment.topCenter,
                           end: Alignment.bottomCenter,
@@ -128,27 +129,27 @@ class UpcomingSchedules extends StatelessWidget {
                   ),
                   // Text Overlay (Name & Service)
                   Positioned(
-                    left: 20,
-                    right: 20,
-                    bottom: 40, // Adjust based on overlap
+                    left: 20.w,
+                    right: 20.w,
+                    bottom: 40.h,
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       crossAxisAlignment: CrossAxisAlignment.end,
                       children: [
                         Text(
                           name,
-                          style: const TextStyle(
+                          style: TextStyle(
                             color: AppColors.neutralWhite,
                             fontWeight: FontWeight.w600,
-                            fontSize: 18,
+                            fontSize: 18.sp,
                           ),
                         ),
                         Text(
                           service,
-                          style: const TextStyle(
+                          style: TextStyle(
                             color: AppColors.neutralWhite,
                             fontWeight: FontWeight.w500,
-                            fontSize: 16,
+                            fontSize: 16.sp,
                           ),
                         ),
                       ],
@@ -161,15 +162,15 @@ class UpcomingSchedules extends StatelessWidget {
 
           // Floating Details Capsule
           Positioned(
-            bottom: 10,
-            left: 12,
-            right: 12,
+            bottom: 10.h,
+            left: 12.w,
+            right: 12.w,
             child: Container(
-              constraints: const BoxConstraints(minHeight: 70),
-              padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+              constraints: BoxConstraints(minHeight: 70.h),
+              padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 12.h),
               decoration: BoxDecoration(
                 color: AppColors.neutralWhite,
-                borderRadius: BorderRadius.circular(40),
+                borderRadius: BorderRadius.circular(40.w),
                 border: Border.all(
                   color: const Color(0xFF29B6F6),
                   width: 1,
@@ -187,19 +188,19 @@ class UpcomingSchedules extends StatelessWidget {
                 children: [
                   // Icon
                   Container(
-                    width: 44,
-                    height: 44,
+                    width: 44.w,
+                    height: 44.w,
                     decoration: const BoxDecoration(
                       color: AppColors.secondary,
                       shape: BoxShape.circle,
                     ),
-                    child: const Icon(
+                    child: Icon(
                       Icons.calendar_month,
                       color: AppColors.neutralDark,
-                      size: 22,
+                      size: 22.w,
                     ),
                   ),
-                  const SizedBox(width: 12),
+                  SizedBox(width: 12.w),
 
                   // Date & Time
                   Expanded(
@@ -209,17 +210,17 @@ class UpcomingSchedules extends StatelessWidget {
                       children: [
                         Text(
                           date,
-                          style: const TextStyle(
+                          style: TextStyle(
                             fontWeight: FontWeight.w600,
-                            fontSize: 15,
+                            fontSize: 15.sp,
                             color: AppColors.neutralDark,
                           ),
                         ),
-                        const SizedBox(height: 2),
+                        SizedBox(height: 2.h),
                         Text(
                           time,
                           style: TextStyle(
-                            fontSize: 13,
+                            fontSize: 13.sp,
                             color: AppColors.neutral500,
                             fontWeight: FontWeight.w400,
                           ),
@@ -229,17 +230,17 @@ class UpcomingSchedules extends StatelessWidget {
                   ),
 
                   // Arrow Button
-                  const SizedBox(width: 8),
+                  SizedBox(width: 8.w),
                   Container(
-                    width: 44,
-                    height: 44,
+                    width: 44.w,
+                    height: 44.w,
                     decoration: BoxDecoration(
                       color: AppColors.neutral200.withOpacity(0.5),
                       shape: BoxShape.circle,
                     ),
-                    child: const Icon(
+                    child: Icon(
                       Icons.arrow_outward,
-                      size: 22,
+                      size: 22.w,
                       color: AppColors.neutralDark,
                     ),
                   ),

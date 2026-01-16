@@ -7,6 +7,7 @@ import 'package:hyper_focused/features/auth/presentation/widgets/auth_text_field
 import 'package:hyper_focused/features/auth/presentation/widgets/social_sign_in_button.dart';
 import 'package:hyper_focused/core/theme/app_colors.dart';
 import 'package:hyper_focused/core/constants/app_strings.dart';
+import 'package:hyper_focused/core/utils/responsive_size.dart';
 
 class LoginPage extends ConsumerStatefulWidget {
   const LoginPage({super.key});
@@ -49,7 +50,7 @@ class _LoginPageState extends ConsumerState<LoginPage> {
         backgroundColor: Colors.white,
         elevation: 0,
         leading: Padding(
-          padding: const EdgeInsets.only(left: 16),
+          padding: EdgeInsets.only(left: 16.w),
           child: Container(
             decoration: BoxDecoration(
               shape: BoxShape.circle,
@@ -57,10 +58,10 @@ class _LoginPageState extends ConsumerState<LoginPage> {
               border: Border.all(color: AppColors.neutral200),
             ),
             child: IconButton(
-              icon: const Icon(
+              icon: Icon(
                 Icons.arrow_back,
                 color: AppColors.neutralDark,
-                size: 20,
+                size: 20.w,
               ),
               onPressed: () => context.pop(),
               padding: EdgeInsets.zero,
@@ -70,46 +71,46 @@ class _LoginPageState extends ConsumerState<LoginPage> {
       ),
       body: SafeArea(
         child: SingleChildScrollView(
-          padding: const EdgeInsets.symmetric(horizontal: 24.0, vertical: 16.0),
+          padding: EdgeInsets.symmetric(horizontal: 24.w, vertical: 16.h),
           child: Form(
             key: _formKey,
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                const SizedBox(height: 16),
+                SizedBox(height: 16.h),
                 // Logo
                 SvgPicture.asset(
                   'assets/images/svg/hyperfocused_icon.svg',
-                  height: 60,
+                  height: 60.h,
                   // width: 60,
-                  errorBuilder: (context, error, stackTrace) => const Icon(
+                  errorBuilder: (context, error, stackTrace) => Icon(
                     Icons.apps,
-                    size: 60,
+                    size: 60.w,
                     color: AppColors.primary,
                   ),
                 ),
-                const SizedBox(height: 24),
+                SizedBox(height: 24.h),
 
                 // Title
-                const Text(
+                Text(
                   AppStrings.welcomeBack,
                   style: TextStyle(
-                    fontSize: 24,
+                    fontSize: 24.sp,
                     fontWeight: FontWeight.bold,
                     color: AppColors.neutralDark,
                   ),
                 ),
-                const SizedBox(height: 8),
+                SizedBox(height: 8.h),
                 Text(
                   AppStrings.loginSubtitle,
                   style: TextStyle(
-                    fontSize: 14,
+                    fontSize: 14.sp,
                     fontWeight: FontWeight.normal,
                     color: AppColors.textBody,
                   ),
                 ),
 
-                const SizedBox(height: 32),
+                SizedBox(height: 32.h),
 
                 // Email Field
                 AuthTextField(
@@ -128,7 +129,7 @@ class _LoginPageState extends ConsumerState<LoginPage> {
                   },
                 ),
 
-                const SizedBox(height: 20),
+                SizedBox(height: 20.h),
 
                 // Password Field
                 AuthTextField(
@@ -145,14 +146,14 @@ class _LoginPageState extends ConsumerState<LoginPage> {
                   },
                 ),
 
-                const SizedBox(height: 16),
+                SizedBox(height: 16.h),
 
                 // Remember Me & Forgot Password
                 Row(
                   children: [
                     SizedBox(
-                      height: 24,
-                      width: 24,
+                      height: 24.w,
+                      width: 24.w,
                       child: Checkbox(
                         value: _rememberMe,
                         onChanged: (value) {
@@ -162,15 +163,15 @@ class _LoginPageState extends ConsumerState<LoginPage> {
                         },
                         activeColor: AppColors.primary,
                         shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(4),
+                          borderRadius: BorderRadius.circular(4.w),
                         ),
                       ),
                     ),
-                    const SizedBox(width: 8),
-                    const Text(
+                    SizedBox(width: 8.w),
+                    Text(
                       AppStrings.rememberMe,
                       style: TextStyle(
-                        fontSize: 14,
+                        fontSize: 14.sp,
                         color: AppColors.neutralDark,
                         fontWeight: FontWeight.w500,
                       ),
@@ -191,12 +192,12 @@ class _LoginPageState extends ConsumerState<LoginPage> {
                   ],
                 ),
 
-                const SizedBox(height: 32),
+                SizedBox(height: 32.h),
 
                 // Sign In Button
                 SizedBox(
                   width: double.infinity,
-                  height: 56,
+                  height: 56.h,
                   child: ElevatedButton(
                     onPressed: isLoading
                         ? null
@@ -217,35 +218,35 @@ class _LoginPageState extends ConsumerState<LoginPage> {
                         0.6,
                       ),
                       shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(28),
+                        borderRadius: BorderRadius.circular(28.h),
                       ),
                       elevation: 0,
                     ),
                     child: isLoading
                         ? const CircularProgressIndicator(color: Colors.white)
-                        : const Text(
+                        : Text(
                             AppStrings.signIn,
                             style: TextStyle(
-                              fontSize: 14,
+                              fontSize: 14.sp,
                               fontWeight: FontWeight.w500,
                             ),
                           ),
                   ),
                 ),
 
-                const SizedBox(height: 32),
+                SizedBox(height: 32.h),
 
                 // Or continue with
                 Row(
                   children: [
                     Expanded(child: Divider(color: AppColors.neutral500)),
                     Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 16),
+                      padding: EdgeInsets.symmetric(horizontal: 16.w),
                       child: Text(
                         AppStrings.orContinueWith,
                         style: TextStyle(
                           color: AppColors.neutral500,
-                          fontSize: 14,
+                          fontSize: 14.sp,
                         ),
                       ),
                     ),
@@ -253,7 +254,7 @@ class _LoginPageState extends ConsumerState<LoginPage> {
                   ],
                 ),
 
-                const SizedBox(height: 32),
+                SizedBox(height: 32.h),
 
                 // Social Buttons
                 Row(
@@ -267,7 +268,7 @@ class _LoginPageState extends ConsumerState<LoginPage> {
                             .loginWithGoogle();
                       },
                     ),
-                    const SizedBox(width: 16),
+                    SizedBox(width: 16.w),
                     SocialSignInButton(
                       text: AppStrings.apple,
                       assetName: 'assets/images/svg/apple_logo.svg',
@@ -280,34 +281,34 @@ class _LoginPageState extends ConsumerState<LoginPage> {
                   ],
                 ),
 
-                const SizedBox(height: 32),
+                SizedBox(height: 32.h),
 
                 // Sign Up Footer
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    const Text(
+                    Text(
                       AppStrings.dontHaveAccount,
                       style: TextStyle(
                         color: AppColors.neutralDark,
                         fontWeight: FontWeight.w500,
-                        fontSize: 14,
+                        fontSize: 14.sp,
                       ),
                     ),
                     GestureDetector(
                       onTap: () => context.push('/signup'),
-                      child: const Text(
+                      child: Text(
                         AppStrings.signUp,
                         style: TextStyle(
                           color: AppColors.primary,
                           fontWeight: FontWeight.w500,
-                          fontSize: 14,
+                          fontSize: 14.sp,
                         ),
                       ),
                     ),
                   ],
                 ),
-                const SizedBox(height: 16),
+                SizedBox(height: 16.h),
               ],
             ),
           ),

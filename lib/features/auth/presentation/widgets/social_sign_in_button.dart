@@ -2,6 +2,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:hyper_focused/core/theme/app_colors.dart';
+import 'package:hyper_focused/core/utils/responsive_size.dart';
 
 class SocialSignInButton extends StatelessWidget {
   final String text;
@@ -21,10 +22,10 @@ class SocialSignInButton extends StatelessWidget {
       child: OutlinedButton(
         onPressed: onPressed,
         style: OutlinedButton.styleFrom(
-          padding: const EdgeInsets.symmetric(vertical: 16),
+          padding: EdgeInsets.symmetric(vertical: 16.h),
           side: BorderSide(color: AppColors.neutral200),
           shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(30),
+            borderRadius: BorderRadius.circular(30.h),
           ),
           backgroundColor: Colors.white,
         ),
@@ -32,20 +33,20 @@ class SocialSignInButton extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             SizedBox(
-              width: 24,
-              height: 24,
+              width: 24.w,
+              height: 24.w,
               child: SvgPicture.asset(
                 assetName,
-                errorBuilder: (context, error, stackTrace) => const Icon(Icons.error_outline, size: 20),
+                errorBuilder: (context, error, stackTrace) => Icon(Icons.error_outline, size: 20.w),
               ),
             ),
-            const SizedBox(width: 8),
+            SizedBox(width: 8.w),
             Text(
               text,
-              style: const TextStyle(
+              style: TextStyle(
                 color: AppColors.neutralDark,
                 fontWeight: FontWeight.w500,
-                fontSize: 14,
+                fontSize: 14.sp,
               ),
             ),
           ],

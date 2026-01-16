@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hyper_focused/core/theme/app_colors.dart';
 import 'package:hyper_focused/features/templates/presentation/widgets/template_card.dart';
+import 'package:hyper_focused/core/utils/responsive_size.dart';
 
 class TemplateCenterPage extends StatelessWidget {
   const TemplateCenterPage({super.key});
@@ -12,20 +13,20 @@ class TemplateCenterPage extends StatelessWidget {
       extendBodyBehindAppBar: true,
       appBar: AppBar(
         leading: Padding(
-          padding: const EdgeInsets.only(left: 16),
+          padding: EdgeInsets.only(left: 16.w),
           child: CircleAvatar(
             backgroundColor: AppColors.neutralWhite,
             child: IconButton(
-              icon: const Icon(Icons.arrow_back_ios_new, size: 18, color: AppColors.neutralDark),
+              icon: Icon(Icons.arrow_back_ios_new, size: 18.w, color: AppColors.neutralDark),
               onPressed: () => context.pop(),
             ),
           ),
         ),
-        title: const Text(
+        title: Text(
           'Template Centre',
           style: TextStyle(
             color: AppColors.neutralDark,
-            fontSize: 16,
+            fontSize: 16.sp,
             fontWeight: FontWeight.bold,
           ),
         ),
@@ -34,11 +35,11 @@ class TemplateCenterPage extends StatelessWidget {
         elevation: 0,
         actions: [
           Padding(
-            padding: const EdgeInsets.only(right: 16),
+            padding: EdgeInsets.only(right: 16.w),
             child: Icon(
               Icons.info,
               color: Colors.black, // From design, looks like a filled black icon
-              size: 28,
+              size: 28.w,
             ),
           ),
         ],
@@ -58,7 +59,7 @@ class TemplateCenterPage extends StatelessWidget {
         ),
         child: SafeArea(
           child: ListView(
-            padding: const EdgeInsets.all(16),
+            padding: EdgeInsets.all(16.w),
             children: [
               _buildTemplateCard(
                 context,
@@ -90,13 +91,13 @@ class TemplateCenterPage extends StatelessWidget {
                 'Commercial Building',
                 'You can manage your services here. These services will be shown on your website.',
               ),
-              const SizedBox(height: 80), // Extra space for FAB
+              SizedBox(height: 80.h), // Extra space for FAB
             ],
           ),
         ),
       ),
       floatingActionButton: Padding(
-        padding: const EdgeInsets.only(bottom: 20, right: 10),
+        padding: EdgeInsets.only(bottom: 20.h, right: 10.w),
         child: FloatingActionButton(
           onPressed: () => _showOptionsModal(context),
           backgroundColor: Colors.white,
@@ -113,10 +114,10 @@ class TemplateCenterPage extends StatelessWidget {
       context: context,
       backgroundColor: Colors.transparent,
       builder: (context) => Container(
-        padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 16),
-        decoration: const BoxDecoration(
+        padding: EdgeInsets.symmetric(vertical: 20.h, horizontal: 16.w),
+        decoration: BoxDecoration(
           color: Colors.white,
-          borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
+          borderRadius: BorderRadius.vertical(top: Radius.circular(20.w)),
         ),
         child: SafeArea(
           child: Column(
@@ -160,14 +161,14 @@ class TemplateCenterPage extends StatelessWidget {
       leading: Icon(icon, color: AppColors.neutral500),
       title: Text(
         label,
-        style: const TextStyle(
+        style: TextStyle(
           color: AppColors.neutralDark,
-          fontSize: 16,
+          fontSize: 16.sp,
           fontWeight: FontWeight.w500,
         ),
       ),
       onTap: onTap,
-      contentPadding: const EdgeInsets.symmetric(horizontal: 16),
+      contentPadding: EdgeInsets.symmetric(horizontal: 16.w),
     );
   }
 

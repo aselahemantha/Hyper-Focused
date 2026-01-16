@@ -3,6 +3,7 @@ import 'package:hyper_focused/core/theme/app_colors.dart';
 import 'package:hyper_focused/core/presentation/widgets/week_calendar.dart';
 import 'package:hyper_focused/features/report/presentation/widgets/report_card.dart';
 import 'package:hyper_focused/features/report/presentation/widgets/report_filter.dart';
+import 'package:hyper_focused/core/utils/responsive_size.dart';
 
 class ReportPage extends StatefulWidget {
   const ReportPage({super.key});
@@ -46,14 +47,14 @@ class _ReportPageState extends State<ReportPage> {
             _buildTopSection(),
             Expanded(
               child: ListView(
-                padding: const EdgeInsets.all(16),
+                padding: EdgeInsets.all(16.w),
                 children: [
                   _buildListHeader(),
-                  const SizedBox(height: 16),
+                  SizedBox(height: 16.h),
                   const ReportCard(),
                   const ReportCard(),
                   // Padding for bottom nav
-                  const SizedBox(height: 80),
+                  SizedBox(height: 80.h),
                 ],
               ),
             ),
@@ -83,19 +84,19 @@ class _ReportPageState extends State<ReportPage> {
         children: [
           // Header Row
           Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+            padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 12.h),
             child: Row(
               children: [
                 // Title Area
                 Container(
-                  padding: const EdgeInsets.all(8),
+                  padding: EdgeInsets.all(8.w),
                   decoration: const BoxDecoration(
                     color: Color(0xFFE0F2F1), // Light teal
                     shape: BoxShape.circle,
                   ),
-                  child: const Icon(Icons.assignment_outlined, color: AppColors.primary, size: 20),
+                  child: Icon(Icons.assignment_outlined, color: AppColors.primary, size: 20.w),
                 ),
-                const SizedBox(width: 12),
+                SizedBox(width: 12.w),
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
@@ -103,15 +104,15 @@ class _ReportPageState extends State<ReportPage> {
                       'Viewing',
                       style: TextStyle(
                         color: AppColors.neutral500,
-                        fontSize: 12,
+                        fontSize: 12.sp,
                       ),
                     ),
-                    const Text(
+                    Text(
                       'Your reports',
                       style: TextStyle(
                         color: AppColors.neutralDark,
                         fontWeight: FontWeight.bold,
-                        fontSize: 16,
+                        fontSize: 16.sp,
                       ),
                     ),
                   ],
@@ -124,13 +125,13 @@ class _ReportPageState extends State<ReportPage> {
                   isActive: _isCalendarOpen,
                   onTap: _toggleCalendar,
                 ),
-                const SizedBox(width: 8),
+                SizedBox(width: 8.w),
                 _buildCircleButton(
                   icon: Icons.filter_list, 
                   isActive: _isFilterOpen,
                   onTap: _toggleFilter,
                 ),
-                const SizedBox(width: 8),
+                SizedBox(width: 8.w),
                 _buildCircleButton(
                   icon: Icons.search, 
                   isActive: false,
@@ -149,11 +150,11 @@ class _ReportPageState extends State<ReportPage> {
               children: [
                 if (_isCalendarOpen) ...[
                    _buildCalendarView(),
-                   const SizedBox(height: 16),
+                   SizedBox(height: 16.h),
                 ],
                 if (_isFilterOpen) ...[
                   const ReportFilter(),
-                  const SizedBox(height: 16),
+                  SizedBox(height: 16.h),
                 ],
               ],
             ),
@@ -168,25 +169,25 @@ class _ReportPageState extends State<ReportPage> {
       children: [
         // Month Selector
         Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 16),
+          padding: EdgeInsets.symmetric(horizontal: 16.w),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               IconButton(
-                icon: const Icon(Icons.arrow_back, size: 16),
+                icon: Icon(Icons.arrow_back, size: 16.w),
                 onPressed: () {},
                 padding: EdgeInsets.zero,
                 constraints: const BoxConstraints(),
               ),
-              const Text(
+              Text(
                 'December 2025',
                 style: TextStyle(
                   fontWeight: FontWeight.bold,
-                  fontSize: 14,
+                  fontSize: 14.sp,
                 ),
               ),
               IconButton(
-                icon: const Icon(Icons.arrow_forward, size: 16),
+                icon: Icon(Icons.arrow_forward, size: 16.w),
                 onPressed: () {},
                 padding: EdgeInsets.zero,
                 constraints: const BoxConstraints(),
@@ -194,7 +195,7 @@ class _ReportPageState extends State<ReportPage> {
             ],
           ),
         ),
-        const SizedBox(height: 8),
+        SizedBox(height: 8.h),
         WeekCalendar(
           selectedDate: _selectedDate, 
           onDateSelected: (date) {
@@ -218,8 +219,8 @@ class _ReportPageState extends State<ReportPage> {
     return GestureDetector(
       onTap: onTap,
       child: Container(
-        width: 40,
-        height: 40,
+        width: 40.w,
+        height: 40.w,
         decoration: BoxDecoration(
           color: bgColor,
           shape: BoxShape.circle,
@@ -232,7 +233,7 @@ class _ReportPageState extends State<ReportPage> {
               )
           ]
         ),
-        child: Icon(icon, color: iconColor, size: 20),
+        child: Icon(icon, color: iconColor, size: 20.w),
       ),
     );
   }
@@ -241,11 +242,11 @@ class _ReportPageState extends State<ReportPage> {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
-        const Text(
+        Text(
           'Most Recent',
           style: TextStyle(
             fontWeight: FontWeight.bold,
-            fontSize: 16,
+            fontSize: 16.sp,
             color: AppColors.neutralDark,
           ),
         ),
@@ -256,11 +257,12 @@ class _ReportPageState extends State<ReportPage> {
             minimumSize: Size.zero,
             tapTargetSize: MaterialTapTargetSize.shrinkWrap,
           ),
-          child: const Text(
+          child: Text(
             'Sync Changes',
             style: TextStyle(
               color: AppColors.primary,
               fontWeight: FontWeight.w600,
+              fontSize: 14.sp, // Added font size
             ),
           ),
         )

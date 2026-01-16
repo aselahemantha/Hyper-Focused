@@ -2,6 +2,7 @@ import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hyper_focused/core/theme/app_colors.dart';
+import 'package:hyper_focused/core/utils/responsive_size.dart';
 
 class ReportDetailPage extends StatelessWidget {
   const ReportDetailPage({super.key});
@@ -17,7 +18,7 @@ class ReportDetailPage extends StatelessWidget {
             top: 0,
             left: 0,
             right: 0,
-            height: 300,
+            height: 300.h,
             child: Container(
               decoration: BoxDecoration(
                 gradient: LinearGradient(
@@ -38,19 +39,19 @@ class ReportDetailPage extends StatelessWidget {
                 _buildHeader(context),
                 Expanded(
                   child: SingleChildScrollView(
-                    padding: const EdgeInsets.symmetric(horizontal: 16),
+                    padding: EdgeInsets.symmetric(horizontal: 16.w),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        const SizedBox(height: 16),
+                        SizedBox(height: 16.h),
                         _buildHeroImage(),
-                        const SizedBox(height: 24),
+                        SizedBox(height: 24.h),
                         _buildPropertyDetailsCard(),
-                        const SizedBox(height: 24),
+                        SizedBox(height: 24.h),
                         _buildInspectionTerms(),
-                        const SizedBox(height: 24),
+                        SizedBox(height: 24.h),
                         _buildNotesSection(),
-                        const SizedBox(height: 100), // Space for bottom bar
+                        SizedBox(height: 100.h), // Space for bottom bar
                       ],
                     ),
                   ),
@@ -73,13 +74,13 @@ class ReportDetailPage extends StatelessWidget {
 
   Widget _buildHeader(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+      padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 8.h),
       child: Row(
         children: [
           GestureDetector(
             onTap: () => context.pop(),
             child: Container(
-              padding: const EdgeInsets.all(8),
+              padding: EdgeInsets.all(8.w),
               decoration: const BoxDecoration(
                 color: Colors.white,
                 shape: BoxShape.circle,
@@ -91,18 +92,18 @@ class ReportDetailPage extends StatelessWidget {
                   ),
                 ],
               ),
-              child: const Icon(Icons.arrow_back, color: Colors.black87, size: 20),
+              child: Icon(Icons.arrow_back, color: Colors.black87, size: 20.w),
             ),
           ),
-          const SizedBox(width: 16),
+          SizedBox(width: 16.w),
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,
-            children: const [
+            children: [
               Text(
                 'Residential Inspection',
                 style: TextStyle(
                   color: AppColors.neutral500,
-                  fontSize: 12,
+                  fontSize: 12.sp,
                 ),
               ),
               Text(
@@ -110,7 +111,7 @@ class ReportDetailPage extends StatelessWidget {
                 style: TextStyle(
                   color: AppColors.neutralDark,
                   fontWeight: FontWeight.bold,
-                  fontSize: 14,
+                  fontSize: 14.sp,
                 ),
               ),
             ],
@@ -124,10 +125,10 @@ class ReportDetailPage extends StatelessWidget {
     return Stack(
       children: [
         Container(
-          height: 200,
+          height: 200.h,
           width: double.infinity,
           decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(16),
+            borderRadius: BorderRadius.circular(16.w),
             image: const DecorationImage(
               // Using a placeholder image that looks like a house
               image: NetworkImage('https://images.unsplash.com/photo-1568605114967-8130f3a36994?ixlib=rb-1.2.1&auto=format&fit=crop&w=1000&q=80'), 
@@ -143,16 +144,16 @@ class ReportDetailPage extends StatelessWidget {
           ),
         ),
         Positioned(
-          bottom: 12,
-          right: 12,
+          bottom: 12.h,
+          right: 12.w,
           child: Row(
             children: [
               _buildCircleAction(Icons.cloud_upload_outlined, Colors.white, Colors.black87, showRedDot: true),
-              const SizedBox(width: 8),
+              SizedBox(width: 8.w),
               _buildCircleAction(Icons.camera_alt_outlined, const Color(0xFFFFF176), Colors.black87), // Light yellow
-              const SizedBox(width: 8),
+              SizedBox(width: 8.w),
               _buildCircleAction(Icons.location_on_outlined, const Color(0xFFFFF176), Colors.black87),
-              const SizedBox(width: 8),
+              SizedBox(width: 8.w),
               _buildCircleAction(Icons.phone_outlined, const Color(0xFFFFF176), Colors.black87),
             ],
           ),
@@ -165,7 +166,7 @@ class ReportDetailPage extends StatelessWidget {
     return Stack(
       children: [
         Container(
-          padding: const EdgeInsets.all(8),
+          padding: EdgeInsets.all(8.w),
           decoration: BoxDecoration(
             color: bgColor,
             shape: BoxShape.circle,
@@ -177,19 +178,19 @@ class ReportDetailPage extends StatelessWidget {
               ),
             ],
           ),
-          child: Icon(icon, size: 20, color: iconColor),
+          child: Icon(icon, size: 20.w, color: iconColor),
         ),
         if (showRedDot)
           Positioned(
             top: 0,
             right: 0,
             child: Container(
-              width: 10,
-              height: 10,
+              width: 10.w,
+              height: 10.w,
               decoration: BoxDecoration(
                 color: AppColors.statusNotify,
                 shape: BoxShape.circle,
-                border: Border.all(color: Colors.white, width: 2),
+                border: Border.all(color: Colors.white, width: 2.w),
               ),
             ),
           ),
@@ -199,10 +200,10 @@ class ReportDetailPage extends StatelessWidget {
 
   Widget _buildPropertyDetailsCard() {
     return Container(
-      padding: const EdgeInsets.all(16),
+      padding: EdgeInsets.all(16.w),
       decoration: BoxDecoration(
         color: Colors.white,
-        borderRadius: BorderRadius.circular(16),
+        borderRadius: BorderRadius.circular(16.w),
         boxShadow: [
           BoxShadow(
             color: Colors.black.withOpacity(0.05),
@@ -219,58 +220,58 @@ class ReportDetailPage extends StatelessWidget {
             children: [
               // Home Icon Box
               Container(
-                width: 48,
-                height: 48,
+                width: 48.w,
+                height: 48.w,
                 decoration: BoxDecoration(
                   color: Colors.black,
-                  borderRadius: BorderRadius.circular(8),
+                  borderRadius: BorderRadius.circular(8.w),
                 ),
-                child: const Icon(Icons.home_outlined, color: Colors.white, size: 28),
+                child: Icon(Icons.home_outlined, color: Colors.white, size: 28.w),
               ),
-              const SizedBox(width: 12),
+              SizedBox(width: 12.w),
               Expanded(
                 child: Column(
                   children: [
                     // Date Time Row
                     Container(
-                      padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+                      padding: EdgeInsets.symmetric(horizontal: 12.w, vertical: 8.h),
                       decoration: BoxDecoration(
                         border: Border.all(color: AppColors.primary.withOpacity(0.3)),
-                        borderRadius: BorderRadius.circular(4),
+                        borderRadius: BorderRadius.circular(4.w),
                         color: AppColors.primary.withOpacity(0.05),
                       ),
                       child: Row(
-                        children: const [
-                          Icon(Icons.access_time, size: 16, color: AppColors.primary),
-                          SizedBox(width: 8),
+                        children: [
+                          Icon(Icons.access_time, size: 16.w, color: AppColors.primary),
+                          SizedBox(width: 8.w),
                           Text(
                             '12.12.2025 | 8.00AM - 12.00PM',
                             style: TextStyle(
                               color: AppColors.primary,
                               fontWeight: FontWeight.w600,
-                              fontSize: 12,
+                              fontSize: 12.sp,
                             ),
                           ),
                         ],
                       ),
                     ),
-                    const SizedBox(height: 8),
+                    SizedBox(height: 8.h),
                     // Service Name Row
                     Container(
-                      padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+                      padding: EdgeInsets.symmetric(horizontal: 12.w, vertical: 8.h),
                       decoration: BoxDecoration(
                         border: Border.all(color: AppColors.neutral200),
-                        borderRadius: BorderRadius.circular(4),
+                        borderRadius: BorderRadius.circular(4.w),
                       ),
                       child: Row(
-                        children: const [
-                          Icon(Icons.business_outlined, size: 16, color: AppColors.neutral500),
-                          SizedBox(width: 8),
+                        children: [
+                          Icon(Icons.business_outlined, size: 16.w, color: AppColors.neutral500),
+                          SizedBox(width: 8.w),
                           Text(
                             'Residential Home Inspection',
                             style: TextStyle(
                               color: AppColors.neutral500,
-                              fontSize: 12,
+                              fontSize: 12.sp,
                             ),
                           ),
                         ],
@@ -281,54 +282,54 @@ class ReportDetailPage extends StatelessWidget {
               ),
             ],
           ),
-          const SizedBox(height: 16),
+          SizedBox(height: 16.h),
           
           // Person Info
            Row(
-            children: const [
-              Icon(Icons.person_outline, size: 20, color: AppColors.neutralDark),
-              SizedBox(width: 8),
+            children: [
+              Icon(Icons.person_outline, size: 20.w, color: AppColors.neutralDark),
+              SizedBox(width: 8.w),
               Text(
                 'Jason Johnson',
                 style: TextStyle(
                   fontWeight: FontWeight.bold,
-                  fontSize: 15,
+                  fontSize: 15.sp,
                   color: AppColors.neutralDark,
                 ),
               ),
             ],
           ),
-          const SizedBox(height: 12),
+          SizedBox(height: 12.h),
 
           // Address
           Row(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const Icon(Icons.location_on_outlined, size: 20, color: AppColors.textBody),
-              const SizedBox(width: 8),
+              Icon(Icons.location_on_outlined, size: 20.w, color: AppColors.textBody),
+              SizedBox(width: 8.w),
               Expanded(
                 child: Text(
                   '1005 S Lorem Ipsum, Dolor Dantos, Garylord St Dancer, Co 80209',
                   style: TextStyle(
                     color: AppColors.textBody,
-                    fontSize: 14,
+                    fontSize: 14.sp,
                   ),
                 ),
               ),
             ],
           ),
-          const SizedBox(height: 12),
+          SizedBox(height: 12.h),
 
           // Phone
           Row(
             children: [
-              const Icon(Icons.phone_outlined, size: 18, color: AppColors.textBody),
-              const SizedBox(width: 8),
+              Icon(Icons.phone_outlined, size: 18.w, color: AppColors.textBody),
+              SizedBox(width: 8.w),
               Text(
                 '880 762 233 2234',
                 style: TextStyle(
                   color: AppColors.textBody,
-                  fontSize: 14,
+                  fontSize: 14.sp,
                 ),
               ),
             ],
@@ -345,11 +346,11 @@ class ReportDetailPage extends StatelessWidget {
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            const Text(
+            Text(
               'Inspection Terms',
               style: TextStyle(
                 fontWeight: FontWeight.bold,
-                fontSize: 16,
+                fontSize: 16.sp,
                 color: AppColors.neutralDark,
               ),
             ),
@@ -360,75 +361,77 @@ class ReportDetailPage extends StatelessWidget {
                 minimumSize: Size.zero,
                 tapTargetSize: MaterialTapTargetSize.shrinkWrap,
               ),
-              child: const Text(
+              child: Text(
                 'View Agreement',
                 style: TextStyle(
                   color: AppColors.primary,
                   fontWeight: FontWeight.w600,
-                  fontSize: 14,
+                  fontSize: 14.sp,
                 ),
               ),
             ),
           ],
         ),
-        const SizedBox(height: 12),
+        SizedBox(height: 12.h),
         Row(
           children: [
             Expanded(
               child: Container(
-                padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 12),
+                padding: EdgeInsets.symmetric(horizontal: 12.w, vertical: 12.h),
                 decoration: BoxDecoration(
                   border: Border.all(color: AppColors.neutral200),
-                  borderRadius: BorderRadius.circular(8),
+                  borderRadius: BorderRadius.circular(8.w),
                   color: Colors.white,
                 ),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Row(
-                      children: const [
-                         Icon(Icons.handshake_outlined, size: 20, color: Colors.black87),
-                         SizedBox(width: 8),
+                      children: [
+                         Icon(Icons.handshake_outlined, size: 20.w, color: Colors.black87),
+                         SizedBox(width: 8.w),
                          Text(
                           'Agreement',
                           style: TextStyle(
                             color: Colors.black87,
                             fontWeight: FontWeight.w500,
+                            fontSize: 14.sp,
                           ),
                          )
                       ],
                     ),
-                    const Icon(Icons.check, size: 18, color: Colors.green),
+                    Icon(Icons.check, size: 18.w, color: Colors.green),
                   ],
                 ),
               ),
             ),
-            const SizedBox(width: 12),
+            SizedBox(width: 12.w),
             Expanded(
               child: Container(
-                padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 12),
+                padding: EdgeInsets.symmetric(horizontal: 12.w, vertical: 12.h),
                 decoration: BoxDecoration(
                   border: Border.all(color: AppColors.neutral200),
-                  borderRadius: BorderRadius.circular(8),
+                  borderRadius: BorderRadius.circular(8.w),
                   color: Colors.white,
                 ),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Row(
-                      children: const [
-                         Icon(Icons.monetization_on_outlined, size: 20, color: Colors.black87),
-                         SizedBox(width: 8),
+                      children: [
+                         Icon(Icons.monetization_on_outlined, size: 20.w, color: Colors.black87),
+                         SizedBox(width: 8.w),
                          Text(
                           '480 USD',
                           style: TextStyle(
                             color: Colors.black87,
                             fontWeight: FontWeight.w500,
+                            fontSize: 14.sp,
                           ),
                          )
                       ],
                     ),
-                    const Icon(Icons.check, size: 18, color: Colors.green),
+                    Icon(Icons.check, size: 18.w, color: Colors.green),
                   ],
                 ),
               ),
@@ -446,11 +449,11 @@ class ReportDetailPage extends StatelessWidget {
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-             const Text(
+             Text(
               'Notes',
               style: TextStyle(
                 fontWeight: FontWeight.bold,
-                fontSize: 16,
+                fontSize: 16.sp,
                 color: AppColors.neutralDark,
               ),
             ),
@@ -461,23 +464,23 @@ class ReportDetailPage extends StatelessWidget {
                 minimumSize: Size.zero,
                 tapTargetSize: MaterialTapTargetSize.shrinkWrap,
               ),
-              child: const Text(
+              child: Text(
                 'Edit Note',
                 style: TextStyle(
                   color: AppColors.primary,
                   fontWeight: FontWeight.w600,
-                  fontSize: 14,
+                  fontSize: 14.sp,
                 ),
               ),
             ),
           ],
         ),
-        const SizedBox(height: 8),
+        SizedBox(height: 8.h),
         Text(
           'You can manage your services here. These services will be shown on your website and it will help your clients to easily book your services.',
           style: TextStyle(
             color: AppColors.textBody,
-            fontSize: 14,
+            fontSize: 14.sp,
             height: 1.5,
           ),
         ),
@@ -487,7 +490,7 @@ class ReportDetailPage extends StatelessWidget {
 
   Widget _buildBottomActionBar(BuildContext context) {
     return Container(
-      padding: const EdgeInsets.only(left: 24, right: 24, bottom: 32),
+      padding: EdgeInsets.only(left: 24.w, right: 24.w, bottom: 32.h),
       child: Row(
         mainAxisSize: MainAxisSize.min,
         crossAxisAlignment: CrossAxisAlignment.end,
@@ -495,15 +498,15 @@ class ReportDetailPage extends StatelessWidget {
           // Capsule Container
           Expanded(
             child: ClipRRect(
-              borderRadius: BorderRadius.circular(50),
+              borderRadius: BorderRadius.circular(50.w),
               child: BackdropFilter(
                 filter: ImageFilter.blur(sigmaX: 10, sigmaY: 10),
                 child: Container(
-                  height: 72,
-                  padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 8),
+                  height: 72.h,
+                  padding: EdgeInsets.symmetric(horizontal: 8.w, vertical: 8.h),
                   decoration: BoxDecoration(
                     color: Colors.white.withOpacity(0.8),
-                    borderRadius: BorderRadius.circular(50),
+                    borderRadius: BorderRadius.circular(50.w),
                     boxShadow: [
                       BoxShadow(
                         color: Colors.black.withOpacity(0.08),
@@ -517,24 +520,24 @@ class ReportDetailPage extends StatelessWidget {
                       // Start Button
                       InkWell(
                         onTap: () => context.push('/inspection-start'),
-                        borderRadius: BorderRadius.circular(30),
+                        borderRadius: BorderRadius.circular(30.w),
                         child: Container(
-                          padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 0),
+                          padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 0),
                           height: double.infinity,
                           decoration: BoxDecoration(
                             color: Colors.black,
-                            borderRadius: BorderRadius.circular(30),
+                            borderRadius: BorderRadius.circular(30.w),
                           ),
                           child: Row(
-                            children: const [
-                              Icon(Icons.arrow_forward, color: Colors.white, size: 20),
-                              SizedBox(width: 8),
+                            children: [
+                              Icon(Icons.arrow_forward, color: Colors.white, size: 20.w),
+                              SizedBox(width: 8.w),
                               Text(
                                 'Start',
                                 style: TextStyle(
                                   color: Colors.white,
                                   fontWeight: FontWeight.bold,
-                                  fontSize: 16,
+                                  fontSize: 16.sp,
                                 ),
                               ),
                             ],
@@ -544,23 +547,23 @@ class ReportDetailPage extends StatelessWidget {
                       const Spacer(),
                       // Icons
                       _buildIcon(Icons.assignment_outlined),
-                      const SizedBox(width: 4),
+                      SizedBox(width: 4.w),
                       _buildIcon(Icons.people_outline),
-                      const SizedBox(width: 4),
+                      SizedBox(width: 4.w),
                       _buildIcon(Icons.description_outlined),
-                      const SizedBox(width: 8),
+                      SizedBox(width: 8.w),
                     ],
                   ),
                 ),
               ),
             ),
           ),
-          const SizedBox(width: 12),
+          SizedBox(width: 12.w),
           
           // FAB like icon (Cloud)
           Container(
-            width: 72,
-            height: 72,
+            width: 72.w,
+            height: 72.w,
             decoration: BoxDecoration(
               color: const Color(0xFFF1F8F8),
               shape: BoxShape.circle,
@@ -575,17 +578,17 @@ class ReportDetailPage extends StatelessWidget {
             child: Stack(
               alignment: Alignment.center,
               children: [
-                const Icon(Icons.cloud_upload_outlined, color: Colors.black87, size: 28),
+                Icon(Icons.cloud_upload_outlined, color: Colors.black87, size: 28.w),
                  Positioned(
-                    top: 18,
-                    right: 20,
+                    top: 18.h,
+                    right: 20.w,
                     child: Container(
-                      width: 10,
-                      height: 10,
+                      width: 10.w,
+                      height: 10.w,
                       decoration: BoxDecoration(
                         color: AppColors.statusNotify,
                         shape: BoxShape.circle,
-                        border: Border.all(color: const Color(0xFFF1F8F8), width: 1.5),
+                        border: Border.all(color: const Color(0xFFF1F8F8), width: 1.5.w),
                       ),
                     ),
                   ),
@@ -600,7 +603,7 @@ class ReportDetailPage extends StatelessWidget {
   Widget _buildIcon(IconData icon) {
     return IconButton(
       onPressed: () {},
-      icon: Icon(icon, color: Colors.black87, size: 24),
+      icon: Icon(icon, color: Colors.black87, size: 24.w),
       padding: EdgeInsets.zero,
       constraints: const BoxConstraints(),
     );

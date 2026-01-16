@@ -5,6 +5,7 @@ import 'package:go_router/go_router.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:hyper_focused/core/theme/app_colors.dart';
 import 'package:hyper_focused/features/templates/presentation/widgets/add_section_dialog.dart';
+import 'package:hyper_focused/core/utils/responsive_size.dart';
 
 class InspectionItemPage extends StatefulWidget {
   final String categoryName;
@@ -84,21 +85,21 @@ class _InspectionItemPageState extends State<InspectionItemPage> {
       context: context,
       backgroundColor: Colors.transparent,
       builder: (context) => Container(
-        margin: const EdgeInsets.only(left: 16, right: 16, bottom: 40),
-        padding: const EdgeInsets.symmetric(vertical: 8),
+        margin: EdgeInsets.only(left: 16.w, right: 16.w, bottom: 40.h),
+        padding: EdgeInsets.symmetric(vertical: 8.h),
         decoration: BoxDecoration(
           color: Colors.white,
-          borderRadius: BorderRadius.circular(12),
+          borderRadius: BorderRadius.circular(12.w),
         ),
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
             ListTile(
               leading: const Icon(Icons.edit_outlined, color: AppColors.neutral500),
-              title: const Text(
+              title: Text(
                 'Edit Sections',
                 style: TextStyle(
-                  fontSize: 16,
+                  fontSize: 16.sp,
                   fontWeight: FontWeight.w500,
                   color: AppColors.neutralDark,
                 ),
@@ -119,10 +120,10 @@ class _InspectionItemPageState extends State<InspectionItemPage> {
               // It looks like a map pin on a map/layer. `Icons.add_location_alt_outlined` is closest? 
               // Or standard `Icons.location_on_outlined`. The screenshot shows `Location` as `Icons.location_on_outlined` in the body.
               // In the menu it's a bit more complex. Let's use `Icons.add_location_alt_outlined` for "Add/Edit Location".
-              title: const Text(
+              title: Text(
                 'Add/Edit Location',
                 style: TextStyle(
-                  fontSize: 16,
+                  fontSize: 16.sp,
                   fontWeight: FontWeight.w500,
                   color: AppColors.neutralDark,
                 ),
@@ -137,10 +138,10 @@ class _InspectionItemPageState extends State<InspectionItemPage> {
             const Divider(height: 1, color: AppColors.neutral100),
             ListTile(
               leading: const Icon(Icons.camera_alt_outlined, color: AppColors.neutral500),
-              title: const Text(
+              title: Text(
                 'Edit Cover Photo',
                 style: TextStyle(
-                  fontSize: 16,
+                  fontSize: 16.sp,
                   fontWeight: FontWeight.w500,
                   color: AppColors.neutralDark,
                 ),
@@ -156,10 +157,10 @@ class _InspectionItemPageState extends State<InspectionItemPage> {
               // Screenshot icon looks like a grid/table. `Icons.table_chart_outlined`? 
               // Or `Icons.grid_on_outlined`.
               // Previous was `grid_view_outlined`. I'll stick to that or `grid_view`
-              title: const Text(
+              title: Text(
                 'Add a New Item',
                 style: TextStyle(
-                  fontSize: 16,
+                  fontSize: 16.sp,
                   fontWeight: FontWeight.w500,
                   color: AppColors.neutralDark,
                 ),
@@ -186,7 +187,7 @@ class _InspectionItemPageState extends State<InspectionItemPage> {
             top: 0,
             left: 0,
             right: 0,
-            height: 300,
+            height: 300.h,
             child: Container(
               decoration: BoxDecoration(
                 gradient: LinearGradient(
@@ -208,16 +209,16 @@ class _InspectionItemPageState extends State<InspectionItemPage> {
                 _buildHeader(context),
                 Expanded(
                   child: SingleChildScrollView(
-                    padding: const EdgeInsets.fromLTRB(16, 0, 16, 120),
+                    padding: EdgeInsets.fromLTRB(16.w, 0, 16.w, 120.h),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        const SizedBox(height: 16),
+                        SizedBox(height: 16.h),
                         // Hero Image
                         ClipRRect(
-                          borderRadius: BorderRadius.circular(12),
+                          borderRadius: BorderRadius.circular(12.w),
                           child: Container(
-                            height: 200,
+                            height: 200.h,
                             width: double.infinity,
                             color: Colors.grey[300], // Placeholder for image
                             child: _coverImage != null
@@ -233,7 +234,7 @@ class _InspectionItemPageState extends State<InspectionItemPage> {
                                ), 
                           ),
                         ),
-                        const SizedBox(height: 24),
+                        SizedBox(height: 24.h),
                         
                         // Location Section
                         _buildSectionHeader(
@@ -246,19 +247,19 @@ class _InspectionItemPageState extends State<InspectionItemPage> {
                             });
                           }
                         ),
-                        const SizedBox(height: 8),
+                        SizedBox(height: 8.h),
                         Container(
                           width: double.infinity,
-                          padding: const EdgeInsets.all(16),
+                          padding: EdgeInsets.all(16.w),
                           decoration: BoxDecoration(
                             color: Colors.white,
-                            borderRadius: BorderRadius.circular(12),
+                            borderRadius: BorderRadius.circular(12.w),
                           ),
                           child: _isEditingLocation 
                             ? TextField(
                                 controller: _locationController,
-                                style: const TextStyle(
-                                  fontSize: 16,
+                                style: TextStyle(
+                                  fontSize: 16.sp,
                                   color: AppColors.neutralDark,
                                   fontWeight: FontWeight.w500,
                                 ),
@@ -271,14 +272,14 @@ class _InspectionItemPageState extends State<InspectionItemPage> {
                               )
                             : Text(
                                 _locationController.text,
-                                style: const TextStyle(
-                                  fontSize: 16,
+                                style: TextStyle(
+                                  fontSize: 16.sp,
                                   color: AppColors.neutralDark,
                                   fontWeight: FontWeight.w500,
                                 ),
                               ),
                         ),
-                        const SizedBox(height: 24),
+                        SizedBox(height: 24.h),
 
                         // Items Section
                         _buildSectionHeader(
@@ -287,7 +288,7 @@ class _InspectionItemPageState extends State<InspectionItemPage> {
                           actionLabel: _isEditingItems ? 'Save Changes' : 'Edit Items', 
                           onAction: _toggleEditItems
                         ),
-                        const SizedBox(height: 8),
+                        SizedBox(height: 8.h),
                         
                         if (_isEditingItems)
                           ReorderableListView.builder(
@@ -311,7 +312,7 @@ class _InspectionItemPageState extends State<InspectionItemPage> {
                             itemBuilder: (context, index) {
                               return Container(
                                 key: ValueKey(_items[index]),
-                                margin: const EdgeInsets.only(bottom: 12),
+                                margin: EdgeInsets.only(bottom: 12.h),
                                 child: _buildItemRow(_items[index], index: index),
                               );
                             },
@@ -323,37 +324,37 @@ class _InspectionItemPageState extends State<InspectionItemPage> {
                             itemCount: _items.length,
                             itemBuilder: (context, index) {
                               return Container(
-                                margin: const EdgeInsets.only(bottom: 12),
+                                margin: EdgeInsets.only(bottom: 12.h),
                                 child: _buildItemRow(_items[index]),
                               );
                             },
                           ),
                         
-                        const SizedBox(height: 12),
+                        SizedBox(height: 12.h),
                         // Add Item Button
                         if (!_isEditingItems)
                         GestureDetector(
                           onTap: () => _showAddItemDialog(context),
                           child: Container(
                             width: double.infinity,
-                            padding: const EdgeInsets.symmetric(vertical: 16),
+                            padding: EdgeInsets.symmetric(vertical: 16.h),
                             decoration: BoxDecoration(
                               color: const Color(0xFF00A98E), // Green color from screenshot
-                              borderRadius: BorderRadius.circular(12),
+                              borderRadius: BorderRadius.circular(12.w),
                             ),
-                            child: const Center(
+                            child: Center(
                               child: Text(
                                 'Add Item',
                                 style: TextStyle(
                                   color: Colors.white,
-                                  fontSize: 16,
+                                  fontSize: 16.sp,
                                   fontWeight: FontWeight.w600,
                                 ),
                               ),
                             ),
                           ),
                         ),
-                        const SizedBox(height: 20),
+                        SizedBox(height: 20.h),
                       ],
                     ),
                   ),
@@ -376,7 +377,7 @@ class _InspectionItemPageState extends State<InspectionItemPage> {
 
   Widget _buildHeader(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+      padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 8.h),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
@@ -385,7 +386,7 @@ class _InspectionItemPageState extends State<InspectionItemPage> {
               GestureDetector(
                 onTap: () => context.pop(),
                 child: Container(
-                  padding: const EdgeInsets.all(8),
+                  padding: EdgeInsets.all(8.w),
                   decoration: const BoxDecoration(
                     color: Colors.white,
                     shape: BoxShape.circle,
@@ -397,37 +398,37 @@ class _InspectionItemPageState extends State<InspectionItemPage> {
                       ),
                     ],
                   ),
-                  child: const Icon(Icons.arrow_back, color: Colors.black87, size: 20),
+                  child: Icon(Icons.arrow_back, color: Colors.black87, size: 20.w),
                 ),
               ),
-              const SizedBox(width: 12),
+              SizedBox(width: 12.w),
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  const Text(
+                  Text(
                     'Inspection Details',
                     style: TextStyle(
                       color: AppColors.neutral500,
-                      fontSize: 12,
+                      fontSize: 12.sp,
                     ),
                   ),
                   Row(
                     children: [
                       Text(
                         widget.categoryName,
-                        style: const TextStyle(
+                        style: TextStyle(
                           color: AppColors.neutralDark,
                           fontWeight: FontWeight.bold,
-                          fontSize: 14,
+                          fontSize: 14.sp,
                         ),
                       ),
-                      const Icon(Icons.keyboard_arrow_right, size: 16, color: AppColors.neutralDark),
+                      Icon(Icons.keyboard_arrow_right, size: 16.w, color: AppColors.neutralDark),
                       Text(
                         widget.sectionName,
-                        style: const TextStyle(
+                        style: TextStyle(
                           color: AppColors.neutralDark,
                           fontWeight: FontWeight.bold,
-                          fontSize: 14,
+                          fontSize: 14.sp,
                         ),
                       ),
                     ],
@@ -460,12 +461,12 @@ class _InspectionItemPageState extends State<InspectionItemPage> {
       children: [
         Row(
           children: [
-            Icon(icon, size: 20, color: AppColors.neutral500),
-            const SizedBox(width: 8),
+            Icon(icon, size: 20.w, color: AppColors.neutral500),
+            SizedBox(width: 8.w),
             Text(
               title,
-              style: const TextStyle(
-                fontSize: 16,
+              style: TextStyle(
+                fontSize: 16.sp,
                 fontWeight: FontWeight.bold,
                 color: AppColors.neutralDark,
               ),
@@ -481,10 +482,10 @@ class _InspectionItemPageState extends State<InspectionItemPage> {
           ),
           child: Text(
             actionLabel,
-            style: const TextStyle(
-              color: Color(0xFF00A98E), // Green like "Add Item" button
+            style: TextStyle(
+              color: const Color(0xFF00A98E), // Green like "Add Item" button
               fontWeight: FontWeight.w600,
-              fontSize: 14,
+              fontSize: 14.sp,
             ),
           ),
         ),
@@ -495,19 +496,19 @@ class _InspectionItemPageState extends State<InspectionItemPage> {
   Widget _buildItemRow(String itemName, {int? index}) {
     final pins = _itemPins[itemName];
     return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
+      padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 16.h),
       decoration: BoxDecoration(
         color: Colors.white,
-        borderRadius: BorderRadius.circular(12),
+        borderRadius: BorderRadius.circular(12.w),
       ),
       child: Row(
         children: [
           if (_isEditingItems)
             ReorderableDragStartListener(
               index: index!,
-              child: const Padding(
-                padding: EdgeInsets.only(right: 16),
-                child: Icon(Icons.menu, color: AppColors.neutral500),
+              child: Padding(
+                padding: EdgeInsets.only(right: 16.w),
+                child: const Icon(Icons.menu, color: AppColors.neutral500),
               ),
             ),
           Expanded(
@@ -525,8 +526,8 @@ class _InspectionItemPageState extends State<InspectionItemPage> {
               behavior: HitTestBehavior.translucent,
               child: Text(
                 itemName,
-                style: const TextStyle(
-                  fontSize: 16,
+                style: TextStyle(
+                  fontSize: 16.sp,
                   fontWeight: FontWeight.w500,
                   color: AppColors.neutralDark,
                 ),
@@ -535,17 +536,17 @@ class _InspectionItemPageState extends State<InspectionItemPage> {
           ),
           if (!_isEditingItems) ...[
             if (pins != null) ...[
-              const Icon(Icons.push_pin_outlined, size: 16, color: Color(0xFF00A98E)),
-              const SizedBox(width: 4),
+              Icon(Icons.push_pin_outlined, size: 16.w, color: const Color(0xFF00A98E)),
+              SizedBox(width: 4.w),
               Text(
                 '$pins Pins',
-                style: const TextStyle(
-                  color: Color(0xFF00A98E),
-                  fontSize: 14,
+                style: TextStyle(
+                  color: const Color(0xFF00A98E),
+                  fontSize: 14.sp,
                   fontWeight: FontWeight.w500,
                 ),
               ),
-              const SizedBox(width: 12),
+              SizedBox(width: 12.w),
             ],
             GestureDetector(
               onTap: () {
@@ -559,14 +560,14 @@ class _InspectionItemPageState extends State<InspectionItemPage> {
                 );
               },
               behavior: HitTestBehavior.translucent,
-              child: const Icon(Icons.arrow_forward_ios, size: 16, color: AppColors.neutralDark),
+              child: Icon(Icons.arrow_forward_ios, size: 16.w, color: AppColors.neutralDark),
             ),
           ] else
             GestureDetector(
               onTap: () => _removeItem(index!),
               child: Container(
-                width: 24, 
-                height: 2, 
+                width: 24.w, 
+                height: 2.h, 
                 color: Colors.red,
               ),
             )
@@ -577,7 +578,7 @@ class _InspectionItemPageState extends State<InspectionItemPage> {
 
   Widget _buildBottomActionBar(BuildContext context) {
     return Container(
-      padding: const EdgeInsets.only(left: 24, right: 24, bottom: 32),
+      padding: EdgeInsets.only(left: 24.w, right: 24.w, bottom: 32.h),
       child: Row(
         mainAxisSize: MainAxisSize.min,
         crossAxisAlignment: CrossAxisAlignment.end,
@@ -585,15 +586,15 @@ class _InspectionItemPageState extends State<InspectionItemPage> {
           // Capsule Container
           Expanded(
             child: ClipRRect(
-              borderRadius: BorderRadius.circular(50),
+              borderRadius: BorderRadius.circular(50.w),
               child: BackdropFilter(
                 filter: ImageFilter.blur(sigmaX: 10, sigmaY: 10),
                 child: Container(
-                  height: 72,
-                  padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 8),
+                  height: 72.h,
+                  padding: EdgeInsets.symmetric(horizontal: 8.w, vertical: 8.h),
                   decoration: BoxDecoration(
                     color: Colors.white.withOpacity(0.8),
-                    borderRadius: BorderRadius.circular(50),
+                    borderRadius: BorderRadius.circular(50.w),
                     boxShadow: [
                       BoxShadow(
                         color: Colors.black.withOpacity(0.08),
@@ -610,7 +611,7 @@ class _InspectionItemPageState extends State<InspectionItemPage> {
                       // Camera Icon
                       IconButton(
                         onPressed: () {},
-                        icon: const Icon(Icons.camera_alt_outlined, color: Colors.black87, size: 24),
+                        icon: Icon(Icons.camera_alt_outlined, color: Colors.black87, size: 24.w),
                         padding: EdgeInsets.zero,
                         constraints: const BoxConstraints(),
                       ),
@@ -621,14 +622,14 @@ class _InspectionItemPageState extends State<InspectionItemPage> {
               ),
             ),
           ),
-          const SizedBox(width: 12),
+          SizedBox(width: 12.w),
           
           // FAB like icon (Menu)
           GestureDetector(
             onTap: () => _showMenuModal(context),
             child: Container(
-              width: 72,
-              height: 72,
+              width: 72.w,
+              height: 72.w,
               decoration: BoxDecoration(
                 color: Colors.white,
                 shape: BoxShape.circle,
@@ -640,7 +641,7 @@ class _InspectionItemPageState extends State<InspectionItemPage> {
                     ),
                   ],
               ),
-              child: const Icon(Icons.menu, color: Colors.black87, size: 28),
+              child: Icon(Icons.menu, color: Colors.black87, size: 28.w),
             ),
           ),
         ],
@@ -651,7 +652,7 @@ class _InspectionItemPageState extends State<InspectionItemPage> {
   Widget _buildIcon(IconData icon) {
     return IconButton(
       onPressed: () {},
-      icon: Icon(icon, color: Colors.black87, size: 24),
+      icon: Icon(icon, color: Colors.black87, size: 24.w),
       padding: EdgeInsets.zero,
       constraints: const BoxConstraints(),
     );

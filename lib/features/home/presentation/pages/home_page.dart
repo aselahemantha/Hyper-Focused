@@ -4,6 +4,7 @@ import 'package:hyper_focused/features/home/presentation/widgets/home_header.dar
 import 'package:hyper_focused/features/home/presentation/widgets/dashboard_stats.dart';
 import 'package:hyper_focused/features/home/presentation/widgets/upcoming_schedules.dart';
 import 'package:hyper_focused/features/home/presentation/widgets/recent_reports.dart';
+import 'package:hyper_focused/core/utils/responsive_size.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
@@ -28,18 +29,18 @@ class HomePage extends StatelessWidget {
         child: SafeArea(
           bottom: false,
           child: SingleChildScrollView(
-            padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
+            padding: EdgeInsets.symmetric(horizontal: 20.w, vertical: 20.h),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
-              children: const [
-                HomeHeader(),
-                SizedBox(height: 24),
-                DashboardStats(),
-                SizedBox(height: 24),
-                UpcomingSchedules(),
-                SizedBox(height: 24),
-                RecentReports(),
-                SizedBox(height: 100),
+              children: [
+                const HomeHeader(),
+                SizedBox(height: 24.h),
+                const DashboardStats(),
+                SizedBox(height: 24.h),
+                const UpcomingSchedules(),
+                SizedBox(height: 24.h),
+                const RecentReports(),
+                SizedBox(height: 100.h),
               ],
             ),
           ),

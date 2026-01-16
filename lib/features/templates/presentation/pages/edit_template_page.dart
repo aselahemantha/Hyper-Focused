@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hyper_focused/core/theme/app_colors.dart';
+import 'package:hyper_focused/core/utils/responsive_size.dart';
 
 class EditTemplatePage extends StatelessWidget {
   const EditTemplatePage({super.key});
@@ -13,11 +14,12 @@ class EditTemplatePage extends StatelessWidget {
           icon: const Icon(Icons.arrow_back, color: AppColors.neutralDark),
           onPressed: () => context.pop(),
         ),
-        title: const Text(
+        title: Text(
           'Edit Template',
           style: TextStyle(
             color: AppColors.neutralDark,
             fontWeight: FontWeight.bold,
+            fontSize: 18.sp,
           ),
         ),
         centerTitle: true,

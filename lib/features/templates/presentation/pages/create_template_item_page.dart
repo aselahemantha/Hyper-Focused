@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hyper_focused/core/theme/app_colors.dart';
 import 'package:hyper_focused/features/templates/presentation/widgets/add_item_dialog.dart';
+import 'package:hyper_focused/core/utils/responsive_size.dart';
 import 'dart:ui';
 
 class CreateTemplateItemPage extends StatefulWidget {
@@ -66,11 +67,11 @@ class _CreateTemplateItemPageState extends State<CreateTemplateItemPage> {
       extendBodyBehindAppBar: true,
       appBar: AppBar(
         leading: Padding(
-          padding: const EdgeInsets.only(left: 16),
+          padding: EdgeInsets.only(left: 16.w),
           child: CircleAvatar(
             backgroundColor: AppColors.neutralWhite,
             child: IconButton(
-              icon: const Icon(Icons.arrow_back_ios_new, size: 18, color: AppColors.neutralDark),
+              icon: Icon(Icons.arrow_back_ios_new, size: 18.w, color: AppColors.neutralDark),
               onPressed: () => context.pop(),
             ),
           ),
@@ -78,40 +79,40 @@ class _CreateTemplateItemPageState extends State<CreateTemplateItemPage> {
         title: Column(
           children: [
              RichText(
-              text: const TextSpan(
+              text: TextSpan(
                 style: TextStyle(
-                  fontSize: 12,
+                  fontSize: 12.sp,
                   color: AppColors.neutralDark,
                 ),
                 children: [
-                  TextSpan(text: 'Create a New Template '),
+                  const TextSpan(text: 'Create a New Template '),
                   WidgetSpan(
-                    child: Icon(Icons.arrow_forward, size: 12, color: AppColors.neutralDark),
+                    child: Icon(Icons.arrow_forward, size: 12.w, color: AppColors.neutralDark),
                     alignment: PlaceholderAlignment.middle,
                   ),
-                  TextSpan(text: ' Step 3'),
+                  const TextSpan(text: ' Step 3'),
                 ],
               ),
             ),
-            const SizedBox(height: 4),
+            SizedBox(height: 4.h),
             SingleChildScrollView(
               scrollDirection: Axis.horizontal,
               child: RichText(
                 text: TextSpan(
-                  style: const TextStyle(
+                  style: TextStyle(
                     color: AppColors.neutralDark,
-                    fontSize: 14, // Slightly smaller to fit breadcrumbs
+                    fontSize: 14.sp, // Slightly smaller to fit breadcrumbs
                     fontWeight: FontWeight.bold,
                   ),
                   children: [
                     const TextSpan(text: 'Main Categories '),
-                    const WidgetSpan(
-                      child: Icon(Icons.keyboard_arrow_right, size: 16, color: AppColors.neutralDark),
+                    WidgetSpan(
+                      child: Icon(Icons.keyboard_arrow_right, size: 16.w, color: AppColors.neutralDark),
                       alignment: PlaceholderAlignment.middle,
                     ),
                     TextSpan(text: ' ${widget.categoryName} '),
-                    const WidgetSpan(
-                      child: Icon(Icons.keyboard_arrow_right, size: 16, color: AppColors.neutralDark),
+                    WidgetSpan(
+                      child: Icon(Icons.keyboard_arrow_right, size: 16.w, color: AppColors.neutralDark),
                       alignment: PlaceholderAlignment.middle,
                     ),
                     TextSpan(text: ' ${widget.subCategoryName}'),
@@ -126,11 +127,11 @@ class _CreateTemplateItemPageState extends State<CreateTemplateItemPage> {
         elevation: 0,
         actions: [
           Padding(
-            padding: const EdgeInsets.only(right: 16),
+            padding: EdgeInsets.only(right: 16.w),
             child: CircleAvatar(
               backgroundColor: Colors.black,
-              radius: 14,
-              child: const Icon(Icons.info_outline, color: Colors.white, size: 18),
+              radius: 14.w,
+              child: Icon(Icons.info_outline, color: Colors.white, size: 18.w),
             ),
           ),
         ],
@@ -152,57 +153,57 @@ class _CreateTemplateItemPageState extends State<CreateTemplateItemPage> {
           child: Stack(
             children: [
               ListView(
-                padding: const EdgeInsets.fromLTRB(16, 16, 16, 100),
+                padding: EdgeInsets.fromLTRB(16.w, 16.h, 16.w, 100.h),
                 children: [
-                  const Text(
+                  Text(
                     'You can manage your services here. These services will be shown on your website.',
                     style: TextStyle(
-                      fontSize: 14,
+                      fontSize: 14.sp,
                       color: AppColors.neutral500,
                     ),
                   ),
-                  const SizedBox(height: 16),
+                  SizedBox(height: 16.h),
 
                   // Cover Image Placeholder
                   Container(
-                    height: 150,
+                    height: 150.h,
                     width: double.infinity,
                     decoration: BoxDecoration(
                       color: AppColors.neutralWhite,
-                      borderRadius: BorderRadius.circular(12),
+                      borderRadius: BorderRadius.circular(12.w),
                     ),
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        const Icon(Icons.image_outlined, size: 48, color: AppColors.neutralDark),
-                        const SizedBox(height: 8),
-                        const Text(
+                        Icon(Icons.image_outlined, size: 48.w, color: AppColors.neutralDark),
+                        SizedBox(height: 8.h),
+                        Text(
                           'Cover Image Position',
                           style: TextStyle(
                             color: AppColors.neutral500,
-                            fontSize: 14,
+                            fontSize: 14.sp,
                           ),
                         ),
                       ],
                     ),
                   ),
-                  const SizedBox(height: 16),
+                  SizedBox(height: 16.h),
                   
                   // General Info Item
                   Container(
-                    padding: const EdgeInsets.all(16),
+                    padding: EdgeInsets.all(16.w),
                     decoration: BoxDecoration(
                       color: AppColors.neutralWhite,
-                      borderRadius: BorderRadius.circular(12),
+                      borderRadius: BorderRadius.circular(12.w),
                     ),
                     child: Row(
                       children: [
                         const Icon(Icons.info_outline, color: AppColors.neutral500),
-                        const SizedBox(width: 12),
-                        const Text(
+                        SizedBox(width: 12.w),
+                        Text(
                           'General Info (Default)',
                           style: TextStyle(
-                            fontSize: 16,
+                            fontSize: 16.sp,
                             fontWeight: FontWeight.w500,
                             color: AppColors.neutralDark,
                           ),
@@ -210,19 +211,19 @@ class _CreateTemplateItemPageState extends State<CreateTemplateItemPage> {
                       ],
                     ),
                   ),
-                  const SizedBox(height: 16),
+                  SizedBox(height: 16.h),
                   
                   // Items
                   ..._items.asMap().entries.map((entry) {
                     final index = entry.key;
                     final item = entry.value;
                     return Padding(
-                      padding: const EdgeInsets.only(bottom: 16),
+                      padding: EdgeInsets.only(bottom: 16.h),
                       child: Container(
-                        padding: const EdgeInsets.all(16),
+                        padding: EdgeInsets.all(16.w),
                         decoration: BoxDecoration(
                           color: AppColors.neutralWhite,
-                          borderRadius: BorderRadius.circular(12),
+                          borderRadius: BorderRadius.circular(12.w),
                         ),
                         child: Row(
                           children: [
@@ -238,8 +239,8 @@ class _CreateTemplateItemPageState extends State<CreateTemplateItemPage> {
                                         border: InputBorder.none,
                                         contentPadding: EdgeInsets.zero,
                                       ),
-                                      style: const TextStyle(
-                                        fontSize: 16,
+                                      style: TextStyle(
+                                        fontSize: 16.sp,
                                         fontWeight: FontWeight.w500,
                                         color: AppColors.neutralDark,
                                       ),
@@ -249,8 +250,8 @@ class _CreateTemplateItemPageState extends State<CreateTemplateItemPage> {
                                     children: [
                                       Text(
                                         item,
-                                        style: const TextStyle(
-                                          fontSize: 16,
+                                        style: TextStyle(
+                                          fontSize: 16.sp,
                                           fontWeight: FontWeight.w500,
                                           color: AppColors.neutralDark,
                                         ),
@@ -296,10 +297,10 @@ class _CreateTemplateItemPageState extends State<CreateTemplateItemPage> {
                     onTap: () => _showAddItemDialog(context),
                     child: Container(
                       width: double.infinity,
-                      padding: const EdgeInsets.symmetric(vertical: 20),
+                      padding: EdgeInsets.symmetric(vertical: 20.h),
                       decoration: BoxDecoration(
                         color: AppColors.neutralWhite.withOpacity(0.5),
-                        borderRadius: BorderRadius.circular(12),
+                        borderRadius: BorderRadius.circular(12.w),
                         border: Border.all(
                           color: AppColors.neutral100,
                            width: 1.5,
@@ -316,12 +317,12 @@ class _CreateTemplateItemPageState extends State<CreateTemplateItemPage> {
                       // Actually, let's look at the previous code for "Add New Section" button style.
                       // decoration: BoxDecoration(color: AppColors.neutralWhite.withOpacity(0.5), borderRadius: BorderRadius.circular(12), border: Border.all(color: AppColors.neutral100, style: BorderStyle.solid)),
                       // I'll copy that.
-                     child: const Center(
+                     child: Center(
                         child: Text(
                           'Click to add a New Item',
                           style: TextStyle(
                             color: AppColors.neutral500,
-                            fontSize: 16,
+                            fontSize: 16.sp,
                           ),
                         ),
                       ),
@@ -332,22 +333,22 @@ class _CreateTemplateItemPageState extends State<CreateTemplateItemPage> {
               
               // Bottom Bar
               Positioned(
-                bottom: 24,
-                left: 16,
-                right: 16,
+                bottom: 24.h,
+                left: 16.w,
+                right: 16.w,
                 child: Row(
                   children: [
                     Expanded(
                       child: ClipRRect(
-                        borderRadius: BorderRadius.circular(35),
+                        borderRadius: BorderRadius.circular(35.w),
                         child: BackdropFilter(
                           filter: ImageFilter.blur(sigmaX: 10, sigmaY: 10),
                           child: Container(
-                            height: 70,
-                            padding: const EdgeInsets.symmetric(horizontal: 24),
+                            height: 70.w,
+                            padding: EdgeInsets.symmetric(horizontal: 24.w),
                             decoration: BoxDecoration(
                               color: AppColors.neutralWhite.withOpacity(0.3),
-                              borderRadius: BorderRadius.circular(35),
+                              borderRadius: BorderRadius.circular(35.w),
                               boxShadow: [
                                 BoxShadow(
                                   color: AppColors.neutralDark.withOpacity(0.1),
@@ -360,34 +361,34 @@ class _CreateTemplateItemPageState extends State<CreateTemplateItemPage> {
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
                                 IconButton(
-                                  icon: const Icon(Icons.arrow_back, color: AppColors.neutralDark, size: 28),
+                                  icon: Icon(Icons.arrow_back, color: AppColors.neutralDark, size: 28.w),
                                   onPressed: () => context.pop(),
                                 ),
                                 if (_isEditing)
                                    IconButton(
-                                    icon: const Icon(Icons.check, color: AppColors.neutralDark, size: 28),
+                                    icon: Icon(Icons.check, color: AppColors.neutralDark, size: 28.w),
                                     onPressed: () => _toggleEditMode(),
                                   )
                                 else 
                                   IconButton(
-                                  icon: const Icon(Icons.save_outlined, color: AppColors.neutralDark, size: 28),
+                                  icon: Icon(Icons.save_outlined, color: AppColors.neutralDark, size: 28.w),
                                   onPressed: () {},
                                 ),
                                 if (_isEditing)
                                    IconButton(
-                                    icon: const Icon(Icons.save_outlined, color: AppColors.neutralDark, size: 28),
+                                    icon: Icon(Icons.save_outlined, color: AppColors.neutralDark, size: 28.w),
                                     onPressed: () {
                                       _toggleEditMode();
                                     },
                                   )
                                 else if (_items.isNotEmpty)
                                   IconButton(
-                                    icon: const Icon(Icons.edit_outlined, color: AppColors.neutralDark, size: 28),
+                                    icon: Icon(Icons.edit_outlined, color: AppColors.neutralDark, size: 28.w),
                                     onPressed: () => _toggleEditMode(),
                                   ),
                                 if (!_isEditing)
                                 IconButton(
-                                  icon: const Icon(Icons.add, color: AppColors.neutralDark, size: 28),
+                                  icon: Icon(Icons.add, color: AppColors.neutralDark, size: 28.w),
                                   onPressed: () => _showAddItemDialog(context),
                                 ),
                               ],
@@ -396,12 +397,12 @@ class _CreateTemplateItemPageState extends State<CreateTemplateItemPage> {
                         ),
                       ),
                     ),
-                    const SizedBox(width: 16),
+                    SizedBox(width: 16.w),
                     GestureDetector( // Keeping the menu for consistency, though maybe not strictly needed for this sub-view? Design keeps it usually.
                       onTap: () => _showMenuModal(context),
                       child: Container(
-                        width: 70,
-                        height: 70,
+                        width: 70.w,
+                        height: 70.w,
                         decoration: const BoxDecoration(
                             color: AppColors.neutralWhite,
                             shape: BoxShape.circle,
@@ -413,7 +414,7 @@ class _CreateTemplateItemPageState extends State<CreateTemplateItemPage> {
                               ),
                             ],
                           ),
-                        child: const Icon(Icons.menu, color: AppColors.neutralDark, size: 30),
+                        child: Icon(Icons.menu, color: AppColors.neutralDark, size: 30.w),
                       ),
                     ),
                   ],
@@ -431,11 +432,11 @@ class _CreateTemplateItemPageState extends State<CreateTemplateItemPage> {
       context: context,
       backgroundColor: Colors.transparent,
       builder: (context) => Container(
-        margin: const EdgeInsets.all(16),
-        padding: const EdgeInsets.symmetric(vertical: 8),
+        margin: EdgeInsets.all(16.w),
+        padding: EdgeInsets.symmetric(vertical: 8.h),
         decoration: BoxDecoration(
           color: Colors.white,
-          borderRadius: BorderRadius.circular(12),
+          borderRadius: BorderRadius.circular(12.w),
         ),
         child: Column(
           mainAxisSize: MainAxisSize.min,

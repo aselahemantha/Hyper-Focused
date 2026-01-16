@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hyper_focused/core/constants/app_strings.dart';
 import 'package:hyper_focused/core/theme/app_colors.dart';
+import 'package:hyper_focused/core/utils/responsive_size.dart';
 
 class SplashPage extends StatefulWidget {
   const SplashPage({super.key});
@@ -63,22 +64,22 @@ class _SplashPageState extends State<SplashPage> {
                    // Placeholder for user's logo or existing one
                    Image.asset(
                      'assets/images/logo_full.png', // Assuming a full logo exists or use the one we saw before
-                     height: 120, // Adjust size
+                     height: 120.h, // Adjust size
                      errorBuilder: (context, error, stackTrace) => Column(
                        children: [
-                         const Icon(Icons.inventory_2_outlined, size: 80, color: Colors.white), // Placeholder icon
-                         const SizedBox(height: 16),
+                         Icon(Icons.inventory_2_outlined, size: 80.w, color: Colors.white), // Placeholder icon
+                         SizedBox(height: 16.h),
                          // If image fails, show text logic here or just the text below
                        ],
                      ),
                    ),
-                   const SizedBox(height: 16),
-                   const Text(
+                   SizedBox(height: 16.h),
+                   Text(
                      AppStrings.appTitle,
                      textAlign: TextAlign.center,
                      style: TextStyle(
-                       color: Color(0xFF005544), // Darker green text based on image
-                       fontSize: 32,
+                       color: const Color(0xFF005544), // Darker green text based on image
+                       fontSize: 32.sp,
                        fontWeight: FontWeight.w900,
                        letterSpacing: 2.0,
                        height: 1.0,
@@ -92,12 +93,12 @@ class _SplashPageState extends State<SplashPage> {
              Align(
                alignment: Alignment.bottomCenter,
                child: Padding(
-                 padding: const EdgeInsets.only(bottom: 40.0),
+                 padding: EdgeInsets.only(bottom: 40.0.h),
                  child: Text(
                    AppStrings.copyright,
                    style: TextStyle(
                      color: AppColors.primaryExtDark,
-                     fontSize: 12,
+                     fontSize: 12.sp,
                    ),
                  ),
                ),

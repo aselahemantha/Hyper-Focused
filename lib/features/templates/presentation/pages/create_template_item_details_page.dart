@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hyper_focused/core/theme/app_colors.dart';
+import 'package:hyper_focused/core/utils/responsive_size.dart';
 import 'dart:ui';
 
 class CreateTemplateItemDetailsPage extends StatefulWidget {
@@ -29,11 +30,11 @@ class _CreateTemplateItemDetailsPageState extends State<CreateTemplateItemDetail
       extendBodyBehindAppBar: true,
       appBar: AppBar(
         leading: Padding(
-          padding: const EdgeInsets.only(left: 16),
+          padding: EdgeInsets.only(left: 16.w),
           child: CircleAvatar(
             backgroundColor: AppColors.neutralWhite,
             child: IconButton(
-              icon: const Icon(Icons.arrow_back_ios_new, size: 18, color: AppColors.neutralDark),
+              icon: Icon(Icons.arrow_back_ios_new, size: 18.w, color: AppColors.neutralDark),
               onPressed: () => context.pop(),
             ),
           ),
@@ -41,40 +42,40 @@ class _CreateTemplateItemDetailsPageState extends State<CreateTemplateItemDetail
         title: Column(
           children: [
             RichText(
-              text: const TextSpan(
+              text: TextSpan(
                 style: TextStyle(
-                  fontSize: 12,
+                  fontSize: 12.sp,
                   color: AppColors.neutralDark,
                 ),
                 children: [
-                  TextSpan(text: 'Create a New Template '),
+                  const TextSpan(text: 'Create a New Template '),
                   WidgetSpan(
-                    child: Icon(Icons.arrow_forward, size: 12, color: AppColors.neutralDark),
+                    child: Icon(Icons.arrow_forward, size: 12.w, color: AppColors.neutralDark),
                     alignment: PlaceholderAlignment.middle,
                   ),
-                  TextSpan(text: ' Step 2'), // Design keeps Step 2 label even deep in hierarchy sometimes, user req image shows "Step 2"
+                  const TextSpan(text: ' Step 2'), // Design keeps Step 2 label even deep in hierarchy sometimes, user req image shows "Step 2"
                 ],
               ),
             ),
-            const SizedBox(height: 4),
+            SizedBox(height: 4.h),
             SingleChildScrollView(
               scrollDirection: Axis.horizontal,
               child: RichText(
                 text: TextSpan(
-                  style: const TextStyle(
+                  style: TextStyle(
                     color: AppColors.neutralDark,
-                    fontSize: 14,
+                    fontSize: 14.sp,
                     fontWeight: FontWeight.bold,
                   ),
                   children: [
                     const TextSpan(text: 'Main Categories '),
-                    const WidgetSpan(
-                      child: Icon(Icons.keyboard_arrow_right, size: 16, color: AppColors.neutralDark),
+                    WidgetSpan(
+                      child: Icon(Icons.keyboard_arrow_right, size: 16.w, color: AppColors.neutralDark),
                       alignment: PlaceholderAlignment.middle,
                     ),
                     TextSpan(text: ' ${widget.categoryName} '),
-                    const WidgetSpan(
-                      child: Icon(Icons.keyboard_arrow_right, size: 16, color: AppColors.neutralDark),
+                    WidgetSpan(
+                      child: Icon(Icons.keyboard_arrow_right, size: 16.w, color: AppColors.neutralDark),
                       alignment: PlaceholderAlignment.middle,
                     ),
                     TextSpan(text: ' ${widget.subCategoryName}'),
@@ -89,11 +90,11 @@ class _CreateTemplateItemDetailsPageState extends State<CreateTemplateItemDetail
         elevation: 0,
         actions: [
           Padding(
-            padding: const EdgeInsets.only(right: 16),
+            padding: EdgeInsets.only(right: 16.w),
             child: CircleAvatar(
               backgroundColor: Colors.black,
-              radius: 14,
-              child: const Icon(Icons.info_outline, color: Colors.white, size: 18),
+              radius: 14.w,
+              child: Icon(Icons.info_outline, color: Colors.white, size: 18.w),
             ),
           ),
         ],
@@ -115,34 +116,34 @@ class _CreateTemplateItemDetailsPageState extends State<CreateTemplateItemDetail
           child: Stack(
             children: [
               ListView(
-                padding: const EdgeInsets.fromLTRB(16, 16, 16, 100),
+                padding: EdgeInsets.fromLTRB(16.w, 16.h, 16.w, 100.h),
                 children: [
                   // Item Name Title
                   Text(
                     widget.itemName,
-                    style: const TextStyle(
-                      fontSize: 18,
+                    style: TextStyle(
+                      fontSize: 18.sp,
                       fontWeight: FontWeight.bold,
                       color: AppColors.neutralDark,
                     ),
                   ),
-                  const SizedBox(height: 8),
-                  const Text(
+                  SizedBox(height: 8.h),
+                  Text(
                     'You can manage your services here. These services will be shown on your website.',
                     style: TextStyle(
-                      fontSize: 14,
+                      fontSize: 14.sp,
                       color: AppColors.neutral500,
                     ),
                   ),
-                  const SizedBox(height: 16),
+                  SizedBox(height: 16.h),
 
                   // Tabs
                   Container(
-                    height: 50, // Fixed height for tab bar row
+                    height: 50.h, // Fixed height for tab bar row
                     child: ListView.separated(
                       scrollDirection: Axis.horizontal,
                       itemCount: _tabs.length,
-                      separatorBuilder: (context, index) => const SizedBox(width: 12),
+                      separatorBuilder: (context, index) => SizedBox(width: 12.w),
                       itemBuilder: (context, index) {
                         final tab = _tabs[index];
                         final isSelected = _selectedTab == tab;
@@ -153,10 +154,10 @@ class _CreateTemplateItemDetailsPageState extends State<CreateTemplateItemDetail
                             });
                           },
                           child: Container(
-                            padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 12),
+                            padding: EdgeInsets.symmetric(horizontal: 24.w, vertical: 12.h),
                             decoration: BoxDecoration(
                               color: isSelected ? AppColors.primary : AppColors.neutralWhite,
-                              borderRadius: BorderRadius.circular(25),
+                              borderRadius: BorderRadius.circular(25.h),
                               border: Border.all(color: isSelected ? AppColors.primary : Colors.transparent),
                               boxShadow: [
                                 if (!isSelected)
@@ -181,14 +182,14 @@ class _CreateTemplateItemDetailsPageState extends State<CreateTemplateItemDetail
                       },
                     ),
                   ),
-                  const SizedBox(height: 24),
+                  SizedBox(height: 24.h),
 
                   // Location Input
                    Row(
                     children: [
-                      Icon(Icons.flag_outlined, color: AppColors.neutral500, size: 20),
-                      const SizedBox(width: 8),
-                      const Text(
+                      Icon(Icons.flag_outlined, color: AppColors.neutral500, size: 20.w),
+                      SizedBox(width: 8.w),
+                      Text(
                         'Location*',
                         style: TextStyle(
                           fontWeight: FontWeight.bold,
@@ -197,12 +198,12 @@ class _CreateTemplateItemDetailsPageState extends State<CreateTemplateItemDetail
                       ),
                     ],
                   ),
-                  const SizedBox(height: 8),
+                  SizedBox(height: 8.h),
                   Container(
-                    padding: const EdgeInsets.symmetric(horizontal: 16),
+                    padding: EdgeInsets.symmetric(horizontal: 16.w),
                     decoration: BoxDecoration(
                       color: AppColors.neutralWhite,
-                      borderRadius: BorderRadius.circular(12),
+                      borderRadius: BorderRadius.circular(12.w),
                     ),
                     child: const TextField(
                       decoration: InputDecoration(
@@ -212,7 +213,7 @@ class _CreateTemplateItemDetailsPageState extends State<CreateTemplateItemDetail
                       ),
                     ),
                   ),
-                  const SizedBox(height: 16),
+                  SizedBox(height: 16.h),
 
                   // Add New Item Button (Dynamic text based on tab)
                   GestureDetector(
@@ -221,10 +222,10 @@ class _CreateTemplateItemDetailsPageState extends State<CreateTemplateItemDetail
                     },
                     child: Container(
                       width: double.infinity,
-                      padding: const EdgeInsets.symmetric(vertical: 20),
+                      padding: EdgeInsets.symmetric(vertical: 20.h),
                       decoration: BoxDecoration(
                         color: AppColors.neutralWhite.withOpacity(0.5),
-                        borderRadius: BorderRadius.circular(12),
+                        borderRadius: BorderRadius.circular(12.w),
                         border: Border.all(
                           color: AppColors.neutral100,
                         ),
@@ -232,9 +233,9 @@ class _CreateTemplateItemDetailsPageState extends State<CreateTemplateItemDetail
                       child: Center(
                         child: Text(
                           'Click to add a New $_selectedTab', // e.g., "Click to add a New Information"
-                          style: const TextStyle(
+                          style: TextStyle(
                             color: AppColors.neutral500,
-                            fontSize: 16,
+                            fontSize: 16.sp,
                           ),
                         ),
                       ),
@@ -245,22 +246,22 @@ class _CreateTemplateItemDetailsPageState extends State<CreateTemplateItemDetail
 
               // Bottom Bar
               Positioned(
-                bottom: 24,
-                left: 16,
-                right: 16,
+                bottom: 24.h,
+                left: 16.w,
+                right: 16.w,
                 child: Row(
                   children: [
                     Expanded(
                       child: ClipRRect(
-                        borderRadius: BorderRadius.circular(35),
+                        borderRadius: BorderRadius.circular(35.h),
                         child: BackdropFilter(
                           filter: ImageFilter.blur(sigmaX: 10, sigmaY: 10),
                           child: Container(
-                            height: 70,
-                            padding: const EdgeInsets.symmetric(horizontal: 24),
+                            height: 70.w, // Using .w to keep it proportional if needed, or .h. 70.w is prob better for touch targets
+                            padding: EdgeInsets.symmetric(horizontal: 24.w),
                             decoration: BoxDecoration(
                               color: AppColors.neutralWhite.withOpacity(0.3),
-                              borderRadius: BorderRadius.circular(35),
+                              borderRadius: BorderRadius.circular(35.h),
                               boxShadow: [
                                 BoxShadow(
                                   color: AppColors.neutralDark.withOpacity(0.1),
@@ -273,21 +274,21 @@ class _CreateTemplateItemDetailsPageState extends State<CreateTemplateItemDetail
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
                                 IconButton(
-                                  icon: const Icon(Icons.arrow_back, color: AppColors.neutralDark, size: 28),
+                                  icon: Icon(Icons.arrow_back, color: AppColors.neutralDark, size: 28.w),
                                   onPressed: () => context.pop(),
                                 ),
                                 IconButton(
-                                  icon: const Icon(Icons.home_outlined, color: AppColors.neutralDark, size: 28),
+                                  icon: Icon(Icons.home_outlined, color: AppColors.neutralDark, size: 28.w),
                                   onPressed: () {
                                      context.go('/'); // Or wherever home is
                                   },
                                 ),
                                 IconButton(
-                                  icon: const Icon(Icons.edit_outlined, color: AppColors.neutralDark, size: 28),
+                                  icon: Icon(Icons.edit_outlined, color: AppColors.neutralDark, size: 28.w),
                                   onPressed: () {},
                                 ),
                                 IconButton(
-                                  icon: const Icon(Icons.save_outlined, color: AppColors.neutralDark, size: 28),
+                                  icon: Icon(Icons.save_outlined, color: AppColors.neutralDark, size: 28.w),
                                   onPressed: () {},
                                 ),
                               ],
@@ -296,12 +297,12 @@ class _CreateTemplateItemDetailsPageState extends State<CreateTemplateItemDetail
                         ),
                       ),
                     ),
-                    const SizedBox(width: 16),
+                    SizedBox(width: 16.w),
                     GestureDetector(
                       onTap: () => _showMenuModal(context),
                       child: Container(
-                        width: 70,
-                        height: 70,
+                        width: 70.w,
+                        height: 70.w,
                         decoration: const BoxDecoration(
                             color: AppColors.neutralWhite,
                             shape: BoxShape.circle,
@@ -313,7 +314,7 @@ class _CreateTemplateItemDetailsPageState extends State<CreateTemplateItemDetail
                               ),
                             ],
                           ),
-                        child: const Icon(Icons.menu, color: AppColors.neutralDark, size: 30),
+                        child: Icon(Icons.menu, color: AppColors.neutralDark, size: 30.w),
                       ),
                     ),
                   ],
@@ -331,11 +332,11 @@ class _CreateTemplateItemDetailsPageState extends State<CreateTemplateItemDetail
       context: context,
       backgroundColor: Colors.transparent,
       builder: (context) => Container(
-        margin: const EdgeInsets.all(16),
-        padding: const EdgeInsets.symmetric(vertical: 8),
+        margin: EdgeInsets.all(16.w),
+        padding: EdgeInsets.symmetric(vertical: 8.h),
         decoration: BoxDecoration(
           color: Colors.white,
-          borderRadius: BorderRadius.circular(12),
+          borderRadius: BorderRadius.circular(12.w),
         ),
         child: Column(
           mainAxisSize: MainAxisSize.min,

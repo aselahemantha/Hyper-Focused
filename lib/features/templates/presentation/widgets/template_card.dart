@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:hyper_focused/core/theme/app_colors.dart';
+import 'package:hyper_focused/core/utils/responsive_size.dart';
 
 class TemplateCard extends StatelessWidget {
   final String title;
@@ -18,11 +19,11 @@ class TemplateCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: const EdgeInsets.only(bottom: 16),
-      padding: const EdgeInsets.all(16),
+      margin: EdgeInsets.only(bottom: 16.h),
+      padding: EdgeInsets.all(16.w),
       decoration: BoxDecoration(
         color: AppColors.neutralWhite,
-        borderRadius: BorderRadius.circular(12),
+        borderRadius: BorderRadius.circular(12.w),
         boxShadow: [
           BoxShadow(
             color: Colors.black.withOpacity(0.05),
@@ -36,59 +37,59 @@ class TemplateCard extends StatelessWidget {
         children: [
           Text(
             title,
-            style: const TextStyle(
-              fontSize: 14,
+            style: TextStyle(
+              fontSize: 14.sp,
               fontWeight: FontWeight.bold,
               color: AppColors.neutralDark,
             ),
           ),
-          const SizedBox(height: 4),
+          SizedBox(height: 4.h),
           Text(
             description,
-            style: const TextStyle(
-              fontSize: 12,
+            style: TextStyle(
+              fontSize: 12.sp,
               color: AppColors.neutral500,
               height: 1.4,
             ),
           ),
-          const SizedBox(height: 16),
+          SizedBox(height: 16.h),
           Row(
             children: [
               Expanded(
                 child: OutlinedButton.icon(
                   onPressed: onExport,
-                  icon: const Icon(Icons.file_upload_outlined, size: 16),
-                  label: const Text(
+                  icon: Icon(Icons.file_upload_outlined, size: 16.w),
+                  label: Text(
                     'Export template',
-                    style: TextStyle(fontSize: 12),
+                    style: TextStyle(fontSize: 12.sp),
                   ),
                   style: OutlinedButton.styleFrom(
                     foregroundColor: const Color(0xFF2FA2B9),
                     side: const BorderSide(color: Color(0xFFE5E7EB)),
                     shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(8),
+                      borderRadius: BorderRadius.circular(8.w),
                     ),
-                    padding: const EdgeInsets.symmetric(vertical: 12),
+                    padding: EdgeInsets.symmetric(vertical: 12.h),
                     alignment: Alignment.center,
                   ),
                 ),
               ),
-              const SizedBox(width: 12),
+              SizedBox(width: 12.w),
               Expanded(
                 child: OutlinedButton.icon(
                   onPressed: onEdit,
-                  icon: const Icon(Icons.edit_outlined, size: 16),
-                  label: const Text(
+                  icon: Icon(Icons.edit_outlined, size: 16.w),
+                  label: Text(
                     'Edit Template',
-                    style: TextStyle(fontSize: 12),
+                    style: TextStyle(fontSize: 12.sp),
                   ),
                   style: OutlinedButton.styleFrom(
                     foregroundColor: const Color(0xFF2FA2B9),
                     side: const BorderSide(color: Color(0xFFE5E7EB)),
                     shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(8),
+                      borderRadius: BorderRadius.circular(8.w),
                     ),
-                    padding: const EdgeInsets.symmetric(vertical: 12),
+                    padding: EdgeInsets.symmetric(vertical: 12.h),
                     alignment: Alignment.center,
                   ),
                 ),

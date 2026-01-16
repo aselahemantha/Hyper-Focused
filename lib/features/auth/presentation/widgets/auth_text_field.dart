@@ -1,6 +1,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:hyper_focused/core/theme/app_colors.dart';
+import 'package:hyper_focused/core/utils/responsive_size.dart';
 
 class AuthTextField extends StatefulWidget {
   final String label;
@@ -34,31 +35,31 @@ class _AuthTextFieldState extends State<AuthTextField> {
       children: [
         Text(
           widget.label,
-          style: const TextStyle(
-            fontSize: 14,
+          style: TextStyle(
+            fontSize: 14.sp,
             fontWeight: FontWeight.w500,
             color: AppColors.neutralDark,
           ),
         ),
-        const SizedBox(height: 8),
+        SizedBox(height: 8.h),
         TextFormField(
           controller: widget.controller,
           obscureText: widget.isPassword ? _obscureText : false,
           validator: widget.validator,
           decoration: InputDecoration(
             hintText: widget.hintText,
-            hintStyle: const TextStyle(color: AppColors.textBody, fontSize: 14),
+            hintStyle: TextStyle(color: AppColors.textBody, fontSize: 14.sp),
             filled: true,
             fillColor: AppColors.neutral100,
             prefixIcon: widget.prefixIcon != null
-                ? Icon(widget.prefixIcon, color: AppColors.textBody, size: 20)
+                ? Icon(widget.prefixIcon, color: AppColors.textBody, size: 20.w)
                 : null,
             suffixIcon: widget.isPassword
                 ? IconButton(
                     icon: Icon(
                       _obscureText ? Icons.visibility_outlined : Icons.visibility_off_outlined,
                       color: AppColors.textBody,
-                      size: 20,
+                      size: 20.w,
                     ),
                     onPressed: () {
                       setState(() {
@@ -67,21 +68,21 @@ class _AuthTextFieldState extends State<AuthTextField> {
                     },
                   )
                 : null,
-            contentPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
+            contentPadding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 16.h),
             border: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(12),
+              borderRadius: BorderRadius.circular(12.w),
               borderSide: BorderSide.none,
             ),
             enabledBorder: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(12),
+              borderRadius: BorderRadius.circular(12.w),
               borderSide: BorderSide.none,
             ),
             focusedBorder: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(12),
+              borderRadius: BorderRadius.circular(12.w),
               borderSide: const BorderSide(color: AppColors.primary, width: 1.5),
             ),
             errorBorder: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(12),
+              borderRadius: BorderRadius.circular(12.w),
               borderSide: const BorderSide(color: Colors.red, width: 1.5),
             ),
           ),

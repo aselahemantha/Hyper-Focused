@@ -3,6 +3,7 @@ import 'package:flutter/services.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hyper_focused/core/theme/app_colors.dart';
 import 'package:hyper_focused/core/constants/app_strings.dart';
+import 'package:hyper_focused/core/utils/responsive_size.dart';
 
 class SignupVerifyPage extends StatefulWidget {
   const SignupVerifyPage({super.key});
@@ -52,7 +53,7 @@ class _SignupVerifyPageState extends State<SignupVerifyPage> {
         backgroundColor: Colors.white,
         elevation: 0,
         leading: Padding(
-          padding: const EdgeInsets.only(left: 16),
+          padding: EdgeInsets.only(left: 16.w),
           child: Container(
             decoration: BoxDecoration(
               shape: BoxShape.circle,
@@ -60,10 +61,10 @@ class _SignupVerifyPageState extends State<SignupVerifyPage> {
               border: Border.all(color: AppColors.neutral200),
             ),
             child: IconButton(
-              icon: const Icon(
+              icon: Icon(
                 Icons.arrow_back,
                 color: AppColors.neutralDark,
-                size: 20,
+                size: 20.w,
               ),
               onPressed: () => context.pop(),
               padding: EdgeInsets.zero,
@@ -73,30 +74,30 @@ class _SignupVerifyPageState extends State<SignupVerifyPage> {
       ),
       body: SafeArea(
         child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 24.0, vertical: 16.0),
+          padding: EdgeInsets.symmetric(horizontal: 24.w, vertical: 16.h),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const SizedBox(height: 16),
-              const Text(
+              SizedBox(height: 16.h),
+              Text(
                 AppStrings.enter6DigitCode,
                 style: TextStyle(
-                  fontSize: 24,
+                  fontSize: 24.sp,
                   fontWeight: FontWeight.w700,
                   color: AppColors.neutralDark,
                 ),
               ),
-              const SizedBox(height: 8),
+              SizedBox(height: 8.h),
               RichText(
-                text: const TextSpan(
+                text: TextSpan(
                   text: AppStrings.verifySubtitle,
                   style: TextStyle(
-                    fontSize: 14,
+                    fontSize: 14.sp,
                     color: AppColors.textBody,
                     height: 1.5,
                   ),
                   children: [
-                    TextSpan(
+                    const TextSpan(
                       text: 'jessydoe@email.com', // Passed from prev screen
                       style: TextStyle(
                         color: AppColors.primary,
@@ -107,15 +108,15 @@ class _SignupVerifyPageState extends State<SignupVerifyPage> {
                 ),
               ),
 
-              const SizedBox(height: 48),
+              SizedBox(height: 48.h),
 
               // OTP Input Fields
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: List.generate(6, (index) {
                   return SizedBox(
-                    width: 48,
-                    height: 56,
+                    width: 48.w,
+                    height: 56.h,
                     child: TextField(
                       controller: _controllers[index],
                       focusNode: _focusNodes[index],
@@ -123,8 +124,8 @@ class _SignupVerifyPageState extends State<SignupVerifyPage> {
                       keyboardType: TextInputType.number,
                       maxLength: 1,
                       onChanged: (value) => _onChanged(value, index),
-                      style: const TextStyle(
-                        fontSize: 20,
+                      style: TextStyle(
+                        fontSize: 20.sp,
                         fontWeight: FontWeight.w700,
                       ),
                       decoration: InputDecoration(
@@ -132,14 +133,14 @@ class _SignupVerifyPageState extends State<SignupVerifyPage> {
                         filled: true,
                         fillColor: AppColors.neutral100,
                         border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(8),
+                          borderRadius: BorderRadius.circular(8.w),
                           borderSide: BorderSide.none,
                         ),
                         focusedBorder: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(8),
-                          borderSide: const BorderSide(
+                          borderRadius: BorderRadius.circular(8.w),
+                          borderSide: BorderSide(
                             color: AppColors.primary,
-                            width: 1.5,
+                            width: 1.5.w,
                           ),
                         ),
                       ),
@@ -149,7 +150,7 @@ class _SignupVerifyPageState extends State<SignupVerifyPage> {
                 }),
               ),
 
-              const SizedBox(height: 24),
+              SizedBox(height: 24.h),
 
               // Timer and Help
               Row(
@@ -157,7 +158,7 @@ class _SignupVerifyPageState extends State<SignupVerifyPage> {
                 children: [
                   Text(
                     'Remaining 60s',
-                    style: TextStyle(color: AppColors.textBody, fontSize: 14),
+                    style: TextStyle(color: AppColors.textBody, fontSize: 14.sp),
                   ),
                   TextButton(
                     onPressed: () {},
@@ -172,12 +173,12 @@ class _SignupVerifyPageState extends State<SignupVerifyPage> {
                 ],
               ),
 
-              const SizedBox(height: 32),
+              SizedBox(height: 32.h),
 
               // Continue Button
               SizedBox(
                 width: double.infinity,
-                height: 56,
+                height: 56.h,
                 child: ElevatedButton(
                   onPressed: () {
                     // TODO: Validate OTP
@@ -187,37 +188,37 @@ class _SignupVerifyPageState extends State<SignupVerifyPage> {
                     backgroundColor: AppColors.primary,
                     foregroundColor: AppColors.neutralWhite,
                     shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(28),
+                      borderRadius: BorderRadius.circular(28.h),
                     ),
                     elevation: 0,
                   ),
-                  child: const Text(
+                  child: Text(
                     AppStrings.continueText,
-                    style: TextStyle(fontSize: 14, fontWeight: FontWeight.w500),
+                    style: TextStyle(fontSize: 14.sp, fontWeight: FontWeight.w500),
                   ),
                 ),
               ),
 
-              const SizedBox(height: 24),
+              SizedBox(height: 24.h),
 
               // Resend Code
               Center(
                 child: RichText(
                   text: TextSpan(
                     text: AppStrings.didntReceiveCode,
-                    style: TextStyle(color: AppColors.textBody, fontSize: 14),
+                    style: TextStyle(color: AppColors.textBody, fontSize: 14.sp),
                     children: [
                       WidgetSpan(
                         child: GestureDetector(
                           onTap: () {
                             // TODO: Resend action
                           },
-                          child: const Text(
+                          child: Text(
                             AppStrings.resendIt,
                             style: TextStyle(
                               color: AppColors.primary,
                               fontWeight: FontWeight.w500,
-                              fontSize: 14,
+                              fontSize: 14.sp,
                             ),
                           ),
                         ),

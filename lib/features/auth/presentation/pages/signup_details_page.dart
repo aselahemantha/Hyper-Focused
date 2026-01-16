@@ -5,6 +5,7 @@ import 'package:hyper_focused/features/auth/presentation/widgets/auth_text_field
 import 'package:hyper_focused/features/auth/presentation/controllers/auth_controller.dart';
 import 'package:hyper_focused/core/theme/app_colors.dart';
 import 'package:hyper_focused/core/constants/app_strings.dart';
+import 'package:hyper_focused/core/utils/responsive_size.dart';
 
 class SignupDetailsPage extends ConsumerStatefulWidget {
   const SignupDetailsPage({super.key});
@@ -41,7 +42,7 @@ class _SignupDetailsPageState extends ConsumerState<SignupDetailsPage> {
         backgroundColor: Colors.white,
         elevation: 0,
         leading: Padding(
-          padding: const EdgeInsets.only(left: 16),
+          padding: EdgeInsets.only(left: 16.w),
           child: Container(
             decoration: BoxDecoration(
               shape: BoxShape.circle,
@@ -49,10 +50,10 @@ class _SignupDetailsPageState extends ConsumerState<SignupDetailsPage> {
               border: Border.all(color: AppColors.neutral200),
             ),
             child: IconButton(
-              icon: const Icon(
+              icon: Icon(
                 Icons.arrow_back,
                 color: AppColors.neutralDark,
-                size: 20,
+                size: 20.w,
               ),
               onPressed: () => context.pop(),
               padding: EdgeInsets.zero,
@@ -62,32 +63,32 @@ class _SignupDetailsPageState extends ConsumerState<SignupDetailsPage> {
       ),
       body: SafeArea(
         child: SingleChildScrollView(
-          padding: const EdgeInsets.symmetric(horizontal: 24.0, vertical: 16.0),
+          padding: EdgeInsets.symmetric(horizontal: 24.w, vertical: 16.h),
           child: Form(
             key: _formKey,
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                const SizedBox(height: 16),
-                const Text(
+                SizedBox(height: 16.h),
+                Text(
                   AppStrings.employmentDetails,
                   style: TextStyle(
-                    fontSize: 24,
+                    fontSize: 24.sp,
                     fontWeight: FontWeight.w700,
                     color: AppColors.neutralDark,
                   ),
                 ),
-                const SizedBox(height: 8),
+                SizedBox(height: 8.h),
                 Text(
                   AppStrings.employmentDetailsSubtitle,
                   style: TextStyle(
-                    fontSize: 14,
+                    fontSize: 14.sp,
                     color: AppColors.textBody,
                     height: 1.5,
                   ),
                 ),
 
-                const SizedBox(height: 32),
+                SizedBox(height: 32.h),
 
                 // Phone Number
                 AuthTextField(
@@ -102,7 +103,7 @@ class _SignupDetailsPageState extends ConsumerState<SignupDetailsPage> {
                   },
                 ),
 
-                const SizedBox(height: 20),
+                SizedBox(height: 20.h),
 
                 // Company
                 AuthTextField(
@@ -112,7 +113,7 @@ class _SignupDetailsPageState extends ConsumerState<SignupDetailsPage> {
                   prefixIcon: Icons.business_outlined,
                 ),
 
-                const SizedBox(height: 20),
+                SizedBox(height: 20.h),
 
                 // Years
                 AuthTextField(
@@ -121,7 +122,7 @@ class _SignupDetailsPageState extends ConsumerState<SignupDetailsPage> {
                   controller: _yearsController,
                 ),
 
-                const SizedBox(height: 20),
+                SizedBox(height: 20.h),
 
                 // Number of Inspectors
                 AuthTextField(
@@ -130,12 +131,12 @@ class _SignupDetailsPageState extends ConsumerState<SignupDetailsPage> {
                   controller: _inspectorsCountController,
                 ),
 
-                const SizedBox(height: 32),
+                SizedBox(height: 32.h),
 
                 // Complete Button
                 SizedBox(
                   width: double.infinity,
-                  height: 56,
+                  height: 56.h,
                   child: ElevatedButton(
                     onPressed: _isLoading
                         ? null
@@ -158,30 +159,30 @@ class _SignupDetailsPageState extends ConsumerState<SignupDetailsPage> {
                       foregroundColor: AppColors.neutralWhite,
                       disabledBackgroundColor: AppColors.primary.withOpacity(0.6),
                       shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(28),
+                        borderRadius: BorderRadius.circular(28.h),
                       ),
                       elevation: 0,
                     ),
                     child: _isLoading
-                        ? const SizedBox(
-                            height: 24,
-                            width: 24,
-                            child: CircularProgressIndicator(
+                        ? SizedBox(
+                            height: 24.w,
+                            width: 24.w,
+                            child: const CircularProgressIndicator(
                               color: Colors.white,
                               strokeWidth: 2.5,
                             ),
                           )
-                        : const Text(
+                        : Text(
                             AppStrings.complete,
                             style: TextStyle(
-                              fontSize: 14,
+                              fontSize: 14.sp,
                               fontWeight: FontWeight.w500,
                               color: AppColors.neutralWhite,
                             ),
                           ),
                   ),
                 ),
-                const SizedBox(height: 20),
+                SizedBox(height: 20.h),
               ],
             ),
           ),

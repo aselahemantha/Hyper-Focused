@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:hyper_focused/core/theme/app_colors.dart';
+import 'package:hyper_focused/core/utils/responsive_size.dart';
 
 class AddDeficiencyDialog extends StatefulWidget {
   const AddDeficiencyDialog({super.key});
@@ -17,11 +18,11 @@ class _AddDeficiencyDialogState extends State<AddDeficiencyDialog> {
   Widget build(BuildContext context) {
     return Dialog(
       backgroundColor: Colors.white,
-      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
-      insetPadding: const EdgeInsets.symmetric(horizontal: 16),
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16.w)),
+      insetPadding: EdgeInsets.symmetric(horizontal: 16.w),
       child: SingleChildScrollView(
         child: Padding(
-          padding: const EdgeInsets.all(24),
+          padding: EdgeInsets.all(24.w),
           child: Column(
             mainAxisSize: MainAxisSize.min,
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -29,10 +30,10 @@ class _AddDeficiencyDialogState extends State<AddDeficiencyDialog> {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                   const Text(
+                   Text(
                     'Add a New Deficiency',
                     style: TextStyle(
-                      fontSize: 18,
+                      fontSize: 18.sp,
                       fontWeight: FontWeight.bold,
                       color: AppColors.neutralDark,
                     ),
@@ -41,16 +42,16 @@ class _AddDeficiencyDialogState extends State<AddDeficiencyDialog> {
                     onTap: () {
                       // Placeholder for add photo
                     },
-                    child: const Row(
+                    child: Row(
                       children: [
-                         Icon(Icons.camera_alt_outlined, size: 20, color: Color(0xFF00A98E)),
-                         SizedBox(width: 4),
+                         Icon(Icons.camera_alt_outlined, size: 20.w, color: const Color(0xFF00A98E)),
+                         SizedBox(width: 4.w),
                          Text(
                           'Add a Photo',
                           style: TextStyle(
-                            fontSize: 14,
+                            fontSize: 14.sp,
                             fontWeight: FontWeight.w600,
-                            color: Color(0xFF00A98E),
+                            color: const Color(0xFF00A98E),
                           ),
                         ),
                       ],
@@ -58,35 +59,35 @@ class _AddDeficiencyDialogState extends State<AddDeficiencyDialog> {
                   ),
                 ],
               ),
-              const SizedBox(height: 24),
+              SizedBox(height: 24.h),
               _buildTextField('Deficiency name', _nameController),
-              const SizedBox(height: 16),
+              SizedBox(height: 16.h),
               _buildTextField('Comment', _commentController, maxLines: 6),
-              const SizedBox(height: 24),
+              SizedBox(height: 24.h),
               Row(
                 children: [
                   Expanded(child: _buildStatusButton('Monitor', Icons.analytics_outlined, Colors.blue)),
-                  const SizedBox(width: 12),
+                  SizedBox(width: 12.w),
                   Expanded(child: _buildStatusButton('Deficiency', Icons.build_outlined, Colors.orange)),
-                  const SizedBox(width: 12),
+                  SizedBox(width: 12.w),
                   Expanded(child: _buildStatusButton('Priority', Icons.warning_amber_rounded, Colors.red)),
                 ],
               ),
-              const SizedBox(height: 32),
+              SizedBox(height: 32.h),
               Row(
                 children: [
                   Expanded(
                     child: OutlinedButton(
                       onPressed: () => Navigator.pop(context),
                       style: OutlinedButton.styleFrom(
-                        padding: const EdgeInsets.symmetric(vertical: 16),
+                        padding: EdgeInsets.symmetric(vertical: 16.h),
                         side: const BorderSide(color: AppColors.neutral200),
-                        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(30)),
+                        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(30.w)),
                       ),
                       child: const Text('Cancel', style: TextStyle(color: AppColors.neutralDark)),
                     ),
                   ),
-                  const SizedBox(width: 16),
+                  SizedBox(width: 16.w),
                    Expanded(
                     child: ElevatedButton(
                       onPressed: () {
@@ -101,8 +102,8 @@ class _AddDeficiencyDialogState extends State<AddDeficiencyDialog> {
                       },
                       style: ElevatedButton.styleFrom(
                         backgroundColor: const Color(0xFF00A98E),
-                        padding: const EdgeInsets.symmetric(vertical: 16),
-                        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(30)),
+                        padding: EdgeInsets.symmetric(vertical: 16.h),
+                        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(30.w)),
                         elevation: 0,
                       ),
                       child: const Text('Add', style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold)),
@@ -119,10 +120,10 @@ class _AddDeficiencyDialogState extends State<AddDeficiencyDialog> {
 
   Widget _buildTextField(String hint, TextEditingController controller, {int maxLines = 1}) {
     return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 4),
+      padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 4.h),
       decoration: BoxDecoration(
         color: const Color(0xFFF3F4F6),
-        borderRadius: BorderRadius.circular(8),
+        borderRadius: BorderRadius.circular(8.w),
       ),
       child: TextField(
         controller: controller,
@@ -130,7 +131,7 @@ class _AddDeficiencyDialogState extends State<AddDeficiencyDialog> {
         decoration: InputDecoration(
           border: InputBorder.none,
           hintText: hint,
-          hintStyle: const TextStyle(color: AppColors.neutral500, fontSize: 15),
+          hintStyle: TextStyle(color: AppColors.neutral500, fontSize: 15.sp),
         ),
       ),
     );
@@ -141,20 +142,20 @@ class _AddDeficiencyDialogState extends State<AddDeficiencyDialog> {
     return GestureDetector(
       onTap: () => setState(() => _selectedStatus = label),
       child: Container(
-        padding: const EdgeInsets.symmetric(vertical: 12),
+        padding: EdgeInsets.symmetric(vertical: 12.h),
         decoration: BoxDecoration(
           color: isSelected ? color.withOpacity(0.1) : const Color(0xFFE5E7EB),
-          borderRadius: BorderRadius.circular(8),
-          border: isSelected ? Border.all(color: color, width: 1.5) : null,
+          borderRadius: BorderRadius.circular(8.w),
+          border: isSelected ? Border.all(color: color, width: 1.5.w) : null,
         ),
         child: Column(
           children: [
-             Icon(icon, color: isSelected ? color : AppColors.neutral500, size: 20),
-            const SizedBox(height: 4),
+             Icon(icon, color: isSelected ? color : AppColors.neutral500, size: 20.w),
+            SizedBox(height: 4.h),
             Text(
               label,
               style: TextStyle(
-                fontSize: 13,
+                fontSize: 13.sp,
                 color: isSelected ? color : AppColors.neutral500,
                 fontWeight: isSelected ? FontWeight.w600 : FontWeight.w400,
               ),
