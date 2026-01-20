@@ -4,6 +4,7 @@ import 'package:go_router/go_router.dart';
 import 'package:hyper_focused/core/constants/app_strings.dart';
 import 'package:hyper_focused/core/theme/app_colors.dart';
 import 'package:hyper_focused/features/schedule/presentation/widgets/schedule_card.dart';
+import 'package:hyper_focused/features/schedule/domain/entities/schedule_entity.dart';
 import 'package:hyper_focused/core/presentation/widgets/week_calendar.dart';
 import 'package:hyper_focused/core/utils/responsive_size.dart';
 import 'package:intl/intl.dart';
@@ -18,6 +19,37 @@ class SchedulePage extends StatefulWidget {
 class _SchedulePageState extends State<SchedulePage> {
   bool _isCalendarOpen = true;
   DateTime _selectedDate = DateTime.now();
+
+  final List<ScheduleEntity> _dummySchedules = [
+    const ScheduleEntity(
+      id: '1',
+      status: 'In Progress',
+      imageUrl: 'assets/images/property_placeholder_1.jpg',
+      startTime: '8.00AM',
+      endTime: '12.00PM',
+      serviceName: 'Service Name Length',
+      personName: 'Jason Johnson',
+      address: '1005 S Lorem Ipsum, Dolor Dantos, Garylord St Dancer, Co 80209',
+      isSigned: true,
+      isPaymentCompleted: true,
+      isUploaded: false,
+      isPublished: false,
+    ),
+    const ScheduleEntity(
+      id: '2',
+      status: 'Completed',
+      imageUrl: 'assets/images/property_placeholder_2.jpg',
+      startTime: '1.00PM',
+      endTime: '5.00PM',
+      serviceName: 'Cleaning Service',
+      personName: 'Emily Clark',
+      address: '1234 N Lorem Ipsum, Dolor Dantos, Garylord St Dancer, Co 80209',
+      isSigned: true,
+      isPaymentCompleted: true,
+      isUploaded: true,
+      isPublished: true,
+    ),
+  ];
 
   @override
   Widget build(BuildContext context) {
@@ -34,8 +66,7 @@ class _SchedulePageState extends State<SchedulePage> {
                 children: [
                   _buildDateHeader(),
                   SizedBox(height: 16.h),
-                  const ScheduleCard(),
-                  const ScheduleCard(),
+                  ..._dummySchedules.map((schedule) => ScheduleCard(schedule: schedule)).toList(),
                   SizedBox(height: 80.h),
                 ],
               ),
@@ -236,8 +267,8 @@ class _SchedulePageState extends State<SchedulePage> {
         Text(
           DateFormat('d MMMM yyyy').format(_selectedDate),
           style: TextStyle(
-            fontWeight: FontWeight.bold,
-            fontSize: 16.sp,
+            fontWeight: FontWeight.w500,
+            fontSize: 14.sp,
             color: AppColors.neutralDark,
           ),
         ),
@@ -249,10 +280,10 @@ class _SchedulePageState extends State<SchedulePage> {
             tapTargetSize: MaterialTapTargetSize.shrinkWrap,
           ),
           child: Text(
-            'Sync Changes',
+            AppStrings.syncChanges,
             style: TextStyle(
               color: AppColors.primary,
-              fontWeight: FontWeight.w600,
+              fontWeight: FontWeight.w700,
               fontSize: 14.sp,
             ),
           ),

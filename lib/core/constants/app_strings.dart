@@ -114,6 +114,7 @@ class AppStrings {
 
   static const String viewing = 'Viewing';
   static const String yourSchedule = 'Your Schedule';
+  static const String syncChanges = 'Sync Changes';
 
 
 

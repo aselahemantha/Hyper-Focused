@@ -15,6 +15,11 @@ class AppColors {
   static const Color statusNotifyBell = Color(0xFFFFC107);
   static const Color statusCalender = Color(0xFFFFEBD3);
   static const Color statusError = Color(0xFFF38508);
+  static const Color success = Color(0xFF00B50C);
+  static const Color successLight = Color(0xFFE0EDD6);
+  static const Color error = Color(0xFFFF4A4A);
+  static const Color errorLight = Color(0xFFFFE9E9);
+
 
 
   // Backgrounds
