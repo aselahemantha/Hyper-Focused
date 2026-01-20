@@ -112,6 +112,10 @@ class AppStrings {
   static const String personalInformation = 'Personal Information';
   static const String personalDetails= 'Personal Details';
 
+  static const String viewing = 'Viewing';
+  static const String yourSchedule = 'Your Schedule';
+
+
 
 
 

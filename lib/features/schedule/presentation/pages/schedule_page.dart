@@ -1,8 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:go_router/go_router.dart';
+import 'package:hyper_focused/core/constants/app_strings.dart';
 import 'package:hyper_focused/core/theme/app_colors.dart';
 import 'package:hyper_focused/features/schedule/presentation/widgets/schedule_card.dart';
 import 'package:hyper_focused/core/presentation/widgets/week_calendar.dart';
+import 'package:hyper_focused/core/utils/responsive_size.dart';
+import 'package:intl/intl.dart';
 
 class SchedulePage extends StatefulWidget {
   const SchedulePage({super.key});
@@ -12,8 +16,8 @@ class SchedulePage extends StatefulWidget {
 }
 
 class _SchedulePageState extends State<SchedulePage> {
-  bool _isCalendarOpen = true; // Default to open as per screen
-  DateTime _selectedDate = DateTime(2025, 12, 13); // Default to Fri 13
+  bool _isCalendarOpen = true;
+  DateTime _selectedDate = DateTime.now();
 
   @override
   Widget build(BuildContext context) {
@@ -26,14 +30,13 @@ class _SchedulePageState extends State<SchedulePage> {
             _buildTopSection(),
             Expanded(
               child: ListView(
-                padding: const EdgeInsets.all(16),
+                padding: EdgeInsets.all(16.w),
                 children: [
                   _buildDateHeader(),
-                  const SizedBox(height: 16),
+                  SizedBox(height: 16.h),
                   const ScheduleCard(),
                   const ScheduleCard(),
-                  // Padding for bottom nav
-                  const SizedBox(height: 80),
+                  SizedBox(height: 80.h),
                 ],
               ),
             ),
@@ -54,44 +57,50 @@ class _SchedulePageState extends State<SchedulePage> {
             Colors.white.withOpacity(0.5),
           ],
         ),
-        border: Border(
-           bottom: BorderSide(color: Colors.grey.withOpacity(0.1)),
-        )
       ),
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
           // Header Row
           Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+            padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 12.h),
             child: Row(
               children: [
                 // Title Area
                 Container(
-                  padding: const EdgeInsets.all(8),
-                  decoration: const BoxDecoration(
-                    color: Color(0xFFE0F2F1), // Light teal
+                  padding: EdgeInsets.all(8.w),
+                  decoration: BoxDecoration(
+                    color: AppColors.primary.withOpacity(0.2),
                     shape: BoxShape.circle,
                   ),
-                  child: const Icon(Icons.calendar_today_outlined, color: AppColors.primary, size: 20),
+                  child: SvgPicture.asset(
+                    'assets/images/svg/schedule_icon.svg',
+                    height: 24,
+                    placeholderBuilder: (context) => const Icon(
+                      Icons.calendar_today_outlined,
+                      size: 24,
+                      color: AppColors.primary,
+                    ),
+                  ),
                 ),
-                const SizedBox(width: 12),
+                SizedBox(width: 12.w),
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      'Viewing',
+                      AppStrings.viewing,
                       style: TextStyle(
-                        color: AppColors.neutral500,
-                        fontSize: 12,
+                        color: AppColors.textBody,
+                        fontWeight: FontWeight.w400,
+                        fontSize: 14.sp,
                       ),
                     ),
-                    const Text(
-                      'Your schedule',
+                    Text(
+                      AppStrings.yourSchedule,
                       style: TextStyle(
                         color: AppColors.neutralDark,
-                        fontWeight: FontWeight.bold,
-                        fontSize: 16,
+                        fontWeight: FontWeight.w500,
+                        fontSize: 14.sp,
                       ),
                     ),
                   ],
@@ -100,28 +109,28 @@ class _SchedulePageState extends State<SchedulePage> {
                 
                 // Buttons
                 _buildCircleButton(
-                  icon: Icons.calendar_month, 
+                  icon: Icons.calendar_today_outlined,
                   color: AppColors.primary, 
-                  iconColor: Colors.white,
+                  iconColor: AppColors.neutralWhite,
                   onTap: () {
                     setState(() {
                       _isCalendarOpen = !_isCalendarOpen;
                     });
                   },
                 ),
-                const SizedBox(width: 8),
+                SizedBox(width: 8.w),
                 _buildCircleButton(
                   icon: Icons.add, 
-                  color: Colors.white, 
+                  color: AppColors.neutralWhite,
                   iconColor: AppColors.primary,
                   onTap: () {
                     context.go('/schedule/create');
                   },
                 ),
-                const SizedBox(width: 8),
+                SizedBox(width: 8.w),
                 _buildCircleButton(
                   icon: Icons.search, 
-                  color: Colors.white, 
+                  color: AppColors.neutralWhite,
                   iconColor: AppColors.primary,
                   onTap: () {
                     // Not functioning as requested
@@ -133,38 +142,46 @@ class _SchedulePageState extends State<SchedulePage> {
 
           // Calendar Area (Collapsible)
           AnimatedCrossFade(
-            firstChild: Container(height: 0), // Closed state
+            firstChild: Container(height: 0),
             secondChild: Column(
               children: [
                 // Month Selector
                 Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 16),
+                  padding: EdgeInsets.symmetric(horizontal: 16.w),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       IconButton(
-                        icon: const Icon(Icons.arrow_back, size: 16),
-                        onPressed: () {},
+                        icon: Icon(Icons.arrow_back, size: 16.w),
+                        onPressed: () {
+                          setState(() {
+                             _selectedDate = DateTime(_selectedDate.year, _selectedDate.month - 1, _selectedDate.day);
+                          });
+                        },
                         padding: EdgeInsets.zero,
                         constraints: const BoxConstraints(),
                       ),
-                      const Text(
-                        'December 2025',
+                      Text(
+                        DateFormat('MMMM yyyy').format(_selectedDate),
                         style: TextStyle(
-                          fontWeight: FontWeight.bold,
-                          fontSize: 14,
+                          fontWeight: FontWeight.w500,
+                          fontSize: 14.sp,
                         ),
                       ),
                       IconButton(
-                        icon: const Icon(Icons.arrow_forward, size: 16),
-                        onPressed: () {},
+                        icon: Icon(Icons.arrow_forward, size: 16.w),
+                        onPressed: () {
+                           setState(() {
+                             _selectedDate = DateTime(_selectedDate.year, _selectedDate.month + 1, _selectedDate.day);
+                          });
+                        },
                         padding: EdgeInsets.zero,
                         constraints: const BoxConstraints(),
                       ),
                     ],
                   ),
                 ),
-                const SizedBox(height: 8),
+                SizedBox(height: 8.h),
                 WeekCalendar(
                   selectedDate: _selectedDate, 
                   onDateSelected: (date) {
@@ -173,7 +190,7 @@ class _SchedulePageState extends State<SchedulePage> {
                     });
                   }
                 ),
-                const SizedBox(height: 16),
+                SizedBox(height: 16.h),
               ],
             ),
             crossFadeState: _isCalendarOpen ? CrossFadeState.showSecond : CrossFadeState.showFirst,
@@ -193,21 +210,21 @@ class _SchedulePageState extends State<SchedulePage> {
     return GestureDetector(
       onTap: onTap,
       child: Container(
-        width: 40,
-        height: 40,
+        width: 40.w,
+        height: 40.w,
         decoration: BoxDecoration(
           color: color,
           shape: BoxShape.circle,
           boxShadow: [
-            if (color == Colors.white)
+            if (color == AppColors.neutralWhite)
               BoxShadow(
-                color: Colors.black.withOpacity(0.05),
+                color: AppColors.neutralDark.withOpacity(0.05),
                 blurRadius: 4,
                 offset: const Offset(0, 2),
               )
           ]
         ),
-        child: Icon(icon, color: iconColor, size: 20),
+        child: Icon(icon, color: iconColor, size: 20.w),
       ),
     );
   }
@@ -216,11 +233,11 @@ class _SchedulePageState extends State<SchedulePage> {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
-        const Text(
-          '13 December 2025',
+        Text(
+          DateFormat('d MMMM yyyy').format(_selectedDate),
           style: TextStyle(
             fontWeight: FontWeight.bold,
-            fontSize: 16,
+            fontSize: 16.sp,
             color: AppColors.neutralDark,
           ),
         ),
@@ -231,11 +248,12 @@ class _SchedulePageState extends State<SchedulePage> {
             minimumSize: Size.zero,
             tapTargetSize: MaterialTapTargetSize.shrinkWrap,
           ),
-          child: const Text(
+          child: Text(
             'Sync Changes',
             style: TextStyle(
               color: AppColors.primary,
               fontWeight: FontWeight.w600,
+              fontSize: 14.sp,
             ),
           ),
         )

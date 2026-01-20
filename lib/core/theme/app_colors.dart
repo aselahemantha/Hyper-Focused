@@ -13,6 +13,8 @@ class AppColors {
   static const Color neutral800 = Color(0xFF262626);
   static const Color statusNotify = Color(0xFFFF4A4A);
   static const Color statusNotifyBell = Color(0xFFFFC107);
+  static const Color statusCalender = Color(0xFFFFEBD3);
+  static const Color statusError = Color(0xFFF38508);
 
 
   // Backgrounds
