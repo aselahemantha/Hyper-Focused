@@ -30,6 +30,7 @@ class AppColors {
   static const Color neutralDark = Color(0xFF000000);
   static const Color primaryExtDark = Color(0xFF001712);
   static const Color textBody = Color(0xFF737373);
+  static const Color textBody2 = Color(0xFF525252);
   static const Color transparent = Colors.transparent;
 
   // Navigation Bar Gradient
