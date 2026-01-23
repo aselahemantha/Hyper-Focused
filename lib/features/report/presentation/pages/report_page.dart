@@ -16,7 +16,7 @@ class _ReportPageState extends State<ReportPage> {
   // Calendar is open by default, Filter is closed
   bool _isCalendarOpen = true; 
   bool _isFilterOpen = false;
-  DateTime _selectedDate = DateTime(2025, 12, 16); // Default as per image
+  DateTime _selectedDate = DateTime.now();
 
   void _toggleCalendar() {
     setState(() {
@@ -180,7 +180,7 @@ class _ReportPageState extends State<ReportPage> {
                 constraints: const BoxConstraints(),
               ),
               Text(
-                'December 2025',
+                '${_getMonthName(_selectedDate.month)} ${_selectedDate.year}',
                 style: TextStyle(
                   fontWeight: FontWeight.bold,
                   fontSize: 14.sp,
@@ -268,5 +268,14 @@ class _ReportPageState extends State<ReportPage> {
         )
       ],
     );
+  }
+
+
+  String _getMonthName(int month) {
+    const months = [
+      'January', 'February', 'March', 'April', 'May', 'June',
+      'July', 'August', 'September', 'October', 'November', 'December'
+    ];
+    return months[month - 1];
   }
 }
