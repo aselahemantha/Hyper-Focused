@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
+import 'package:hyper_focused/core/constants/app_strings.dart';
 import 'package:hyper_focused/core/theme/app_colors.dart';
 import 'package:hyper_focused/core/presentation/widgets/week_calendar.dart';
 import 'package:hyper_focused/features/report/presentation/widgets/report_card.dart';
@@ -13,8 +15,7 @@ class ReportPage extends StatefulWidget {
 }
 
 class _ReportPageState extends State<ReportPage> {
-  // Calendar is open by default, Filter is closed
-  bool _isCalendarOpen = true; 
+  bool _isCalendarOpen = true;
   bool _isFilterOpen = false;
   DateTime _selectedDate = DateTime.now();
 
@@ -53,7 +54,6 @@ class _ReportPageState extends State<ReportPage> {
                   SizedBox(height: 16.h),
                   const ReportCard(),
                   const ReportCard(),
-                  // Padding for bottom nav
                   SizedBox(height: 80.h),
                 ],
               ),
@@ -90,29 +90,38 @@ class _ReportPageState extends State<ReportPage> {
                 // Title Area
                 Container(
                   padding: EdgeInsets.all(8.w),
-                  decoration: const BoxDecoration(
-                    color: Color(0xFFE0F2F1), // Light teal
+                  decoration: BoxDecoration(
+                    color: AppColors.primary.withOpacity(0.2),
                     shape: BoxShape.circle,
                   ),
-                  child: Icon(Icons.assignment_outlined, color: AppColors.primary, size: 20.w),
+                  child: SvgPicture.asset(
+                    'assets/images/svg/report_icon.svg',
+                    height: 24,
+                    placeholderBuilder: (context) => const Icon(
+                      Icons.calendar_today_outlined,
+                      size: 24,
+                      color: AppColors.primary,
+                    ),
+                  ),
                 ),
                 SizedBox(width: 12.w),
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      'Viewing',
+                      AppStrings.viewing,
                       style: TextStyle(
-                        color: AppColors.neutral500,
-                        fontSize: 12.sp,
+                        color: AppColors.textBody,
+                        fontWeight: FontWeight.w400,
+                        fontSize: 14.sp,
                       ),
                     ),
                     Text(
-                      'Your reports',
+                      AppStrings.yourReports,
                       style: TextStyle(
                         color: AppColors.neutralDark,
-                        fontWeight: FontWeight.bold,
-                        fontSize: 16.sp,
+                        fontWeight: FontWeight.w500,
+                        fontSize: 14.sp,
                       ),
                     ),
                   ],
@@ -121,7 +130,7 @@ class _ReportPageState extends State<ReportPage> {
                 
                 // Buttons
                 _buildCircleButton(
-                  icon: Icons.calendar_month, 
+                  icon: Icons.calendar_today_outlined,
                   isActive: _isCalendarOpen,
                   onTap: _toggleCalendar,
                 ),
@@ -243,10 +252,10 @@ class _ReportPageState extends State<ReportPage> {
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
         Text(
-          'Most Recent',
+          AppStrings.mostRecent,
           style: TextStyle(
-            fontWeight: FontWeight.bold,
-            fontSize: 16.sp,
+            fontWeight: FontWeight.w500,
+            fontSize: 14.sp,
             color: AppColors.neutralDark,
           ),
         ),
@@ -258,11 +267,11 @@ class _ReportPageState extends State<ReportPage> {
             tapTargetSize: MaterialTapTargetSize.shrinkWrap,
           ),
           child: Text(
-            'Sync Changes',
+            AppStrings.syncChanges,
             style: TextStyle(
               color: AppColors.primary,
-              fontWeight: FontWeight.w600,
-              fontSize: 14.sp, // Added font size
+              fontWeight: FontWeight.w700,
+              fontSize: 14.sp,
             ),
           ),
         )

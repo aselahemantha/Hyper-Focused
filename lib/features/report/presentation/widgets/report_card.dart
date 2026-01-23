@@ -8,120 +8,145 @@ class ReportCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      margin: EdgeInsets.only(bottom: 16.h),
-      padding: EdgeInsets.all(16.w),
-      decoration: BoxDecoration(
-        color: AppColors.neutralWhite,
-        borderRadius: BorderRadius.circular(16.w),
-        boxShadow: [
-          BoxShadow(
-            color: Colors.black.withOpacity(0.05),
-            blurRadius: 10,
-            offset: const Offset(0, 4),
-          ),
-        ],
-      ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          // Header Chips
-          Row(
-            children: [
-              _buildHeaderChip(Icons.business, 'Service Name'),
-              SizedBox(width: 8.w),
-              _buildHeaderChip(Icons.access_time, '12-12-2025 | 12.00PM'),
-            ],
-          ),
-          SizedBox(height: 12.h),
-
-          // Person
-          Row(
-            children: [
-              Icon(Icons.person_outline, size: 20.w, color: AppColors.neutralDark),
-              SizedBox(width: 8.w),
-              Text(
-                'Jason Johnson',
-                style: TextStyle(
-                  fontWeight: FontWeight.bold,
-                  fontSize: 15.sp,
-                  color: AppColors.neutralDark,
-                ),
+    return Column(
+      mainAxisSize: MainAxisSize.min,
+      children: [
+        // Main Details Card
+        Container(
+          padding: EdgeInsets.all(16.w),
+          decoration: BoxDecoration(
+            color: AppColors.neutralWhite,
+            borderRadius: BorderRadius.circular(16.w),
+            boxShadow: [
+              BoxShadow(
+                color: Colors.black.withOpacity(0.05),
+                blurRadius: 10,
+                offset: const Offset(0, 4),
               ),
             ],
           ),
-          SizedBox(height: 8.h),
-
-          // Address
-          Row(
+          child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Icon(Icons.location_on_outlined, size: 20.w, color: AppColors.textBody),
-              SizedBox(width: 8.w),
-              Expanded(
-                child: Text(
-                  '1005 S Lorem Ipsum, Dolor Dantos, Garylord St Dancer, Co 80209',
-                  style: TextStyle(
-                    color: AppColors.textBody,
-                    fontSize: 14.sp,
+              // Header Chips
+              Row(
+                children: [
+                  _buildHeaderChip(Icons.business, 'Service Name'),
+                  SizedBox(width: 8.w),
+                  _buildHeaderChip(Icons.alarm, '12-12-2025 | 12.00PM'),
+                ],
+              ),
+              SizedBox(height: 12.h),
+
+              // Person
+              Row(
+                children: [
+                  Icon(Icons.person_outline, size: 20.w, color: AppColors.neutralDark),
+                  SizedBox(width: 8.w),
+                  Text(
+                    'Jason Johnson',
+                    style: TextStyle(
+                      fontWeight: FontWeight.w600,
+                      fontSize: 14.sp,
+                      color: AppColors.neutralDark,
+                    ),
                   ),
+                ],
+              ),
+              SizedBox(height: 8.h),
+
+              // Address
+              Row(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Icon(Icons.location_on_outlined, size: 20.w, color: AppColors.textBody),
+                  SizedBox(width: 8.w),
+                  Expanded(
+                    child: Text(
+                      '1005 S Lorem Ipsum, Dolor Dantos, Garylord St Dancer, Co 80209',
+                      style: TextStyle(
+                        color: AppColors.neutral800,
+                        fontWeight: FontWeight.w400,
+                        fontSize: 14.sp,
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+              SizedBox(height: 8.h),
+
+              // Phone
+              Row(
+                children: [
+                  Icon(Icons.phone_outlined, size: 18.w, color: AppColors.textBody),
+                  SizedBox(width: 8.w),
+                  Text(
+                    '880 762 233 2234',
+                    style: TextStyle(
+                      color: AppColors.textBody,
+                      fontWeight: FontWeight.w400,
+                      fontSize: 14.sp,
+                    ),
+                  ),
+                ],
+              ),
+              SizedBox(height: 16.h),
+
+              // Status Tags
+              SizedBox(
+                height: 20.h,
+                child: Row(
+                  children: [
+                    _buildStatusTag('Signed', true),
+                    VerticalDivider(width: 16.w, thickness: 1, color: AppColors.neutral200),
+                    _buildStatusTag('Payment', true),
+                    VerticalDivider(width: 16.w, thickness: 1, color: AppColors.neutral200),
+                    _buildStatusTag('Uploaded', false),
+                    VerticalDivider(width: 16.w, thickness: 1, color: AppColors.neutral200),
+                    _buildStatusTag('Published', false),
+                  ],
                 ),
               ),
             ],
           ),
-          SizedBox(height: 8.h),
+        ),
+        
+        SizedBox(height: 6.h),
 
-          // Phone
-          Row(
-            children: [
-              Icon(Icons.phone_outlined, size: 18.w, color: AppColors.textBody),
-              SizedBox(width: 8.w),
-              Text(
-                '880 762 233 2234',
-                style: TextStyle(
-                  color: AppColors.textBody,
-                  fontSize: 14.sp,
-                ),
+        // Floating Footer
+        Container(
+          padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 8.h),
+          margin: EdgeInsets.only(bottom: 16.h),
+          decoration: BoxDecoration(
+            color: AppColors.neutralWhite,
+            borderRadius: BorderRadius.circular(30.w),
+            boxShadow: [
+              BoxShadow(
+                color: Colors.black.withOpacity(0.05),
+                blurRadius: 10,
+                offset: const Offset(0, 4),
               ),
             ],
           ),
-          SizedBox(height: 16.h),
-
-          // Status Tags
-          Wrap(
-            spacing: 8.w,
-            runSpacing: 8.h,
-            children: [
-              _buildStatusTag('Signed', true),
-              _buildStatusTag('Payment', true),
-              _buildStatusTag('Uploaded', false),
-              _buildStatusTag('Published', false),
-            ],
-          ),
-          SizedBox(height: 16.h),
-          const Divider(height: 1, color: AppColors.neutral200),
-          SizedBox(height: 16.h),
-
-          // Footer
-          Row(
+          child: Row(
             children: [
               // Price Tag
               Container(
                 padding: EdgeInsets.symmetric(horizontal: 12.w, vertical: 6.h),
                 decoration: BoxDecoration(
-                  color: AppColors.neutral100,
+                  color: AppColors.neutral200,
                   borderRadius: BorderRadius.circular(20.w),
                 ),
                 child: Row(
                   children: [
-                    Icon(Icons.sell_outlined, size: 16.w, color: Colors.black87),
+                    Icon(Icons.sell_outlined, size: 16.w, color: AppColors.neutralDark),
                     SizedBox(width: 4.w),
                     Text(
                       '\$550.48',
                       style: TextStyle(
-                        fontWeight: FontWeight.bold,
-                        fontSize: 14.sp,
-                        color: Colors.black87,
+                        fontWeight: FontWeight.w500,
+                        fontSize: 12.sp,
+                        color: AppColors.neutralDark,
                       ),
                     ),
                   ],
@@ -156,8 +181,8 @@ class ReportCard extends StatelessWidget {
               ),
             ],
           ),
-        ],
-      ),
+        ),
+      ],
     );
   }
 
@@ -177,8 +202,8 @@ class ReportCard extends StatelessWidget {
             text,
             style: TextStyle(
               fontSize: 12.sp,
-              fontWeight: FontWeight.bold,
-              color: Colors.black87,
+              fontWeight: FontWeight.w600,
+              color: AppColors.neutralDark,
             ),
           ),
         ],
@@ -201,7 +226,7 @@ class ReportCard extends StatelessWidget {
           Text(
             label,
             style: TextStyle(
-              color: Colors.black87,
+              color: AppColors.neutralDark,
               fontSize: 12.sp,
             ),
           ),
