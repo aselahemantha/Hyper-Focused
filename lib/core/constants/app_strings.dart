@@ -35,19 +35,22 @@ class AppStrings {
 
   // Login
   static const String welcomeBack = 'Welcome Back';
-  static const String loginSubtitle = 'Sign in to continue your inspection works.';
+  static const String loginSubtitle =
+      'Sign in to continue your inspection works.';
   static const String rememberMe = 'Remember Me';
   static const String forgotPassword = 'Forgot Password';
 
   // Signup
   static const String joinHyperFocused = 'Join Hyper Focused';
-  static const String signupSubtitle = 'Create your account to start professional home inspections.';
+  static const String signupSubtitle =
+      'Create your account to start professional home inspections.';
   static const String fullName = 'Full Name';
   static const String fullNameHint = 'Enter your full name';
 
   // Signup Details
   static const String employmentDetails = 'Employment Details';
-  static const String employmentDetailsSubtitle = 'Enter details of your current employment details.';
+  static const String employmentDetailsSubtitle =
+      'Enter details of your current employment details.';
   static const String phoneNumber = 'Phone Number';
   static const String phoneNumberHint = 'Phone Number';
   static const String company = 'Company (Optional)';
@@ -60,13 +63,15 @@ class AppStrings {
 
   // Verify
   static const String enter6DigitCode = 'Enter 6-digit code';
-  static const String verifySubtitle = 'We sent a verification code to your email\n';
+  static const String verifySubtitle =
+      'We sent a verification code to your email\n';
   static const String needHelp = 'Need Help?';
   static const String didntReceiveCode = 'Didn\'t receive the code ';
   static const String resendIt = 'Resend it';
-  
+
   // Landing
-  static const String landingDescription = 'The modern home inspection platform designed for professionals who value precision, efficiency, and exceptional client experiences.';
+  static const String landingDescription =
+      'The modern home inspection platform designed for professionals who value precision, efficiency, and exceptional client experiences.';
   static const String registerNow = 'Register Now';
 
   // Splash
@@ -75,7 +80,6 @@ class AppStrings {
 
   // Home
   // static const String welcomeBack = 'Welcome Back!';
-
 
   // Dashboard Stats
   static const String pendingPayment = 'Pending\nPayments';
@@ -110,14 +114,16 @@ class AppStrings {
   static const String signOut = 'Sign Out';
 
   static const String personalInformation = 'Personal Information';
-  static const String personalDetails= 'Personal Details';
+  static const String personalDetails = 'Personal Details';
 
   static const String viewing = 'Viewing';
   static const String yourSchedule = 'Your Schedule';
   static const String syncChanges = 'Sync Changes';
 
   static const String mostRecent = 'Most Recent';
+  static const String yourReports = 'Your Reports';
 
-
-
+  static const String myReportDesc =
+      'You can manage your services here. These services will be shown on your '
+      'website and it will help your clients to easily book your services.';
 }

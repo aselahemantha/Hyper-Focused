@@ -14,10 +14,13 @@ class WeekCalendar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final days = List.generate(
-      9, 
-      (index) => selectedDate.subtract(const Duration(days: 4)).add(Duration(days: index))
-    );
+    // Generate 9 days centered around today (4 before, today, 4 after)
+    final now = DateTime.now();
+    final today = DateTime(now.year, now.month, now.day);
+
+    final days = List.generate(9, (index) {
+      return today.add(Duration(days: index - 4));
+    });
 
     final peachColor = AppColors.statusCalender;
 
@@ -33,27 +36,22 @@ class WeekCalendar extends StatelessWidget {
           final date = days[index];
           final isSelected = date.day == selectedDate.day;
 
-          // Hardcoded event logic for demo
-          final hasEvent = [13, 16, 19].contains(date.day);
+          // Hardcoded event logic for demo (removed for dynamic dates)
+          final hasEvent = false;
 
           // Style logic
-          final isPeach = [16, 18, 19].contains(date.day);
           final bgColor = isSelected
               ? AppColors.primary
-              : (isPeach ? peachColor : AppColors.neutralWhite);
+              : AppColors.neutralWhite;
 
           final textColor = isSelected
               ? AppColors.neutralWhite
-              : isPeach
-              ? AppColors.statusError
               : (date.weekday == DateTime.sunday
                     ? AppColors.neutral500
                     : AppColors.neutralDark);
 
           final subTextColor = isSelected
               ? AppColors.neutralWhite
-              : isPeach
-              ? AppColors.statusError
               : AppColors.neutral500;
 
           return GestureDetector(

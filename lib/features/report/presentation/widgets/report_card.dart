@@ -11,7 +11,7 @@ class ReportCard extends StatelessWidget {
     return Column(
       mainAxisSize: MainAxisSize.min,
       children: [
-        // Main Card
+        // Main Details Card
         Container(
           padding: EdgeInsets.all(16.w),
           decoration: BoxDecoration(
@@ -33,7 +33,7 @@ class ReportCard extends StatelessWidget {
                 children: [
                   _buildHeaderChip(Icons.business, 'Service Name'),
                   SizedBox(width: 8.w),
-                  _buildHeaderChip(Icons.access_time, '12-12-2025 | 12.00PM'),
+                  _buildHeaderChip(Icons.alarm, '12-12-2025 | 12.00PM'),
                 ],
               ),
               SizedBox(height: 12.h),
@@ -41,17 +41,13 @@ class ReportCard extends StatelessWidget {
               // Person
               Row(
                 children: [
-                  Icon(
-                    Icons.person_outline,
-                    size: 20.w,
-                    color: AppColors.neutralDark,
-                  ),
+                  Icon(Icons.person_outline, size: 20.w, color: AppColors.neutralDark),
                   SizedBox(width: 8.w),
                   Text(
                     'Jason Johnson',
                     style: TextStyle(
-                      fontWeight: FontWeight.bold,
-                      fontSize: 15.sp,
+                      fontWeight: FontWeight.w600,
+                      fontSize: 14.sp,
                       color: AppColors.neutralDark,
                     ),
                   ),
@@ -63,17 +59,14 @@ class ReportCard extends StatelessWidget {
               Row(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Icon(
-                    Icons.location_on_outlined,
-                    size: 20.w,
-                    color: AppColors.textBody,
-                  ),
+                  Icon(Icons.location_on_outlined, size: 20.w, color: AppColors.textBody),
                   SizedBox(width: 8.w),
                   Expanded(
                     child: Text(
                       '1005 S Lorem Ipsum, Dolor Dantos, Garylord St Dancer, Co 80209',
                       style: TextStyle(
-                        color: AppColors.textBody,
+                        color: AppColors.neutral800,
+                        fontWeight: FontWeight.w400,
                         fontSize: 14.sp,
                       ),
                     ),
@@ -85,18 +78,14 @@ class ReportCard extends StatelessWidget {
               // Phone
               Row(
                 children: [
-                  Icon(
-                    Icons.phone_outlined,
-                    size: 18.w,
-                    color: AppColors.textBody,
-                  ),
+                  Icon(Icons.phone_outlined, size: 18.w, color: AppColors.textBody),
                   SizedBox(width: 8.w),
                   Text(
                     '880 762 233 2234',
                     style: TextStyle(
                       color: AppColors.textBody,
+                      fontWeight: FontWeight.w400,
                       fontSize: 14.sp,
-                      fontFamily: 'Inter',
                     ),
                   ),
                 ],
@@ -104,28 +93,16 @@ class ReportCard extends StatelessWidget {
               SizedBox(height: 16.h),
 
               // Status Tags
-              IntrinsicHeight(
+              SizedBox(
+                height: 20.h,
                 child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     _buildStatusTag('Signed', true),
-                    const VerticalDivider(
-                      color: AppColors.neutral200,
-                      width: 1,
-                      thickness: 1,
-                    ),
+                    VerticalDivider(width: 16.w, thickness: 1, color: AppColors.neutral200),
                     _buildStatusTag('Payment', true),
-                    const VerticalDivider(
-                      color: AppColors.neutral200,
-                      width: 1,
-                      thickness: 1,
-                    ),
+                    VerticalDivider(width: 16.w, thickness: 1, color: AppColors.neutral200),
                     _buildStatusTag('Uploaded', false),
-                    const VerticalDivider(
-                      color: AppColors.neutral200,
-                      width: 1,
-                      thickness: 1,
-                    ),
+                    VerticalDivider(width: 16.w, thickness: 1, color: AppColors.neutral200),
                     _buildStatusTag('Published', false),
                   ],
                 ),
@@ -133,14 +110,16 @@ class ReportCard extends StatelessWidget {
             ],
           ),
         ),
-        SizedBox(height: 12.h),
+        
+        SizedBox(height: 6.h),
 
-        // Footer (Outside the card)
+        // Floating Footer
         Container(
-          padding: EdgeInsets.all(4.w),
+          padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 8.h),
+          margin: EdgeInsets.only(bottom: 16.h),
           decoration: BoxDecoration(
             color: AppColors.neutralWhite,
-            borderRadius: BorderRadius.circular(20.w),
+            borderRadius: BorderRadius.circular(30.w),
             boxShadow: [
               BoxShadow(
                 color: Colors.black.withOpacity(0.05),
@@ -153,18 +132,14 @@ class ReportCard extends StatelessWidget {
             children: [
               // Price Tag
               Container(
-                padding: EdgeInsets.symmetric(horizontal: 12.w, vertical: 8.h),
+                padding: EdgeInsets.symmetric(horizontal: 12.w, vertical: 6.h),
                 decoration: BoxDecoration(
                   color: AppColors.neutral200,
                   borderRadius: BorderRadius.circular(20.w),
                 ),
                 child: Row(
                   children: [
-                    Icon(
-                      Icons.sell_outlined,
-                      size: 16.w,
-                      color: AppColors.neutralDark,
-                    ),
+                    Icon(Icons.sell_outlined, size: 16.w, color: AppColors.neutralDark),
                     SizedBox(width: 4.w),
                     Text(
                       '\$550.48',
@@ -181,11 +156,10 @@ class ReportCard extends StatelessWidget {
 
               // Status Outline
               Container(
-                padding: EdgeInsets.symmetric(horizontal: 12.w, vertical: 7.h),
+                padding: EdgeInsets.symmetric(horizontal: 12.w, vertical: 6.h),
                 decoration: BoxDecoration(
                   border: Border.all(color: AppColors.statusNotify),
                   borderRadius: BorderRadius.circular(20.w),
-                  color: Colors.white,
                 ),
                 child: Text(
                   'Under Review',
@@ -198,60 +172,12 @@ class ReportCard extends StatelessWidget {
               ),
               const Spacer(),
 
-              // Upload Button
-              SizedBox(
-                width: 40.w,
-                height: 40.w,
-                child: Stack(
-                  alignment: Alignment.center,
-                  children: [
-                    Container(
-                      width: 36.w,
-                      height: 36.w,
-                      decoration: const BoxDecoration(
-                        color: AppColors.secondary,
-                        shape: BoxShape.circle,
-                      ),
-                      child: Icon(
-                        Icons.cloud_upload_outlined,
-                        size: 20.w,
-                        color: AppColors.neutralDark,
-                      ),
-                    ),
-                    Positioned(
-                      top: 0,
-                      right: 0,
-                      child: Container(
-                        width: 12.w,
-                        height: 12.w,
-                        decoration: BoxDecoration(
-                          color: AppColors.statusNotify,
-                          shape: BoxShape.circle,
-                          border: Border.all(color: Colors.white, width: 2),
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-              ),
+              // Action Icons
+              _buildCircleIcon(Icons.cloud_upload_outlined, AppColors.secondary, showDot: true),
               SizedBox(width: 8.w),
-
-              // Arrow Button
               GestureDetector(
                 onTap: () => context.push('/report-detail'),
-                child: Container(
-                  width: 36.w,
-                  height: 36.w,
-                  decoration: const BoxDecoration(
-                    color: AppColors.neutral200,
-                    shape: BoxShape.circle,
-                  ),
-                  child: Icon(
-                    Icons.arrow_forward,
-                    size: 20.w,
-                    color: AppColors.neutralDark,
-                  ),
-                ),
+                child: _buildCircleIcon(Icons.arrow_forward, AppColors.neutral200, showDot: false),
               ),
             ],
           ),
@@ -276,8 +202,8 @@ class ReportCard extends StatelessWidget {
             text,
             style: TextStyle(
               fontSize: 12.sp,
-              fontWeight: FontWeight.bold,
-              color: Colors.black87,
+              fontWeight: FontWeight.w600,
+              color: AppColors.neutralDark,
             ),
           ),
         ],
@@ -286,6 +212,7 @@ class ReportCard extends StatelessWidget {
   }
 
   Widget _buildStatusTag(String label, bool isSuccess) {
+    final color = isSuccess ? const Color(0xFFE8F5E9) : const Color(0xFFFFEBEE);
     final iconColor = isSuccess ? Colors.green : Colors.red;
     final icon = isSuccess ? Icons.check : Icons.close;
 
@@ -298,25 +225,27 @@ class ReportCard extends StatelessWidget {
         children: [
           Text(
             label,
-            style: TextStyle(color: Colors.black87, fontSize: 12.sp),
+            style: TextStyle(
+              color: AppColors.neutralDark,
+              fontSize: 12.sp,
+            ),
           ),
-          SizedBox(width: 4.w),
+          SizedBox(width: 2.w),
           Icon(icon, size: 14.w, color: iconColor),
         ],
       ),
     );
   }
 
-  Widget _buildCircleIcon(
-    IconData icon,
-    Color bgColor, {
-    bool showDot = false,
-  }) {
+  Widget _buildCircleIcon(IconData icon, Color bgColor, {bool showDot = false}) {
     return Stack(
       children: [
         Container(
           padding: EdgeInsets.all(8.w),
-          decoration: BoxDecoration(color: bgColor, shape: BoxShape.circle),
+          decoration: BoxDecoration(
+            color: bgColor,
+            shape: BoxShape.circle,
+          ),
           child: Icon(icon, size: 18.w, color: Colors.black87),
         ),
         if (showDot)
