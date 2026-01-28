@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:hyper_focused/core/constants/app_strings.dart';
 import 'package:hyper_focused/core/theme/app_colors.dart';
 import 'package:hyper_focused/core/presentation/widgets/week_calendar.dart';
 import 'package:hyper_focused/features/report/presentation/widgets/report_card.dart';
@@ -16,7 +17,7 @@ class _ReportPageState extends State<ReportPage> {
   // Calendar is open by default, Filter is closed
   bool _isCalendarOpen = true; 
   bool _isFilterOpen = false;
-  DateTime _selectedDate = DateTime(2025, 12, 16); // Default as per image
+  DateTime _selectedDate = DateTime.now();
 
   void _toggleCalendar() {
     setState(() {
@@ -52,6 +53,7 @@ class _ReportPageState extends State<ReportPage> {
                   _buildListHeader(),
                   SizedBox(height: 16.h),
                   const ReportCard(),
+                  SizedBox(height: 16.h),
                   const ReportCard(),
                   // Padding for bottom nav
                   SizedBox(height: 80.h),
@@ -243,10 +245,10 @@ class _ReportPageState extends State<ReportPage> {
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
         Text(
-          'Most Recent',
+          AppStrings.mostRecent,
           style: TextStyle(
-            fontWeight: FontWeight.bold,
-            fontSize: 16.sp,
+            fontWeight: FontWeight.w500,
+            fontSize: 14.sp,
             color: AppColors.neutralDark,
           ),
         ),
@@ -258,11 +260,11 @@ class _ReportPageState extends State<ReportPage> {
             tapTargetSize: MaterialTapTargetSize.shrinkWrap,
           ),
           child: Text(
-            'Sync Changes',
+            AppStrings.syncChanges,
             style: TextStyle(
               color: AppColors.primary,
-              fontWeight: FontWeight.w600,
-              fontSize: 14.sp, // Added font size
+              fontWeight: FontWeight.w700,
+              fontSize: 14.sp,
             ),
           ),
         )

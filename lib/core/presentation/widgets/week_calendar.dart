@@ -14,17 +14,10 @@ class WeekCalendar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final days = [
-      DateTime(2025, 12, 12), // Thu
-      DateTime(2025, 12, 13), // Fri
-      DateTime(2025, 12, 14), // Sat
-      DateTime(2025, 12, 15), // Sun
-      DateTime(2025, 12, 16), // Mon
-      DateTime(2025, 12, 17), // Tue
-      DateTime(2025, 12, 18), // Wed
-      DateTime(2025, 12, 19), // Thu
-      DateTime(2025, 12, 20), // Fri
-    ];
+    final days = List.generate(
+      9, 
+      (index) => selectedDate.subtract(const Duration(days: 4)).add(Duration(days: index))
+    );
 
     final peachColor = AppColors.statusCalender;
 
