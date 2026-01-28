@@ -126,4 +126,6 @@ class AppStrings {
   static const String myReportDesc =
       'You can manage your services here. These services will be shown on your '
       'website and it will help your clients to easily book your services.';
+
+  static const String searchContacts = 'Search Contacts';
 }

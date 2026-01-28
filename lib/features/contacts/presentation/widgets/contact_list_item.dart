@@ -16,14 +16,13 @@ class ContactListItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: const EdgeInsets.symmetric(vertical: 6),
       padding: const EdgeInsets.all(12),
       decoration: BoxDecoration(
-        color: Colors.white,
-        borderRadius: BorderRadius.circular(12),
+        color: AppColors.neutralWhite,
+        borderRadius: BorderRadius.circular(6),
         boxShadow: [
           BoxShadow(
-            color: Colors.black.withOpacity(0.03),
+            color: AppColors.neutralDark.withOpacity(0.03),
             blurRadius: 4,
             offset: const Offset(0, 2),
           ),
@@ -35,15 +34,15 @@ class ContactListItem extends StatelessWidget {
             width: 40,
             height: 40,
             decoration: BoxDecoration(
-              color: Colors.black,
+              color: AppColors.neutralDark,
               borderRadius: BorderRadius.circular(8),
             ),
             alignment: Alignment.center,
             child: Text(
               initials,
               style: const TextStyle(
-                color: Colors.white,
-                fontWeight: FontWeight.bold,
+                color: AppColors.neutralWhite,
+                fontWeight: FontWeight.w500,
                 fontSize: 14,
               ),
             ),
@@ -57,7 +56,7 @@ class ContactListItem extends StatelessWidget {
                   name,
                   style: const TextStyle(
                     fontSize: 14,
-                    fontWeight: FontWeight.bold,
+                    fontWeight: FontWeight.w500,
                     color: AppColors.neutralDark,
                   ),
                 ),
@@ -65,7 +64,8 @@ class ContactListItem extends StatelessWidget {
                   phoneNumber,
                   style: const TextStyle(
                     fontSize: 12,
-                    color: AppColors.neutral500,
+                    fontWeight: FontWeight.w400,
+                    color: AppColors.textBody,
                   ),
                 ),
               ],
@@ -79,7 +79,7 @@ class ContactListItem extends StatelessWidget {
             ),
             child: const Icon(
               Icons.phone_outlined,
-              color: Colors.white,
+              color: AppColors.neutralWhite,
               size: 20,
             ),
           ),
