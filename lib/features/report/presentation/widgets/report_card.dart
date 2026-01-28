@@ -41,7 +41,11 @@ class ReportCard extends StatelessWidget {
               // Person
               Row(
                 children: [
-                  Icon(Icons.person_outline, size: 20.w, color: AppColors.neutralDark),
+                  Icon(
+                    Icons.person_outline,
+                    size: 20.w,
+                    color: AppColors.neutralDark,
+                  ),
                   SizedBox(width: 8.w),
                   Text(
                     'Jason Johnson',
@@ -59,7 +63,11 @@ class ReportCard extends StatelessWidget {
               Row(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Icon(Icons.location_on_outlined, size: 20.w, color: AppColors.textBody),
+                  Icon(
+                    Icons.location_on_outlined,
+                    size: 20.w,
+                    color: AppColors.textBody,
+                  ),
                   SizedBox(width: 8.w),
                   Expanded(
                     child: Text(
@@ -78,7 +86,11 @@ class ReportCard extends StatelessWidget {
               // Phone
               Row(
                 children: [
-                  Icon(Icons.phone_outlined, size: 18.w, color: AppColors.textBody),
+                  Icon(
+                    Icons.phone_outlined,
+                    size: 18.w,
+                    color: AppColors.textBody,
+                  ),
                   SizedBox(width: 8.w),
                   Text(
                     '880 762 233 2234',
@@ -98,11 +110,23 @@ class ReportCard extends StatelessWidget {
                 child: Row(
                   children: [
                     _buildStatusTag('Signed', true),
-                    VerticalDivider(width: 16.w, thickness: 1, color: AppColors.neutral200),
+                    VerticalDivider(
+                      width: 16.w,
+                      thickness: 1,
+                      color: AppColors.neutral200,
+                    ),
                     _buildStatusTag('Payment', true),
-                    VerticalDivider(width: 16.w, thickness: 1, color: AppColors.neutral200),
+                    VerticalDivider(
+                      width: 16.w,
+                      thickness: 1,
+                      color: AppColors.neutral200,
+                    ),
                     _buildStatusTag('Uploaded', false),
-                    VerticalDivider(width: 16.w, thickness: 1, color: AppColors.neutral200),
+                    VerticalDivider(
+                      width: 16.w,
+                      thickness: 1,
+                      color: AppColors.neutral200,
+                    ),
                     _buildStatusTag('Published', false),
                   ],
                 ),
@@ -110,7 +134,7 @@ class ReportCard extends StatelessWidget {
             ],
           ),
         ),
-        
+
         SizedBox(height: 6.h),
 
         // Floating Footer
@@ -139,7 +163,11 @@ class ReportCard extends StatelessWidget {
                 ),
                 child: Row(
                   children: [
-                    Icon(Icons.sell_outlined, size: 16.w, color: AppColors.neutralDark),
+                    Icon(
+                      Icons.sell_outlined,
+                      size: 16.w,
+                      color: AppColors.neutralDark,
+                    ),
                     SizedBox(width: 4.w),
                     Text(
                       '\$550.48',
@@ -173,11 +201,19 @@ class ReportCard extends StatelessWidget {
               const Spacer(),
 
               // Action Icons
-              _buildCircleIcon(Icons.cloud_upload_outlined, AppColors.secondary, showDot: true),
+              _buildCircleIcon(
+                Icons.cloud_upload_outlined,
+                AppColors.secondary,
+                showDot: true,
+              ),
               SizedBox(width: 8.w),
               GestureDetector(
                 onTap: () => context.push('/report-detail'),
-                child: _buildCircleIcon(Icons.arrow_forward, AppColors.neutral200, showDot: false),
+                child: _buildCircleIcon(
+                  Icons.arrow_forward,
+                  AppColors.neutral200,
+                  showDot: false,
+                ),
               ),
             ],
           ),
@@ -225,10 +261,7 @@ class ReportCard extends StatelessWidget {
         children: [
           Text(
             label,
-            style: TextStyle(
-              color: AppColors.neutralDark,
-              fontSize: 12.sp,
-            ),
+            style: TextStyle(color: AppColors.neutralDark, fontSize: 12.sp),
           ),
           SizedBox(width: 2.w),
           Icon(icon, size: 14.w, color: iconColor),
@@ -237,16 +270,17 @@ class ReportCard extends StatelessWidget {
     );
   }
 
-  Widget _buildCircleIcon(IconData icon, Color bgColor, {bool showDot = false}) {
+  Widget _buildCircleIcon(
+    IconData icon,
+    Color bgColor, {
+    bool showDot = false,
+  }) {
     return Stack(
       children: [
         Container(
           padding: EdgeInsets.all(8.w),
-          decoration: BoxDecoration(
-            color: bgColor,
-            shape: BoxShape.circle,
-          ),
-          child: Icon(icon, size: 18.w, color: Colors.black87),
+          decoration: BoxDecoration(color: bgColor, shape: BoxShape.circle),
+          child: Icon(icon, size: 18.w, color: AppColors.neutralDark),
         ),
         if (showDot)
           Positioned(
