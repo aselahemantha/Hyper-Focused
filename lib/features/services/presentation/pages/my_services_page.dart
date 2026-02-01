@@ -5,9 +5,70 @@ import 'package:hyper_focused/core/theme/app_colors.dart';
 import 'package:hyper_focused/core/utils/responsive_size.dart';
 
 import '../../../../core/constants/app_strings.dart';
+import '../../data/models/service_model.dart';
 
 class MyServicesPage extends StatelessWidget {
   const MyServicesPage({super.key});
+
+  static const List<ServiceModel> _services = [
+    ServiceModel(
+      id: '1',
+      title: 'Residential Home Inspection',
+      totalEarned: 239.98,
+      upcomingSchedules: 4,
+      price: 480,
+      iconKey: 'home',
+    ),
+    ServiceModel(
+      id: '2',
+      title: 'Commercial Property',
+      totalEarned: 499.99,
+      upcomingSchedules: 2,
+      price: 1200,
+      iconKey: 'apartment',
+    ),
+    ServiceModel(
+      id: '3',
+      title: 'Pest Control Evaluation',
+      totalEarned: 159.50,
+      upcomingSchedules: 3,
+      price: 450,
+      iconKey: 'pest_control',
+    ),
+    ServiceModel(
+      id: '4',
+      title: 'Energy Efficiency Audit',
+      totalEarned: 349.00,
+      upcomingSchedules: 5,
+      price: 800,
+      iconKey: 'power',
+    ),
+    ServiceModel(
+      id: '5',
+      title: 'Pool Safety Inspection',
+      totalEarned: 299.99,
+      upcomingSchedules: 1,
+      price: 300,
+      iconKey: 'pool',
+    ),
+  ];
+
+  IconData _getIcon(String key) {
+    switch (key) {
+      case 'home':
+        return Icons.home_outlined;
+      case 'apartment':
+        return Icons.apartment_outlined;
+      case 'pest_control':
+        return Icons.pest_control_outlined;
+      case 'power':
+        return Icons.power_outlined;
+      case 'pool':
+        return Icons.pool_outlined;
+      default:
+        return Icons.help_outline;
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -19,7 +80,7 @@ class MyServicesPage extends StatelessWidget {
         leading: Padding(
           padding: EdgeInsets.only(left: 16.0.w),
           child: CircleAvatar(
-            backgroundColor: Colors.white,
+            backgroundColor: AppColors.neutralWhite,
             child: IconButton(
               icon: const Icon(Icons.arrow_back, color: AppColors.neutralDark),
               onPressed: () => context.pop(),
@@ -40,7 +101,7 @@ class MyServicesPage extends StatelessWidget {
         onPressed: () {
           // TODO: Implement add service
         },
-        backgroundColor: Colors.white,
+        backgroundColor: AppColors.neutralWhite,
         child: const Icon(Icons.add, color: AppColors.primary),
       ),
       body: Container(
@@ -48,11 +109,7 @@ class MyServicesPage extends StatelessWidget {
           gradient: LinearGradient(
             begin: Alignment.topCenter,
             end: Alignment.bottomCenter,
-            colors: [
-              Color(0xFFE8F5E9),
-              Color(0xFFE0F2F1),
-              Color(0xFFE0F7FA),
-            ],
+            colors: [Color(0xFFE8F5E9), Color(0xFFE0F2F1), Color(0xFFE0F7FA)],
             stops: [0.0, 0.3, 1.0],
           ),
         ),
@@ -73,44 +130,23 @@ class MyServicesPage extends StatelessWidget {
                 ),
                 SizedBox(height: 24.h),
                 Expanded(
-                  child: ListView(
-                    children: [
-                      _buildServiceCard(
-                        icon: Icons.home_outlined,
-                        title: 'Residential Home Inspection',
-                        totalEarned: 239.98,
-                        upcomingSchedules: 4,
-                        price: 480,
-                      ),
-                      _buildServiceCard(
-                        icon: Icons.apartment_outlined,
-                        title: 'Commercial Property',
-                        totalEarned: 499.99,
-                        upcomingSchedules: 2,
-                        price: 1200,
-                      ),
-                      _buildServiceCard(
-                        icon: Icons.pest_control_outlined,
-                        title: 'Pest Control Evaluation',
-                        totalEarned: 159.50,
-                        upcomingSchedules: 3,
-                        price: 450,
-                      ),
-                      _buildServiceCard(
-                        icon: Icons.power_outlined,
-                        title: 'Energy Efficiency Audit',
-                        totalEarned: 349.00,
-                        upcomingSchedules: 5,
-                        price: 800,
-                      ),
-                      _buildServiceCard(
-                        icon: Icons.pool_outlined,
-                        title: 'Pool Safety Inspection',
-                        totalEarned: 299.99,
-                        upcomingSchedules: 1,
-                        price: 300,
-                      ),
-                    ],
+                  child: ListView.separated(
+                    itemCount: _services.length,
+                    itemBuilder: (context, index) {
+                      final service = _services[index];
+                      return _buildServiceCard(
+                        icon: _getIcon(service.iconKey),
+                        title: service.title,
+                        totalEarned: service.totalEarned,
+                        upcomingSchedules: service.upcomingSchedules,
+                        price: service.price.toInt(),
+                      );
+                    },
+                    separatorBuilder: (context, index) => const Divider(
+                      height: 1,
+                      thickness: 1,
+                      color: AppColors.neutral200,
+                    ),
                   ),
                 ),
               ],
@@ -129,7 +165,6 @@ class MyServicesPage extends StatelessWidget {
     required int price,
   }) {
     return Container(
-      margin: EdgeInsets.only(bottom: 16.h),
       padding: EdgeInsets.all(12.w),
       decoration: BoxDecoration(
         color: AppColors.neutralWhite,
@@ -151,11 +186,7 @@ class MyServicesPage extends StatelessWidget {
               color: AppColors.neutralDark,
               borderRadius: BorderRadius.circular(8.w),
             ),
-            child: Icon(
-                icon,
-                color: AppColors.neutralWhite,
-                size: 24.w
-            ),
+            child: Icon(icon, color: AppColors.neutralWhite, size: 24.w),
           ),
           SizedBox(width: 12.w),
           Expanded(
@@ -179,9 +210,9 @@ class MyServicesPage extends StatelessWidget {
                       'assets/images/svg/earned_service.svg',
                       height: 14,
                       placeholderBuilder: (context) => Icon(
-                          Icons.money_outlined,
-                          size: 14.w,
-                          color: AppColors.primary
+                        Icons.money_outlined,
+                        size: 14.w,
+                        color: AppColors.primary,
                       ),
                     ),
                     SizedBox(width: 4.w),
