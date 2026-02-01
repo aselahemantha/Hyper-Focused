@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:hyper_focused/core/constants/app_strings.dart';
 import 'package:hyper_focused/core/theme/app_colors.dart';
 import 'package:hyper_focused/features/templates/presentation/widgets/template_card.dart';
 import 'package:hyper_focused/core/utils/responsive_size.dart';
@@ -23,11 +24,11 @@ class TemplateCenterPage extends StatelessWidget {
           ),
         ),
         title: Text(
-          'Template Centre',
+          AppStrings.templateCenter,
           style: TextStyle(
             color: AppColors.neutralDark,
-            fontSize: 16.sp,
-            fontWeight: FontWeight.bold,
+            fontSize: 14.sp,
+            fontWeight: FontWeight.w500,
           ),
         ),
         centerTitle: true,
@@ -38,8 +39,8 @@ class TemplateCenterPage extends StatelessWidget {
             padding: EdgeInsets.only(right: 16.w),
             child: Icon(
               Icons.info,
-              color: Colors.black, // From design, looks like a filled black icon
-              size: 28.w,
+              color: AppColors.neutralDark,
+              size: 26.w,
             ),
           ),
         ],
@@ -51,8 +52,8 @@ class TemplateCenterPage extends StatelessWidget {
             end: Alignment.bottomCenter,
             stops: [0.0, 0.3, 1.0],
             colors: [
-              Color(0xFFE0F7FA), // Light cyan/blue at top
-              Color(0xFFF5F5F5), // Fade to white-ish
+              Color(0xFFE0F7FA),
+              Color(0xFFF5F5F5),
               Color(0xFFF5F5F5),
             ],
           ),

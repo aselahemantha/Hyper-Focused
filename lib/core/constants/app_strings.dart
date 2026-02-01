@@ -128,4 +128,12 @@ class AppStrings {
       'website and it will help your clients to easily book your services.';
 
   static const String searchContacts = 'Search Contacts';
+
+  static const String clients = 'Clients';
+  static const String agents = 'Agents';
+  static const String agencies = 'Agencies';
+
+  static const String templateCenter = 'Template Centre';
+  static const String exportTemplate = 'Export template';
+  static const String editTemplate = 'Edit Template';
 }

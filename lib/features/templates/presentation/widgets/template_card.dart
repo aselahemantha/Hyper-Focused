@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:hyper_focused/core/constants/app_strings.dart';
 import 'package:hyper_focused/core/theme/app_colors.dart';
 import 'package:hyper_focused/core/utils/responsive_size.dart';
 
@@ -26,7 +27,7 @@ class TemplateCard extends StatelessWidget {
         borderRadius: BorderRadius.circular(12.w),
         boxShadow: [
           BoxShadow(
-            color: Colors.black.withOpacity(0.05),
+            color: AppColors.neutralDark.withOpacity(0.05),
             blurRadius: 10,
             offset: const Offset(0, 4),
           ),
@@ -39,7 +40,7 @@ class TemplateCard extends StatelessWidget {
             title,
             style: TextStyle(
               fontSize: 14.sp,
-              fontWeight: FontWeight.bold,
+              fontWeight: FontWeight.w500,
               color: AppColors.neutralDark,
             ),
           ),
@@ -47,8 +48,8 @@ class TemplateCard extends StatelessWidget {
           Text(
             description,
             style: TextStyle(
-              fontSize: 12.sp,
-              color: AppColors.neutral500,
+              fontSize: 14.sp,
+              color: AppColors.textBody,
               height: 1.4,
             ),
           ),
@@ -58,18 +59,21 @@ class TemplateCard extends StatelessWidget {
               Expanded(
                 child: OutlinedButton.icon(
                   onPressed: onExport,
-                  icon: Icon(Icons.file_upload_outlined, size: 16.w),
+                  icon: Icon(Icons.upload_file, size: 16.w),
                   label: Text(
-                    'Export template',
-                    style: TextStyle(fontSize: 12.sp),
+                    AppStrings.exportTemplate,
+                    style: TextStyle(
+                      fontSize: 12.sp,
+                      fontWeight: FontWeight.w500,
+                    ),
                   ),
                   style: OutlinedButton.styleFrom(
-                    foregroundColor: const Color(0xFF2FA2B9),
-                    side: const BorderSide(color: Color(0xFFE5E7EB)),
+                    foregroundColor: AppColors.primary,
+                    side: const BorderSide(color: AppColors.neutral200),
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(8.w),
                     ),
-                    padding: EdgeInsets.symmetric(vertical: 12.h),
+                    padding: EdgeInsets.symmetric(vertical: 8.h),
                     alignment: Alignment.center,
                   ),
                 ),
@@ -80,16 +84,16 @@ class TemplateCard extends StatelessWidget {
                   onPressed: onEdit,
                   icon: Icon(Icons.edit_outlined, size: 16.w),
                   label: Text(
-                    'Edit Template',
+                    AppStrings.editTemplate,
                     style: TextStyle(fontSize: 12.sp),
                   ),
                   style: OutlinedButton.styleFrom(
-                    foregroundColor: const Color(0xFF2FA2B9),
-                    side: const BorderSide(color: Color(0xFFE5E7EB)),
+                    foregroundColor: AppColors.primary,
+                    side: const BorderSide(color: AppColors.neutral200),
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(8.w),
                     ),
-                    padding: EdgeInsets.symmetric(vertical: 12.h),
+                    padding: EdgeInsets.symmetric(vertical: 8.h),
                     alignment: Alignment.center,
                   ),
                 ),
